@@ -40,8 +40,8 @@
   --s-7: 44px;
   --s-8: 60px;
 
-  /* Tighten top whitespace: hero starts closer to header */
-  --hero-top: clamp(44px, 6.0vw, 84px);
+  /* Micro tighten: hero starts closer to header */
+  --hero-top: clamp(38px, 5.6vw, 78px);
   --hero-bottom: clamp(18px, 2.6vw, 30px);
 
   --ease: cubic-bezier(.2,.9,.2,1);
@@ -109,14 +109,14 @@ body::after{
 
 main{
   flex: 1 0 auto;
-  /* tighter: brings whole page up under header */
-  padding-top: 34px;
+  /* micro tighter: brings whole page up under header */
+  padding-top: 28px;
   padding-bottom: var(--s-8);
 }
 
 @media (max-width: 720px){
   .container{ padding: 0 var(--s-5); }
-  main{ padding-top: 30px; }
+  main{ padding-top: 26px; }
 }
 
 /* --- Header / nav -------------------------------------------------------- */
@@ -151,8 +151,8 @@ main{
   align-items:center;
   justify-content: space-between;
   gap: var(--s-6);
-  /* slightly tighter header height */
-  padding: 12px 0;
+  /* micro tighter header height */
+  padding: 11px 0;
 }
 
 .brand{
@@ -162,9 +162,9 @@ main{
   min-width: 0;
 }
 
-/* Logo emphasis: larger + slightly stronger presence */
+/* Logo emphasis: slightly larger */
 .brand .logo{
-  height: 42px;
+  height: 46px;
   width:auto;
   display:block;
   filter: drop-shadow(0 0 22px rgba(83,225,255,0.14));
@@ -248,7 +248,7 @@ main{
   .navbar{ gap: 14px; }
   .brand-title{ display:none; }
   .availability-pill{ display:none; }
-  .brand .logo{ height: 38px; }
+  .brand .logo{ height: 40px; }
 }
 
 /* --- Hero ---------------------------------------------------------------- */
