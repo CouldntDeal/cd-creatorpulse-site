@@ -29,7 +29,7 @@ header .container {
     gap: 12px;
 }
 
-.logo { height: 48px; width: auto; display: block; }
+.logo { height: 54px; width: auto; display: block; }
 
 .brand span {
     font-size: 17px;
@@ -56,8 +56,9 @@ nav a:hover {
     font-weight: 700;
 }
 
-.logo { height: 48px; width: auto; display: block; }
+.logo { height: 54px; width: auto; display: block; }
 
-.logo { height: 48px; width: auto; display: block; }
+.logo { height: 54px; width: auto; display: block; }
+
 
 
