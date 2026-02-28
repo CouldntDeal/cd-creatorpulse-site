@@ -558,7 +558,7 @@ nav a.active::after{
 /* ===== end CP_POLISH_OVERRIDES_V1 ===== */
 /* ===== CP_POLISH_OVERRIDES_V2 (body glow banding fix) ===== */
 
-/* The horizontal Ã¢â‚¬Å“bandÃ¢â‚¬Â at zoom levels is typically the BODY radial gradients.
+/* The horizontal ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œbandÃƒÂ¢Ã¢â€šÂ¬Ã‚Â at zoom levels is typically the BODY radial gradients.
    We keep the vibe, but lower intensity + move the bottom glow closer. */
 body{
   background:
@@ -632,7 +632,7 @@ body::before{
   will-change: transform, opacity !important;
 }
 
-/* Optional: widen content slightly on big screens (less “tiny island” feeling) */
+/* Optional: widen content slightly on big screens (less â€œtiny islandâ€ feeling) */
 .container{
   max-width: 1100px !important;
 }
@@ -641,3 +641,63 @@ body::before{
 }
 
 /* ===== end CP_POLISH_OVERRIDES_V4 ===== */
+
+/* ===== CP_LAYOUT_FIX_V1 (spacing + divider hardening) ===== */
+
+/* The problem you're seeing (huge blank bands) is almost always caused by min-height on sections/dividers.
+   These rules harden layout so sections flow naturally. */
+
+/* Always keep the page dark (prevents accidental "white wash" at odd zoom levels) */
+body{
+  background-color: #05080b !important;
+}
+
+/* Divider is a THIN line (not a spacer) */
+.section-divider{
+  height: 1px;
+  width: 100%;
+  margin: 56px 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(83,225,255,0.22),
+    rgba(83,225,255,0.38),
+    rgba(83,225,255,0.22),
+    transparent
+  );
+  border-radius: 999px;
+}
+
+/* If any older CSS set "divider" with height, kill it */
+.divider{
+  height: 1px !important;
+  margin: 56px 0 !important;
+}
+
+/* Kill min-height spacing that causes massive empty vertical zones */
+main, .hero, .section, .card{
+  min-height: unset !important;
+}
+
+/* Make spacing consistent and premium */
+main{
+  padding-top: 52px !important;
+}
+
+.hero{
+  padding-top: 72px !important;
+  padding-bottom: 28px !important;
+}
+
+/* Tighten section spacing so it doesn't float away on tall screens */
+.section{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Reduce excessive top margins if any headings were pushing things down */
+h2{
+  margin-top: 0 !important;
+}
+
+/* ===== end CP_LAYOUT_FIX_V1 ===== */
