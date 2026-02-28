@@ -3,7 +3,6 @@
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     background-color: #0b0f15;
     color: #e6e8eb;
-    line-height: 1.6;
 }
 
 .container {
@@ -30,22 +29,11 @@ header .container {
     gap: 12px;
 }
 
-/* --- Cropped Logo Container --- */
-.logo-crop {
+.logo {
     height: 34px;
-    width: 80px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
+    width: auto;
 }
 
-/* Zoom + reposition image inside crop */
-.logo-crop img {
-    height: 120px;
-    transform: translateX(-20px) translateY(-25px);
-}
-
-/* --- Text --- */
 .brand span {
     font-size: 17px;
     font-weight: 600;
@@ -56,7 +44,6 @@ nav a {
     color: #9ca3af;
     text-decoration: none;
     font-size: 13px;
-    font-weight: 500;
 }
 
 nav a:hover {
@@ -70,11 +57,4 @@ nav a:hover {
 .hero h1 {
     font-size: 38px;
     font-weight: 700;
-}
-
-footer {
-    text-align: center;
-    padding: 40px 24px;
-    color: #8b93a1;
-    font-size: 13px;
 }

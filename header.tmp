@@ -1,0 +1,14 @@
+<header>
+    <div class="container">
+        <div class="brand">
+            <img src="assets/images/logo.png" alt="CD-CreatorPulse Logo" class="logo">
+            <span>CD-CreatorPulse</span>
+        </div>
+        <nav>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="refunds.html">Refunds</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
+</header>
