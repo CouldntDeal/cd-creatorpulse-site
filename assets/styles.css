@@ -701,3 +701,10 @@ h2{
   .panel-dot{ animation: none !important; }
   *{ transition: none !important; scroll-behavior: auto !important; }
 }
+/* --- Nav active state (unified chrome) ----------------------------------- */
+.nav-links a.active{
+  color: rgba(255,255,255,0.96);
+  background: rgba(83,225,255,0.08);
+  border-color: rgba(83,225,255,0.22);
+  box-shadow: 0 10px 30px rgba(83,225,255,0.10);
+}

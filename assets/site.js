@@ -1,63 +1,44 @@
 /* assets/site.js
- * Static partial injection + nav active highlight (no frameworks)
- * Uses body[data-page] if present, otherwise falls back to path matching.
+ * Shared chrome injection for GitHub Pages static site.
+ * Uses absolute /assets/... paths so it never breaks.
  */
-(function(){
-  function normalizePath(p){
-    if (!p) return "/";
-    // Convert "/index.html" -> "/"
-    return p.replace(/\/index\.html$/i, "/");
-  }
-
-  async function loadPartial(url){
+(function () {
+  async function load(url) {
     const res = await fetch(url, { cache: "no-cache" });
-    if (!res.ok) throw new Error("Failed to load partial: " + url);
+    if (!res.ok) throw new Error("Failed to load: " + url + " (" + res.status + ")");
     return await res.text();
   }
 
-  function setActiveNav(){
-    const body = document.body;
-    const pageKey = (body && body.getAttribute("data-page")) ? body.getAttribute("data-page") : null;
-
-    const links = Array.from(document.querySelectorAll('.nav-links a[data-nav]'));
-    if (!links.length) return;
+  function setActiveNav() {
+    const pageKey = document.body ? document.body.getAttribute("data-page") : null;
+    const links = Array.from(document.querySelectorAll(".nav-links a[data-nav]"));
 
     links.forEach(a => {
       a.classList.remove("active");
       a.removeAttribute("aria-current");
     });
 
-    // Prefer explicit pageKey if set
     if (pageKey) {
       const match = links.find(a => a.getAttribute("data-nav") === pageKey);
       if (match) {
         match.classList.add("active");
         match.setAttribute("aria-current", "page");
-        return;
       }
-    }
-
-    // Fallback: compare pathname
-    const current = normalizePath(location.pathname);
-    const best = links.find(a => normalizePath(new URL(a.getAttribute("href"), location.origin).pathname) === current);
-    if (best) {
-      best.classList.add("active");
-      best.setAttribute("aria-current", "page");
     }
   }
 
-  async function inject(){
+  async function inject() {
     const headerHost = document.getElementById("site-header");
     const footerHost = document.getElementById("site-footer");
 
     if (headerHost) {
-      try { headerHost.innerHTML = await loadPartial("assets/partials/header.html"); }
-      catch (e) { console.warn(e); }
+      try { headerHost.innerHTML = await load("/assets/partials/header.html"); }
+      catch (e) { console.warn("[site] header inject failed:", e); }
     }
 
     if (footerHost) {
-      try { footerHost.innerHTML = await loadPartial("assets/partials/footer.html"); }
-      catch (e) { console.warn(e); }
+      try { footerHost.innerHTML = await load("/assets/partials/footer.html"); }
+      catch (e) { console.warn("[site] footer inject failed:", e); }
     }
 
     setActiveNav();
