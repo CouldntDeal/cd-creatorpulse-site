@@ -558,7 +558,7 @@ nav a.active::after{
 /* ===== end CP_POLISH_OVERRIDES_V1 ===== */
 /* ===== CP_POLISH_OVERRIDES_V2 (body glow banding fix) ===== */
 
-/* The horizontal “band” at zoom levels is typically the BODY radial gradients.
+/* The horizontal â€œbandâ€ at zoom levels is typically the BODY radial gradients.
    We keep the vibe, but lower intensity + move the bottom glow closer. */
 body{
   background:
@@ -579,3 +579,23 @@ main{
 }
 
 /* ===== end CP_POLISH_OVERRIDES_V2 ===== */
+/* ===== CP_POLISH_OVERRIDES_V3 (restore dark base + keep banding fix) ===== */
+
+/* V2 accidentally removed the dark base. We must keep a solid dark backdrop,
+   then layer the gradients on top so text remains readable. */
+body{
+  background-color: #070b10 !important;
+  background-image:
+    radial-gradient(1100px 600px at 15% -10%, rgba(83,225,255,0.11), transparent 58%),
+    radial-gradient(900px 500px at 85% 5%, rgba(43,167,255,0.10), transparent 60%),
+    radial-gradient(700px 520px at 50% 95%, rgba(83,225,255,0.06), transparent 62%) !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+
+/* Safety: ensure default text color stays light */
+body, main{
+  color: rgba(235,242,250,0.92);
+}
+
+/* ===== end CP_POLISH_OVERRIDES_V3 ===== */
