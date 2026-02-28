@@ -1,16 +1,15 @@
 ﻿body {
     margin: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background-color: #0c0f14;
+    background-color: #0b0f15;
     color: #e6e8eb;
     line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
 }
 
 .container {
     max-width: 960px;
     margin: 0 auto;
-    padding: 48px 24px;
+    padding: 60px 24px;
 }
 
 header {
@@ -22,25 +21,23 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 24px;
+    padding: 14px 24px;
 }
 
 .brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .brand img {
-    height: 22px;
+    height: 30px;
     width: auto;
-    display: block;
 }
 
 .brand span {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
-    letter-spacing: 0.2px;
 }
 
 nav a {
@@ -49,7 +46,6 @@ nav a {
     text-decoration: none;
     font-size: 13px;
     font-weight: 500;
-    transition: color 0.2s ease;
 }
 
 nav a:hover {
@@ -57,26 +53,34 @@ nav a:hover {
 }
 
 .hero {
-    padding-top: 60px;
-    padding-bottom: 60px;
+    background: radial-gradient(circle at top, rgba(0,160,255,0.08), transparent 60%);
+    border-bottom: 1px solid #1a1f28;
 }
 
-.hero h2 {
-    font-size: 32px;
-    font-weight: 600;
-    line-height: 1.25;
+.tag {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    color: #4db8ff;
     margin-bottom: 18px;
+    font-weight: 600;
+}
+
+.hero h1 {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 20px;
     max-width: 760px;
 }
 
 .hero p {
-    font-size: 16px;
+    font-size: 17px;
     color: #b8c0cc;
     max-width: 620px;
 }
 
 section {
-    border-top: 1px solid #1a1f28;
+    border-bottom: 1px solid #1a1f28;
 }
 
 h3 {
@@ -86,13 +90,12 @@ h3 {
 }
 
 ul li {
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 
 footer {
-    border-top: 1px solid #1e242e;
     text-align: center;
-    padding: 32px 24px;
+    padding: 40px 24px;
     color: #8b93a1;
     font-size: 13px;
 }
