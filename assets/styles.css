@@ -1,10 +1,6 @@
 /* ==========================================================================
    CD-CreatorPulse — Neon Creator-Tech Premium SaaS CSS
-   Goal: energetic creator-tech (pulse + neon) while staying clean and readable
-   Rules:
-   - Neon is an accent layer (edges + highlights), not a full-screen fog.
-   - Keep typography legible; glow never reduces contrast.
-   - One deliberate animation band (hero) + micro-motions only.
+   Visual System Finalization (Polish)
    ========================================================================== */
 
 :root{
@@ -15,40 +11,22 @@
   --muted: rgba(255,255,255,0.72);
   --muted-2: rgba(255,255,255,0.56);
 
-  /* Creator-tech neon palette */
   --cyan:  #53E1FF;
   --blue:  #2BA7FF;
   --violet:#7A5CFF;
   --pink:  #FF4FD8;
-  --lime:  #4CFFB0;
 
   --accent: var(--cyan);
-  --accent-2: var(--blue);
-  --accent-3: var(--violet);
 
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
   --lh: 1.55;
 
   --max: 1120px;
-
-  /* Content width control */
   --content-max: var(--max);
   --legal-max: 740px;
 
-  /* Surface + border system (refined, controlled) */
-  --surface-0: rgba(255,255,255,0.018);
-  --surface-1: rgba(255,255,255,0.030);
-  --surface-2: rgba(255,255,255,0.050);
-
   --border-soft: rgba(255,255,255,0.08);
   --border-med: rgba(255,255,255,0.12);
-  --border-acc: rgba(83,225,255,0.22);
-
-  --glow-acc: rgba(83,225,255,0.12);
-  --glow-acc-strong: rgba(83,225,255,0.18);
-
-  --r-1: 14px;
-  --r-2: 18px;
 
   --shadow-1: 0 12px 40px rgba(0,0,0,0.45);
   --shadow-2: 0 24px 80px rgba(0,0,0,0.55);
@@ -67,10 +45,8 @@
 
   --ease: cubic-bezier(.2,.9,.2,1);
 
-  /* Neon controls (tweak safely) */
-  --neon-1: 0.14; /* general glow */
-  --neon-2: 0.20; /* hero intensity (slightly reduced to avoid banding) */
-  --neon-3: 0.32; /* accent edges */
+  /* Neon controls */
+  --neon-hero: 0.18;
 }
 
 /* --- Base reset ---------------------------------------------------------- */
@@ -197,6 +173,7 @@ main{
   white-space: nowrap;
 }
 
+/* Limited Access pill: subtle shimmer so it isn't a static “filled slab” */
 .availability-pill{
   margin-left: 10px;
   font-size: 12px;
@@ -204,7 +181,7 @@ main{
   padding: 6px 10px;
   border-radius: 999px;
   border: 1px solid rgba(83,225,255,0.22);
-  background: rgba(83,225,255,0.06);
+  background: rgba(83,225,255,0.055);
   box-shadow: 0 12px 40px rgba(83,225,255,0.10);
   position: relative;
   overflow:hidden;
@@ -213,10 +190,24 @@ main{
 .availability-pill::before{
   content:"";
   position:absolute;
-  inset:-1px;
-  background: radial-gradient(380px 70px at 20% 50%, rgba(255,255,255,0.18), transparent 65%);
+  inset:-2px;
+  background:
+    linear-gradient(110deg,
+      rgba(255,255,255,0.00) 0%,
+      rgba(255,255,255,0.14) 22%,
+      rgba(255,255,255,0.00) 45%,
+      rgba(255,255,255,0.00) 100%
+    );
   opacity: 0.55;
-  transform: translateX(-12%);
+  transform: translateX(-60%);
+  animation: pillSheen 4.8s var(--ease) infinite;
+  pointer-events:none;
+}
+
+@keyframes pillSheen{
+  0%   { transform: translateX(-60%); }
+  55%  { transform: translateX(120%); }
+  100% { transform: translateX(120%); }
 }
 
 .nav-links{
@@ -243,6 +234,13 @@ main{
   transform: translateY(-1px);
 }
 
+.nav-links a.active{
+  color: rgba(255,255,255,0.96);
+  background: rgba(83,225,255,0.085);
+  border-color: rgba(83,225,255,0.26);
+  box-shadow: 0 10px 30px rgba(83,225,255,0.10), inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
 @media (max-width: 720px){
   .navbar{ gap: 14px; }
   .brand-title{ display:none; }
@@ -256,46 +254,54 @@ main{
   padding-bottom: var(--hero-bottom);
 }
 
-/* Neon hero band + scanline pulse (THIS is the “creator-tech” moment) */
+/* Aurora field (kept deliberate) */
 .hero::before{
   content:"";
   position:absolute;
-  inset: -240px -260px -120px -260px;
+  inset: -240px -260px -140px -260px;
   pointer-events:none;
   z-index:-2;
   background:
-    radial-gradient(1200px 560px at 50% 16%, rgba(83,225,255,calc(var(--neon-2) + 0.08)), transparent 62%),
-    radial-gradient(1100px 520px at 64% 18%, rgba(122,92,255,calc(var(--neon-2) - 0.02)), transparent 64%),
-    radial-gradient(1000px 520px at 34% 20%, rgba(255,79,216,0.10), transparent 66%),
-    radial-gradient(420px 320px at 22% 26%, rgba(83,225,255,0.14), transparent 66%),
-    radial-gradient(380px 300px at 78% 30%, rgba(43,167,255,0.12), transparent 66%);
-  filter: blur(28px);
-  opacity: 0.94;
+    radial-gradient(1200px 560px at 50% 16%, rgba(83,225,255,calc(var(--neon-hero) + 0.08)), transparent 62%),
+    radial-gradient(1100px 520px at 64% 18%, rgba(122,92,255,calc(var(--neon-hero) - 0.02)), transparent 64%),
+    radial-gradient(1000px 520px at 34% 20%, rgba(255,79,216,0.09), transparent 66%),
+    radial-gradient(420px 320px at 22% 26%, rgba(83,225,255,0.12), transparent 66%),
+    radial-gradient(380px 300px at 78% 30%, rgba(43,167,255,0.10), transparent 66%);
+  filter: blur(30px);
+  opacity: 0.92;
   mask-image: radial-gradient(950px 540px at 50% 18%, rgba(0,0,0,1), rgba(0,0,0,0) 72%);
-  animation: auroraDrift 10.5s var(--ease) infinite;
+  animation: auroraDrift 10.8s var(--ease) infinite;
 }
 
-.hero::after{
+/* IMPORTANT FIX:
+   We REMOVED the old hero::after “scan band” that looked like a static slab.
+   Replaced by a very subtle diagonal sheen on the hero content itself. */
+.hero .container{
+  position: relative;
+}
+
+.hero .container::before{
   content:"";
   position:absolute;
-  left:-20%;
-  right:-20%;
-  top: 0px;
-  height: 170px; /* reduced to avoid "band" feeling */
+  inset: -40px -40px auto -40px;
+  height: 220px;
   pointer-events:none;
   z-index:-1;
   background:
-    linear-gradient(90deg,
-      rgba(83,225,255,0.0),
-      rgba(83,225,255,0.16),
-      rgba(255,79,216,0.12),
-      rgba(122,92,255,0.14),
-      rgba(83,225,255,0.0)
+    linear-gradient(115deg,
+      rgba(83,225,255,0.00) 0%,
+      rgba(83,225,255,0.10) 26%,
+      rgba(255,79,216,0.06) 42%,
+      rgba(122,92,255,0.08) 58%,
+      rgba(83,225,255,0.00) 78%,
+      rgba(83,225,255,0.00) 100%
     );
-  filter: blur(22px);
-  opacity: 0.40;
-  transform: translateY(26px);
-  animation: scanPulse 3.1s var(--ease) infinite;
+  background-size: 220% 100%;
+  filter: blur(24px);
+  opacity: 0.28;
+  transform: translateY(22px);
+  animation: heroSheen 7.8s var(--ease) infinite;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
 }
 
 @keyframes auroraDrift{
@@ -303,9 +309,10 @@ main{
   50%     { transform: translate3d(0,-12px,0); }
 }
 
-@keyframes scanPulse{
-  0%,100% { opacity: 0.28; transform: translateY(28px); }
-  50%     { opacity: 0.46; transform: translateY(22px); }
+@keyframes heroSheen{
+  0%   { background-position: 0% 50%; }
+  55%  { background-position: 100% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
 /* Hero layout */
@@ -318,21 +325,34 @@ main{
   position: relative;
 }
 
-/* Hero field anchor (adds deliberate depth; not neon fog) */
+/* HARD-EDGE FIX:
+   This layer previously could render as a visible rectangle edge depending on mask/blur.
+   We clamp it to a soft ellipse with border-radius + overflow, and we mask it twice. */
 .hero-grid::before{
   content:"";
   position:absolute;
-  inset: -90px -80px -60px -80px;
+  inset: -96px -110px -70px -110px;
   pointer-events:none;
   z-index:-1;
+
+  /* Soft “field anchor” behind right panel */
   background:
-    radial-gradient(820px 520px at 70% 18%, rgba(83,225,255,0.14), transparent 64%),
-    radial-gradient(760px 520px at 84% 36%, rgba(122,92,255,0.10), transparent 66%),
-    radial-gradient(640px 520px at 54% 44%, rgba(255,79,216,0.07), transparent 70%),
-    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.00));
-  filter: blur(18px);
-  opacity: 0.92;
-  mask-image: radial-gradient(820px 520px at 72% 18%, rgba(0,0,0,1), rgba(0,0,0,0) 74%);
+    radial-gradient(760px 520px at 72% 20%, rgba(83,225,255,0.13), transparent 66%),
+    radial-gradient(720px 520px at 84% 40%, rgba(122,92,255,0.095), transparent 68%),
+    radial-gradient(640px 520px at 56% 48%, rgba(255,79,216,0.065), transparent 72%);
+
+  filter: blur(26px);
+  opacity: 0.74;
+
+  /* Force “no corners” no matter what */
+  border-radius: 60px;
+  overflow: hidden;
+
+  /* Stronger mask to prevent rectangular cutoffs */
+  mask-image:
+    radial-gradient(820px 560px at 72% 18%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 76%),
+    linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0) 80%);
+  mask-composite: intersect;
 }
 
 @media (max-width: 980px){
@@ -411,9 +431,7 @@ h1{
   border-color: rgba(83,225,255,0.28);
 }
 
-.btn-icon{
-  opacity: 0.92;
-}
+.btn-icon{ opacity: 0.92; }
 
 /* Chips */
 .chips{
@@ -466,34 +484,13 @@ h1{
   pointer-events:none;
   background:
     radial-gradient(900px 360px at 30% 10%, rgba(255,255,255,0.07), transparent 62%),
-    radial-gradient(980px 420px at 92% 0%, rgba(83,225,255,0.15), transparent 58%),
-    radial-gradient(980px 420px at 78% 120%, rgba(255,79,216,0.10), transparent 62%),
-    radial-gradient(980px 420px at 16% 120%, rgba(122,92,255,0.08), transparent 62%);
+    radial-gradient(980px 420px at 92% 0%, rgba(83,225,255,0.14), transparent 58%),
+    radial-gradient(980px 420px at 78% 120%, rgba(255,79,216,0.09), transparent 62%),
+    radial-gradient(980px 420px at 16% 120%, rgba(122,92,255,0.075), transparent 62%);
   opacity: 0.95;
 }
 
-.hero-panel::after{
-  content:"";
-  position:absolute;
-  inset: 0;
-  pointer-events:none;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(180deg,
-    rgba(83,225,255,0.26),
-    rgba(255,79,216,0.14) 24%,
-    rgba(122,92,255,0.10) 42%,
-    rgba(255,255,255,0.0) 60%,
-    rgba(255,255,255,0.0)
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0.78;
-}
-
 .panel-top{
-  position: relative;
   display:flex;
   align-items:center;
   justify-content: space-between;
@@ -502,10 +499,7 @@ h1{
   border-bottom: 1px solid rgba(255,255,255,0.10);
 }
 
-.panel-title{
-  font-weight: 850;
-  letter-spacing: 0.2px;
-}
+.panel-title{ font-weight: 850; letter-spacing: 0.2px; }
 
 .panel-badge{
   font-size: 12px;
@@ -515,22 +509,9 @@ h1{
   border: 1px solid rgba(83,225,255,0.20);
   background: rgba(83,225,255,0.06);
   box-shadow: 0 12px 40px rgba(83,225,255,0.10);
-  position: relative;
-}
-
-.panel-badge::before{
-  content:"";
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: rgba(83,225,255,0.95);
-  display:inline-block;
-  margin-right: 7px;
-  box-shadow: 0 0 18px rgba(83,225,255,0.25);
 }
 
 .panel-list{
-  position: relative;
   margin: 12px 0 0 0;
   padding: 0;
   list-style:none;
@@ -542,7 +523,6 @@ h1{
   padding: 12px 8px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-
 .panel-item:last-child{ border-bottom:none; }
 
 .panel-dot{
@@ -552,41 +532,10 @@ h1{
   margin-top: 6px;
   background: rgba(83,225,255,0.88);
   box-shadow: 0 0 24px rgba(83,225,255,0.25), 0 0 18px rgba(255,79,216,0.12);
-  animation: dotPulse 2.6s var(--ease) infinite;
 }
 
-.panel-item:nth-child(2) .panel-dot{
-  background: rgba(122,92,255,0.92);
-  box-shadow: 0 0 24px rgba(122,92,255,0.22), 0 0 18px rgba(83,225,255,0.10);
-  animation-delay: 0.25s;
-}
-
-.panel-item:nth-child(3) .panel-dot{
-  background: rgba(255,79,216,0.84);
-  box-shadow: 0 0 24px rgba(255,79,216,0.18), 0 0 18px rgba(83,225,255,0.10);
-  animation-delay: 0.45s;
-}
-
-@keyframes dotPulse{
-  0%,100% { transform: scale(1);   opacity: 0.95; }
-  50%     { transform: scale(1.08);opacity: 1; }
-}
-
-.panel-label{
-  font-weight: 760;
-  color: rgba(255,255,255,0.92);
-}
-
-.panel-sub{
-  font-size: 13px;
-  color: rgba(255,255,255,0.72);
-  margin-top: 2px;
-}
-
-.panel-footer{
-  position: relative;
-  padding-top: 14px;
-}
+.panel-label{ font-weight: 760; color: rgba(255,255,255,0.92); }
+.panel-sub{ font-size: 13px; color: rgba(255,255,255,0.72); margin-top: 2px; }
 
 .panel-footnote{
   display:inline-block;
@@ -597,111 +546,6 @@ h1{
   width: 100%;
 }
 
-/* Divider */
-.section-divider{
-  height: 1px;
-  width: 100%;
-  margin: 36px 0;
-  background: rgba(255,255,255,0.08);
-}
-
-/* --- Sections ------------------------------------------------------------ */
-.section{
-  padding: 38px 0 0 0;
-}
-
-.section h2{
-  margin: 0;
-  font-size: 22px;
-  letter-spacing: -0.02em;
-}
-
-.section p{
-  margin: 12px 0 0 0;
-  color: rgba(255,255,255,0.72);
-  max-width: 78ch;
-}
-
-/* Cards */
-.card{
-  margin-top: 18px;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-  box-shadow: var(--shadow-1);
-  padding: 16px;
-  position: relative;
-  overflow:hidden;
-}
-
-.card::before{
-  content:"";
-  position:absolute;
-  inset:-1px;
-  pointer-events:none;
-  background:
-    radial-gradient(600px 220px at 12% 0%, rgba(83,225,255,0.12), transparent 62%),
-    radial-gradient(640px 280px at 86% 0%, rgba(122,92,255,0.08), transparent 66%);
-  opacity: 0.75;
-}
-
-.card h3{
-  margin: 0;
-  font-size: 16px;
-  letter-spacing: -0.01em;
-}
-
-.card p{
-  margin: 8px 0 0 0;
-  color: rgba(255,255,255,0.72);
-  font-size: 14px;
-}
-
-/* Policy pages */
-.policy-note{
-  margin-top: 12px;
-  font-size: 14px;
-  color: rgba(255,255,255,0.70);
-  max-width: 74ch;
-}
-
-.policy-grid{
-  margin-top: 18px;
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 14px;
-}
-
-@media (max-width: 820px){
-  .policy-grid{ grid-template-columns: 1fr; }
-}
-
-.policy-block{
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018));
-  box-shadow: var(--shadow-1);
-  padding: 16px;
-}
-
-.policy-block strong{
-  color: rgba(255,255,255,0.92);
-}
-
-.policy-block p{
-  margin: 8px 0 0 0;
-  color: rgba(255,255,255,0.72);
-  font-size: 14px;
-}
-
-.list{
-  margin: 14px 0 0 0;
-  padding-left: 18px;
-  color: rgba(255,255,255,0.72);
-}
-.list li{ margin: 8px 0; }
-.list li::marker{ color: rgba(83,225,255,0.95); }
-
 /* --- Legal pages ---------------------------------------------------------- */
 .legal{
   max-width: var(--legal-max);
@@ -710,32 +554,6 @@ h1{
   padding-bottom: clamp(24px, 4vw, 42px);
 }
 
-/* Slight top field continuity (refined; not hero-level) */
-body[data-page="terms"] .legal,
-body[data-page="privacy"] .legal,
-body[data-page="refunds"] .legal,
-body[data-page="contact"] .legal{
-  position: relative;
-}
-
-body[data-page="terms"] .legal::before,
-body[data-page="privacy"] .legal::before,
-body[data-page="refunds"] .legal::before,
-body[data-page="contact"] .legal::before{
-  content:"";
-  position:absolute;
-  inset: -26px -18px auto -18px;
-  height: 140px;
-  pointer-events:none;
-  background:
-    radial-gradient(520px 220px at 22% 10%, rgba(83,225,255,0.10), transparent 70%),
-    radial-gradient(520px 220px at 82% 0%, rgba(122,92,255,0.08), transparent 72%);
-  filter: blur(18px);
-  opacity: 0.65;
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
-}
-
-/* Refined legal H1 sizing */
 .legal h1{
   margin: 0 0 10px 0;
   letter-spacing: -0.02em;
@@ -743,7 +561,6 @@ body[data-page="contact"] .legal::before{
   line-height: 1.06;
 }
 
-/* Typography rhythm */
 .legal p{
   margin: 10px 0 0 0;
   color: rgba(255,255,255,0.76);
@@ -758,7 +575,6 @@ body[data-page="contact"] .legal::before{
   position: relative;
 }
 
-/* Subtle section divider (structure without decoration) */
 .legal h2::before{
   content:"";
   position:absolute;
@@ -770,13 +586,6 @@ body[data-page="contact"] .legal::before{
   opacity: 0.85;
 }
 
-/* Inset divider feel (less "full-width rule") */
-.legal h2::before{
-  left: 0;
-  right: 0;
-  max-width: 100%;
-}
-
 .legal ul{
   margin: 14px 0 0 0;
   padding-left: 18px;
@@ -785,11 +594,6 @@ body[data-page="contact"] .legal::before{
 
 .legal li{ margin: 8px 0; }
 .legal li::marker{ color: rgba(83,225,255,0.92); }
-
-/* Contact page “Email:” line should read clean */
-.legal strong{
-  color: rgba(255,255,255,0.88);
-}
 
 /* --- Footer --------------------------------------------------------------- */
 .footer{
@@ -813,14 +617,6 @@ body[data-page="contact"] .legal::before{
 
 @media (max-width: 720px){
   .footer-inner{ padding: 16px var(--s-5); }
-}
-
-/* --- Nav active state (unified chrome) ----------------------------------- */
-.nav-links a.active{
-  color: rgba(255,255,255,0.96);
-  background: rgba(83,225,255,0.085);
-  border-color: rgba(83,225,255,0.26);
-  box-shadow: 0 10px 30px rgba(83,225,255,0.10), inset 0 0 0 1px rgba(255,255,255,0.04);
 }
 
 /* --- Reduced motion ------------------------------------------------------- */
