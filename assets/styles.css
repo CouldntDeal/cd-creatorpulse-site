@@ -394,3 +394,30 @@ nav a.active::after{
 @media (max-width: 780px){
   .availability-pill{ display:none; }
 }
+  
+/* ===== Availability Pill Layout ===== */
+.brand{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+}
+
+.availability-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-left: 0;
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(83,225,255,0.22);
+  background: linear-gradient(180deg, rgba(83,225,255,0.14), rgba(255,255,255,0.03));
+  color: rgba(220,250,255,0.92);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+  white-space: nowrap;
+}
+
+@media (max-width: 780px){
+  .availability-pill{ display:none; }
+}
