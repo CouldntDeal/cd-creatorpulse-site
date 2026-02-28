@@ -192,3 +192,70 @@ footer{
   .logo{ height: 46px; }
   main{ padding-top: 34px; }
 }
+
+/* ===== Premium polish pack (v1) ===== */
+
+.hero{
+  position: relative;
+}
+
+/* neon accent line under hero */
+.hero::after{
+  content:"";
+  display:block;
+  height:1px;
+  margin-top: 26px;
+  background: linear-gradient(90deg, transparent, rgba(83,225,255,0.28), rgba(43,167,255,0.20), transparent);
+  filter: drop-shadow(0 0 12px rgba(83,225,255,0.22));
+}
+
+/* make the lead feel more "designed" */
+.lead{
+  max-width: 72ch;
+}
+
+/* card hover: subtle premium lift */
+.card{
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+.card:hover{
+  transform: translateY(-2px);
+  border-color: rgba(83,225,255,0.16);
+  background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02));
+  box-shadow: 0 26px 90px rgba(0,0,0,0.62);
+}
+
+/* replace default bullets with glow dots */
+.list{
+  list-style: none;
+  padding-left: 0;
+}
+.list li{
+  position: relative;
+  padding-left: 18px;
+}
+.list li::before{
+  content:"";
+  position:absolute;
+  left: 0;
+  top: 0.72em;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, rgba(83,225,255,1), rgba(43,167,255,0.65));
+  box-shadow: 0 0 14px rgba(83,225,255,0.25);
+  transform: translateY(-50%);
+}
+
+/* nav hover: slightly more premium */
+.nav-links a{
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+.nav-links a:hover{
+  transform: translateY(-1px);
+}
+
+/* optional: tighten kicker */
+.kicker{
+  opacity: 0.95;
+}
