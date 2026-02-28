@@ -25,3 +25,7 @@ Thumbs.db
 # Temp artifacts
 *.tmp
 header.tmp
+# Local snapshot artifacts
+SITE_SNAPSHOT_*.txt
+WEBSITE_COPY_PHASE_SNAPSHOT.txt
+
