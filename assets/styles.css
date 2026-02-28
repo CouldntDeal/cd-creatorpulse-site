@@ -40,12 +40,12 @@
   --s-7: 44px;
   --s-8: 60px;
 
-  --hero-top: clamp(56px, 7.2vw, 98px);
+  /* Tighten top whitespace: hero starts closer to header */
+  --hero-top: clamp(44px, 6.0vw, 84px);
   --hero-bottom: clamp(18px, 2.6vw, 30px);
 
   --ease: cubic-bezier(.2,.9,.2,1);
 
-  /* Neon controls */
   --neon-hero: 0.18;
 }
 
@@ -109,13 +109,14 @@ body::after{
 
 main{
   flex: 1 0 auto;
-  padding-top: 56px;
+  /* tighter: brings whole page up under header */
+  padding-top: 34px;
   padding-bottom: var(--s-8);
 }
 
 @media (max-width: 720px){
   .container{ padding: 0 var(--s-5); }
-  main{ padding-top: 52px; }
+  main{ padding-top: 30px; }
 }
 
 /* --- Header / nav -------------------------------------------------------- */
@@ -150,7 +151,8 @@ main{
   align-items:center;
   justify-content: space-between;
   gap: var(--s-6);
-  padding: 14px 0;
+  /* slightly tighter header height */
+  padding: 12px 0;
 }
 
 .brand{
@@ -160,11 +162,12 @@ main{
   min-width: 0;
 }
 
+/* Logo emphasis: larger + slightly stronger presence */
 .brand .logo{
-  height: 34px;
+  height: 42px;
   width:auto;
   display:block;
-  filter: drop-shadow(0 0 18px rgba(83,225,255,0.12));
+  filter: drop-shadow(0 0 22px rgba(83,225,255,0.14));
 }
 
 .brand-title{
@@ -173,7 +176,7 @@ main{
   white-space: nowrap;
 }
 
-/* Limited Access pill: subtle shimmer so it isn't a static “filled slab” */
+/* Limited Access pill shimmer */
 .availability-pill{
   margin-left: 10px;
   font-size: 12px;
@@ -245,6 +248,7 @@ main{
   .navbar{ gap: 14px; }
   .brand-title{ display:none; }
   .availability-pill{ display:none; }
+  .brand .logo{ height: 38px; }
 }
 
 /* --- Hero ---------------------------------------------------------------- */
@@ -254,7 +258,7 @@ main{
   padding-bottom: var(--hero-bottom);
 }
 
-/* Aurora field (kept deliberate) */
+/* Aurora field (deliberate) */
 .hero::before{
   content:"";
   position:absolute;
@@ -273,9 +277,7 @@ main{
   animation: auroraDrift 10.8s var(--ease) infinite;
 }
 
-/* IMPORTANT FIX:
-   We REMOVED the old hero::after “scan band” that looked like a static slab.
-   Replaced by a very subtle diagonal sheen on the hero content itself. */
+/* Subtle diagonal sheen */
 .hero .container{
   position: relative;
 }
@@ -325,30 +327,20 @@ main{
   position: relative;
 }
 
-/* HARD-EDGE FIX:
-   This layer previously could render as a visible rectangle edge depending on mask/blur.
-   We clamp it to a soft ellipse with border-radius + overflow, and we mask it twice. */
 .hero-grid::before{
   content:"";
   position:absolute;
   inset: -96px -110px -70px -110px;
   pointer-events:none;
   z-index:-1;
-
-  /* Soft “field anchor” behind right panel */
   background:
     radial-gradient(760px 520px at 72% 20%, rgba(83,225,255,0.13), transparent 66%),
     radial-gradient(720px 520px at 84% 40%, rgba(122,92,255,0.095), transparent 68%),
     radial-gradient(640px 520px at 56% 48%, rgba(255,79,216,0.065), transparent 72%);
-
   filter: blur(26px);
   opacity: 0.74;
-
-  /* Force “no corners” no matter what */
   border-radius: 60px;
   overflow: hidden;
-
-  /* Stronger mask to prevent rectangular cutoffs */
   mask-image:
     radial-gradient(820px 560px at 72% 18%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 76%),
     linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0) 80%);
