@@ -388,6 +388,10 @@ h1{
   font-size: 15.5px;
 }
 
+.lead-tight{
+  margin-top: 10px;
+}
+
 .hero-actions{
   margin-top: 18px;
   display:flex;
@@ -536,6 +540,76 @@ h1{
   border-top: 1px solid rgba(255,255,255,0.08);
   padding-top: 12px;
   width: 100%;
+}
+
+/* --- Sections / Cards (RESTORED) ----------------------------------------- */
+/* Purpose:
+   - Prevent “floating content”
+   - Create clear hierarchy
+   - Keep it premium + quiet (not neon overload)
+*/
+
+.section{
+  margin-top: clamp(22px, 3.2vw, 34px);
+  max-width: 880px; /* anchors lower sections to a deliberate content column */
+}
+
+.section h2{
+  margin: 0 0 12px 0;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+
+.section-divider{
+  height: 1px;
+  width: 100%;
+  margin: clamp(22px, 4vw, 42px) 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(83,225,255,0.22),
+    rgba(255,79,216,0.14),
+    rgba(122,92,255,0.14),
+    rgba(83,225,255,0.22),
+    transparent
+  );
+  opacity: 0.58;
+}
+
+.card{
+  position: relative;
+  border-radius: 18px;
+  padding: clamp(18px, 2.6vw, 24px);
+  border: 1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(180deg, rgba(255,255,255,0.050), rgba(255,255,255,0.018));
+  box-shadow: 0 26px 90px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.02);
+  overflow: hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset: 0;
+  pointer-events:none;
+  background:
+    radial-gradient(900px 320px at 16% 0%, rgba(255,255,255,0.06), transparent 62%),
+    radial-gradient(760px 360px at 110% 10%, rgba(83,225,255,0.10), transparent 58%),
+    radial-gradient(760px 360px at 110% 120%, rgba(122,92,255,0.06), transparent 62%);
+  opacity: 0.90;
+}
+
+.list{
+  margin: 10px 0 0 0;
+  padding-left: 18px;
+  color: rgba(255,255,255,0.74);
+}
+
+.list li{
+  margin: 8px 0;
+}
+
+.list li::marker{
+  color: rgba(83,225,255,0.88);
 }
 
 /* --- Legal pages ---------------------------------------------------------- */
