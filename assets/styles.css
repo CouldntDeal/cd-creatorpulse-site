@@ -556,3 +556,26 @@ nav a.active::after{
 }
 
 /* ===== end CP_POLISH_OVERRIDES_V1 ===== */
+/* ===== CP_POLISH_OVERRIDES_V2 (body glow banding fix) ===== */
+
+/* The horizontal “band” at zoom levels is typically the BODY radial gradients.
+   We keep the vibe, but lower intensity + move the bottom glow closer. */
+body{
+  background:
+    radial-gradient(1100px 600px at 15% -10%, rgba(83,225,255,0.11), transparent 58%),
+    radial-gradient(900px 500px at 85% 5%, rgba(43,167,255,0.10), transparent 60%),
+    radial-gradient(700px 520px at 50% 95%, rgba(83,225,255,0.06), transparent 62%);
+}
+
+/* If any extra hero overlay exists, kill it (we already use ::before). */
+.hero::after{
+  content: none !important;
+  display: none !important;
+}
+
+/* Optional: if main has a faint band background, force it transparent */
+main{
+  background: transparent !important;
+}
+
+/* ===== end CP_POLISH_OVERRIDES_V2 ===== */
