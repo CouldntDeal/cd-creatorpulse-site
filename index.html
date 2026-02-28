@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
+  <div id="top"></div>
 
   <header class="site-header">
     <div class="container">
@@ -73,11 +74,39 @@
   <footer>
     <div class="container">
       <div class="footer-row">
-        <div>� 2026 CD-CreatorPulse</div>
+        <div>ÃƒÂ¯Ã‚Â¿Ã‚Â½ 2026 CD-CreatorPulse</div>
         <div><a href="mailto:support@cdcreatorpulse.com">support@cdcreatorpulse.com</a></div>
       </div>
     </div>
   </footer>
 
+<script>
+/* navActiveHighlight */
+(function(){
+  const links = Array.from(document.querySelectorAll('nav a[href^="#"]'));
+  const sections = links
+    .map(a => document.querySelector(a.getAttribute("href")))
+    .filter(Boolean);
+
+  function setActive(){
+    const y = window.scrollY + 140;
+    let active = null;
+
+    for (const s of sections){
+      const top = s.getBoundingClientRect().top + window.scrollY;
+      if (top <= y) active = s;
+    }
+
+    links.forEach(a => a.classList.remove("active"));
+    if (active){
+      const match = links.find(a => a.getAttribute("href") === "#" + active.id);
+      if (match) match.classList.add("active");
+    }
+  }
+
+  window.addEventListener("scroll", setActive, { passive: true });
+  setActive();
+})();
+</script>
 </body>
 </html>
