@@ -1,3 +1,17 @@
-﻿# local backups / scratch
+# ==============================
+# CD-CreatorPulse Site
+# Local Development Ignore Rules
+# ==============================
+
+# Local backup folders
 _backup_*/
+
+# Snapshot artifacts
 snapshots/
+
+# Local tooling (not deployed)
+tools/
+
+# OS / editor noise
+Thumbs.db
+.DS_Store
