@@ -509,3 +509,50 @@ nav a.active::after{
 .hero h1{
   letter-spacing: -0.5px;
 }
+/* ===== CP_POLISH_OVERRIDES_V1 (glow control + banding fix) ===== */
+
+/* Make sure hero can safely host a pseudo-element */
+.hero{
+  position: relative;
+  overflow: hidden;
+}
+
+/* Controlled hero glow (subtle, higher up, smaller) */
+.hero::before{
+  content:"";
+  position:absolute;
+  top:-320px;
+  left:50%;
+  transform:translateX(-50%);
+  width:760px;
+  height:760px;
+  background: radial-gradient(circle,
+    rgba(83,225,255,0.10) 0%,
+    rgba(83,225,255,0.05) 38%,
+    transparent 70%
+  );
+  pointer-events:none;
+  filter: blur(0.2px);
+  opacity: 0.9;
+}
+
+/* Divider: reduce the banding line intensity and kill big glow */
+.section-divider,
+.divider{
+  height: 1px;
+  margin: 110px 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(83,225,255,0.28) 50%,
+    transparent 100%
+  );
+  box-shadow: 0 0 10px rgba(83,225,255,0.18);
+}
+
+/* If you have any background glow bands on sections, clamp them */
+.section,
+.features{
+  background-image: none !important;
+}
+
+/* ===== end CP_POLISH_OVERRIDES_V1 ===== */
