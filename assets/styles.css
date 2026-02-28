@@ -1,7 +1,7 @@
 /* ==========================================================================
-   CD-CreatorPulse — Premium SaaS CSS System (Pop v2)
-   Goal: calm, powerful, modern, enterprise-grade
-   Add: signature headline, refined hero focus, premium cards, accent markers
+   CD-CreatorPulse — Premium SaaS CSS System (Pulse Accent v3)
+   Goal: calm + powerful + creator-native (controlled neon, not gimmicky)
+   Adds: subtle pulse motion (hero/header), logo glow polish, refined card edge
    ========================================================================== */
 
 :root{
@@ -12,8 +12,10 @@
   --muted: rgba(255,255,255,0.70);
   --muted-2: rgba(255,255,255,0.56);
 
-  --accent: #53E1FF;
-  --accent-2: #2BA7FF;
+  /* Brand accents (slightly more “pulse” energy, still premium) */
+  --accent:  #53E1FF;
+  --accent-2:#2BA7FF;
+  --accent-3:#7A5CFF;
 
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
   --lh: 1.55;
@@ -53,6 +55,7 @@ body{
   overflow-x:hidden;
 }
 
+/* Ambient glow field (global, calm) */
 body::before{
   content:"";
   position:fixed;
@@ -68,6 +71,7 @@ body::before{
   opacity: 0.92;
 }
 
+/* Grid texture (quiet) */
 body::after{
   content:"";
   position:fixed;
@@ -117,9 +121,21 @@ main{
   position:absolute;
   left:0; right:0; bottom:-1px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(83,225,255,0.30), transparent);
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(83,225,255,0.30),
+    rgba(122,92,255,0.18),
+    rgba(83,225,255,0.30),
+    transparent
+  );
   opacity: 0.65;
   pointer-events:none;
+  animation: headerPulse 9.5s var(--ease) infinite;
+}
+
+@keyframes headerPulse{
+  0%, 100%{ opacity: 0.52; filter: blur(0px); }
+  50%     { opacity: 0.78; filter: blur(0.2px); }
 }
 
 .navbar{
@@ -141,7 +157,17 @@ main{
   height: 34px;
   width:auto;
   display:block;
-  filter: drop-shadow(0 10px 28px rgba(0,0,0,0.55));
+  /* Premium pulse glow (subtle) */
+  filter:
+    drop-shadow(0 10px 28px rgba(0,0,0,0.55))
+    drop-shadow(0 0 14px rgba(83,225,255,0.22));
+  transition: filter 220ms var(--ease), transform 220ms var(--ease);
+}
+.brand:hover .logo{
+  transform: translateY(-1px);
+  filter:
+    drop-shadow(0 12px 34px rgba(0,0,0,0.60))
+    drop-shadow(0 0 18px rgba(83,225,255,0.30));
 }
 
 .brand-title{
@@ -157,7 +183,7 @@ main{
   padding: 7px 10px;
   border-radius: 999px;
   color: rgba(255,255,255,0.88);
-  border: 1px solid rgba(83,225,255,0.30);
+  border: 1px solid rgba(83,225,255,0.32);
   background: linear-gradient(180deg, rgba(83,225,255,0.16), rgba(43,167,255,0.10));
   box-shadow: 0 12px 34px rgba(83,225,255,0.12);
   white-space: nowrap;
@@ -201,6 +227,7 @@ main{
   max-width: 980px;
 }
 
+/* Creator-native: subtle “breathing pulse” halo */
 .hero::before{
   content:"";
   position:absolute;
@@ -211,10 +238,17 @@ main{
   pointer-events:none;
   z-index:-1;
   background:
-    radial-gradient(closest-side at 40% 35%, rgba(83,225,255,0.22), transparent 64%),
-    radial-gradient(closest-side at 68% 55%, rgba(43,167,255,0.16), transparent 64%);
+    radial-gradient(closest-side at 40% 35%, rgba(83,225,255,0.24), transparent 64%),
+    radial-gradient(closest-side at 68% 55%, rgba(43,167,255,0.16), transparent 64%),
+    radial-gradient(closest-side at 55% 50%, rgba(122,92,255,0.10), transparent 70%);
   filter: blur(18px);
   opacity: 0.92;
+  animation: heroBreath 9.0s var(--ease) infinite;
+}
+
+@keyframes heroBreath{
+  0%,100%{ transform: translate3d(0,0,0) scale(1.00); opacity: 0.86; }
+  50%    { transform: translate3d(0,-6px,0) scale(1.03); opacity: 0.98; }
 }
 
 .kicker{
@@ -225,16 +259,22 @@ main{
   color: rgba(83,225,255,0.88);
 }
 
-/* Signature headline: subtle gradient ink + soft shadow (premium pop) */
+/* Signature headline: controlled neon on key phrase only */
 .hero h1{
   margin: 0 0 14px 0;
   font-size: clamp(34px, 4.5vw, 56px);
   line-height: 1.06;
   letter-spacing: -0.025em;
-  background: linear-gradient(90deg, rgba(255,255,255,0.98), rgba(255,255,255,0.92), rgba(83,225,255,0.92));
+
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.98),
+    rgba(255,255,255,0.92),
+    rgba(83,225,255,0.92)
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+
   text-shadow: 0 18px 55px rgba(0,0,0,0.50);
 }
 
@@ -245,7 +285,7 @@ main{
   color: rgba(255,255,255,0.76);
 }
 
-/* Premium focus line under hero (less empty space, more intention) */
+/* Premium focus line under hero */
 .hero::after{
   content:"";
   display:block;
@@ -253,14 +293,19 @@ main{
   height: 1px;
   width: min(760px, 100%);
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(83,225,255,0.0), rgba(83,225,255,0.34), rgba(83,225,255,0.0));
+  background: linear-gradient(90deg,
+    rgba(83,225,255,0.0),
+    rgba(83,225,255,0.34),
+    rgba(122,92,255,0.16),
+    rgba(83,225,255,0.34),
+    rgba(83,225,255,0.0)
+  );
   opacity: 0.72;
 }
 
 /* --- Sections ------------------------------------------------------------ */
 .section{ padding: 0; }
 
-/* Depth modulation for alternating sections (subtle, not boxed) */
 main > .container > .section:nth-of-type(even){
   position: relative;
 }
@@ -280,14 +325,16 @@ main > .container > .section:nth-of-type(even)::before{
   }
 }
 
-/* Divider: atmospheric fade */
 .section-divider{
   height: 1px;
   width: 100%;
   margin: var(--s-7) 0;
   border-radius: 999px;
   background:
-    radial-gradient(closest-side at 50% 50%, rgba(83,225,255,0.46), rgba(83,225,255,0.12) 45%, rgba(83,225,255,0.0) 82%);
+    radial-gradient(closest-side at 50% 50%,
+      rgba(83,225,255,0.48),
+      rgba(83,225,255,0.12) 45%,
+      rgba(83,225,255,0.0) 82%);
   opacity: 0.64;
 }
 
@@ -298,15 +345,13 @@ main > .container > .section:nth-of-type(even)::before{
   padding: var(--s-6);
   overflow: hidden;
 
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035));
+  background: linear-gradient(180deg, rgba(255,255,255,0.078), rgba(255,255,255,0.035));
   border: 1px solid rgba(255,255,255,0.12);
   box-shadow: var(--shadow-1);
 
   transition: transform 220ms var(--ease), box-shadow 220ms var(--ease), border-color 220ms var(--ease);
 }
 
-/* top “sheen” + faint accent edge */
 .card::before{
   content:"";
   position:absolute;
@@ -314,7 +359,8 @@ main > .container > .section:nth-of-type(even)::before{
   pointer-events:none;
   background:
     radial-gradient(900px 320px at 30% 10%, rgba(255,255,255,0.075), transparent 62%),
-    radial-gradient(900px 380px at 85% 0%, rgba(83,225,255,0.10), transparent 58%);
+    radial-gradient(900px 380px at 85% 0%, rgba(83,225,255,0.10), transparent 58%),
+    radial-gradient(900px 420px at 75% 115%, rgba(122,92,255,0.06), transparent 62%);
   opacity: 0.95;
 }
 
@@ -325,17 +371,32 @@ main > .container > .section:nth-of-type(even)::before{
   pointer-events:none;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(180deg, rgba(83,225,255,0.16), rgba(255,255,255,0.0) 40%, rgba(255,255,255,0.0));
+  background: linear-gradient(180deg,
+    rgba(83,225,255,0.18),
+    rgba(122,92,255,0.10) 26%,
+    rgba(255,255,255,0.0) 55%,
+    rgba(255,255,255,0.0)
+  );
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  opacity: 0.65;
+  opacity: 0.62;
 }
 
 .card:hover{
   transform: translateY(-2px);
   box-shadow: 0 20px 68px rgba(0,0,0,0.58);
-  border-color: rgba(83,225,255,0.20);
+  border-color: rgba(83,225,255,0.22);
+}
+
+/* Ultra-subtle hover sheen sweep (only on hover, slow) */
+.card:hover::before{
+  animation: sheenSweep 1.8s var(--ease) 1;
+}
+@keyframes sheenSweep{
+  0%   { transform: translateX(-2%); opacity: 0.85; }
+  50%  { transform: translateX(2%);  opacity: 0.98; }
+  100% { transform: translateX(0%);  opacity: 0.92; }
 }
 
 .card h2{
@@ -343,20 +404,19 @@ main > .container > .section:nth-of-type(even)::before{
   font-size: 20px;
   letter-spacing: -0.01em;
 }
-
 .card p{
   margin: 0;
   color: rgba(255,255,255,0.72);
 }
 
-/* Lists: accent markers = small “designed” detail */
+/* Lists: accent markers */
 .list{
   margin: 14px 0 0 0;
   padding-left: 18px;
   color: rgba(255,255,255,0.70);
 }
 .list li{ margin: 8px 0; }
-.list li::marker{ color: rgba(83,225,255,0.85); }
+.list li::marker{ color: rgba(83,225,255,0.90); }
 
 /* --- Footer --------------------------------------------------------------- */
 .footer{
@@ -364,7 +424,6 @@ main > .container > .section:nth-of-type(even)::before{
   background: rgba(7,11,20,0.40);
   backdrop-filter: blur(12px);
 }
-
 .footer-inner{
   max-width: var(--max);
   margin: 0 auto;
@@ -376,7 +435,6 @@ main > .container > .section:nth-of-type(even)::before{
   color: rgba(255,255,255,0.72);
   font-size: 14px;
 }
-
 .footer a{ color: rgba(83,225,255,0.82); }
 .footer a:hover{ color: rgba(83,225,255,0.96); }
 
@@ -394,30 +452,31 @@ main > .container > .section:nth-of-type(even)::before{
   padding-bottom: var(--s-8);
   max-width: 860px;
 }
-
 .legal h1{
   margin: 0 0 14px 0;
   font-size: clamp(26px, 3.4vw, 36px);
   line-height: 1.12;
   letter-spacing: -0.02em;
 }
-
 .legal h2{
   margin: 22px 0 10px 0;
   font-size: 18px;
   letter-spacing: -0.01em;
 }
-
 .legal p, .legal li{ color: rgba(255,255,255,0.70); }
-
 .legal ul{
   margin: 10px 0 0 0;
   padding-left: 18px;
 }
 .legal li{ margin: 8px 0; }
-.legal li::marker{ color: rgba(83,225,255,0.80); }
+.legal li::marker{ color: rgba(83,225,255,0.86); }
 
 /* --- Reduced motion ------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce){
+  .site-header::after,
+  .hero::before,
+  .card:hover::before{
+    animation: none !important;
+  }
   *{ transition: none !important; scroll-behavior: auto !important; }
 }
