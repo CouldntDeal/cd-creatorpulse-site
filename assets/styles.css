@@ -30,11 +30,22 @@ header .container {
     gap: 12px;
 }
 
-.brand img {
-    height: 30px;
-    width: auto;
+/* --- Cropped Logo Container --- */
+.logo-crop {
+    height: 34px;
+    width: 80px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
 }
 
+/* Zoom + reposition image inside crop */
+.logo-crop img {
+    height: 120px;
+    transform: translateX(-20px) translateY(-25px);
+}
+
+/* --- Text --- */
 .brand span {
     font-size: 17px;
     font-weight: 600;
@@ -53,44 +64,12 @@ nav a:hover {
 }
 
 .hero {
-    background: radial-gradient(circle at top, rgba(0,160,255,0.08), transparent 60%);
     border-bottom: 1px solid #1a1f28;
-}
-
-.tag {
-    font-size: 12px;
-    letter-spacing: 1.5px;
-    color: #4db8ff;
-    margin-bottom: 18px;
-    font-weight: 600;
 }
 
 .hero h1 {
     font-size: 38px;
     font-weight: 700;
-    line-height: 1.25;
-    margin-bottom: 20px;
-    max-width: 760px;
-}
-
-.hero p {
-    font-size: 17px;
-    color: #b8c0cc;
-    max-width: 620px;
-}
-
-section {
-    border-bottom: 1px solid #1a1f28;
-}
-
-h3 {
-    font-size: 20px;
-    margin-bottom: 14px;
-    font-weight: 600;
-}
-
-ul li {
-    margin-bottom: 8px;
 }
 
 footer {
