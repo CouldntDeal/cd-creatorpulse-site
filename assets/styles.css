@@ -60,3 +60,5 @@ nav a:hover {
 }
 
 .logo { height: 28px; width: auto; }
+
+.logo { height: 28px; width: auto; display: block; }
