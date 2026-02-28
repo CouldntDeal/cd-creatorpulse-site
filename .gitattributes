@@ -1,0 +1,8 @@
+﻿# Keep repo diffs stable across OSes
+* text=auto
+
+# Web assets should always be LF in-repo
+*.css  text eol=lf
+*.html text eol=lf
+*.js   text eol=lf
+*.md   text eol=lf
