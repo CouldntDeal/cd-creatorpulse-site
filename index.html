@@ -1,76 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CreatorPulse</title>
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
 
-<div id="header"></div>
+  <!-- header include (your build/templating should insert assets/partials/header.html) -->
 
-<main>
-  <section class="hero container">
-    <div class="hero-grid">
-      <div>
-        <p class="kicker">BUILT FOR GROWING CREATORS</p>
-        <h1>Your content deserves your full attention.</h1>
-        <p class="lead">
-          CreatorPulse keeps your Discord organized and up to date —
-          so you can stream without added stress or constant checking in.
-        </p>
+  <main class="container" style="padding: 42px 22px 0 22px;">
+    <section class="hero" style="padding: 34px 0 24px 0;">
+      <div style="display:grid;grid-template-columns:1.2fr .9fr;gap:26px;align-items:start;">
+        <div>
+          <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(42,215,255,.85);margin-bottom:10px;">
+            Built for growing creators
+          </div>
 
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#">Request Access</a>
-          <a class="btn" href="terms.html">View Policies</a>
+          <h1 style="font-size:56px;line-height:1.02;margin:0 0 12px 0;">
+            Your content deserves<br/>your full attention.
+          </h1>
+
+          <p style="max-width:560px;color:rgba(255,255,255,.75);margin:0 0 16px 0;font-size:14px;line-height:1.6;">
+            CreatorPulse keeps your Discord organized and up to date — so you can stream without added stress or constant checking in.
+          </p>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
+            <a class="btn primary" href="contact.html">Request Access →</a>
+            <a class="btn" href="terms.html">View Policies</a>
+          </div>
+
+          <!-- Small indicator card -->
+          <div class="card availability">
+            <div class="kicker">Early access availability</div>
+            <div class="row">
+              <div class="count">3 / 5 creator slots filled</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.62);">updates automatically later</div>
+            </div>
+            <div class="meter"><span></span></div>
+            <div class="sub">
+              We onboard a small number of communities at a time to protect stability and long-term quality.
+            </div>
+          </div>
         </div>
 
-        <!-- Early Access Availability -->
-        <div class="availability-card card" id="availabilityCard">
-          <div class="availability-title">Early Access Availability</div>
-          <div class="availability-main" id="availabilityMain">
-            Loading availability...
+        <div class="card" style="padding:16px 16px 14px 16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <div style="font-weight:800;">Community Support</div>
+            <span class="pill" style="padding:6px 10px;font-weight:800;font-size:11px;">Live</span>
           </div>
-          <div class="availability-sub">
-            We onboard a limited number of communities at a time to
-            protect stability and long-term performance.
+
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div>
+              <div style="font-weight:800;">● Welcome + Guide</div>
+              <div style="color:rgba(255,255,255,.68);font-size:12px;margin-top:2px;">A clear, professional first impression</div>
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,.10);padding-top:12px;">
+              <div style="font-weight:800;">● Live Updates</div>
+              <div style="color:rgba(255,255,255,.68);font-size:12px;margin-top:2px;">Calm alerts that don’t spam the server</div>
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,.10);padding-top:12px;">
+              <div style="font-weight:800;">● Clean Dashboards</div>
+              <div style="color:rgba(255,255,255,.68);font-size:12px;margin-top:2px;">Single pinned updates, refreshed in place</div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px;color:rgba(255,255,255,.78);font-weight:700;">
+            Calm structure. Stream with confidence.
           </div>
         </div>
-
       </div>
+    </section>
+  </main>
 
-      <div class="hero-panel">
-        <!-- existing hero panel content remains -->
-      </div>
-    </div>
-  </section>
-</main>
-
-<div id="footer"></div>
-
-<script>
-fetch("assets/data/availability.json")
-  .then(res => res.json())
-  .then(data => {
-    const capacity = data.capacity;
-    const filled = data.filled;
-
-    const el = document.getElementById("availabilityMain");
-
-    if (filled >= capacity) {
-      el.innerHTML = "<strong>" + filled + " of " + capacity + " creator slots currently active</strong><br><span style='opacity:.7'>All slots are currently filled.</span>";
-    } else {
-      el.innerHTML = "<strong>" + filled + " of " + capacity + " creator slots currently active</strong>";
-    }
-  })
-  .catch(() => {
-    document.getElementById("availabilityMain").innerText =
-      "Availability status temporarily unavailable.";
-  });
-</script>
-
-<script src="assets/load-partials.js"></script>
+  <!-- footer include (your build/templating should insert assets/partials/footer.html) -->
 
 </body>
 </html>
