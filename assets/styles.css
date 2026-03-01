@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CD-CreatorPulse Ã¢â‚¬â€ Neon Creator-Tech Premium SaaS CSS
+   CD-CreatorPulse ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Neon Creator-Tech Premium SaaS CSS
    Visual System Finalization (Polish)
    ========================================================================== */
 
@@ -110,7 +110,7 @@ a:hover{ color: rgba(255,255,255,0.98); }
   pointer-events:none;
 }
 
-/* Makes header feel Ã¢â‚¬Å“connectedÃ¢â‚¬Â during scroll */
+/* Makes header feel ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œconnectedÃƒÂ¢Ã¢â€šÂ¬Ã‚Â during scroll */
 .site-header.is-scrolled{
   background: rgba(7,11,20,0.78);
   border-bottom-color: rgba(83,225,255,0.16);
@@ -577,169 +577,116 @@ h1{
 
 /* BEGIN_CREATORPULSE_PREMIUM_FLARE */
 /* Premium flare system (NO layout changes; CSS only).
-   Goal: Electric glass + subtle motion + creator-tech atmosphere. */
+   Goal: Electric glass + subtle color depth (PERF SAFE).
+   Changes vs prior: removed heavy fixed animated aurora; toned down sheen; reduced purple dominance. */
 
-/* ---------- Global aura (subtle, premium) ---------- */
+/* ---------- Global color depth (static, light) ---------- */
+/* Keep the nice purple/pink + blue vibe WITHOUT animations/blend/huge blur */
+body::before{
+  /* If you already have a body::before, this gently boosts it without heavy GPU effects */
+  opacity: 0.30 !important;
+}
+
+/* Kill the heavy animated layer that caused scroll heaviness (if present) */
 body::after{
-  content:"";
-  position: fixed;
-  inset: -20%;
-  pointer-events: none;
-  z-index: -2;
-  background:
-    radial-gradient(900px 520px at 25% 15%, rgba(255,79,216,0.06), transparent 62%),
-    radial-gradient(900px 560px at 75% 10%, rgba(122,92,255,0.08), transparent 64%),
-    radial-gradient(1100px 620px at 50% 0%, rgba(83,225,255,0.06), transparent 62%),
-    radial-gradient(700px 420px at 60% 70%, rgba(43,167,255,0.04), transparent 68%);
-  filter: blur(34px);
-  opacity: 0.75;
-  transform: translate3d(0,0,0);
-  animation: cpAurora 10.5s cubic-bezier(.2,.8,.2,1) infinite;
-  mix-blend-mode: screen;
+  content: none !important;
+  animation: none !important;
 }
 
-@keyframes cpAurora{
-  0%,100% { transform: translate3d(0,0,0) scale(1); }
-  50%     { transform: translate3d(0,-10px,0) scale(1.02); }
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce){
-  body::after{ animation: none !important; }
-  .btn, .card, .chip, .hero-panel{ transition: none !important; }
-}
-
-/* ---------- Buttons: more premium pop ---------- */
-.btn{
-  box-shadow:
-    0 18px 60px rgba(0,0,0,0.45),
-    0 0 0 1px rgba(255,255,255,0.04);
-}
-
+/* ---------- Buttons/chips/cards: subtle premium pop ---------- */
 .btn:hover{
   box-shadow:
-    0 28px 90px rgba(0,0,0,0.62),
-    0 0 0 1px rgba(83,225,255,0.10),
-    0 0 28px rgba(122,92,255,0.08);
-}
-
-/* ---------- Chips: add a gentle neon edge ---------- */
-.chip{
-  border-color: rgba(255,255,255,0.12);
-  box-shadow:
-    0 16px 54px rgba(0,0,0,0.40),
-    0 0 0 1px rgba(255,255,255,0.03);
+    0 26px 84px rgba(0,0,0,0.58),
+    0 0 0 1px rgba(83,225,255,0.08),
+    0 0 18px rgba(122,92,255,0.05) !important;
 }
 
 .chip:hover{
-  border-color: rgba(122,92,255,0.18);
+  border-color: rgba(122,92,255,0.14) !important;
   box-shadow:
     0 18px 62px rgba(0,0,0,0.50),
-    0 0 0 1px rgba(122,92,255,0.08);
-}
-
-/* ---------- Cards: subtle sheen + hover depth ---------- */
-.card{
-  position: relative;
-}
-
-.card::before{
-  content:"";
-  position:absolute;
-  inset:-40px;
-  pointer-events:none;
-  background:
-    radial-gradient(520px 240px at 25% 20%, rgba(83,225,255,0.06), transparent 68%),
-    radial-gradient(480px 240px at 70% 10%, rgba(122,92,255,0.06), transparent 70%),
-    radial-gradient(420px 220px at 55% 85%, rgba(255,79,216,0.04), transparent 72%);
-  filter: blur(26px);
-  opacity: 0.55;
-  mask-image: radial-gradient(420px 260px at 40% 25%, rgba(0,0,0,1), rgba(0,0,0,0) 70%);
+    0 0 0 1px rgba(122,92,255,0.05) !important;
 }
 
 .card:hover{
-  border-color: rgba(83,225,255,0.14);
   box-shadow:
-    0 28px 120px rgba(0,0,0,0.66),
-    0 0 0 1px rgba(83,225,255,0.06),
-    0 0 22px rgba(122,92,255,0.05);
+    0 26px 110px rgba(0,0,0,0.62),
+    0 0 0 1px rgba(83,225,255,0.05),
+    0 0 16px rgba(122,92,255,0.04) !important;
 }
 
-/* ---------- Section divider: add premium neon hint ---------- */
+/* ---------- Divider: keep the premium neon hint ---------- */
 .section-divider{
   background: linear-gradient(90deg,
     transparent,
     rgba(83,225,255,0.10),
-    rgba(122,92,255,0.10),
-    rgba(255,79,216,0.06),
+    rgba(122,92,255,0.08),
+    rgba(255,79,216,0.04),
     rgba(83,225,255,0.10),
     transparent
   ) !important;
   opacity: 0.80 !important;
 }
 
-/* ---------- Hero right panel: restore hierarchy + add electric sheen ---------- */
+/* ---------- Hero right panel: dark glass, subtle violet accent ---------- */
 .hero-panel{
-  position: relative;
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.14) !important;
   background:
-    radial-gradient(760px 420px at 85% 0%, rgba(122,92,255,0.10), transparent 58%),
-    radial-gradient(640px 380px at 20% 25%, rgba(83,225,255,0.06), transparent 62%),
-    linear-gradient(180deg, rgba(255,255,255,0.085), rgba(255,255,255,0.020));
+    radial-gradient(760px 420px at 80% 0%, rgba(122,92,255,0.06), transparent 62%),
+    radial-gradient(640px 380px at 20% 25%, rgba(83,225,255,0.05), transparent 66%),
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)) !important;
   box-shadow:
-    0 34px 120px rgba(0,0,0,0.72),
-    0 0 0 1px rgba(83,225,255,0.06);
-  overflow: hidden;
+    0 34px 120px rgba(0,0,0,0.70),
+    0 0 0 1px rgba(83,225,255,0.05) !important;
 }
 
+/* Replace fast/bright sheen with a slower, dimmer one (optional, gentle) */
 .hero-panel::after{
   content:"";
   position:absolute;
-  inset:-60% -80%;
+  inset:-70% -90%;
   pointer-events:none;
   background: linear-gradient(90deg,
     rgba(83,225,255,0.00),
-    rgba(83,225,255,0.10),
-    rgba(122,92,255,0.14),
-    rgba(255,79,216,0.08),
+    rgba(83,225,255,0.06),
+    rgba(122,92,255,0.08),
+    rgba(255,79,216,0.03),
     rgba(83,225,255,0.00)
   );
   transform: translateX(-45%) rotate(8deg);
-  opacity: 0.55;
-  filter: blur(22px);
-  animation: cpSheen 6.2s cubic-bezier(.2,.8,.2,1) infinite;
+  opacity: 0.22;           /* dimmer */
+  filter: blur(26px);      /* softer */
+  animation: cpSheenSlow 10.8s cubic-bezier(.2,.8,.2,1) infinite;
 }
 
-@keyframes cpSheen{
+@keyframes cpSheenSlow{
   0%   { transform: translateX(-45%) rotate(8deg); }
   60%  { transform: translateX(45%) rotate(8deg); }
   100% { transform: translateX(45%) rotate(8deg); }
 }
 
 .hero-panel:hover{
-  border-color: rgba(122,92,255,0.22);
+  border-color: rgba(83,225,255,0.16) !important;
   box-shadow:
-    0 38px 140px rgba(0,0,0,0.78),
-    0 0 0 1px rgba(122,92,255,0.10),
-    0 0 28px rgba(255,79,216,0.06);
+    0 38px 140px rgba(0,0,0,0.74),
+    0 0 0 1px rgba(83,225,255,0.07),
+    0 0 16px rgba(122,92,255,0.04) !important;
 }
 
-/* Keep panel rows readable (don’t let effects flatten text) */
+/* Keep panel text readable */
 .hero-panel .panel-title{ color: rgba(255,255,255,0.92) !important; }
 .hero-panel .panel-label{ color: rgba(255,255,255,0.88) !important; }
 .hero-panel .panel-sub{ color: rgba(255,255,255,0.66) !important; }
 
-/* LIVE badge: small, premium, pulsing dot (not a big bar) */
+/* LIVE badge: small, clean, premium */
 .panel-badge{
-  position: relative;
-  font-size: 11px;
-  padding: 6px 10px 6px 18px;
-  border-radius: 999px;
-  color: rgba(255,255,255,0.90);
-  border: 1px solid rgba(122,92,255,0.18);
-  background: rgba(255,255,255,0.03);
-  box-shadow: 0 14px 46px rgba(0,0,0,0.42);
+  font-size: 11px !important;
+  padding: 6px 10px 6px 18px !important;
+  border-radius: 999px !important;
+  color: rgba(255,255,255,0.90) !important;
+  border: 1px solid rgba(122,92,255,0.14) !important;
+  background: rgba(255,255,255,0.03) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.38) !important;
 }
 
 .panel-badge::before{
@@ -751,13 +698,13 @@ body::after{
   height: 6px;
   margin-top: -3px;
   border-radius: 999px;
-  background: rgba(255,79,216,0.95);
-  box-shadow: 0 0 16px rgba(255,79,216,0.20), 0 0 14px rgba(122,92,255,0.16);
-  animation: cpLivePulse 1.55s cubic-bezier(.2,.8,.2,1) infinite;
+  background: rgba(255,79,216,0.90);
+  box-shadow: 0 0 14px rgba(255,79,216,0.16), 0 0 12px rgba(122,92,255,0.12);
+  animation: cpLivePulse 1.85s cubic-bezier(.2,.8,.2,1) infinite; /* slower */
 }
 
 @keyframes cpLivePulse{
-  0%,100% { transform: scale(1); opacity: 0.95; }
-  50%     { transform: scale(1.45); opacity: 0.65; }
+  0%,100% { transform: scale(1); opacity: 0.92; }
+  50%     { transform: scale(1.35); opacity: 0.70; }
 }
 /* END_CREATORPULSE_PREMIUM_FLARE */
