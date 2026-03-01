@@ -1,80 +1,147 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CreatorPulse</title>
-  <link rel="stylesheet" href="assets/styles.css" />
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CreatorPulse — Discord automation for growing creators</title>
+    <meta name="description" content="CreatorPulse keeps your Discord organized and up to date so you can focus on content — not constant server maintenance." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
 
-  <!-- header include (your build/templating should insert assets/partials/header.html) -->
+  <body data-page="home">
+    <div class="bg">
+      <div class="bg-glow"></div>
+    </div>
 
-  <main class="container" style="padding: 42px 22px 0 22px;">
-    <section class="hero" style="padding: 34px 0 24px 0;">
-      <div style="display:grid;grid-template-columns:1.2fr .9fr;gap:26px;align-items:start;">
-        <div>
-          <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(42,215,255,.85);margin-bottom:10px;">
-            Built for growing creators
-          </div>
+    <!-- Header -->
+    <div data-include="assets/partials/header.html"></div>
 
-          <h1 style="font-size:56px;line-height:1.02;margin:0 0 12px 0;">
-            Your content deserves<br/>your full attention.
-          </h1>
+    <main class="page">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-left">
+            <div class="eyebrow">Built for growing creators</div>
+            <h1>Your content deserves<br />your full attention.</h1>
+            <p class="lead">
+              CreatorPulse keeps your Discord organized and up to date — so you can stream without
+              added stress or constant checking in. Built for growing creators who care about their
+              community and want it to feel welcoming, organized, and professionally run.
+            </p>
 
-          <p style="max-width:560px;color:rgba(255,255,255,.75);margin:0 0 16px 0;font-size:14px;line-height:1.6;">
-            CreatorPulse keeps your Discord organized and up to date — so you can stream without added stress or constant checking in.
-          </p>
+            <p class="lead-sub">
+              Discord should support your growth — not distract from it.
+            </p>
 
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
-            <a class="btn primary" href="contact.html">Request Access →</a>
-            <a class="btn" href="terms.html">View Policies</a>
-          </div>
-
-          <!-- Small indicator card -->
-          <div class="card availability">
-            <div class="kicker">Early access availability</div>
-            <div class="row">
-              <div class="count">3 / 5 creator slots filled</div>
-              <div style="font-size:12px;color:rgba(255,255,255,.62);">updates automatically later</div>
+            <div class="cta-row">
+              <a class="btn primary" href="contact.html">Request Access <span aria-hidden="true">→</span></a>
+              <a class="btn" href="terms.html">View Policies</a>
             </div>
-            <div class="meter"><span></span></div>
-            <div class="sub">
-              We onboard a small number of communities at a time to protect stability and long-term quality.
+
+            <div class="chips">
+              <span class="chip">Live Alerts</span>
+              <span class="chip">Clean Announcements</span>
+              <span class="chip">Role Access</span>
+              <span class="chip">Clean Dashboards</span>
+            </div>
+
+            <!-- Early Access tracker (small + “live indicator” feel) -->
+            <div class="card availability-card" role="status" aria-label="Early access availability">
+              <div class="availability-top">
+                <div class="availability-label">Early access</div>
+                <div class="availability-live"><span class="dot" aria-hidden="true"></span>Live</div>
+              </div>
+              <div class="availability-metric">
+                <span class="availability-count">3 / 5</span>
+                <span class="availability-text">canary slots filled</span>
+              </div>
+              <div class="availability-sub">Small rollout for stability. Request access to join the next slot.</div>
+            </div>
+          </div>
+
+          <aside class="hero-panel card">
+            <div class="panel-head">
+              <div class="panel-title">Community Support</div>
+              <span class="panel-pill">Live</span>
+            </div>
+
+            <div class="panel-list">
+              <div class="panel-item">
+                <div class="panel-dot"></div>
+                <div>
+                  <div class="panel-item-title">Welcome + Guide</div>
+                  <div class="panel-item-sub">A clear, professional first impression</div>
+                </div>
+              </div>
+
+              <div class="panel-item">
+                <div class="panel-dot"></div>
+                <div>
+                  <div class="panel-item-title">Live Updates</div>
+                  <div class="panel-item-sub">Calm alerts that don’t spam the server</div>
+                </div>
+              </div>
+
+              <div class="panel-item">
+                <div class="panel-dot"></div>
+                <div>
+                  <div class="panel-item-title">Clean Dashboards</div>
+                  <div class="panel-item-sub">Single pinned updates, refreshed in place</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-foot">
+              Calm structure. <strong>Stream with confidence.</strong>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container two-col">
+          <div>
+            <h2>What It Helps With</h2>
+            <div class="card">
+              <p class="muted">
+                CreatorPulse gives your community structure that feels intentional — even while you’re live.
+              </p>
+              <ul class="list">
+                <li>Live alerts and status updates</li>
+                <li>Structured announcements and posts</li>
+                <li>Channel organization that stays consistent as you grow</li>
+                <li>Role-based access management</li>
+                <li>Bot-managed dashboards that stay tidy (no message spam)</li>
+                <li>Confidence inviting viewers into a community that feels professional from day one</li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <h2>Who It Is For</h2>
+            <div class="card">
+              <p>
+                Designed for small and mid-sized creators who care about how their community feels — and want their Discord to
+                grow with them across TikTok, YouTube, Twitch, Kick, and beyond.
+              </p>
+              <p class="muted">
+                Built with long-term stability in mind — not rapid feature releases.
+              </p>
             </div>
           </div>
         </div>
+      </section>
 
-        <div class="card" style="padding:16px 16px 14px 16px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-            <div style="font-weight:800;">Community Support</div>
-            <span class="pill" style="padding:6px 10px;font-weight:800;font-size:11px;">Live</span>
-          </div>
-
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div>
-              <div style="font-weight:800;">● Welcome + Guide</div>
-              <div style="color:rgba(255,255,255,.68);font-size:12px;margin-top:2px;">A clear, professional first impression</div>
-            </div>
-            <div style="border-top:1px solid rgba(255,255,255,.10);padding-top:12px;">
-              <div style="font-weight:800;">● Live Updates</div>
-              <div style="color:rgba(255,255,255,.68);font-size:12px;margin-top:2px;">Calm alerts that don’t spam the server</div>
-            </div>
-            <div style="border-top:1px solid rgba(255,255,255,.10);padding-top:12px;">
-              <div style="font-weight:800;">● Clean Dashboards</div>
-              <div style="color:rgba(255,255,255,.68);font-size:12px;margin-top:2px;">Single pinned updates, refreshed in place</div>
-            </div>
-          </div>
-
-          <div style="margin-top:12px;color:rgba(255,255,255,.78);font-weight:700;">
-            Calm structure. Stream with confidence.
-          </div>
+      <footer class="site-footer">
+        <div class="container footer-inner">
+          <div class="footer-left">© 2026 CD-CreatorPulse</div>
+          <div class="footer-right"><a href="contact.html">support@cdcreatorpulse.com</a></div>
         </div>
-      </div>
-    </section>
-  </main>
+      </footer>
+    </main>
 
-  <!-- footer include (your build/templating should insert assets/partials/footer.html) -->
-
-</body>
+    <script src="assets/site.js"></script>
+  </body>
 </html>

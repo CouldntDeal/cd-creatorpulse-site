@@ -26,7 +26,7 @@ body{
   padding-top: var(--headerH);
 }
 
-/* softer background grid + glow (less “squares”, more premium) */
+/* softer background grid + glow (less â€œsquaresâ€, more premium) */
 body::before{
   content:"";
   position:fixed;
@@ -234,4 +234,93 @@ a:hover{color:var(--accent2)}
   .nav-wrap{flex-direction:column; align-items:flex-start}
   .nav-links{justify-content:flex-start}
   body{padding-top:96px}
+}
+
+
+/* =========================================================
+   Premium polish overrides (safe appended overrides)
+   ========================================================= */
+
+/* Soften the visible grid so it doesn't read as "squares" */
+body::before {
+  background-image:
+    linear-gradient(transparent, transparent 71px, rgba(255, 255, 255, 0.02) 72px),
+    linear-gradient(90deg, transparent, transparent 71px, rgba(255, 255, 255, 0.02) 72px);
+  background-size: 72px 72px;
+  opacity: 0.55;
+}
+
+/* Footer feels thinner/cleaner */
+.site-footer {
+  padding: 10px 0 !important;
+}
+.site-footer,
+.site-footer a {
+  font-size: 12px;
+}
+
+/* Early access tracker (small live-style indicator) */
+.availability-card {
+  margin-top: 14px;
+  max-width: 520px;
+  padding: 14px 16px;
+}
+
+.availability-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.availability-label {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: rgba(140, 214, 255, 0.9);
+}
+
+.availability-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(220, 240, 255, 0.88);
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(120, 200, 255, 0.22);
+  background: rgba(15, 28, 45, 0.35);
+}
+
+.availability-live .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(120, 230, 255, 0.95);
+  box-shadow: 0 0 12px rgba(120, 230, 255, 0.35);
+}
+
+.availability-metric {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.availability-count {
+  font-weight: 800;
+  font-size: 18px;
+  color: rgba(240, 250, 255, 0.96);
+}
+
+.availability-text {
+  font-weight: 600;
+  font-size: 13px;
+  color: rgba(220, 240, 255, 0.75);
+}
+
+.availability-sub {
+  font-size: 12px;
+  color: rgba(220, 240, 255, 0.6);
+  line-height: 1.35;
 }
