@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CreatorPulse — Discord automation for growing creators</title>
-    <meta name="description" content="CreatorPulse keeps your Discord organized and up to date so you can focus on content — not constant server maintenance." />
+    <meta name="description" content="CreatorPulse keeps your Discord structured and up to date so you can focus on content — not constant server maintenance." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,6 +16,7 @@
       <div class="bg-glow"></div>
     </div>
 
+    <!-- Injected Header -->
     <div id="site-header"></div>
 
     <main class="page">
@@ -26,10 +27,10 @@
           <div class="hero-left">
             <div class="eyebrow">Built for growing creators</div>
             <h1>Your content deserves<br />your full attention.</h1>
+
             <p class="lead">
-              CreatorPulse keeps your Discord organized and up to date — so you can stream without
-              added stress or constant checking in. Built for growing creators who care about their
-              community and want it to feel welcoming, organized, and professionally run.
+              CreatorPulse keeps your Discord structured and up to date — so you can focus on creating, not managing.
+              Built for growing creators who care about how their community feels and how it grows.
             </p>
 
             <p class="lead-sub">
@@ -38,7 +39,7 @@
 
             <div class="cta-row">
               <a class="btn primary" href="contact.html">Request Access <span aria-hidden="true">→</span></a>
-              <a class="btn" href="terms.html">View Policies</a>
+              <a class="btn" href="terms.html">Read Policies</a>
             </div>
 
             <div class="chips">
@@ -54,7 +55,7 @@
 
             <aside class="hero-panel card">
               <div class="panel-head">
-                <div class="panel-title">Community Support</div>
+                <div class="panel-title">Community Structure</div>
                 <span class="panel-pill">Live</span>
               </div>
 
@@ -89,21 +90,20 @@
               </div>
             </aside>
 
-            <!-- EARLY ACCESS MOVED HERE -->
+            <!-- EARLY ACCESS (0 for now; auto-updates from JSON) -->
             <div class="card availability-card" role="status" aria-label="Early access availability">
               <div class="availability-top">
                 <div class="availability-label">Early access</div>
                 <div class="availability-live"><span class="dot" aria-hidden="true"></span>Live</div>
               </div>
               <div class="availability-metric">
-                <span class="availability-count">3 / 5</span>
+                <span class="availability-count" id="availabilityCount">0 / 5</span>
                 <span class="availability-text">slots filled</span>
               </div>
               <div class="availability-sub">Small rollout for stability.</div>
             </div>
 
           </div>
-
         </div>
       </section>
 
@@ -130,8 +130,7 @@
             <h2>Who It Is For</h2>
             <div class="card">
               <p>
-                Designed for small and mid-sized creators who care about how their community feels — and want their Discord to
-                grow with them across TikTok, YouTube, Twitch, Kick, and beyond.
+                Designed for creators who care about how their community feels — and want their Discord to grow with them.
               </p>
               <p class="muted">
                 Built with long-term stability in mind — not rapid feature releases.
@@ -141,6 +140,7 @@
         </div>
       </section>
 
+      <!-- Injected Footer -->
       <div id="site-footer"></div>
     </main>
 

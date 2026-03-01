@@ -1,66 +1,51 @@
-/* assets/site.js
- * Shared chrome injection for GitHub Pages static site.
- * Uses absolute /assets/... paths so it never breaks.
- */
-(function () {
-  async function load(url) {
-    const res = await fetch(url, { cache: "no-cache" });
-    if (!res.ok) throw new Error("Failed to load: " + url + " (" + res.status + ")");
-    return await res.text();
+document.addEventListener("DOMContentLoaded", function () {
+  // Header/Footer includes
+  function includeHTML(selector, url) {
+    var el = document.querySelector(selector);
+    if (!el) return Promise.resolve();
+
+    return fetch(url, { cache: "no-store" })
+      .then(function (res) { return res.text(); })
+      .then(function (html) { el.innerHTML = html; })
+      .catch(function () { /* fail quietly */ });
   }
 
-  function setActiveNav() {
-    const pageKey = document.body ? document.body.getAttribute("data-page") : null;
-    const links = Array.from(document.querySelectorAll(".nav-links a[data-nav]"));
-
-    links.forEach(a => {
-      a.classList.remove("active");
-      a.removeAttribute("aria-current");
-    });
-
-    if (pageKey) {
-      const match = links.find(a => a.getAttribute("data-nav") === pageKey);
-      if (match) {
-        match.classList.add("active");
-        match.setAttribute("aria-current", "page");
+  Promise.all([
+    includeHTML("#site-header", "assets/partials/header.html"),
+    includeHTML("#site-footer", "assets/partials/footer.html")
+  ]).then(function () {
+    // Sticky header shadow on scroll (if header exists)
+    var header = document.querySelector(".site-header");
+    if (header) {
+      function onScroll() {
+        if (window.scrollY > 8) header.classList.add("is-scrolled");
+        else header.classList.remove("is-scrolled");
       }
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
     }
-  }
+  });
 
-  function setupHeaderScrollFX() {
-    const header = document.querySelector(".site-header");
-    if (!header) return;
+  // Early access availability (reads JSON; updates the metric)
+  // No backend required. Update assets/data/availability.json to change values.
+  (function updateAvailability() {
+    var el = document.getElementById("availabilityCount");
+    if (!el) return;
 
-    function apply() {
-      if (window.scrollY > 8) header.classList.add("is-scrolled");
-      else header.classList.remove("is-scrolled");
-    }
+    fetch("assets/data/availability.json", { cache: "no-store" })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        var filled = Number(data && data.filled);
+        var cap = Number(data && data.capacity);
 
-    apply();
-    window.addEventListener("scroll", apply, { passive: true });
-  }
+        if (!isFinite(filled) || filled < 0) filled = 0;
+        if (!isFinite(cap) || cap <= 0) cap = 5;
+        if (filled > cap) filled = cap;
 
-  async function inject() {
-    const headerHost = document.getElementById("site-header");
-    const footerHost = document.getElementById("site-footer");
-
-    if (headerHost) {
-      try { headerHost.innerHTML = await load("/assets/partials/header.html"); }
-      catch (e) { console.warn("[site] header inject failed:", e); }
-    }
-
-    if (footerHost) {
-      try { footerHost.innerHTML = await load("/assets/partials/footer.html"); }
-      catch (e) { console.warn("[site] footer inject failed:", e); }
-    }
-
-    setActiveNav();
-    setupHeaderScrollFX();
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", inject);
-  } else {
-    inject();
-  }
-})();
+        el.textContent = filled + " / " + cap;
+      })
+      .catch(function () {
+        // Keep whatever is already in the HTML as the fallback.
+      });
+  })();
+});
