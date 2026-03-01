@@ -87,7 +87,7 @@ a:hover{opacity:.9}
 .brand{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:8px;
   min-width:0;
   text-decoration:none;
   color:inherit;
@@ -109,17 +109,44 @@ a:hover{opacity:.9}
   display:block;
 }
 
-/* Limited Access pill */
+/* Limited Access badge (status indicator) */
 .pill{
+  position:relative;
   display:inline-flex;
   align-items:center;
-  padding:6px 10px;
+  padding:6px 12px;
   border-radius:999px;
   font-size:12px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.04);
-  color:rgba(233,238,248,.85);
+  font-weight:600;
+  letter-spacing:.02em;
   white-space:nowrap;
+
+  color:#0a1a24;
+  background:linear-gradient(90deg,#28d7ff,#5ef2ff);
+  border:1px solid rgba(40,215,255,.6);
+
+  box-shadow:
+    0 0 0 1px rgba(40,215,255,.3),
+    0 0 12px rgba(40,215,255,.35);
+
+  transition:all .3s ease;
+}
+
+/* subtle electric pulse */
+.pill::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  box-shadow:0 0 18px rgba(40,215,255,.5);
+  opacity:.6;
+  animation:pulseGlow 2.8s ease-in-out infinite;
+}
+
+@keyframes pulseGlow{
+  0%{opacity:.4}
+  50%{opacity:.8}
+  100%{opacity:.4}
 }
 
 /* IMPORTANT: no wrap, horizontal scroll when needed */
@@ -302,7 +329,7 @@ h2{margin:0 0 12px}
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:12px;
+  gap:8px;
   padding:8px var(--page-pad);
 }
 
