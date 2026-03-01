@@ -235,7 +235,7 @@ a:hover{color:var(--accent2)}
   position:relative;
 }
 
-/* subtle â€œrailâ€ so the right stack feels placed, not random */
+/* subtle Ã¢â‚¬Å“railÃ¢â‚¬Â so the right stack feels placed, not random */
 .hero-right::before{
   content:"";
   position:absolute;
@@ -380,7 +380,7 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 }
 .list li{margin:0 0 8px 0; color:rgba(255,255,255,.86)}
 
-/* Early access tracker: tighten interior so it feels â€œengineeredâ€ */
+/* Early access tracker: tighten interior so it feels Ã¢â‚¬Å“engineeredÃ¢â‚¬Â */
 .availability-card{
   margin-top:0;
   width:100%;
@@ -484,3 +484,54 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 .availability-live--neutral .dot{
   display:none;
 }
+
+/* Partnership ladder visuals */
+.ladder { display: grid; gap: 12px; margin-top: 14px; }
+.ladder-step {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  background: rgba(0,0,0,.16);
+}
+.ladder-step-title { font-weight: 700; }
+.ladder-step-sub { opacity: .75; font-size: 12px; margin-top: 2px; }
+.ladder-pct { text-align: right; min-width: 140px; display: flex; flex-direction: column; justify-content: center; }
+.ladder-pct .pct { font-weight: 800; }
+.ladder-pct .pct-sub { opacity: .7; font-size: 12px; margin-top: 2px; }
+
+.ladder-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  overflow: hidden;
+  margin-top: 10px;
+}
+.ladder-bar > span { display: block; height: 100%; background: rgba(0,180,255,.35); }
+
+.note {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  color: rgba(255,255,255,.85);
+  font-size: 13px;
+}
+
+.mini-table { margin-top: 10px; display: grid; gap: 10px; }
+.mini-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(0,0,0,.14);
+}
+.mini-left { opacity: .85; }
+.mini-right { white-space: nowrap; }

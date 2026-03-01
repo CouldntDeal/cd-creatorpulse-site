@@ -1,58 +1,86 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CreatorPulse - FAQ</title>
-  <link rel="stylesheet" href="assets/styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FAQ — CreatorPulse</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script defer src="assets/site.js"></script>
 </head>
 <body>
-  <!--#include file="partials/header.html" -->
+  <div data-include="assets/partials/header.html"></div>
 
   <main class="page">
-    <section class="hero">
-      <div class="container">
-        <p class="kicker">FAQ</p>
-        <h1>Clear answers. Calm operations.</h1>
-        <p class="lead">
-          CreatorPulse is designed to keep your Discord professional without adding noise.
-          Here are the most common questions.
+    <section class="hero-grid">
+      <div class="hero-left">
+        <div class="eyebrow">FAQ</div>
+        <h1 class="hero-title">Answers, without the hype.</h1>
+        <p class="hero-subtitle">
+          CreatorPulse is a Discord assistant platform for creators. It helps structure and manage your community
+          so you can focus on content creation.
         </p>
 
-        <div class="section-grid" style="margin-top:18px;">
-          <div class="card">
-            <h2>Does CreatorPulse read DMs?</h2>
-            <p>No. CreatorPulse operates on server surfaces and configured channels only.</p>
-          </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="contact.html">Request Early Access</a>
+          <a class="btn btn-secondary" href="how-it-works.html">How It Works</a>
+        </div>
+      </div>
 
-          <div class="card">
-            <h2>Will it spam my server?</h2>
-            <p>No. The core pattern is pinned placards updated in place (edit, do not append).</p>
+      <div class="hero-right">
+        <div class="panel">
+          <div class="panel-top">
+            <div class="panel-title">Quick facts</div>
+            <span class="panel-pill">Clear</span>
           </div>
-
-          <div class="card">
-            <h2>Where do payments happen?</h2>
-            <p>Payments are processed by Stripe. CreatorPulse integrates with Stripe for subscriptions.</p>
-          </div>
-
-          <div class="card">
-            <h2>Can I uninstall?</h2>
-            <p>Yes. You can remove the bot at any time. Your server remains yours.</p>
-          </div>
-
-          <div class="card" style="grid-column:1 / -1;">
-            <h2>Support</h2>
-            <p>
-              Email <strong>support@cdcreatorpulse.com</strong> with:
-              <strong>[BUG]</strong>, <strong>[FEEDBACK]</strong>, or <strong>[ACCESS]</strong> in the subject.
-            </p>
+          <div class="panel-body">
+            <ul class="bullets">
+              <li>Designed for calm structure (no message spam).</li>
+              <li>Guided setup inside Discord.</li>
+              <li>Early access is limited intentionally for stability.</li>
+            </ul>
           </div>
         </div>
+      </div>
+    </section>
 
+    <section class="grid-2">
+      <div class="card">
+        <div class="card-title">Is CreatorPulse public?</div>
+        <p class="muted">
+          Not yet. Right now it’s limited access while we validate stability in real communities.
+          Once the platform is rollout-ready, it will be open to any Discord server.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">What does it do first?</div>
+        <p class="muted">
+          From the moment it’s invited, it begins helping. It guides the owner/admin through setup
+          and provisions clean, bot-managed surfaces where needed.
+        </p>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <div class="card">
+        <div class="card-title">Does it take over my server?</div>
+        <p class="muted">
+          No. The creator stays in control. CreatorPulse focuses on structure and bot-managed surfaces,
+          and avoids destructive changes to your community culture.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">How does the platform sustain itself?</div>
+        <p class="muted">
+          Through a partnership revenue share on subscription revenue. The split is designed to scale in your favor
+          as you grow. See the Partnership page for the ladder and examples.
+        </p>
+        <p class="muted"><a href="partnership.html">Read Partnership details</a></p>
       </div>
     </section>
   </main>
 
-  <!--#include file="partials/footer.html" -->
+  <div data-include="assets/partials/footer.html"></div>
 </body>
 </html>

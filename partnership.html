@@ -3,250 +3,165 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CreatorPulse - Partnership and Revenue Model</title>
-  <link rel="stylesheet" href="assets/styles.css?v=1" />
+  <title>Partnership — CreatorPulse</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script defer src="assets/site.js"></script>
 </head>
-<body data-page="partnership">
-  <div id="site-header"></div>
+<body>
+  <div data-include="assets/partials/header.html"></div>
 
-  <main>
-    <div class="container">
+  <main class="page">
+    <section class="hero-grid">
+      <div class="hero-left">
+        <div class="eyebrow">PARTNERSHIP</div>
+        <h1 class="hero-title">A split that funds stability — and scales in your favor.</h1>
+        <p class="hero-subtitle">
+          CreatorPulse is built to be a long-term assistant for your Discord — including subscription management.
+          To keep the platform reliable (hosting, monitoring, support, and continued development), the platform
+          sustains itself through a revenue share on subscription revenue.
+        </p>
+        <p class="hero-subtitle">
+          The goal is simple: as you grow, the platform share goes down. This is a partnership — not a forever tax.
+        </p>
 
-      <section class="hero">
-        <div class="hero-grid">
-          <div class="hero-left">
-            <p class="kicker">PARTNERSHIP + REVENUE MODEL</p>
-            <h1>Clear, predictable, and built for long-term trust.</h1>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="contact.html">Request Early Access</a>
+          <a class="btn btn-secondary" href="legal.html">Read Policies</a>
+        </div>
+      </div>
 
-            <p class="lead">
-              CreatorPulse is free to install. If you choose to offer paid supporter tiers to your community,
-              payments are processed through Stripe.
-            </p>
-
-            <p class="lead lead-tight">
-              This page is the source of truth for how the partnership works. It is written to be clear and calm,
-              with no hidden rules.
-            </p>
-
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="pricing.html">
-                Pricing Overview
-                <span class="btn-icon">&rarr;</span>
-              </a>
-              <a class="btn btn-secondary" href="contact.html">
-                Contact Support
-              </a>
-            </div>
-
-            <div class="chips">
-              <span class="chip">Transparent ladder</span>
-              <span class="chip">Permanent milestones</span>
-              <span class="chip">Stripe payments</span>
-              <span class="chip">No fluctuating splits</span>
-            </div>
+      <div class="hero-right">
+        <div class="panel">
+          <div class="panel-top">
+            <div class="panel-title">Revenue split ladder</div>
+            <span class="panel-pill">Partnership</span>
           </div>
 
-          <aside class="hero-panel">
-            <div class="panel-top">
-              <div class="panel-title">Quick summary</div>
-              <div class="panel-badge">Stable</div>
-            </div>
+          <div class="panel-body">
+            <p class="muted">
+              Early access uses a milestone ladder. Exact tiers are confirmed during onboarding so there are no surprises.
+              Below is the intended model (platform share decreases as your community grows).
+            </p>
 
-            <div class="panel-body">
-              <div class="panel-row">
-                <div class="panel-dot"></div>
-                <div class="panel-copy">
-                  <div class="panel-label">Free to install</div>
-                  <div class="panel-sub">Paid tiers are optional</div>
+            <div class="ladder">
+              <div class="ladder-step">
+                <div>
+                  <div class="ladder-step-title">Starter</div>
+                  <div class="ladder-step-sub">Up to $200 MRR</div>
+                  <div class="ladder-bar"><span style="width:50%"></span></div>
+                </div>
+                <div class="ladder-pct">
+                  <div class="pct">50% / 50%</div>
+                  <div class="pct-sub">Creator / Platform</div>
                 </div>
               </div>
 
-              <div class="panel-row">
-                <div class="panel-dot"></div>
-                <div class="panel-copy">
-                  <div class="panel-label">Milestone upgrades</div>
-                  <div class="panel-sub">Permanent once unlocked</div>
+              <div class="ladder-step">
+                <div>
+                  <div class="ladder-step-title">Growing</div>
+                  <div class="ladder-step-sub">$200–$1,000 MRR</div>
+                  <div class="ladder-bar"><span style="width:70%"></span></div>
+                </div>
+                <div class="ladder-pct">
+                  <div class="pct">70% / 30%</div>
+                  <div class="pct-sub">Creator / Platform</div>
                 </div>
               </div>
 
-              <div class="panel-row">
-                <div class="panel-dot"></div>
-                <div class="panel-copy">
-                  <div class="panel-label">Stripe handles payments</div>
-                  <div class="panel-sub">Split applied automatically</div>
+              <div class="ladder-step">
+                <div>
+                  <div class="ladder-step-title">Established</div>
+                  <div class="ladder-step-sub">$1,000–$5,000 MRR</div>
+                  <div class="ladder-bar"><span style="width:85%"></span></div>
+                </div>
+                <div class="ladder-pct">
+                  <div class="pct">85% / 15%</div>
+                  <div class="pct-sub">Creator / Platform</div>
                 </div>
               </div>
 
-              <div class="panel-row">
-                <div class="panel-dot"></div>
-                <div class="panel-copy">
-                  <div class="panel-label">No server spam</div>
-                  <div class="panel-sub">Placards update in place</div>
+              <div class="ladder-step">
+                <div>
+                  <div class="ladder-step-title">Scale</div>
+                  <div class="ladder-step-sub">$5,000+ MRR</div>
+                  <div class="ladder-bar"><span style="width:90%"></span></div>
+                </div>
+                <div class="ladder-pct">
+                  <div class="pct">90% / 10%</div>
+                  <div class="pct-sub">Creator / Platform</div>
                 </div>
               </div>
             </div>
 
-            <div class="panel-footer">
-              Calm structure. Predictable outcomes.
+            <div class="note">
+              <strong>Important:</strong> Payment processing fees (Stripe) are separate from the split.
+              We keep policies and expectations calm and explicit.
             </div>
-          </aside>
-        </div>
-      </section>
-
-      <section class="section section-grid">
-        <div>
-          <h2>Partnership philosophy</h2>
-          <div class="card">
-            <ul class="list">
-              <li>The platform earns only when you earn.</li>
-              <li>The platform always earns some percentage (never zero).</li>
-              <li>The platform share decreases as you grow.</li>
-              <li>Platform share never drops below 10% (max creator split is 90% / 10%).</li>
-              <li>Milestones are permanent once unlocked.</li>
-              <li>Your split does not fluctuate week to week.</li>
-            </ul>
-            <p class="lead lead-tight" style="margin-top:10px;">
-              This structure is designed to reward growth while keeping your revenue predictable.
-            </p>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div>
-          <h2>How milestones unlock</h2>
-          <div class="card">
-            <p class="lead lead-tight">
-              Each milestone requires BOTH:
-            </p>
-            <ul class="list">
-              <li>Active supporter count</li>
-              <li>A monthly gross revenue floor</li>
-            </ul>
+    <section class="grid-2">
+      <div class="card">
+        <div class="card-title">Why a split exists</div>
+        <ul class="bullets">
+          <li><strong>Reliability costs money:</strong> hosting, monitoring, logs, and uptime.</li>
+          <li><strong>Safe rollouts:</strong> canary + stable release channels to protect creators.</li>
+          <li><strong>Support & iteration:</strong> onboarding improvements, fixes, and polish without spammy churn.</li>
+        </ul>
+        <p class="muted">
+          CreatorPulse is designed to feel like a calm assistant — not an experiment that breaks your community.
+        </p>
+      </div>
 
-            <p class="lead lead-tight" style="margin-top:10px;">
-              Both conditions must be satisfied. This prevents manipulation through ultra-low pricing and keeps the ladder fair across different creator models.
-            </p>
+      <div class="card">
+        <div class="card-title">What you get as a partner</div>
+        <ul class="bullets">
+          <li><strong>Subscription handling:</strong> roles, entitlements, and access management.</li>
+          <li><strong>Bot-managed surfaces:</strong> pinned placards that update in place (no clutter).</li>
+          <li><strong>Guided setup:</strong> the bot asks the right questions so it can help properly.</li>
+          <li><strong>Respect for your server:</strong> structure without deleting your culture.</li>
+        </ul>
+      </div>
+    </section>
 
-            <p class="lead lead-tight" style="margin-top:10px;">
-              Once a milestone is unlocked, it is permanent. There are no downgrades if supporters drop temporarily.
-            </p>
+    <section class="grid-2">
+      <div class="card">
+        <div class="card-title">Example math (simple)</div>
+        <div class="mini-table">
+          <div class="mini-row">
+            <div class="mini-left">$100 MRR at 50/50</div>
+            <div class="mini-right"><strong>$50 creator</strong> / $50 platform</div>
+          </div>
+          <div class="mini-row">
+            <div class="mini-left">$800 MRR at 70/30</div>
+            <div class="mini-right"><strong>$560 creator</strong> / $240 platform</div>
+          </div>
+          <div class="mini-row">
+            <div class="mini-left">$2,500 MRR at 85/15</div>
+            <div class="mini-right"><strong>$2,125 creator</strong> / $375 platform</div>
           </div>
         </div>
-      </section>
+        <p class="muted">
+          This is intentionally straightforward. During onboarding, we confirm the current ladder and where you fit.
+        </p>
+      </div>
 
-      <section class="section">
-        <h2>Milestone ladder</h2>
-
-        <div class="card">
-          <p class="lead lead-tight">
-            All splits are shown as Creator / Platform.
-          </p>
-
-          <div style="overflow-x:auto; margin-top:12px;">
-            <table style="width:100%; border-collapse:collapse;">
-              <thead>
-                <tr>
-                  <th style="text-align:left; padding:10px; border-bottom:1px solid rgba(255,255,255,.10);">Milestone</th>
-                  <th style="text-align:left; padding:10px; border-bottom:1px solid rgba(255,255,255,.10);">Unlock requirement (BOTH)</th>
-                  <th style="text-align:left; padding:10px; border-bottom:1px solid rgba(255,255,255,.10);">Split</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);">Starter</td>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);">Default before milestones</td>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);"><strong>50% / 50%</strong></td>
-                </tr>
-                <tr>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);">Momentum</td>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);"><strong>10</strong> active supporters AND <strong>$50/mo</strong> gross</td>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);"><strong>60% / 40%</strong></td>
-                </tr>
-                <tr>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);">Growing</td>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);"><strong>25</strong> active supporters AND <strong>$125/mo</strong> gross</td>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);"><strong>70% / 30%</strong></td>
-                </tr>
-                <tr>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);">Breakthrough</td>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);"><strong>50</strong> active supporters AND <strong>$250/mo</strong> gross</td>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);"><strong>80% / 20%</strong></td>
-                </tr>
-                <tr>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);">Established</td>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);"><strong>100</strong> active supporters AND <strong>$500/mo</strong> gross</td>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);"><strong>85% / 15%</strong></td>
-                </tr>
-                <tr>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);">Scale</td>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);"><strong>250</strong> active supporters AND <strong>$1,250/mo</strong> gross</td>
-                  <td style="padding:10px; border-top:1px solid rgba(255,255,255,.06);"><strong>90% / 10%</strong></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <p class="lead lead-tight" style="margin-top:12px;">
-            Platform share never drops below 10%. The platform stays invested in reliability, uptime, and long-term support.
-          </p>
-        </div>
-      </section>
-
-      <section class="section section-grid">
-        <div>
-          <h2>Pricing floors (fairness)</h2>
-          <div class="card">
-            <p class="lead lead-tight">
-              Creators can customize tier pricing, but the platform enforces minimum price floors to keep milestones fair and prevent manipulation.
-            </p>
-            <ul class="list">
-              <li>Tier 1 floor: $1.99</li>
-              <li>Tier 2 floor: $4.99</li>
-              <li>Tier 3 floor: $9.99</li>
-            </ul>
-            <p class="lead lead-tight" style="margin-top:10px;">
-              This keeps the milestone ladder consistent across different communities and pricing strategies.
-            </p>
-          </div>
-        </div>
-
-        <div>
-          <h2>Transparency and uninstall</h2>
-          <div class="card">
-            <ul class="list">
-              <li>CreatorPulse does not read direct messages.</li>
-              <li>CreatorPulse operates on server surfaces and configured channels only.</li>
-              <li>Placards are updated in place to avoid server spam.</li>
-            </ul>
-
-            <p class="lead lead-tight" style="margin-top:10px;">
-              If you remove the bot, automation stops immediately and no new data is collected for your server.
-              Financial records may be retained for accounting integrity and audit requirements.
-            </p>
-
-            <p class="lead lead-tight" style="margin-top:10px;">
-              Questions or compliance requests: <a href="mailto:support@cdcreatorpulse.com">support@cdcreatorpulse.com</a>
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="card">
-          <p style="margin:0;">
-            <strong>Effective date:</strong> March 1, 2026
-          </p>
-          <p style="margin:8px 0 0; opacity:.9;">
-            This partnership structure is foundational to CreatorPulse. Any future updates, if ever required for operational or regulatory reasons,
-            will be published here before taking effect.
-          </p>
-        </div>
-      </section>
-
-    </div>
+      <div class="card">
+        <div class="card-title">How early access works</div>
+        <ul class="bullets">
+          <li>Limited test servers so stability stays high.</li>
+          <li>Clear expectations: feedback when something feels confusing or noisy.</li>
+          <li>We do not ask you to “market” the bot — stability comes first.</li>
+        </ul>
+        <p class="muted">
+          If accepted, you receive a custom invite link for the bot.
+        </p>
+      </div>
+    </section>
   </main>
 
-  <div id="site-footer"></div>
-
-  <script src="assets/site.js" defer></script>
+  <div data-include="assets/partials/footer.html"></div>
 </body>
 </html>
