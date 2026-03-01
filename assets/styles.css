@@ -239,6 +239,7 @@ main::before{
 
 /* Right hero card */
 .hero-panel{
+  transform: translateY(48px);
   margin-top: 18px;
   position: relative;
   border-radius: var(--radius2);
@@ -369,6 +370,7 @@ main::before{
     grid-template-columns: 1fr;
   }
   .hero-panel{
+  transform: translateY(48px);
     margin-top: 0 !important;
   }
   .section-grid{
@@ -385,4 +387,5 @@ main::before{
 }
 
 /* Layout micro-tighten overrides (Home fit) */
-.hero-panel{ margin-top: 22px !important; }
+.hero-panel{
+  transform: translateY(48px); margin-top: 22px !important; }
