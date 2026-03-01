@@ -53,12 +53,41 @@ a:hover{color:var(--accent2)}
 }
 
 .card{
+  position:relative;
+  overflow:hidden;
   background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.05));
   border:1px solid rgba(255,255,255,.10);
   border-radius:var(--radius);
-  /* slightly tighter, more intentional */
   box-shadow: 0 16px 46px rgba(0,0,0,.34);
   backdrop-filter: blur(10px);
+  padding:16px 16px;
+}
+
+/* subtle premium edge flare (consistent across ALL cards) */
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background:
+    radial-gradient(600px 240px at 18% 12%, rgba(42,215,255,.12), transparent 60%),
+    radial-gradient(520px 240px at 86% 18%, rgba(122,215,255,.09), transparent 62%),
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
+  opacity:.55;
+  mix-blend-mode:screen;
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  box-shadow:
+    0 0 0 1px rgba(42,215,255,.06) inset,
+    0 0 22px rgba(42,215,255,.06);
+  opacity:.85;
 }
 
 /* BUTTONS */
@@ -201,7 +230,7 @@ a:hover{color:var(--accent2)}
 .hero-right{
   display:flex;
   flex-direction:column;
-  gap:14px;              /* consistent spacing */
+  gap:14px;
   align-self:start;
   position:relative;
 }
@@ -329,9 +358,6 @@ a:hover{color:var(--accent2)}
 
 h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 
-/* slightly tighter cards */
-.card{padding:16px 16px}
-
 .muted{color:rgba(255,255,255,.70)}
 
 .list{
@@ -342,7 +368,7 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 
 /* Early access tracker: small, premium, aligned to right card width */
 .availability-card{
-  margin-top:0;           /* relies on .hero-right gap */
+  margin-top:0;
   width:100%;
   max-width:none;
   padding:14px 16px;
