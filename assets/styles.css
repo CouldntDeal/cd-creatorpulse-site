@@ -32,7 +32,7 @@ body{
   line-height:1.45;
   overflow-x:hidden;
 
-  /* Fixed header safety: prevent content from hiding under the header */
+  /* Fixed header safety */
   padding-top: var(--header-h);
 }
 
@@ -87,7 +87,7 @@ a:hover{opacity:.9}
 .brand{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:10px; /* keep badge close to logo */
   min-width:0;
   text-decoration:none;
   color:inherit;
@@ -114,39 +114,46 @@ a:hover{opacity:.9}
   position:relative;
   display:inline-flex;
   align-items:center;
+  gap:8px;
   padding:6px 12px;
   border-radius:999px;
   font-size:12px;
   font-weight:600;
   letter-spacing:.02em;
   white-space:nowrap;
+}
 
-  color:#0a1a24;
-  background:linear-gradient(90deg,#28d7ff,#5ef2ff);
-  border:1px solid rgba(40,215,255,.6);
+.pill-limited{
+  color:rgba(233,238,248,.90);
+  background:rgba(40,215,255,.08);
+  border:1px solid rgba(40,215,255,.22);
 
   box-shadow:
-    0 0 0 1px rgba(40,215,255,.3),
-    0 0 12px rgba(40,215,255,.35);
+    0 0 0 1px rgba(40,215,255,.08),
+    0 10px 22px rgba(0,0,0,.25);
 
-  transition:all .3s ease;
+  transition:all .2s ease;
 }
 
-/* subtle electric pulse */
-.pill::after{
-  content:"";
-  position:absolute;
-  inset:0;
+.pill-limited:hover{
+  border-color: rgba(40,215,255,.32);
+  background:rgba(40,215,255,.10);
+}
+
+/* premium dot */
+.pill-dot{
+  width:8px;
+  height:8px;
   border-radius:999px;
-  box-shadow:0 0 18px rgba(40,215,255,.5);
-  opacity:.6;
-  animation:pulseGlow 2.8s ease-in-out infinite;
+  background:rgba(40,215,255,.95);
+  box-shadow:0 0 0 4px rgba(40,215,255,.10);
+  animation:limitedPulse 2.6s ease-in-out infinite;
 }
 
-@keyframes pulseGlow{
-  0%{opacity:.4}
-  50%{opacity:.8}
-  100%{opacity:.4}
+@keyframes limitedPulse{
+  0%{transform:scale(.95); box-shadow:0 0 0 4px rgba(40,215,255,.08)}
+  50%{transform:scale(1.05); box-shadow:0 0 0 7px rgba(40,215,255,.14)}
+  100%{transform:scale(.95); box-shadow:0 0 0 4px rgba(40,215,255,.08)}
 }
 
 /* IMPORTANT: no wrap, horizontal scroll when needed */
@@ -329,7 +336,7 @@ h2{margin:0 0 12px}
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:8px;
+  gap:12px;
   padding:8px var(--page-pad);
 }
 
@@ -339,7 +346,7 @@ h2{margin:0 0 12px}
   .section-grid{grid-template-columns:1fr}
 }
 
-/* Mobile: slightly smaller lockup so it never forces nav too tight */
+/* Mobile: slightly smaller lockup */
 @media (max-width: 520px){
   :root{
     --brand-logo-w:120px;
