@@ -873,3 +873,31 @@ main {
 #site-footer {
   margin-top: 40px;
 }
+
+/* ===== Page Height Fix ===== */
+
+html, body {
+  height: auto;
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 0 1 auto;
+  padding-bottom: 20px;
+}
+
+#site-footer {
+  margin-top: 30px;
+  padding: 20px 0;
+}
+
+/* Remove phantom scroll feel */
+.section {
+  margin-bottom: 0;
+}
+
