@@ -97,6 +97,8 @@ a:hover{color:var(--accent2)}
   align-items:center;
   gap:12px;
   min-width:0;
+  text-decoration:none;
+  color:inherit;
 }
 .brand-logo{
   width:40px;
@@ -263,6 +265,10 @@ main::before{
 .hero-panel{
   padding:16px 18px;
   transform: translateY(22px); /* lower slightly (visual alignment, no layout height change) */
+  background:var(--card);
+  border:1px solid var(--stroke);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow2);
 }
 
 .hero-panel .panel-top{
