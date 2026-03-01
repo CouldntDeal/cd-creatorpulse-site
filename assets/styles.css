@@ -94,20 +94,21 @@ a:hover{opacity:.9}
   align-items:center;
   justify-content:flex-start;
 
-  /* critical: do NOT reserve phantom width */
-  width:fit-content;
   height:40px;
+  overflow:hidden;          /* hide phantom transparent area */
   flex:0 0 auto;
 }
 
 .brand-img{
   display:block;
-
-  /* critical: image defines actual width */
-  width:auto;
   height:38px;
+  width:auto;
+
   object-fit:contain;
   object-position:left center;
+
+  /* trim transparent right-side spacing */
+  margin-right:-12px;
 }
 
 /* Limited Access badge (status indicator) */
@@ -351,6 +352,24 @@ h2{margin:0 0 12px}
 }
 
 @media (max-width: 520px){
-  .brand-logo{height:36px}
-  .brand-img{height:34px}
+  .brand-logo{
+  display:inline-flex;
+  align-items:center;
+  justify-content:flex-start;
+
+  height:40px;
+  overflow:hidden;          /* hide phantom transparent area */
+  flex:0 0 auto;
+}
+  .brand-img{
+  display:block;
+  height:38px;
+  width:auto;
+
+  object-fit:contain;
+  object-position:left center;
+
+  /* trim transparent right-side spacing */
+  margin-right:-12px;
+}
 }
