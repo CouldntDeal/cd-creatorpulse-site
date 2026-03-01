@@ -831,3 +831,45 @@ main > .container{
 }
 /* END_FOOTER_AND_BADGE_FIX */
 /* END_CREATORPULSE_PREMIUM_FLARE */
+
+/* ===== Layout Tightening Patch ===== */
+
+main {
+  flex: 1;
+  padding-bottom: 40px;
+}
+
+.section {
+  margin-top: 50px;
+}
+
+.section-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .section-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section h2 {
+  margin-bottom: 18px;
+}
+
+.card {
+  height: 100%;
+}
+
+/* Remove excessive scroll feel */
+.section-divider {
+  display: none;
+}
+
+/* Footer tighten */
+#site-footer {
+  margin-top: 40px;
+}
