@@ -901,3 +901,31 @@ main {
   margin-bottom: 0;
 }
 
+
+/* ===== Background Scroll Fix ===== */
+
+/* Prevent decorative layers from creating scroll */
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Ensure layout height follows content only */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: auto;
+}
+
+/* Remove accidental bottom spacing */
+main {
+  padding-bottom: 0 !important;
+}
+
+/* Prevent background effects from stretching page */
+body::before,
+body::after {
+  max-height: 100vh;
+  pointer-events: none;
+}
+
