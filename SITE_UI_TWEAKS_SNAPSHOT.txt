@@ -1,0 +1,651 @@
+===== FILE: index.html =====
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CreatorPulse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+
+  <body data-page="home">
+    <div class="bg"><div class="bg-glow"></div></div>
+
+    <!-- Injected Header -->
+    <div id="site-header"></div>
+
+    <main class="page">
+      <section class="hero">
+        <div class="container hero-grid">
+
+          <div class="hero-left">
+            <div class="eyebrow">Built for growing creators</div>
+            <h1>Your content deserves<br />your full attention.</h1>
+
+            <p class="lead">
+              CreatorPulse keeps your Discord structured and up to date â€” so you can focus on creating, not managing.
+              Built for growing creators who care about how their community feels and how it grows.
+            </p>
+
+            <p class="lead-sub">
+              Discord should support your growth â€” not distract from it.
+            </p>
+
+            <div class="cta-row">
+              <a class="btn primary" href="contact.html">Request Access <span aria-hidden="true">â†’</span></a>
+              <a class="btn" href="legal.html">Read Policies</a>
+            </div>
+
+            <div class="chips">
+              <span class="chip">Live Alerts</span>
+              <span class="chip">Clean Announcements</span>
+              <span class="chip">Role Access</span>
+              <span class="chip">Clean Dashboards</span>
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <aside class="hero-panel card">
+              <div class="panel-head">
+                <div class="panel-title">Community Structure</div>
+                <span class="panel-pill">Live</span>
+              </div>
+
+              <div class="panel-list">
+                <div class="panel-item">
+                  <div class="panel-dot"></div>
+                  <div>
+                    <div class="panel-item-title">Welcome + Guide</div>
+                    <div class="panel-item-sub">A clear, professional first impression</div>
+                  </div>
+                </div>
+
+                <div class="panel-item">
+                  <div class="panel-dot"></div>
+                  <div>
+                    <div class="panel-item-title">Live Updates</div>
+                    <div class="panel-item-sub">Calm alerts that donâ€™t spam the server</div>
+                  </div>
+                </div>
+
+                <div class="panel-item">
+                  <div class="panel-dot"></div>
+                  <div>
+                    <div class="panel-item-title">Clean Dashboards</div>
+                    <div class="panel-item-sub">Single pinned updates, refreshed in place</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-foot">
+                Calm structure. <strong>Stream with confidence.</strong>
+              </div>
+            </aside>
+
+            <div class="card availability-card" role="status" aria-label="Early access availability">
+              <div class="availability-top">
+                <div class="availability-label">Early access</div>
+                <div class="availability-live"><span class="dot" aria-hidden="true"></span>Live</div>
+              </div>
+
+              <div class="availability-metric">
+                <span class="availability-count" id="availabilityCount">0 / 5</span>
+                <span class="availability-text">slots filled</span>
+              </div>
+
+              <div class="availability-sub">Small rollout for stability.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container two-col">
+
+          <div>
+            <h2>What It Helps With</h2>
+            <div class="card">
+              <p class="muted">
+                CreatorPulse gives your community structure that feels intentional â€” even while youâ€™re live.
+              </p>
+              <ul class="list">
+                <li>Live alerts and status updates</li>
+                <li>Structured announcements and posts</li>
+                <li>Channel organization that stays consistent as you grow</li>
+                <li>Role-based access management</li>
+                <li>Bot-managed dashboards that stay tidy (no message spam)</li>
+                <li>Confidence inviting viewers into a community that feels professional from day one</li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <h2>Who It Is For</h2>
+            <div class="card">
+              <p>
+                Designed for creators who care about how their community feels â€” and want their Discord to grow with them.
+              </p>
+
+              <ul class="list">
+                <li>Communities that want a clean, professional first impression</li>
+                <li>Creators who prefer stability over rapid feature churn</li>
+                <li>Servers that want structure without losing personality</li>
+                <li>Teams that want â€œset it up onceâ€ and keep it tidy</li>
+              </ul>
+
+              <p class="muted">
+                Early access is limited on purpose. If you join as a test server, youâ€™re helping validate the rollout in real communities.
+                Weâ€™ll prioritize creators who can give calm feedback and keep expectations realistic while we harden the platform.
+              </p>
+
+              <p class="muted">
+                Built with long-term stability in mind â€” not rapid feature releases.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Injected Footer -->
+      <div id="site-footer"></div>
+    </main>
+
+    <script src="assets/site.js"></script>
+  </body>
+</html>
+
+===== FILE: assets/styles.css =====
+:root{
+  --bg0:#05070c;
+  --bg1:#070b12;
+  --card:rgba(255,255,255,.06);
+  --card2:rgba(255,255,255,.08);
+  --stroke:rgba(255,255,255,.10);
+  --text:rgba(255,255,255,.92);
+  --muted:rgba(255,255,255,.70);
+  --accent:#2ad7ff;
+  --accent2:#7ad7ff;
+  --container:1120px;
+  --radius:18px;
+  --headerH:72px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color:var(--text);
+  background:
+    radial-gradient(1200px 700px at 18% 10%, rgba(42,215,255,.10), transparent 60%),
+    radial-gradient(1000px 700px at 82% 35%, rgba(122,215,255,.06), transparent 55%),
+    linear-gradient(180deg, var(--bg1), var(--bg0) 60%, #03050a);
+  padding-top: var(--headerH);
+}
+
+/* premium subtle texture (no obvious squares) */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(1100px 700px at 20% 10%, rgba(40,215,255,.10), transparent 60%),
+    radial-gradient(900px 700px at 80% 35%, rgba(122,215,255,.06), transparent 55%),
+    linear-gradient(transparent, transparent 83px, rgba(255,255,255,.016) 84px),
+    linear-gradient(90deg, transparent, transparent 83px, rgba(255,255,255,.012) 84px);
+  background-size: auto, auto, 84px 84px, 84px 84px;
+  opacity:.18;
+  filter:saturate(110%) blur(.25px);
+}
+
+a{color:inherit}
+a:hover{color:var(--accent2)}
+
+.container{
+  width:100%;
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 22px;
+}
+
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:var(--radius);
+  /* slightly tighter, more intentional */
+  box-shadow: 0 16px 46px rgba(0,0,0,.34);
+  backdrop-filter: blur(10px);
+}
+
+/* BUTTONS */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.05);
+  color:var(--text);
+  text-decoration:none;
+  gap:10px;
+  font-weight:600;
+  font-size:14px;
+}
+.btn:hover{border-color:rgba(42,215,255,.35)}
+.btn.primary{
+  background:rgba(42,215,255,.12);
+  border-color:rgba(42,215,255,.35);
+}
+
+/* HEADER */
+.site-header{
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:1000;
+  height:var(--headerH);
+  display:flex;
+  align-items:center;
+  background:rgba(5,7,12,.55);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(14px);
+}
+
+.site-header.is-scrolled{
+  background:rgba(5,7,12,.72);
+  border-bottom-color: rgba(255,255,255,.10);
+}
+
+.nav-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.brand{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  min-width:0;
+}
+
+.brand-logo{
+  display:inline-flex;
+  align-items:center;
+}
+
+.brand-logo img{
+  height:30px;
+  width:auto;
+  display:block;
+  object-fit:contain;
+  image-rendering:auto;
+  filter: drop-shadow(0 0 10px rgba(42,215,255,.18));
+}
+
+.brand-title{
+  font-size:15px;
+  letter-spacing:.2px;
+  white-space:nowrap;
+}
+
+/* Limited Access pill: premium, subtle glow, stays near brand */
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.2px;
+  white-space:nowrap;
+}
+
+.pill--limited{
+  margin-left:6px;
+  background:rgba(42,215,255,.10);
+  border-color:rgba(42,215,255,.28);
+  box-shadow: 0 0 0 1px rgba(42,215,255,.10) inset, 0 0 18px rgba(42,215,255,.10);
+}
+.pill--limited::before{
+  content:"";
+  width:8px; height:8px;
+  border-radius:50%;
+  background:rgba(42,215,255,.92);
+  box-shadow: 0 0 14px rgba(42,215,255,.55);
+}
+
+/* Nav pills: keep premium + stop awkward wraps */
+.nav-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:flex-end;
+}
+.nav-links a{
+  text-decoration:none;
+  padding:7px 11px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.04);
+  font-size:12px;
+  color:rgba(255,255,255,.86);
+}
+.nav-links a:hover{
+  border-color:rgba(42,215,255,.30);
+}
+
+/* HERO (slightly tighter) */
+.hero{
+  padding:48px 0 22px;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns: 1.08fr .92fr;
+  gap:38px;
+  align-items:start;
+}
+
+.hero-left{max-width:650px}
+
+/* right side becomes an intentional stack */
+.hero-right{
+  display:flex;
+  flex-direction:column;
+  gap:14px;              /* consistent spacing */
+  align-self:start;
+  position:relative;
+}
+
+/* subtle â€œrailâ€ so the right stack feels placed, not random */
+.hero-right::before{
+  content:"";
+  position:absolute;
+  left:-18px;
+  top:6px;
+  bottom:6px;
+  width:1px;
+  background:linear-gradient(180deg, rgba(42,215,255,.12), rgba(255,255,255,.05), rgba(42,215,255,.10));
+  opacity:.45;
+  pointer-events:none;
+}
+
+.eyebrow{
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:rgba(42,215,255,.85);
+  margin-bottom:10px;
+}
+
+.hero-left h1{
+  margin:0 0 12px 0;
+  font-size:42px;
+  line-height:1.06;
+  letter-spacing:-.01em;
+}
+
+.lead{
+  margin:0 0 10px 0;
+  font-size:15px;
+  line-height:1.62;
+  color:rgba(255,255,255,.74);
+  max-width:620px;
+}
+
+.lead-sub{
+  margin:0 0 14px 0;
+  font-size:13px;
+  color:rgba(255,255,255,.82);
+}
+
+.cta-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:0 0 12px 0;
+}
+
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:12px;
+}
+
+.chip{
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.04);
+  font-size:12px;
+  color:rgba(255,255,255,.86);
+}
+
+/* Right card */
+.hero-panel{
+  padding:18px 18px 16px 18px;
+}
+
+.panel-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.panel-title{font-weight:800}
+.panel-pill{
+  font-size:11px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(42,215,255,.30);
+  background:rgba(42,215,255,.10);
+}
+
+.panel-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.panel-item{
+  display:flex;
+  gap:12px;
+}
+
+.panel-dot{
+  width:7px; height:7px;
+  border-radius:999px;
+  margin-top:6px;
+  background:rgba(42,215,255,.95);
+  box-shadow: 0 0 14px rgba(42,215,255,.50);
+}
+
+.panel-item-title{font-weight:700; font-size:13px}
+.panel-item-sub{font-size:12px; color:rgba(255,255,255,.70)}
+.panel-foot{margin-top:14px; font-size:12px; color:rgba(255,255,255,.72)}
+
+/* Sections (tighter) */
+.section{padding:26px 0 30px}
+
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  align-items:start;
+}
+
+h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
+
+/* slightly tighter cards */
+.card{padding:16px 16px}
+
+.muted{color:rgba(255,255,255,.70)}
+
+.list{
+  margin:10px 0 0 0;
+  padding-left:18px;
+}
+.list li{margin:0 0 8px 0; color:rgba(255,255,255,.86)}
+
+/* Early access tracker: small, premium, aligned to right card width */
+.availability-card{
+  margin-top:0;           /* relies on .hero-right gap */
+  width:100%;
+  max-width:none;
+  padding:14px 16px;
+}
+
+.availability-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:6px;
+}
+
+.availability-label{
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  font-size:11px;
+  color:rgba(140,214,255,.92);
+}
+
+.availability-live{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  color:rgba(220,240,255,.88);
+  padding:5px 9px;
+  border-radius:999px;
+  border:1px solid rgba(120,200,255,.22);
+  background:rgba(15,28,45,.30);
+}
+
+.availability-live .dot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:rgba(120,230,255,.95);
+  box-shadow:0 0 12px rgba(120,230,255,.35);
+}
+
+.availability-metric{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+  margin-bottom:4px;
+}
+
+.availability-count{
+  font-weight:900;
+  font-size:18px;
+  color:rgba(240,250,255,.96);
+}
+
+.availability-text{
+  font-weight:650;
+  font-size:13px;
+  color:rgba(220,240,255,.72);
+}
+
+.availability-sub{
+  font-size:12px;
+  color:rgba(220,240,255,.60);
+  line-height:1.35;
+}
+
+/* FOOTER (tight + premium) */
+.site-footer{
+  border-top:1px solid rgba(255,255,255,.08);
+  margin-top:18px;
+}
+.site-footer .container{
+  padding:8px 22px;
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  font-size:12px;
+  color:rgba(255,255,255,.70);
+}
+.site-footer a{color:rgba(255,255,255,.78)}
+.site-footer a:hover{color:var(--accent2)}
+
+/* Responsive */
+@media (max-width: 980px){
+  .hero{padding:36px 0 18px}
+  .hero-grid{grid-template-columns:1fr; gap:18px}
+  .hero-right::before{display:none}
+  .two-col{grid-template-columns:1fr}
+}
+
+@media (max-width: 880px){
+  .nav-wrap{flex-direction:column; align-items:flex-start}
+  .nav-links{justify-content:flex-start}
+  body{padding-top:96px}
+  .hero-left h1{font-size:38px}
+}
+
+===== FILE: assets/site.js =====
+document.addEventListener("DOMContentLoaded", function () {
+  // Header/Footer includes
+  function includeHTML(selector, url) {
+    var el = document.querySelector(selector);
+    if (!el) return Promise.resolve();
+
+    return fetch(url, { cache: "no-store" })
+      .then(function (res) { return res.text(); })
+      .then(function (html) { el.innerHTML = html; })
+      .catch(function () { /* fail quietly */ });
+  }
+
+  Promise.all([
+    includeHTML("#site-header", "assets/partials/header.html"),
+    includeHTML("#site-footer", "assets/partials/footer.html")
+  ]).then(function () {
+    // Sticky header shadow on scroll (if header exists)
+    var header = document.querySelector(".site-header");
+    if (header) {
+      function onScroll() {
+        if (window.scrollY > 8) header.classList.add("is-scrolled");
+        else header.classList.remove("is-scrolled");
+      }
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    }
+  });
+
+  // Early access availability (reads JSON; updates the metric)
+  // No backend required. Update assets/data/availability.json to change values.
+  (function updateAvailability() {
+    var el = document.getElementById("availabilityCount");
+    if (!el) return;
+
+    fetch("assets/data/availability.json", { cache: "no-store" })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        var filled = Number(data && data.filled);
+        var cap = Number(data && data.capacity);
+
+        if (!isFinite(filled) || filled < 0) filled = 0;
+        if (!isFinite(cap) || cap <= 0) cap = 5;
+        if (filled > cap) filled = cap;
+
+        el.textContent = filled + " / " + cap;
+      })
+      .catch(function () {
+        // Keep whatever is already in the HTML as the fallback.
+      });
+  })();
+});
+

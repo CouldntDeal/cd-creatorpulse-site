@@ -1,0 +1,586 @@
+== Snapshot starting ==
+RepoRoot: C:\Users\Kaide\Desktop\cd-creatorpulse-site
+GeneratedAtLocal: 2026-03-01 11:09:53
+
+Included files:
+ - .\index.html
+ - .\assets\partials\header.html
+ - .\assets\styles.css
+ - .\assets\site.js
+
+========================================
+
+===== FILE: .\index.html =====
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CreatorPulse â€” Discord automation for growing creators</title>
+    <meta name="description" content="CreatorPulse keeps your Discord organized and up to date so you can focus on content â€” not constant server maintenance." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+
+  <body data-page="home">
+    <div class="bg">
+      <div class="bg-glow"></div>
+    </div>
+
+    <!-- Header -->
+    <div data-include="assets/partials/header.html"></div>
+
+    <main class="page">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-left">
+            <div class="eyebrow">Built for growing creators</div>
+            <h1>Your content deserves<br />your full attention.</h1>
+            <p class="lead">
+              CreatorPulse keeps your Discord organized and up to date â€” so you can stream without
+              added stress or constant checking in. Built for growing creators who care about their
+              community and want it to feel welcoming, organized, and professionally run.
+            </p>
+
+            <p class="lead-sub">
+              Discord should support your growth â€” not distract from it.
+            </p>
+
+            <div class="cta-row">
+              <a class="btn primary" href="contact.html">Request Access <span aria-hidden="true">â†’</span></a>
+              <a class="btn" href="terms.html">View Policies</a>
+            </div>
+
+            <div class="chips">
+              <span class="chip">Live Alerts</span>
+              <span class="chip">Clean Announcements</span>
+              <span class="chip">Role Access</span>
+              <span class="chip">Clean Dashboards</span>
+            </div>
+
+            <!-- Early Access tracker (small + â€œlive indicatorâ€ feel) -->
+            <div class="card availability-card" role="status" aria-label="Early access availability">
+              <div class="availability-top">
+                <div class="availability-label">Early access</div>
+                <div class="availability-live"><span class="dot" aria-hidden="true"></span>Live</div>
+              </div>
+              <div class="availability-metric">
+                <span class="availability-count">3 / 5</span>
+                <span class="availability-text">canary slots filled</span>
+              </div>
+              <div class="availability-sub">Small rollout for stability. Request access to join the next slot.</div>
+            </div>
+          </div>
+
+          <aside class="hero-panel card">
+            <div class="panel-head">
+              <div class="panel-title">Community Support</div>
+              <span class="panel-pill">Live</span>
+            </div>
+
+            <div class="panel-list">
+              <div class="panel-item">
+                <div class="panel-dot"></div>
+                <div>
+                  <div class="panel-item-title">Welcome + Guide</div>
+                  <div class="panel-item-sub">A clear, professional first impression</div>
+                </div>
+              </div>
+
+              <div class="panel-item">
+                <div class="panel-dot"></div>
+                <div>
+                  <div class="panel-item-title">Live Updates</div>
+                  <div class="panel-item-sub">Calm alerts that donâ€™t spam the server</div>
+                </div>
+              </div>
+
+              <div class="panel-item">
+                <div class="panel-dot"></div>
+                <div>
+                  <div class="panel-item-title">Clean Dashboards</div>
+                  <div class="panel-item-sub">Single pinned updates, refreshed in place</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-foot">
+              Calm structure. <strong>Stream with confidence.</strong>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container two-col">
+          <div>
+            <h2>What It Helps With</h2>
+            <div class="card">
+              <p class="muted">
+                CreatorPulse gives your community structure that feels intentional â€” even while youâ€™re live.
+              </p>
+              <ul class="list">
+                <li>Live alerts and status updates</li>
+                <li>Structured announcements and posts</li>
+                <li>Channel organization that stays consistent as you grow</li>
+                <li>Role-based access management</li>
+                <li>Bot-managed dashboards that stay tidy (no message spam)</li>
+                <li>Confidence inviting viewers into a community that feels professional from day one</li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <h2>Who It Is For</h2>
+            <div class="card">
+              <p>
+                Designed for small and mid-sized creators who care about how their community feels â€” and want their Discord to
+                grow with them across TikTok, YouTube, Twitch, Kick, and beyond.
+              </p>
+              <p class="muted">
+                Built with long-term stability in mind â€” not rapid feature releases.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="container footer-inner">
+          <div class="footer-left">Â© 2026 CD-CreatorPulse</div>
+          <div class="footer-right"><a href="contact.html">support@cdcreatorpulse.com</a></div>
+        </div>
+      </footer>
+    </main>
+
+    <script src="assets/site.js"></script>
+  </body>
+</html>
+
+===== FILE: .\assets\partials\header.html =====
+<header class="site-header">
+  <div class="container">
+    <div class="nav-wrap">
+      <a class="brand" href="./" aria-label="CreatorPulse Home">
+        <span class="brand-logo" aria-hidden="true">
+          <img src="assets/images/logo-header-cropped.png" alt="" />
+        </span>
+        <span class="brand-title"><strong>CreatorPulse</strong></span>
+
+        <span class="pill pill--limited" title="Limited early access / canary rollout">
+          Limited Access
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="./" data-nav="home">Home</a>
+        <a href="pricing.html" data-nav="pricing">Pricing</a>
+        <a href="partnership.html" data-nav="partnership">Partnership</a>
+        <a href="faq.html" data-nav="faq">FAQ</a>
+        <a href="terms.html" data-nav="terms">Terms</a>
+        <a href="privacy.html" data-nav="privacy">Privacy</a>
+        <a href="refunds.html" data-nav="refunds">Refunds</a>
+        <a href="contact.html" data-nav="contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+===== FILE: .\assets\styles.css =====
+:root{
+  --bg0:#05070c;
+  --bg1:#070b12;
+  --card:rgba(255,255,255,.06);
+  --card2:rgba(255,255,255,.08);
+  --stroke:rgba(255,255,255,.10);
+  --text:rgba(255,255,255,.92);
+  --muted:rgba(255,255,255,.70);
+  --accent:#2ad7ff;
+  --accent2:#7ad7ff;
+  --container:1120px;
+  --radius:18px;
+  --headerH:72px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color:var(--text);
+  background:
+    radial-gradient(1200px 700px at 18% 10%, rgba(42,215,255,.10), transparent 60%),
+    radial-gradient(1000px 700px at 82% 35%, rgba(122,215,255,.06), transparent 55%),
+    linear-gradient(180deg, var(--bg1), var(--bg0) 60%, #03050a);
+  padding-top: var(--headerH);
+}
+
+/* softer background grid + glow (less Ã¢â‚¬Å“squaresÃ¢â‚¬Â, more premium) */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(1100px 700px at 20% 10%, rgba(40,215,255,.10), transparent 60%),
+    radial-gradient(900px 700px at 80% 35%, rgba(122,215,255,.06), transparent 55%),
+    linear-gradient(rgba(255,255,255,.030) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.020) 1px, transparent 1px);
+  background-size: auto, auto, 88px 88px, 88px 88px;
+  opacity:.28;
+  filter:saturate(110%) blur(.2px);
+}
+
+a{color:inherit}
+a:hover{color:var(--accent2)}
+
+.container{
+  width:100%;
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 22px;
+}
+
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:var(--radius);
+  box-shadow: 0 18px 60px rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.05);
+  color:var(--text);
+  text-decoration:none;
+  gap:10px;
+  font-weight:600;
+  font-size:14px;
+}
+.btn:hover{border-color:rgba(42,215,255,.35)}
+.btn.primary{
+  background:rgba(42,215,255,.12);
+  border-color:rgba(42,215,255,.35);
+}
+
+/* HEADER */
+.site-header{
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:1000;
+  height:var(--headerH);
+  display:flex;
+  align-items:center;
+  background:rgba(5,7,12,.55);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(14px);
+}
+
+.nav-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.brand{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  min-width:0;
+}
+
+.brand-logo img{
+  height:30px;
+  width:auto;
+  display:block;
+  object-fit:contain;
+  filter: drop-shadow(0 0 10px rgba(42,215,255,.18));
+}
+
+.brand-title{
+  font-size:15px;
+  letter-spacing:.2px;
+  white-space:nowrap;
+}
+
+/* Limited Access indicator: looks like a status light, not a nav button */
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.2px;
+  white-space:nowrap;
+}
+
+.pill--limited{
+  margin-left:6px;
+  background:rgba(42,215,255,.10);
+  border-color:rgba(42,215,255,.28);
+  box-shadow: 0 0 0 1px rgba(42,215,255,.10) inset;
+}
+.pill--limited::before{
+  content:"";
+  width:8px; height:8px;
+  border-radius:50%;
+  background:rgba(42,215,255,.95);
+  box-shadow: 0 0 14px rgba(42,215,255,.65);
+}
+
+.nav-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:flex-end;
+}
+.nav-links a{
+  text-decoration:none;
+  padding:7px 11px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.04);
+  font-size:12px;
+  color:rgba(255,255,255,.86);
+}
+.nav-links a:hover{
+  border-color:rgba(42,215,255,.30);
+}
+
+/* FOOTER (smaller, calmer) */
+.site-footer{
+  border-top:1px solid rgba(255,255,255,.08);
+  margin-top:36px;
+}
+.site-footer .container{
+  padding:10px 22px;
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  font-size:13px;
+  color:rgba(255,255,255,.70);
+}
+.site-footer a{color:rgba(255,255,255,.78)}
+.site-footer a:hover{color:var(--accent2)}
+
+/* Availability indicator */
+.availability{
+  margin-top:16px;
+  padding:14px 16px;
+  max-width:520px;
+}
+.availability .kicker{
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:rgba(42,215,255,.85);
+  margin:0 0 6px 0;
+}
+.availability .row{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:12px;
+}
+.availability .count{
+  font-size:14px;
+  font-weight:800;
+}
+.availability .sub{
+  margin-top:6px;
+  font-size:12px;
+  color:rgba(255,255,255,.68);
+}
+.availability .meter{
+  height:8px;
+  border-radius:999px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  overflow:hidden;
+  margin-top:10px;
+}
+.availability .meter > span{
+  display:block;
+  height:100%;
+  width:60%; /* set this to match 3/5 = 60% */
+  background:rgba(42,215,255,.35);
+  box-shadow: 0 0 18px rgba(42,215,255,.22);
+}
+
+/* basic responsive */
+@media (max-width: 880px){
+  .nav-wrap{flex-direction:column; align-items:flex-start}
+  .nav-links{justify-content:flex-start}
+  body{padding-top:96px}
+}
+
+
+/* =========================================================
+   Premium polish overrides (safe appended overrides)
+   ========================================================= */
+
+/* Soften the visible grid so it doesn't read as "squares" */
+body::before {
+  background-image:
+    linear-gradient(transparent, transparent 71px, rgba(255, 255, 255, 0.02) 72px),
+    linear-gradient(90deg, transparent, transparent 71px, rgba(255, 255, 255, 0.02) 72px);
+  background-size: 72px 72px;
+  opacity: 0.55;
+}
+
+/* Footer feels thinner/cleaner */
+.site-footer {
+  padding: 10px 0 !important;
+}
+.site-footer,
+.site-footer a {
+  font-size: 12px;
+}
+
+/* Early access tracker (small live-style indicator) */
+.availability-card {
+  margin-top: 14px;
+  max-width: 520px;
+  padding: 14px 16px;
+}
+
+.availability-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.availability-label {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: rgba(140, 214, 255, 0.9);
+}
+
+.availability-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(220, 240, 255, 0.88);
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(120, 200, 255, 0.22);
+  background: rgba(15, 28, 45, 0.35);
+}
+
+.availability-live .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(120, 230, 255, 0.95);
+  box-shadow: 0 0 12px rgba(120, 230, 255, 0.35);
+}
+
+.availability-metric {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.availability-count {
+  font-weight: 800;
+  font-size: 18px;
+  color: rgba(240, 250, 255, 0.96);
+}
+
+.availability-text {
+  font-weight: 600;
+  font-size: 13px;
+  color: rgba(220, 240, 255, 0.75);
+}
+
+.availability-sub {
+  font-size: 12px;
+  color: rgba(220, 240, 255, 0.6);
+  line-height: 1.35;
+}
+
+===== FILE: .\assets\site.js =====
+/* assets/site.js
+ * Shared chrome injection for GitHub Pages static site.
+ * Uses absolute /assets/... paths so it never breaks.
+ */
+(function () {
+  async function load(url) {
+    const res = await fetch(url, { cache: "no-cache" });
+    if (!res.ok) throw new Error("Failed to load: " + url + " (" + res.status + ")");
+    return await res.text();
+  }
+
+  function setActiveNav() {
+    const pageKey = document.body ? document.body.getAttribute("data-page") : null;
+    const links = Array.from(document.querySelectorAll(".nav-links a[data-nav]"));
+
+    links.forEach(a => {
+      a.classList.remove("active");
+      a.removeAttribute("aria-current");
+    });
+
+    if (pageKey) {
+      const match = links.find(a => a.getAttribute("data-nav") === pageKey);
+      if (match) {
+        match.classList.add("active");
+        match.setAttribute("aria-current", "page");
+      }
+    }
+  }
+
+  function setupHeaderScrollFX() {
+    const header = document.querySelector(".site-header");
+    if (!header) return;
+
+    function apply() {
+      if (window.scrollY > 8) header.classList.add("is-scrolled");
+      else header.classList.remove("is-scrolled");
+    }
+
+    apply();
+    window.addEventListener("scroll", apply, { passive: true });
+  }
+
+  async function inject() {
+    const headerHost = document.getElementById("site-header");
+    const footerHost = document.getElementById("site-footer");
+
+    if (headerHost) {
+      try { headerHost.innerHTML = await load("/assets/partials/header.html"); }
+      catch (e) { console.warn("[site] header inject failed:", e); }
+    }
+
+    if (footerHost) {
+      try { footerHost.innerHTML = await load("/assets/partials/footer.html"); }
+      catch (e) { console.warn("[site] footer inject failed:", e); }
+    }
+
+    setActiveNav();
+    setupHeaderScrollFX();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", inject);
+  } else {
+    inject();
+  }
+})();
+

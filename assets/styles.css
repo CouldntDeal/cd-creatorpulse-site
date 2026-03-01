@@ -235,7 +235,7 @@ a:hover{color:var(--accent2)}
   position:relative;
 }
 
-/* subtle “rail” so the right stack feels placed, not random */
+/* subtle â€œrailâ€ so the right stack feels placed, not random */
 .hero-right::before{
   content:"";
   position:absolute;
@@ -380,7 +380,7 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 }
 .list li{margin:0 0 8px 0; color:rgba(255,255,255,.86)}
 
-/* Early access tracker: tighten interior so it feels “engineered” */
+/* Early access tracker: tighten interior so it feels â€œengineeredâ€ */
 .availability-card{
   margin-top:0;
   width:100%;
@@ -476,4 +476,11 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
   .nav-links{justify-content:flex-start}
   body{padding-top:96px}
   .hero-left h1{font-size:38px}
+}
+/* Neutral availability pill (no status dot) */
+.availability-live--neutral{
+  gap:0;
+}
+.availability-live--neutral .dot{
+  display:none;
 }
