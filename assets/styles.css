@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CD-CreatorPulse ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Neon Creator-Tech Premium SaaS CSS
+   CD-CreatorPulse ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Neon Creator-Tech Premium SaaS CSS
    Visual System Finalization (Polish)
    ========================================================================== */
 
@@ -110,7 +110,7 @@ a:hover{ color: rgba(255,255,255,0.98); }
   pointer-events:none;
 }
 
-/* Makes header feel ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œconnectedÃƒÂ¢Ã¢â€šÂ¬Ã‚Â during scroll */
+/* Makes header feel ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“connectedÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â during scroll */
 .site-header.is-scrolled{
   background: rgba(7,11,20,0.78);
   border-bottom-color: rgba(83,225,255,0.16);
@@ -577,70 +577,66 @@ h1{
 
 /* BEGIN_CREATORPULSE_PREMIUM_FLARE */
 /* Premium flare system (NO layout changes; CSS only).
-   Goal: Electric glass + subtle color depth (PERF SAFE).
-   Changes vs prior: removed heavy fixed animated aurora; toned down sheen; reduced purple dominance. */
+   Goals in this pass:
+   - Fix hero right panel color (neutral glass + edge glow)
+   - Reduce “tunnel” darkness when scrolling
+   - Reduce visible grid squares
+   - Clean footer presentation
+   - Improve performance (remove constant animations) */
 
-/* ---------- Global color depth (static, light) ---------- */
-/* Keep the nice purple/pink + blue vibe WITHOUT animations/blend/huge blur */
+/* ---- Background grid squares: reduce contrast ---- */
+/* Your base CSS likely has repeating-linear-gradient grid in body::before.
+   We keep the vibe but make it much subtler. */
 body::before{
-  /* If you already have a body::before, this gently boosts it without heavy GPU effects */
-  opacity: 0.30 !important;
+  opacity: 0.18 !important; /* was too visible */
 }
 
-/* Kill the heavy animated layer that caused scroll heaviness (if present) */
+/* If body::after was used anywhere, keep it disabled for performance */
 body::after{
   content: none !important;
   animation: none !important;
 }
 
-/* ---------- Buttons/chips/cards: subtle premium pop ---------- */
-.btn:hover{
-  box-shadow:
-    0 26px 84px rgba(0,0,0,0.58),
-    0 0 0 1px rgba(83,225,255,0.08),
-    0 0 18px rgba(122,92,255,0.05) !important;
+/* ---- Mid-page lift: prevent “scrolling into a hole” ---- */
+/* Static, no perf hit. Adds gentle depth down the page. */
+main{
+  position: relative;
+}
+main::before{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  top: 380px;
+  height: 1200px;
+  pointer-events:none;
+  background:
+    radial-gradient(900px 520px at 50% 0%, rgba(83,225,255,0.05), transparent 62%),
+    radial-gradient(900px 560px at 30% 18%, rgba(122,92,255,0.04), transparent 66%),
+    radial-gradient(900px 560px at 70% 22%, rgba(255,79,216,0.03), transparent 68%);
+  filter: blur(34px);
+  opacity: 0.70;
+  z-index: 0;
+}
+main > .container{
+  position: relative;
+  z-index: 1;
 }
 
-.chip:hover{
-  border-color: rgba(122,92,255,0.14) !important;
-  box-shadow:
-    0 18px 62px rgba(0,0,0,0.50),
-    0 0 0 1px rgba(122,92,255,0.05) !important;
-}
-
-.card:hover{
-  box-shadow:
-    0 26px 110px rgba(0,0,0,0.62),
-    0 0 0 1px rgba(83,225,255,0.05),
-    0 0 16px rgba(122,92,255,0.04) !important;
-}
-
-/* ---------- Divider: keep the premium neon hint ---------- */
-.section-divider{
-  background: linear-gradient(90deg,
-    transparent,
-    rgba(83,225,255,0.10),
-    rgba(122,92,255,0.08),
-    rgba(255,79,216,0.04),
-    rgba(83,225,255,0.10),
-    transparent
-  ) !important;
-  opacity: 0.80 !important;
-}
-
-/* ---------- Hero right panel: dark glass, subtle violet accent ---------- */
+/* ---- Hero panel: neutral dark glass + subtle edge glow (less purple fill) ---- */
 .hero-panel{
   border: 1px solid rgba(255,255,255,0.14) !important;
   background:
-    radial-gradient(760px 420px at 80% 0%, rgba(122,92,255,0.06), transparent 62%),
-    radial-gradient(640px 380px at 20% 25%, rgba(83,225,255,0.05), transparent 66%),
-    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)) !important;
+    /* keep color as whispers, not a fill */
+    radial-gradient(760px 420px at 85% 0%, rgba(122,92,255,0.035), transparent 64%),
+    radial-gradient(640px 380px at 20% 25%, rgba(83,225,255,0.035), transparent 66%),
+    linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.018)) !important;
   box-shadow:
     0 34px 120px rgba(0,0,0,0.70),
-    0 0 0 1px rgba(83,225,255,0.05) !important;
+    0 0 0 1px rgba(83,225,255,0.05),
+    0 0 18px rgba(122,92,255,0.025) !important;
 }
 
-/* Replace fast/bright sheen with a slower, dimmer one (optional, gentle) */
+/* Remove animated sheen for performance; keep a static soft highlight instead */
 .hero-panel::after{
   content:"";
   position:absolute;
@@ -648,21 +644,15 @@ body::after{
   pointer-events:none;
   background: linear-gradient(90deg,
     rgba(83,225,255,0.00),
-    rgba(83,225,255,0.06),
-    rgba(122,92,255,0.08),
-    rgba(255,79,216,0.03),
+    rgba(83,225,255,0.04),
+    rgba(122,92,255,0.05),
+    rgba(255,79,216,0.02),
     rgba(83,225,255,0.00)
   );
-  transform: translateX(-45%) rotate(8deg);
-  opacity: 0.22;           /* dimmer */
-  filter: blur(26px);      /* softer */
-  animation: cpSheenSlow 10.8s cubic-bezier(.2,.8,.2,1) infinite;
-}
-
-@keyframes cpSheenSlow{
-  0%   { transform: translateX(-45%) rotate(8deg); }
-  60%  { transform: translateX(45%) rotate(8deg); }
-  100% { transform: translateX(45%) rotate(8deg); }
+  transform: translateX(10%) rotate(8deg); /* static placement */
+  opacity: 0.18;
+  filter: blur(28px);
+  animation: none !important; /* PERFORMANCE */
 }
 
 .hero-panel:hover{
@@ -670,41 +660,51 @@ body::after{
   box-shadow:
     0 38px 140px rgba(0,0,0,0.74),
     0 0 0 1px rgba(83,225,255,0.07),
-    0 0 16px rgba(122,92,255,0.04) !important;
+    0 0 16px rgba(122,92,255,0.03) !important;
 }
 
-/* Keep panel text readable */
-.hero-panel .panel-title{ color: rgba(255,255,255,0.92) !important; }
-.hero-panel .panel-label{ color: rgba(255,255,255,0.88) !important; }
-.hero-panel .panel-sub{ color: rgba(255,255,255,0.66) !important; }
-
-/* LIVE badge: small, clean, premium */
+/* ---- LIVE badge: keep premium but less dominant ---- */
 .panel-badge{
-  font-size: 11px !important;
-  padding: 6px 10px 6px 18px !important;
-  border-radius: 999px !important;
-  color: rgba(255,255,255,0.90) !important;
-  border: 1px solid rgba(122,92,255,0.14) !important;
-  background: rgba(255,255,255,0.03) !important;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.38) !important;
+  border: 1px solid rgba(122,92,255,0.12) !important;
+  background: rgba(255,255,255,0.02) !important;
+  box-shadow: 0 10px 34px rgba(0,0,0,0.34) !important;
 }
-
 .panel-badge::before{
-  content:"";
-  position:absolute;
-  left: 8px;
-  top: 50%;
-  width: 6px;
-  height: 6px;
-  margin-top: -3px;
-  border-radius: 999px;
-  background: rgba(255,79,216,0.90);
-  box-shadow: 0 0 14px rgba(255,79,216,0.16), 0 0 12px rgba(122,92,255,0.12);
-  animation: cpLivePulse 1.85s cubic-bezier(.2,.8,.2,1) infinite; /* slower */
+  animation: cpLivePulse 1.95s cubic-bezier(.2,.8,.2,1) infinite !important;
+}
+@keyframes cpLivePulse{
+  0%,100% { transform: scale(1); opacity: 0.90; }
+  50%     { transform: scale(1.25); opacity: 0.68; }
 }
 
-@keyframes cpLivePulse{
-  0%,100% { transform: scale(1); opacity: 0.92; }
-  50%     { transform: scale(1.35); opacity: 0.70; }
+/* ---- Chips/buttons/cards: keep hover pop subtle ---- */
+.btn:hover{
+  box-shadow:
+    0 26px 84px rgba(0,0,0,0.58),
+    0 0 0 1px rgba(83,225,255,0.08),
+    0 0 14px rgba(122,92,255,0.04) !important;
 }
+.chip:hover{
+  border-color: rgba(122,92,255,0.12) !important;
+}
+
+/* ---- Footer: make it feel intentional and aligned ---- */
+.site-footer{
+  border-top: 1px solid rgba(255,255,255,0.08) !important;
+  background: rgba(7,11,20,0.55) !important;
+  color: rgba(255,255,255,0.70) !important;
+}
+.site-footer .container{
+  display:flex !important;
+  align-items:center !important;
+  justify-content: space-between !important;
+  gap: 14px !important;
+}
+.site-footer a{
+  color: rgba(255,255,255,0.78) !important;
+}
+.site-footer a:hover{
+  color: rgba(255,255,255,0.92) !important;
+}
+
 /* END_CREATORPULSE_PREMIUM_FLARE */
