@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CD-CreatorPulse ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â Neon Creator-Tech Premium SaaS CSS
+   CD-CreatorPulse ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â Neon Creator-Tech Premium SaaS CSS
    Visual System Finalization (Polish)
    ========================================================================== */
 
@@ -110,7 +110,7 @@ a:hover{ color: rgba(255,255,255,0.98); }
   pointer-events:none;
 }
 
-/* Makes header feel ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œconnectedÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â during scroll */
+/* Makes header feel ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“connectedÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â during scroll */
 .site-header.is-scrolled{
   background: rgba(7,11,20,0.78);
   border-bottom-color: rgba(83,225,255,0.16);
@@ -576,45 +576,51 @@ h1{
 }
 
 /* BEGIN_CREATORPULSE_PREMIUM_FLARE */
-/* Lighting rebalance pass – clean, premium, no heavy effects */
+/* Premium balance pass (NO layout changes; CSS only)
+   - Bring back violet/pink premium atmosphere (subtle, static)
+   - Make hero right panel neutral glass (remove purple fill)
+   - Add edge glow accent (not body tint)
+   - Lift lower page brightness
+   - Fix footer alignment/spacing
+   - Keep performance smooth (no constant animations, no blend modes) */
 
-/* --- Reduce grid visibility --- */
+/* ---- Grid squares: keep, but very subtle ---- */
 body::before{
-  opacity: 0.10 !important;
+  opacity: 0.12 !important;
 }
 
-/* --- Remove all animated / heavy layers completely --- */
+/* ---- Disable any heavy/animated global layers ---- */
 body::after{
   content: none !important;
   animation: none !important;
 }
 
-/* --- Add subtle full-page vertical light field --- */
+/* ---- Global atmosphere: subtle multi-accent field (static) ---- */
 body{
   background:
-    radial-gradient(1200px 600px at 50% -10%, rgba(83,225,255,0.06), transparent 60%),
-    radial-gradient(1200px 900px at 50% 40%, rgba(122,92,255,0.05), transparent 70%),
-    linear-gradient(180deg,
-      #05070c 0%,
-      #060912 25%,
-      #07101a 60%,
-      #081420 100%
-    ) !important;
+    radial-gradient(1100px 620px at 50% -8%, rgba(83,225,255,0.07), transparent 60%),
+    radial-gradient(900px 520px at 18% 8%, rgba(255,79,216,0.05), transparent 62%),
+    radial-gradient(900px 520px at 82% 10%, rgba(122,92,255,0.06), transparent 62%),
+    linear-gradient(180deg, #05070c 0%, #060a12 35%, #07101a 70%, #081422 100%) !important;
 }
 
-/* --- Prevent tunnel darkness while scrolling --- */
+/* ---- Mid + low page lift: prevent bottom void ---- */
 main{
   position: relative;
 }
 main::before{
   content:"";
   position:absolute;
-  inset: 0;
+  left:0; right:0;
+  top: 320px;
+  height: 1600px;
   pointer-events:none;
   background:
-    radial-gradient(900px 700px at 50% 20%, rgba(83,225,255,0.04), transparent 70%),
-    radial-gradient(900px 900px at 50% 80%, rgba(122,92,255,0.04), transparent 75%);
-  opacity: 0.6;
+    radial-gradient(1100px 680px at 50% 15%, rgba(83,225,255,0.05), transparent 70%),
+    radial-gradient(1000px 700px at 35% 55%, rgba(122,92,255,0.045), transparent 75%),
+    radial-gradient(1000px 700px at 65% 60%, rgba(255,79,216,0.035), transparent 78%);
+  filter: blur(34px);
+  opacity: 0.75;
   z-index: 0;
 }
 main > .container{
@@ -622,39 +628,112 @@ main > .container{
   z-index: 1;
 }
 
-/* --- Hero panel: neutral glass, no heavy tint --- */
-.hero-panel{
+/* Add an extra low-page lift so the bottom never drops to pure black */
+.site-footer{
+  position: relative;
+}
+.site-footer::before{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  top:-220px;
+  height: 320px;
+  pointer-events:none;
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.02)) !important;
-  border: 1px solid rgba(255,255,255,0.14) !important;
-  box-shadow:
-    0 30px 100px rgba(0,0,0,0.65),
-    0 0 0 1px rgba(83,225,255,0.05) !important;
+    radial-gradient(900px 320px at 50% 100%, rgba(83,225,255,0.05), transparent 70%),
+    radial-gradient(900px 320px at 30% 100%, rgba(122,92,255,0.04), transparent 74%),
+    radial-gradient(900px 320px at 70% 100%, rgba(255,79,216,0.03), transparent 78%);
+  filter: blur(30px);
+  opacity: 0.75;
 }
 
-/* Remove sheen entirely */
+/* ---- Hero right panel: MATCH page (neutral glass), no purple fill ---- */
+.hero-panel{
+  position: relative;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.018)) !important;
+  box-shadow:
+    0 30px 110px rgba(0,0,0,0.66),
+    0 0 0 1px rgba(255,255,255,0.03) !important;
+  overflow: hidden;
+}
+
+/* Add premium edge glow (thin, tasteful) */
+.hero-panel::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius: 22px;
+  pointer-events:none;
+  background: linear-gradient(135deg,
+    rgba(83,225,255,0.18),
+    rgba(122,92,255,0.12),
+    rgba(255,79,216,0.08),
+    rgba(83,225,255,0.14)
+  );
+  opacity: 0.55;
+  filter: blur(10px);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  padding: 2px; /* makes it “rim” like */
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* Remove sheen completely for perf and to avoid eye-sore */
 .hero-panel::after{
   content: none !important;
 }
 
-/* --- Live badge clean and minimal --- */
-.panel-badge{
-  background: rgba(255,255,255,0.025) !important;
-  border: 1px solid rgba(122,92,255,0.12) !important;
+/* Hover: slightly stronger rim */
+.hero-panel:hover::before{
+  opacity: 0.75;
 }
 
-/* --- Footer: clean premium endcap --- */
+/* ---- LIVE badge: keep small; dot pulse only ---- */
+.panel-badge{
+  background: rgba(255,255,255,0.02) !important;
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  box-shadow: 0 10px 34px rgba(0,0,0,0.34) !important;
+  color: rgba(255,255,255,0.88) !important;
+}
+
+/* ---- Footer: make it a proper bar (not floating left text) ---- */
 .site-footer{
-  background: #070d16 !important;
+  background: rgba(7,11,20,0.62) !important;
   border-top: 1px solid rgba(255,255,255,0.08) !important;
-  padding: 18px 0 !important;
-  color: rgba(255,255,255,0.75) !important;
+  padding: 18px 0 20px 0 !important;
+  color: rgba(255,255,255,0.72) !important;
 }
 
 .site-footer .container{
   display:flex !important;
-  justify-content: space-between !important;
   align-items:center !important;
-  gap: 12px !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
+
+/* If your footer content is not inside .container, this makes it behave */
+.site-footer > *{
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.site-footer a{
+  color: rgba(255,255,255,0.80) !important;
+  text-decoration: none;
+}
+.site-footer a:hover{
+  color: rgba(255,255,255,0.94) !important;
+}
+
 /* END_CREATORPULSE_PREMIUM_FLARE */
