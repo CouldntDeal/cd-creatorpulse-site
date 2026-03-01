@@ -16,8 +16,8 @@
       <div class="bg-glow"></div>
     </div>
 
-    <!-- Header -->
-    <div data-include="assets/partials/header.html"></div>
+    <!-- Injected Header -->
+    <div id="site-header"></div>
 
     <main class="page">
       <section class="hero">
@@ -40,13 +40,6 @@
               <a class="btn" href="terms.html">View Policies</a>
             </div>
 
-            <div class="chips">
-              <span class="chip">Live Alerts</span>
-              <span class="chip">Clean Announcements</span>
-              <span class="chip">Role Access</span>
-              <span class="chip">Clean Dashboards</span>
-            </div>
-
             <!-- Early Access tracker (small + “live indicator” feel) -->
             <div class="card availability-card" role="status" aria-label="Early access availability">
               <div class="availability-top">
@@ -55,9 +48,16 @@
               </div>
               <div class="availability-metric">
                 <span class="availability-count">3 / 5</span>
-                <span class="availability-text">canary slots filled</span>
+                <span class="availability-text">slots filled</span>
               </div>
-              <div class="availability-sub">Small rollout for stability. Request access to join the next slot.</div>
+              <div class="availability-sub">Small rollout for stability.</div>
+            </div>
+
+            <div class="chips">
+              <span class="chip">Live Alerts</span>
+              <span class="chip">Clean Announcements</span>
+              <span class="chip">Role Access</span>
+              <span class="chip">Clean Dashboards</span>
             </div>
           </div>
 
@@ -134,12 +134,8 @@
         </div>
       </section>
 
-      <footer class="site-footer">
-        <div class="container footer-inner">
-          <div class="footer-left">© 2026 CD-CreatorPulse</div>
-          <div class="footer-right"><a href="contact.html">support@cdcreatorpulse.com</a></div>
-        </div>
-      </footer>
+      <!-- Injected Footer -->
+      <div id="site-footer"></div>
     </main>
 
     <script src="assets/site.js"></script>
