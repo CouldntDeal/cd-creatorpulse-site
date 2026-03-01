@@ -2,14 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CreatorPulse</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/styles.css">
+    <meta name="description" content="CreatorPulse manages your Discord community so you can focus on content creation." />
+    <link rel="stylesheet" href="assets/styles.css" />
   </head>
 
   <body data-page="home">
     <div class="bg"><div class="bg-glow"></div></div>
 
+    <!-- Injected Header -->
     <div id="site-header"></div>
 
     <main class="page">
@@ -17,25 +19,26 @@
         <div class="container hero-grid">
 
           <div class="hero-left">
-            <div class="eyebrow">Built for serious creators</div>
+            <div class="eyebrow">BUILT FOR SERIOUS CREATORS</div>
+
             <h1>Your content deserves your full attention.</h1>
 
             <p class="lead">
-              CreatorPulse keeps your Discord structured and professionally managed &mdash; so you can focus on creating, not maintaining channels.
+              CreatorPulse manages your Discord community so you can focus on content creation.
             </p>
 
             <p class="lead-sub">
-              From the moment it&rsquo;s invited, it begins helping.
+              From the moment it&rsquo;s invited, it starts helping.
             </p>
 
             <div class="cta-row">
-              <a class="btn primary" href="contact.html">Request Early Access &rarr;</a>
+              <a class="btn primary" href="contact.html">Request Early Access <span aria-hidden="true">&rarr;</span></a>
               <a class="btn" href="legal.html">Read Policies</a>
             </div>
           </div>
 
           <div class="hero-right">
-            <aside class="hero-panel card">
+            <div class="card hero-panel">
               <div class="panel-head">
                 <div class="panel-title">Community Structure</div>
                 <span class="panel-pill">Core</span>
@@ -70,22 +73,28 @@
               <div class="panel-foot">
                 Professional structure. <strong>Stream with confidence.</strong>
               </div>
-            </aside>
+            </div>
 
-            <div class="card availability-card" role="status">
-              <div class="availability-top">
-                <div class="availability-label">Early access</div>
-                <div class="availability-live"><span class="dot"></span>Live</div>
+            <div class="card availability-card">
+              <div class="availability-head">
+                <div class="availability-title">EARLY ACCESS</div>
+                <div class="availability-live">
+                  <span class="live-dot" aria-hidden="true"></span>
+                  <span class="live-text">Live</span>
+                </div>
               </div>
 
               <div class="availability-metric">
-                <span class="availability-count" id="availabilityCount">0 / 5</span>
-                <span class="availability-text">slots filled</span>
+                <span id="availabilityCount">0 / 5</span>
+                <span class="availability-sub">slots filled</span>
               </div>
 
-              <div class="availability-sub">Small rollout for stability.</div>
+              <div class="availability-note">
+                Small rollout for stability.
+              </div>
             </div>
           </div>
+
         </div>
       </section>
 
@@ -114,6 +123,7 @@
                 <li>Teams that value stability over rapid feature churn</li>
                 <li>Creators who want an assistant inside Discord</li>
               </ul>
+
               <p class="muted">
                 Early access is limited intentionally while we validate stability in real communities.
               </p>
@@ -123,6 +133,7 @@
         </div>
       </section>
 
+      <!-- Injected Footer -->
       <div id="site-footer"></div>
     </main>
 
