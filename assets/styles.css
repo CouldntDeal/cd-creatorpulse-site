@@ -35,10 +35,10 @@ body::before{
   background-image:
     radial-gradient(1100px 700px at 20% 10%, rgba(40,215,255,.10), transparent 60%),
     radial-gradient(900px 700px at 80% 35%, rgba(122,215,255,.06), transparent 55%),
-    linear-gradient(transparent, transparent 83px, rgba(255,255,255,.018) 84px),
-    linear-gradient(90deg, transparent, transparent 83px, rgba(255,255,255,.014) 84px);
+    linear-gradient(transparent, transparent 83px, rgba(255,255,255,.016) 84px),
+    linear-gradient(90deg, transparent, transparent 83px, rgba(255,255,255,.012) 84px);
   background-size: auto, auto, 84px 84px, 84px 84px;
-  opacity:.22;
+  opacity:.18;
   filter:saturate(110%) blur(.25px);
 }
 
@@ -56,7 +56,8 @@ a:hover{color:var(--accent2)}
   background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.05));
   border:1px solid rgba(255,255,255,.10);
   border-radius:var(--radius);
-  box-shadow: 0 18px 60px rgba(0,0,0,.35);
+  /* slightly tighter, more intentional */
+  box-shadow: 0 16px 46px rgba(0,0,0,.34);
   backdrop-filter: blur(10px);
 }
 
@@ -182,19 +183,41 @@ a:hover{color:var(--accent2)}
   border-color:rgba(42,215,255,.30);
 }
 
-/* HERO (tighter so it fits closer to one screen) */
+/* HERO (slightly tighter) */
 .hero{
-  padding:56px 0 28px;
+  padding:48px 0 22px;
 }
 
 .hero-grid{
   display:grid;
   grid-template-columns: 1.08fr .92fr;
-  gap:44px;
+  gap:38px;
   align-items:start;
 }
 
 .hero-left{max-width:650px}
+
+/* right side becomes an intentional stack */
+.hero-right{
+  display:flex;
+  flex-direction:column;
+  gap:14px;              /* consistent spacing */
+  align-self:start;
+  position:relative;
+}
+
+/* subtle “rail” so the right stack feels placed, not random */
+.hero-right::before{
+  content:"";
+  position:absolute;
+  left:-18px;
+  top:6px;
+  bottom:6px;
+  width:1px;
+  background:linear-gradient(180deg, rgba(42,215,255,.12), rgba(255,255,255,.05), rgba(42,215,255,.10));
+  opacity:.45;
+  pointer-events:none;
+}
 
 .eyebrow{
   font-size:11px;
@@ -205,8 +228,8 @@ a:hover{color:var(--accent2)}
 }
 
 .hero-left h1{
-  margin:0 0 14px 0;
-  font-size:44px;
+  margin:0 0 12px 0;
+  font-size:42px;
   line-height:1.06;
   letter-spacing:-.01em;
 }
@@ -214,13 +237,13 @@ a:hover{color:var(--accent2)}
 .lead{
   margin:0 0 10px 0;
   font-size:15px;
-  line-height:1.65;
+  line-height:1.62;
   color:rgba(255,255,255,.74);
   max-width:620px;
 }
 
 .lead-sub{
-  margin:0 0 16px 0;
+  margin:0 0 14px 0;
   font-size:13px;
   color:rgba(255,255,255,.82);
 }
@@ -251,7 +274,7 @@ a:hover{color:var(--accent2)}
 
 /* Right card */
 .hero-panel{
-  padding:20px 20px 18px 20px;
+  padding:18px 18px 16px 18px;
 }
 
 .panel-head{
@@ -295,18 +318,19 @@ a:hover{color:var(--accent2)}
 .panel-foot{margin-top:14px; font-size:12px; color:rgba(255,255,255,.72)}
 
 /* Sections (tighter) */
-.section{padding:30px 0 34px}
+.section{padding:26px 0 30px}
 
 .two-col{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:34px;
+  gap:30px;
   align-items:start;
 }
 
 h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 
-.card{padding:18px 18px}
+/* slightly tighter cards */
+.card{padding:16px 16px}
 
 .muted{color:rgba(255,255,255,.70)}
 
@@ -316,11 +340,12 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 }
 .list li{margin:0 0 8px 0; color:rgba(255,255,255,.86)}
 
-/* Early access tracker: small, premium, not wordy */
+/* Early access tracker: small, premium, aligned to right card width */
 .availability-card{
-  margin-top:12px;
-  max-width:420px;
-  padding:12px 14px;
+  margin-top:0;           /* relies on .hero-right gap */
+  width:100%;
+  max-width:none;
+  padding:14px 16px;
 }
 
 .availability-top{
@@ -385,7 +410,7 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 /* FOOTER (tight + premium) */
 .site-footer{
   border-top:1px solid rgba(255,255,255,.08);
-  margin-top:22px;
+  margin-top:18px;
 }
 .site-footer .container{
   padding:8px 22px;
@@ -400,8 +425,9 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 
 /* Responsive */
 @media (max-width: 980px){
-  .hero{padding:38px 0 18px}
-  .hero-grid{grid-template-columns:1fr; gap:22px}
+  .hero{padding:36px 0 18px}
+  .hero-grid{grid-template-columns:1fr; gap:18px}
+  .hero-right::before{display:none}
   .two-col{grid-template-columns:1fr}
 }
 
