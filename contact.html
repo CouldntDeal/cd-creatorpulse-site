@@ -1,28 +1,179 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact - CD-CreatorPulse</title>
-  <link rel="stylesheet" href="assets/styles.css" />
-</head>
-<body data-page="contact">
-  <div id="site-header"></div>
+  <head>
+    <meta charset="utf-8" />
+    <title>Request Access — CreatorPulse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Request early access to CreatorPulse. We’re rolling out to a small number of test servers for stability." />
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
 
-  <main>
-    <div class="container">
-      <section class="legal">
-        <h1>Contact</h1>
+  <body data-page="request-access">
+    <div class="bg"><div class="bg-glow"></div></div>
 
-        <p>For support or compliance inquiries:</p>
+    <div id="site-header"></div>
 
-        <p><strong>Email:</strong> <a href="mailto:support@cdcreatorpulse.com">support@cdcreatorpulse.com</a></p>
+    <main class="page">
+      <section class="hero">
+        <div class="container hero-grid">
+
+          <div class="hero-left">
+            <div class="eyebrow">Request access</div>
+            <h1>Early access, on purpose.</h1>
+
+            <p class="lead">
+              CreatorPulse is in a small rollout so we can keep stability high. If you join as a test server, you’ll get access sooner —
+              and you’ll help validate the experience in a real community.
+            </p>
+
+            <p class="lead-sub">
+              If you’re accepted, we’ll send you a custom invite link for the bot.
+            </p>
+
+            <div class="card">
+              <h2 style="margin-top:0;">What to expect</h2>
+              <ul class="list">
+                <li>You are an early test server (not a finished “public launch” experience yet)</li>
+                <li>You may receive updates earlier than the general rollout</li>
+                <li>We want calm feedback: what feels good, what feels confusing, what would help your community</li>
+                <li>We will not ask you to “market” the bot — stability comes first</li>
+              </ul>
+              <p class="muted" style="margin-bottom:0;">
+                The bot is free. The goal is a professional, reliable system that creators can trust long-term.
+              </p>
+            </div>
+          </div>
+
+          <aside class="hero-panel card">
+            <div class="panel-head">
+              <div class="panel-title">Access intake</div>
+              <span class="panel-pill">Step 1</span>
+            </div>
+
+            <p class="muted">
+              Fill this out and click <strong>Generate Email</strong>. It will open a draft to:
+              <strong>support@cdcreatorpulse.com</strong>
+            </p>
+
+            <form id="accessForm" class="panel-list" style="margin-top:12px;">
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">Your name</div>
+                <input name="name" type="text" required style="width:100%; margin-top:6px;">
+              </label>
+
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">Discord username</div>
+                <div class="panel-item-sub">So we know who to talk to</div>
+                <input name="discord" type="text" required style="width:100%; margin-top:6px;">
+              </label>
+
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">Creator platform</div>
+                <div class="panel-item-sub">TikTok / YouTube / Twitch / Kick / other</div>
+                <input name="platform" type="text" required style="width:100%; margin-top:6px;">
+              </label>
+
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">Community size</div>
+                <div class="panel-item-sub">Approximate member count</div>
+                <input name="size" type="text" required style="width:100%; margin-top:6px;" placeholder="e.g., ~350 members">
+              </label>
+
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">Server status</div>
+                <div class="panel-item-sub">New server or existing server?</div>
+                <select name="serverStatus" required style="width:100%; margin-top:6px;">
+                  <option value="" selected disabled>Select one</option>
+                  <option>Existing server</option>
+                  <option>New server</option>
+                </select>
+              </label>
+
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">What are you trying to improve?</div>
+                <div class="panel-item-sub">One short sentence is enough</div>
+                <input name="goal" type="text" required style="width:100%; margin-top:6px;" placeholder="e.g., clean onboarding + live alerts">
+              </label>
+
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">Can you be a test server?</div>
+                <div class="panel-item-sub">Early updates + feedback expected</div>
+                <select name="testConsent" required style="width:100%; margin-top:6px;">
+                  <option value="" selected disabled>Select one</option>
+                  <option>Yes — we understand this is early access</option>
+                  <option>Not sure — we prefer a later, stable release</option>
+                </select>
+              </label>
+
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">Timezone</div>
+                <div class="panel-item-sub">Helps us schedule support</div>
+                <input name="timezone" type="text" required style="width:100%; margin-top:6px;" placeholder="e.g., PST / EST / GMT">
+              </label>
+
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">Anything else we should know?</div>
+                <div class="panel-item-sub">Optional</div>
+                <textarea name="notes" rows="3" style="width:100%; margin-top:6px;"></textarea>
+              </label>
+
+              <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
+                <button class="btn primary" type="submit">Generate Email →</button>
+                <a class="btn" href="mailto:support@cdcreatorpulse.com?subject=CreatorPulse%20Access%20Request">Email without form</a>
+              </div>
+
+              <p class="muted" style="margin-top:10px; margin-bottom:0;">
+                We review requests in order and prioritize communities that match the current rollout goals.
+              </p>
+            </form>
+          </aside>
+
+        </div>
       </section>
-    </div>
-  </main>
 
-  <div id="site-footer"></div>
+      <div id="site-footer"></div>
+    </main>
 
-  <script src="assets/site.js" defer></script>
-</body>
+    <script src="assets/site.js"></script>
+
+    <script>
+      (function () {
+        var form = document.getElementById("accessForm");
+        if (!form) return;
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          function v(name) {
+            var el = form.elements[name];
+            if (!el) return "";
+            return String(el.value || "").trim();
+          }
+
+          var subject = "CreatorPulse Early Access Request";
+          var bodyLines = [
+            "CreatorPulse Early Access Request",
+            "",
+            "Name: " + v("name"),
+            "Discord: " + v("discord"),
+            "Creator platform: " + v("platform"),
+            "Community size: " + v("size"),
+            "Server status: " + v("serverStatus"),
+            "Goal: " + v("goal"),
+            "Test server consent: " + v("testConsent"),
+            "Timezone: " + v("timezone"),
+            "Notes: " + v("notes"),
+            "",
+            "I understand this is early access and that stability is the priority."
+          ];
+
+          var mailto = "mailto:support@cdcreatorpulse.com"
+            + "?subject=" + encodeURIComponent(subject)
+            + "&body=" + encodeURIComponent(bodyLines.join("\n"));
+
+          window.location.href = mailto;
+        });
+      })();
+    </script>
+  </body>
 </html>
