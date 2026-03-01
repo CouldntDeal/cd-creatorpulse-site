@@ -27,6 +27,19 @@
     }
   }
 
+  function setupHeaderScrollFX() {
+    const header = document.querySelector(".site-header");
+    if (!header) return;
+
+    function apply() {
+      if (window.scrollY > 8) header.classList.add("is-scrolled");
+      else header.classList.remove("is-scrolled");
+    }
+
+    apply();
+    window.addEventListener("scroll", apply, { passive: true });
+  }
+
   async function inject() {
     const headerHost = document.getElementById("site-header");
     const footerHost = document.getElementById("site-footer");
@@ -42,6 +55,7 @@
     }
 
     setActiveNav();
+    setupHeaderScrollFX();
   }
 
   if (document.readyState === "loading") {
