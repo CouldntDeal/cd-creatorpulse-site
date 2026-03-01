@@ -262,7 +262,7 @@ main::before{
 }
 .hero-panel{
   padding:16px 18px;
-  transform: translateY(22px); /* lowered more: pushes top-right panel down */
+  transform: translateY(22px); /* lower slightly (visual alignment, no layout height change) */
 }
 
 .hero-panel .panel-top{
@@ -378,6 +378,51 @@ main::before{
   flex-direction:column;
 }
 .page main{flex:1 0 auto}
+
+/* =========================
+   Zoom / viewport safety
+   Prevents vw-sized hero art from exploding at extreme zoom-out (e.g., 25%)
+   ========================= */
+
+/* If your HTML has a dedicated wrapper for the big hero logo/graphic */
+.hero-visual,
+.hero-graphic,
+.hero-mark,
+.hero-logo,
+.hero-splash,
+#heroLogo,
+#hero-logo,
+#splashLogo,
+#splash-logo{
+  width: clamp(220px, 34vw, 560px);
+  max-width: 560px;
+  height: auto;
+}
+
+/* If the hero graphic is an image/svg inside those wrappers */
+.hero-visual img,
+.hero-graphic img,
+.hero-mark img,
+.hero-logo img,
+.hero-splash img,
+.hero-visual svg,
+.hero-graphic svg,
+.hero-mark svg,
+.hero-logo svg,
+.hero-splash svg{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+/* Last-resort: if there is a single large image/svg directly inside hero */
+.hero > img,
+.hero > svg{
+  width: clamp(220px, 34vw, 560px);
+  max-width: 560px;
+  height:auto;
+  display:block;
+}
 
 /* Responsive */
 @media (max-width: 980px){
