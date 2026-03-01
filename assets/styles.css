@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CD-CreatorPulse â€” Neon Creator-Tech Premium SaaS CSS
+   CD-CreatorPulse Ã¢â‚¬â€ Neon Creator-Tech Premium SaaS CSS
    Visual System Finalization (Polish)
    ========================================================================== */
 
@@ -110,7 +110,7 @@ a:hover{ color: rgba(255,255,255,0.98); }
   pointer-events:none;
 }
 
-/* Makes header feel â€œconnectedâ€ during scroll */
+/* Makes header feel Ã¢â‚¬Å“connectedÃ¢â‚¬Â during scroll */
 .site-header.is-scrolled{
   background: rgba(7,11,20,0.78);
   border-bottom-color: rgba(83,225,255,0.16);
@@ -574,3 +574,190 @@ h1{
   gap: 12px;
   flex-wrap: wrap;
 }
+
+/* BEGIN_CREATORPULSE_PREMIUM_FLARE */
+/* Premium flare system (NO layout changes; CSS only).
+   Goal: Electric glass + subtle motion + creator-tech atmosphere. */
+
+/* ---------- Global aura (subtle, premium) ---------- */
+body::after{
+  content:"";
+  position: fixed;
+  inset: -20%;
+  pointer-events: none;
+  z-index: -2;
+  background:
+    radial-gradient(900px 520px at 25% 15%, rgba(255,79,216,0.06), transparent 62%),
+    radial-gradient(900px 560px at 75% 10%, rgba(122,92,255,0.08), transparent 64%),
+    radial-gradient(1100px 620px at 50% 0%, rgba(83,225,255,0.06), transparent 62%),
+    radial-gradient(700px 420px at 60% 70%, rgba(43,167,255,0.04), transparent 68%);
+  filter: blur(34px);
+  opacity: 0.75;
+  transform: translate3d(0,0,0);
+  animation: cpAurora 10.5s cubic-bezier(.2,.8,.2,1) infinite;
+  mix-blend-mode: screen;
+}
+
+@keyframes cpAurora{
+  0%,100% { transform: translate3d(0,0,0) scale(1); }
+  50%     { transform: translate3d(0,-10px,0) scale(1.02); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body::after{ animation: none !important; }
+  .btn, .card, .chip, .hero-panel{ transition: none !important; }
+}
+
+/* ---------- Buttons: more premium pop ---------- */
+.btn{
+  box-shadow:
+    0 18px 60px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.btn:hover{
+  box-shadow:
+    0 28px 90px rgba(0,0,0,0.62),
+    0 0 0 1px rgba(83,225,255,0.10),
+    0 0 28px rgba(122,92,255,0.08);
+}
+
+/* ---------- Chips: add a gentle neon edge ---------- */
+.chip{
+  border-color: rgba(255,255,255,0.12);
+  box-shadow:
+    0 16px 54px rgba(0,0,0,0.40),
+    0 0 0 1px rgba(255,255,255,0.03);
+}
+
+.chip:hover{
+  border-color: rgba(122,92,255,0.18);
+  box-shadow:
+    0 18px 62px rgba(0,0,0,0.50),
+    0 0 0 1px rgba(122,92,255,0.08);
+}
+
+/* ---------- Cards: subtle sheen + hover depth ---------- */
+.card{
+  position: relative;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:-40px;
+  pointer-events:none;
+  background:
+    radial-gradient(520px 240px at 25% 20%, rgba(83,225,255,0.06), transparent 68%),
+    radial-gradient(480px 240px at 70% 10%, rgba(122,92,255,0.06), transparent 70%),
+    radial-gradient(420px 220px at 55% 85%, rgba(255,79,216,0.04), transparent 72%);
+  filter: blur(26px);
+  opacity: 0.55;
+  mask-image: radial-gradient(420px 260px at 40% 25%, rgba(0,0,0,1), rgba(0,0,0,0) 70%);
+}
+
+.card:hover{
+  border-color: rgba(83,225,255,0.14);
+  box-shadow:
+    0 28px 120px rgba(0,0,0,0.66),
+    0 0 0 1px rgba(83,225,255,0.06),
+    0 0 22px rgba(122,92,255,0.05);
+}
+
+/* ---------- Section divider: add premium neon hint ---------- */
+.section-divider{
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(83,225,255,0.10),
+    rgba(122,92,255,0.10),
+    rgba(255,79,216,0.06),
+    rgba(83,225,255,0.10),
+    transparent
+  ) !important;
+  opacity: 0.80 !important;
+}
+
+/* ---------- Hero right panel: restore hierarchy + add electric sheen ---------- */
+.hero-panel{
+  position: relative;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background:
+    radial-gradient(760px 420px at 85% 0%, rgba(122,92,255,0.10), transparent 58%),
+    radial-gradient(640px 380px at 20% 25%, rgba(83,225,255,0.06), transparent 62%),
+    linear-gradient(180deg, rgba(255,255,255,0.085), rgba(255,255,255,0.020));
+  box-shadow:
+    0 34px 120px rgba(0,0,0,0.72),
+    0 0 0 1px rgba(83,225,255,0.06);
+  overflow: hidden;
+}
+
+.hero-panel::after{
+  content:"";
+  position:absolute;
+  inset:-60% -80%;
+  pointer-events:none;
+  background: linear-gradient(90deg,
+    rgba(83,225,255,0.00),
+    rgba(83,225,255,0.10),
+    rgba(122,92,255,0.14),
+    rgba(255,79,216,0.08),
+    rgba(83,225,255,0.00)
+  );
+  transform: translateX(-45%) rotate(8deg);
+  opacity: 0.55;
+  filter: blur(22px);
+  animation: cpSheen 6.2s cubic-bezier(.2,.8,.2,1) infinite;
+}
+
+@keyframes cpSheen{
+  0%   { transform: translateX(-45%) rotate(8deg); }
+  60%  { transform: translateX(45%) rotate(8deg); }
+  100% { transform: translateX(45%) rotate(8deg); }
+}
+
+.hero-panel:hover{
+  border-color: rgba(122,92,255,0.22);
+  box-shadow:
+    0 38px 140px rgba(0,0,0,0.78),
+    0 0 0 1px rgba(122,92,255,0.10),
+    0 0 28px rgba(255,79,216,0.06);
+}
+
+/* Keep panel rows readable (don’t let effects flatten text) */
+.hero-panel .panel-title{ color: rgba(255,255,255,0.92) !important; }
+.hero-panel .panel-label{ color: rgba(255,255,255,0.88) !important; }
+.hero-panel .panel-sub{ color: rgba(255,255,255,0.66) !important; }
+
+/* LIVE badge: small, premium, pulsing dot (not a big bar) */
+.panel-badge{
+  position: relative;
+  font-size: 11px;
+  padding: 6px 10px 6px 18px;
+  border-radius: 999px;
+  color: rgba(255,255,255,0.90);
+  border: 1px solid rgba(122,92,255,0.18);
+  background: rgba(255,255,255,0.03);
+  box-shadow: 0 14px 46px rgba(0,0,0,0.42);
+}
+
+.panel-badge::before{
+  content:"";
+  position:absolute;
+  left: 8px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 999px;
+  background: rgba(255,79,216,0.95);
+  box-shadow: 0 0 16px rgba(255,79,216,0.20), 0 0 14px rgba(122,92,255,0.16);
+  animation: cpLivePulse 1.55s cubic-bezier(.2,.8,.2,1) infinite;
+}
+
+@keyframes cpLivePulse{
+  0%,100% { transform: scale(1); opacity: 0.95; }
+  50%     { transform: scale(1.45); opacity: 0.65; }
+}
+/* END_CREATORPULSE_PREMIUM_FLARE */
