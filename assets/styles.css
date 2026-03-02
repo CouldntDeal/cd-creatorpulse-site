@@ -1,3 +1,20 @@
+/* ---- Global background: single continuous layer (prevents scroll seams) ---- */
+html, body {
+  min-height: 100%;
+}
+
+body {
+  background: radial-gradient(1200px 800px at 20% 10%, rgba(0, 160, 200, 0.18), rgba(0,0,0,0) 60%),
+              radial-gradient(900px 700px at 80% 20%, rgba(0, 120, 180, 0.16), rgba(0,0,0,0) 55%),
+              linear-gradient(180deg, rgba(6,10,14,1) 0%, rgba(4,7,10,1) 40%, rgba(2,4,6,1) 100%);
+  background-attachment: fixed;
+}
+/* Ensure page sections don't paint their own background */
+main, .page, .page-content, .content, .section {
+  background: transparent !important;
+}
+/* ------------------------------------------------------------------------- */
+
 :root{
   --bg0:#05070c;
   --bg1:#070b12;
