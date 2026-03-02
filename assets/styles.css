@@ -235,7 +235,7 @@ a:hover{color:var(--accent2)}
   position:relative;
 }
 
-/* subtle Ã¢â‚¬Å“railÃ¢â‚¬Â so the right stack feels placed, not random */
+/* subtle ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œrailÃƒÂ¢Ã¢â€šÂ¬Ã‚Â so the right stack feels placed, not random */
 .hero-right::before{
   content:"";
   position:absolute;
@@ -380,7 +380,7 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 }
 .list li{margin:0 0 8px 0; color:rgba(255,255,255,.86)}
 
-/* Early access tracker: tighten interior so it feels Ã¢â‚¬Å“engineeredÃ¢â‚¬Â */
+/* Early access tracker: tighten interior so it feels ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œengineeredÃƒÂ¢Ã¢â€šÂ¬Ã‚Â */
 .availability-card{
   margin-top:0;
   width:100%;
@@ -535,3 +535,23 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 }
 .mini-left { opacity: .85; }
 .mini-right { white-space: nowrap; }
+
+
+/* --- CreatorPulse: background seam fix (scroll pages) --- */
+/* Ensure the glow background covers the full viewport while scrolling. */
+html, body { min-height: 100%; }
+
+.bg {
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.bg-glow {
+  position: absolute;
+  inset: 0;
+}
+/* --- end seam fix --- */
