@@ -235,7 +235,7 @@ a:hover{color:var(--accent2)}
   position:relative;
 }
 
-/* subtle ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“railÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â so the right stack feels placed, not random */
+/* subtle ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚¢ÃƒÆ’Ã‚¢Ãƒ¢Ã¢â€š¬Ã…¡Ãƒâ€šÃ‚¬ÃƒÆ’Ã¢â‚¬¦Ãƒ¢Ã¢â€š¬Ã…â€œrailÃƒÆ’Ã†â€™Ãƒâ€šÃ‚¢ÃƒÆ’Ã‚¢Ãƒ¢Ã¢â€š¬Ã…¡Ãƒâ€šÃ‚¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ so the right stack feels placed, not random */
 .hero-right::before{
   content:"";
   position:absolute;
@@ -380,7 +380,7 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 }
 .list li{margin:0 0 8px 0; color:rgba(255,255,255,.86)}
 
-/* Early access tracker: tighten interior so it feels ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“engineeredÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â */
+/* Early access tracker: tighten interior so it feels ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚¢ÃƒÆ’Ã‚¢Ãƒ¢Ã¢â€š¬Ã…¡Ãƒâ€šÃ‚¬ÃƒÆ’Ã¢â‚¬¦Ãƒ¢Ã¢â€š¬Ã…â€œengineeredÃƒÆ’Ã†â€™Ãƒâ€šÃ‚¢ÃƒÆ’Ã‚¢Ãƒ¢Ã¢â€š¬Ã…¡Ãƒâ€šÃ‚¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ */
 .availability-card{
   margin-top:0;
   width:100%;
@@ -583,6 +583,6 @@ body::before {
     linear-gradient(180deg, rgba(7, 12, 18, 1) 0%, rgba(6, 10, 16, 1) 55%, rgba(5, 8, 12, 1) 100%);
 }
 
-/* If you still include the old .bg element, neutralize it so it can’t create seams */
+/* If you still include the old .bg element, neutralize it so it canâ€™t create seams */
 .bg { display: none !important; }
 /* --- end seam fix --- */
