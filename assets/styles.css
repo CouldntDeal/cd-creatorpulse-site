@@ -235,7 +235,7 @@ a:hover{color:var(--accent2)}
   position:relative;
 }
 
-/* subtle ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œrailÃƒÂ¢Ã¢â€šÂ¬Ã‚Â so the right stack feels placed, not random */
+/* subtle ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“railÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â so the right stack feels placed, not random */
 .hero-right::before{
   content:"";
   position:absolute;
@@ -380,7 +380,7 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 }
 .list li{margin:0 0 8px 0; color:rgba(255,255,255,.86)}
 
-/* Early access tracker: tighten interior so it feels ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œengineeredÃƒÂ¢Ã¢â€šÂ¬Ã‚Â */
+/* Early access tracker: tighten interior so it feels ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“engineeredÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â */
 .availability-card{
   margin-top:0;
   width:100%;
@@ -554,4 +554,35 @@ html, body { min-height: 100%; }
   position: absolute;
   inset: 0;
 }
+/* --- end seam fix --- */
+
+
+/* --- CreatorPulse: force ONE continuous background (seam fix) --- */
+html, body { min-height: 100%; }
+
+/* Stop any page/section background bands from creating seams */
+.page,
+.section,
+main,
+main.page {
+  background: transparent !important;
+}
+
+/* Use a single fixed background behind everything */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+
+  /* Keep the same "premium dark + glow" feel */
+  background:
+    radial-gradient(900px 500px at 18% 10%, rgba(40, 120, 180, 0.28), rgba(0, 0, 0, 0) 60%),
+    radial-gradient(700px 420px at 70% 25%, rgba(30, 90, 140, 0.20), rgba(0, 0, 0, 0) 62%),
+    linear-gradient(180deg, rgba(7, 12, 18, 1) 0%, rgba(6, 10, 16, 1) 55%, rgba(5, 8, 12, 1) 100%);
+}
+
+/* If you still include the old .bg element, neutralize it so it can’t create seams */
+.bg { display: none !important; }
 /* --- end seam fix --- */
