@@ -670,3 +670,12 @@ ul li::before {
   opacity: 0.7 !important;
 }
 /* -------------------------------------------------------------------- */
+
+
+/* ---- Disable page overlay pseudo-elements (prevents scroll seam) ---- */
+body::before,
+body::after {
+  content: none !important;
+  display: none !important;
+}
+/* ------------------------------------------------------------------- */
