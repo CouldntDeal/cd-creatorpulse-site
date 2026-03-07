@@ -103,6 +103,8 @@
       .lb-row:hover { border-color: rgba(42,215,255,.20); background: rgba(42,215,255,.04); }
       .lb-row--genesis { border-color: rgba(255,215,0,.20); background: rgba(255,215,0,.04); }
       .lb-row--genesis:hover { border-color: rgba(255,215,0,.35); background: rgba(255,215,0,.07); }
+      .lb-row--celestial { border-color: rgba(42,215,255,.15); background: rgba(42,215,255,.03); }
+      .lb-row--celestial:hover { border-color: rgba(42,215,255,.28); background: rgba(42,215,255,.06); }
 
       .lb-rank { font-size: 12px; font-weight: 800; min-width: 26px; text-align: center; color: rgba(255,255,255,.40); }
       .lb-rank--1 { font-size: 20px; color: #ffd700; }
@@ -123,6 +125,11 @@
         font-size: 10px; padding: 2px 7px; border-radius: 999px;
         border: 1px solid rgba(255,215,0,.35); background: rgba(255,215,0,.10);
         color: rgba(255,215,0,.90); font-weight: 700; letter-spacing: .04em; flex-shrink: 0;
+      }
+      .lb-celestial-badge {
+        font-size: 10px; padding: 2px 7px; border-radius: 999px;
+        border: 1px solid rgba(42,215,255,.30); background: rgba(42,215,255,.08);
+        color: rgba(42,215,255,.90); font-weight: 700; letter-spacing: .04em; flex-shrink: 0;
       }
       .lb-name-sub { font-size: 11px; color: rgba(255,255,255,.38); margin-top: 2px; }
 
@@ -426,13 +433,14 @@
           var rankDisplay = r <= 3 ? MEDALS[r - 1] : r + ".";
           var rankCls     = r <= 3 ? " lb-rank--" + r : "";
           var genesis     = e.is_genesis ? '<span class="lb-genesis-badge">&#10022; The First</span>' : "";
-          var rowCls      = e.is_genesis ? " lb-row--genesis" : "";
+          var celestial   = (!e.is_genesis && e.is_pioneer) ? '<span class="lb-celestial-badge">&#10037; Celestial</span>' : "";
+          var rowCls      = e.is_genesis ? " lb-row--genesis" : (e.is_pioneer ? " lb-row--celestial" : "");
           var sub         = e.discord_username ? "@" + esc(e.discord_username) : "ID: " + esc(e.user_discord_id);
           return '<div class="lb-row' + rowCls + '">' +
             '<div class="lb-rank' + rankCls + '">' + rankDisplay + '</div>' +
             '<div class="lb-dot lb-dot--' + rarity + '"></div>' +
             '<div class="lb-name">' +
-              '<div class="lb-name-main">' + esc(e.display_name) + genesis + '</div>' +
+              '<div class="lb-name-main">' + esc(e.display_name) + genesis + celestial + '</div>' +
               '<div class="lb-name-sub">' + sub + '</div>' +
             '</div>' +
             '<div class="lb-stats">' +
