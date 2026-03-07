@@ -325,7 +325,7 @@
             '<div class="lb-dot lb-dot--' + rarity + '"></div>' +
             '<div class="lb-name">' +
               '<div class="lb-name-main">' + esc(e.display_name) + genesis + '</div>' +
-              '<div class="lb-name-sub">ID: ' + esc(e.user_discord_id) + '</div>' +
+              '<div class="lb-name-sub">' + (e.discord_username ? '@' + esc(e.discord_username) : 'ID: ' + esc(e.user_discord_id)) + '</div>' +
             '</div>' +
             '<div class="lb-stats">' +
               '<div class="lb-stat"><div class="lb-stat-val">Lv.' + e.level + '</div><div class="lb-stat-label">Level</div></div>' +
