@@ -1,20 +1,3 @@
-/* ---- Global background: single continuous layer (prevents scroll seams) ---- */
-html, body {
-  min-height: 100%;
-}
-
-body {
-  background: radial-gradient(1200px 800px at 20% 10%, rgba(0, 160, 200, 0.18), rgba(0,0,0,0) 60%),
-              radial-gradient(900px 700px at 80% 20%, rgba(0, 120, 180, 0.16), rgba(0,0,0,0) 55%),
-              linear-gradient(180deg, rgba(6,10,14,1) 0%, rgba(4,7,10,1) 40%, rgba(2,4,6,1) 100%);
-  background-attachment: fixed;
-}
-/* Ensure page sections don't paint their own background */
-main, .page, .page-content, .content, .section {
-  background: transparent !important;
-}
-/* ------------------------------------------------------------------------- */
-
 :root{
   --bg0:#05070c;
   --bg1:#070b12;
@@ -31,32 +14,71 @@ main, .page, .page-content, .content, .section {
 }
 
 *{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-  color:var(--text);
-  background:
-    radial-gradient(1200px 700px at 18% 10%, rgba(42,215,255,.10), transparent 60%),
-    radial-gradient(1000px 700px at 82% 35%, rgba(122,215,255,.06), transparent 55%),
-    linear-gradient(180deg, var(--bg1), var(--bg0) 60%, #03050a);
-  padding-top: var(--headerH);
+
+html, body {
+  height: 100%;
+  min-height: 100%;
 }
 
-/* premium subtle texture (no obvious squares) */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  background-image:
-    radial-gradient(1100px 700px at 20% 10%, rgba(40,215,255,.10), transparent 60%),
-    radial-gradient(900px 700px at 80% 35%, rgba(122,215,255,.06), transparent 55%),
-    linear-gradient(transparent, transparent 83px, rgba(255,255,255,.016) 84px),
-    linear-gradient(90deg, transparent, transparent 83px, rgba(255,255,255,.012) 84px);
-  background-size: auto, auto, 84px 84px, 84px 84px;
-  opacity:.18;
-  filter:saturate(110%) blur(.25px);
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color: var(--text);
+  padding-top: var(--headerH);
+
+  /* Single authoritative background — fixed so it never scrolls away.
+     Works identically on short pages (home) and long pages (pulselings). */
+  background:
+    radial-gradient(1400px 900px at 18% 12%, rgba(42,215,255,.09), transparent 60%),
+    radial-gradient(1000px 800px at 82% 30%, rgba(100,180,255,.06), transparent 55%),
+    radial-gradient(800px 600px at 50% 70%, rgba(20,80,140,.12), transparent 65%),
+    linear-gradient(180deg, var(--bg1) 0%, #040710 40%, var(--bg0) 100%);
+  background-attachment: fixed;
+}
+
+/* Ensure no section or page element repaints the background */
+main, .page, .page-content, .content, .section {
+  background: transparent !important;
+}
+main::before, main::after,
+.page::before, .page::after,
+.section::before, .section::after {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* List markers */
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+ul li {
+  position: relative;
+  padding-left: 14px;
+}
+ul li::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.7;
+}
+.card ul, .section ul, main ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+.card ul li, .section ul li, main ul li {
+  position: relative !important;
+  padding-left: 14px !important;
+}
+.card ul li::before, .section ul li::before, main ul li::before {
+  content: "-" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  opacity: 0.7 !important;
 }
 
 a{color:inherit}
@@ -464,6 +486,14 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
   line-height:1.35;
 }
 
+/* Neutral availability pill (no status dot) */
+.availability-live--neutral{
+  gap:0;
+}
+.availability-live--neutral .dot{
+  display:none;
+}
+
 /* FOOTER (tight + premium) */
 .site-footer{
   border-top: 0;
@@ -493,13 +523,6 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
   .nav-links{justify-content:flex-start}
   body{padding-top:96px}
   .hero-left h1{font-size:38px}
-}
-/* Neutral availability pill (no status dot) */
-.availability-live--neutral{
-  gap:0;
-}
-.availability-live--neutral .dot{
-  display:none;
 }
 
 /* Partnership ladder visuals */
@@ -552,130 +575,3 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 }
 .mini-left { opacity: .85; }
 .mini-right { white-space: nowrap; }
-
-
-/* --- CreatorPulse: background seam fix (scroll pages) --- */
-/* Ensure the glow background covers the full viewport while scrolling. */
-html, body { min-height: 100%; }
-
-.bg {
-  position: fixed;
-  inset: 0;
-  height: 100vh;
-  width: 100vw;
-  z-index: -1;
-  pointer-events: none;
-}
-
-.bg-glow {
-  position: absolute;
-  inset: 0;
-}
-/* --- end seam fix --- */
-
-
-/* --- CreatorPulse: force ONE continuous background (seam fix) --- */
-html, body { min-height: 100%; }
-
-/* Stop any page/section background bands from creating seams */
-.page,
-.section,
-main,
-main.page {
-  background: transparent !important;
-}
-
-/* Use a single fixed background behind everything */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;
-
-  /* Keep the same "premium dark + glow" feel */
-  background:
-    radial-gradient(900px 500px at 18% 10%, rgba(40, 120, 180, 0.28), rgba(0, 0, 0, 0) 60%),
-    radial-gradient(700px 420px at 70% 25%, rgba(30, 90, 140, 0.20), rgba(0, 0, 0, 0) 62%),
-    linear-gradient(180deg, rgba(7, 12, 18, 1) 0%, rgba(6, 10, 16, 1) 55%, rgba(5, 8, 12, 1) 100%);
-}
-
-/* If you still include the old .bg element, neutralize it so it can't create seams */
-.bg { display: none !important; }
-/* --- end seam fix --- */
-
-
-
-/* ---- Seam fix: remove hard edges caused by section overlays ---- */
-.section,
-.page,
-.page-content,
-main {
-  background: transparent !important;
-}
-
-.section::before,
-.section::after,
-.page::before,
-.page::after,
-main::before,
-main::after {
-  background: transparent !important;
-  box-shadow: none !important;
-  border: 0 !important;
-  outline: 0 !important;
-  content: none !important;
-}
-/* -------------------------------------------------------------- */
-
-/* ---- List marker fix: remove broken glyph boxes ---- */
-ul {
-  list-style: none;
-  padding-left: 0;
-  margin-left: 0;
-}
-
-ul li {
-  position: relative;
-  padding-left: 14px;
-}
-
-ul li::before {
-  content: "-";
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0.7;
-}
-/* --------------------------------------------------- */
-
-
-/* ---- List marker override: force stable markers in content cards ---- */
-.card ul, .section ul, main ul {
-  list-style: none !important;
-  padding-left: 0 !important;
-  margin-left: 0 !important;
-}
-
-.card ul li, .section ul li, main ul li {
-  position: relative !important;
-  padding-left: 14px !important;
-}
-
-.card ul li::before, .section ul li::before, main ul li::before {
-  content: "-" !important;
-  position: absolute !important;
-  left: 0 !important;
-  top: 0 !important;
-  opacity: 0.7 !important;
-}
-/* -------------------------------------------------------------------- */
-
-
-/* ---- Disable page overlay pseudo-elements (prevents scroll seam) ---- */
-body::before,
-body::after {
-  content: none !important;
-  display: none !important;
-}
-/* ------------------------------------------------------------------- */
