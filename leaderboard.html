@@ -4,237 +4,299 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Pulselings Leaderboard &mdash; CreatorPulse</title>
-    <meta name="description" content="Top Pulselings creatures across all CreatorPulse communities." />
+    <meta name="description" content="Top Pulselings creatures across all CreatorPulse communities. See who's leading and learn how to hatch and level up your own." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles.css" />
     <style>
-      .leaderboard-grid {
-        display: grid;
-        gap: 10px;
-        margin-top: 18px;
-      }
+      .leaderboard-grid { display: grid; gap: 8px; margin-top: 16px; }
 
       .lb-row {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        padding: 14px 18px;
-        border-radius: 14px;
-        border: 1px solid rgba(255,255,255,.08);
-        background: rgba(255,255,255,.04);
-        transition: border-color 0.15s, background 0.15s;
-      }
-      .lb-row:hover {
-        border-color: rgba(42,215,255,.22);
-        background: rgba(42,215,255,.04);
-      }
-
-      .lb-row--genesis {
-        border-color: rgba(255,215,0,.22);
-        background: rgba(255,215,0,.04);
-      }
-      .lb-row--genesis:hover {
-        border-color: rgba(255,215,0,.38);
-        background: rgba(255,215,0,.07);
-      }
-
-      .lb-rank {
-        font-size: 13px;
-        font-weight: 800;
-        min-width: 28px;
-        color: rgba(255,255,255,.50);
-        text-align: center;
-      }
-      .lb-rank--1 { color: #ffd700; font-size: 20px; }
-      .lb-rank--2 { color: #c0c0c0; font-size: 18px; }
-      .lb-rank--3 { color: #cd7f32; font-size: 18px; }
-
-      .lb-rarity-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        flex-shrink: 0;
-      }
-      .lb-rarity-dot--common    { background: rgba(180,180,180,.85); }
-      .lb-rarity-dot--uncommon  { background: rgba(80,200,100,.90); box-shadow: 0 0 8px rgba(80,200,100,.40); }
-      .lb-rarity-dot--rare      { background: rgba(80,140,255,.90); box-shadow: 0 0 8px rgba(80,140,255,.40); }
-      .lb-rarity-dot--epic      { background: rgba(170,80,255,.90); box-shadow: 0 0 8px rgba(170,80,255,.40); }
-      .lb-rarity-dot--legendary { background: rgba(255,200,40,.90); box-shadow: 0 0 10px rgba(255,200,40,.50); }
-      .lb-rarity-dot--mythic    { background: rgba(255,120,180,.90); box-shadow: 0 0 12px rgba(255,120,180,.55); }
-
-      .lb-name {
-        flex: 1;
-        min-width: 0;
-      }
-      .lb-name-main {
-        font-weight: 700;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        gap: 7px;
-      }
-      .lb-genesis-badge {
-        font-size: 11px;
-        padding: 2px 7px;
-        border-radius: 999px;
-        border: 1px solid rgba(255,215,0,.35);
-        background: rgba(255,215,0,.10);
-        color: rgba(255,215,0,.90);
-        font-weight: 700;
-        letter-spacing: .04em;
-      }
-      .lb-name-sub {
-        font-size: 12px;
-        color: rgba(255,255,255,.50);
-        margin-top: 2px;
-      }
-
-      .lb-stats {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        flex-shrink: 0;
-      }
-      .lb-stat {
-        text-align: right;
-      }
-      .lb-stat-val {
-        font-size: 13px;
-        font-weight: 700;
-        color: rgba(255,255,255,.90);
-      }
-      .lb-stat-label {
-        font-size: 11px;
-        color: rgba(255,255,255,.40);
-        margin-top: 1px;
-      }
-
-      .lb-rarity-label {
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: .06em;
-        text-transform: uppercase;
-        min-width: 60px;
-        text-align: right;
-        color: rgba(255,255,255,.50);
-      }
-      .lb-rarity-label--uncommon  { color: rgba(80,200,100,.80); }
-      .lb-rarity-label--rare      { color: rgba(80,140,255,.85); }
-      .lb-rarity-label--epic      { color: rgba(170,80,255,.85); }
-      .lb-rarity-label--legendary { color: rgba(255,200,40,.85); }
-      .lb-rarity-label--mythic    { color: rgba(255,120,180,.90); }
-
-      .lb-loading, .lb-empty, .lb-error {
-        padding: 32px;
-        text-align: center;
-        color: rgba(255,255,255,.45);
-        font-size: 14px;
-        border-radius: 14px;
+        display: flex; align-items: center; gap: 14px;
+        padding: 13px 18px; border-radius: 14px;
         border: 1px solid rgba(255,255,255,.07);
         background: rgba(255,255,255,.03);
+        transition: border-color 0.15s, background 0.15s;
       }
+      .lb-row:hover { border-color: rgba(42,215,255,.20); background: rgba(42,215,255,.04); }
+      .lb-row--genesis { border-color: rgba(255,215,0,.20); background: rgba(255,215,0,.04); }
+      .lb-row--genesis:hover { border-color: rgba(255,215,0,.35); background: rgba(255,215,0,.07); }
 
-      .lb-updated {
-        font-size: 12px;
-        color: rgba(255,255,255,.35);
-        margin-top: 12px;
-        text-align: right;
+      .lb-rank { font-size: 12px; font-weight: 800; min-width: 26px; text-align: center; color: rgba(255,255,255,.40); }
+      .lb-rank--1 { font-size: 20px; color: #ffd700; }
+      .lb-rank--2 { font-size: 18px; color: #c0c0c0; }
+      .lb-rank--3 { font-size: 18px; color: #cd7f32; }
+
+      .lb-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+      .lb-dot--common    { background: rgba(180,180,180,.80); }
+      .lb-dot--uncommon  { background: rgba(80,200,100,.90);  box-shadow: 0 0 8px rgba(80,200,100,.40); }
+      .lb-dot--rare      { background: rgba(80,140,255,.90);  box-shadow: 0 0 8px rgba(80,140,255,.40); }
+      .lb-dot--epic      { background: rgba(170,80,255,.90);  box-shadow: 0 0 8px rgba(170,80,255,.40); }
+      .lb-dot--legendary { background: rgba(255,200,40,.90);  box-shadow: 0 0 10px rgba(255,200,40,.50); }
+      .lb-dot--mythic    { background: rgba(255,120,180,.90); box-shadow: 0 0 12px rgba(255,120,180,.55); }
+
+      .lb-name { flex: 1; min-width: 0; }
+      .lb-name-main { font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 7px; }
+      .lb-genesis-badge {
+        font-size: 10px; padding: 2px 7px; border-radius: 999px;
+        border: 1px solid rgba(255,215,0,.35); background: rgba(255,215,0,.10);
+        color: rgba(255,215,0,.90); font-weight: 700; letter-spacing: .04em; flex-shrink: 0;
       }
+      .lb-name-sub { font-size: 11px; color: rgba(255,255,255,.38); margin-top: 2px; }
 
-      @media (max-width: 600px) {
+      .lb-stats { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+      .lb-stat { text-align: right; }
+      .lb-stat-val { font-size: 13px; font-weight: 700; }
+      .lb-stat-label { font-size: 10px; color: rgba(255,255,255,.35); margin-top: 1px; }
+
+      .lb-rarity-text {
+        font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+        min-width: 58px; text-align: right; color: rgba(255,255,255,.40);
+      }
+      .lb-rarity-text--uncommon  { color: rgba(80,200,100,.80); }
+      .lb-rarity-text--rare      { color: rgba(80,140,255,.85); }
+      .lb-rarity-text--epic      { color: rgba(170,80,255,.85); }
+      .lb-rarity-text--legendary { color: rgba(255,200,40,.85); }
+      .lb-rarity-text--mythic    { color: rgba(255,120,180,.90); }
+
+      .lb-loading, .lb-empty, .lb-error {
+        padding: 28px; text-align: center; color: rgba(255,255,255,.40); font-size: 13px;
+        border-radius: 14px; border: 1px solid rgba(255,255,255,.06); background: rgba(255,255,255,.02);
+      }
+      .lb-updated { font-size: 11px; color: rgba(255,255,255,.28); margin-top: 10px; text-align: right; }
+
+      .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+      .guide-item {
+        padding: 14px 16px; border-radius: 14px;
+        border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03);
+      }
+      .guide-item-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+      .guide-icon { font-size: 18px; flex-shrink: 0; }
+      .guide-title { font-weight: 700; font-size: 13px; }
+      .guide-sub { font-size: 12px; color: rgba(255,255,255,.58); line-height: 1.55; }
+      .guide-sub strong { color: rgba(255,255,255,.82); font-weight: 600; }
+
+      .data-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+      .data-table td {
+        padding: 6px 10px; font-size: 12px;
+        border-bottom: 1px solid rgba(255,255,255,.05); color: rgba(255,255,255,.72);
+      }
+      .data-table td:first-child { font-weight: 700; color: rgba(255,255,255,.90); }
+      .data-table td:last-child { text-align: right; color: rgba(255,255,255,.50); }
+      .data-table tr:last-child td { border-bottom: none; }
+
+      .xp-tip {
+        margin-top: 14px; padding: 12px 16px; border-radius: 12px;
+        border: 1px solid rgba(42,215,255,.18); background: rgba(42,215,255,.06);
+        font-size: 12px; color: rgba(255,255,255,.72); line-height: 1.55;
+      }
+      .xp-tip strong { color: rgba(42,215,255,.90); }
+
+      .no-pet-banner {
+        margin-top: 14px; padding: 20px 24px; border-radius: 16px;
+        border: 1px solid rgba(42,215,255,.18); background: rgba(42,215,255,.05);
+        display: flex; align-items: center; gap: 20px;
+      }
+      .no-pet-icon { font-size: 34px; flex-shrink: 0; }
+      .no-pet-title { font-weight: 800; font-size: 15px; margin-bottom: 4px; }
+      .no-pet-sub { font-size: 13px; color: rgba(255,255,255,.62); line-height: 1.5; }
+      .no-pet-sub strong { color: rgba(255,255,255,.88); }
+
+      @media (max-width: 700px) {
+        .guide-grid { grid-template-columns: 1fr; }
         .lb-stats { gap: 12px; }
-        .lb-rarity-label { display: none; }
-        .lb-row { padding: 12px 14px; gap: 12px; }
+        .lb-rarity-text { display: none; }
+        .no-pet-banner { flex-direction: column; text-align: center; }
       }
     </style>
   </head>
 
   <body data-page="leaderboard">
     <div class="bg"><div class="bg-glow"></div></div>
-
     <div id="site-header"></div>
 
     <main class="page">
+
       <section class="hero">
         <div class="container hero-grid">
-
           <div class="hero-left">
             <div class="eyebrow">PULSELINGS</div>
             <h1>Leaderboard.</h1>
             <p class="lead">
-              The top creatures across all CreatorPulse communities, ranked by level and XP.
+              Every CreatorPulse server comes with Pulselings &mdash; a community creature game built into Discord.
+              Each member gets their own unique creature. Feed it, play with it, rest it, and level it up.
             </p>
             <p class="lead-sub">
-              Hatch and level up your Pulseling with <strong>/pet</strong> in any CreatorPulse server.
+              These are the top creatures across all servers right now, ranked by level then XP.
             </p>
             <div class="chips">
               <span class="chip">Updates every 30 min</span>
               <span class="chip">All servers combined</span>
+              <span class="chip">/pet to play</span>
             </div>
           </div>
 
           <aside class="hero-panel card">
             <div class="panel-head">
-              <div class="panel-title">Rarity guide</div>
-              <span class="panel-pill">Traits</span>
+              <div class="panel-title">Rarity at a glance</div>
+              <span class="panel-pill">Hatch odds</span>
             </div>
             <div class="panel-list">
               <div class="panel-item">
-                <div class="panel-dot" style="background:rgba(180,180,180,.85);box-shadow:none;"></div>
-                <div>
-                  <div class="panel-item-title">Common</div>
-                  <div class="panel-item-sub">Trait score 6&ndash;9</div>
-                </div>
+                <div class="panel-dot" style="background:rgba(180,180,180,.80);box-shadow:none;"></div>
+                <div><div class="panel-item-title">Common &mdash; ~40%</div><div class="panel-item-sub">Trait score 6&ndash;9</div></div>
               </div>
               <div class="panel-item">
-                <div class="panel-dot" style="background:rgba(80,200,100,.90);box-shadow:0 0 10px rgba(80,200,100,.40);"></div>
-                <div>
-                  <div class="panel-item-title">Uncommon</div>
-                  <div class="panel-item-sub">Trait score 10&ndash;13</div>
-                </div>
+                <div class="panel-dot" style="background:rgba(80,200,100,.90);box-shadow:0 0 8px rgba(80,200,100,.35);"></div>
+                <div><div class="panel-item-title">Uncommon &mdash; ~31%</div><div class="panel-item-sub">Trait score 10&ndash;13</div></div>
               </div>
               <div class="panel-item">
-                <div class="panel-dot" style="background:rgba(80,140,255,.90);box-shadow:0 0 10px rgba(80,140,255,.40);"></div>
-                <div>
-                  <div class="panel-item-title">Rare</div>
-                  <div class="panel-item-sub">Trait score 14&ndash;17</div>
-                </div>
+                <div class="panel-dot" style="background:rgba(80,140,255,.90);box-shadow:0 0 8px rgba(80,140,255,.35);"></div>
+                <div><div class="panel-item-title">Rare &mdash; ~16%</div><div class="panel-item-sub">Trait score 14&ndash;17</div></div>
               </div>
               <div class="panel-item">
-                <div class="panel-dot" style="background:rgba(170,80,255,.90);box-shadow:0 0 10px rgba(170,80,255,.40);"></div>
-                <div>
-                  <div class="panel-item-title">Epic</div>
-                  <div class="panel-item-sub">Trait score 18&ndash;21</div>
-                </div>
+                <div class="panel-dot" style="background:rgba(170,80,255,.90);box-shadow:0 0 8px rgba(170,80,255,.35);"></div>
+                <div><div class="panel-item-title">Epic &mdash; ~7%</div><div class="panel-item-sub">Trait score 18&ndash;21</div></div>
               </div>
               <div class="panel-item">
-                <div class="panel-dot" style="background:rgba(255,200,40,.90);box-shadow:0 0 12px rgba(255,200,40,.50);"></div>
-                <div>
-                  <div class="panel-item-title">Legendary</div>
-                  <div class="panel-item-sub">Trait score 22&ndash;25</div>
-                </div>
+                <div class="panel-dot" style="background:rgba(255,200,40,.90);box-shadow:0 0 10px rgba(255,200,40,.45);"></div>
+                <div><div class="panel-item-title">Legendary &mdash; ~5%</div><div class="panel-item-sub">Trait score 22&ndash;25</div></div>
               </div>
               <div class="panel-item">
-                <div class="panel-dot" style="background:rgba(255,120,180,.90);box-shadow:0 0 14px rgba(255,120,180,.55);"></div>
-                <div>
-                  <div class="panel-item-title">Mythic</div>
-                  <div class="panel-item-sub">Trait score 26+</div>
-                </div>
+                <div class="panel-dot" style="background:rgba(255,120,180,.90);box-shadow:0 0 12px rgba(255,120,180,.50);"></div>
+                <div><div class="panel-item-title">Mythic &mdash; ~1%</div><div class="panel-item-sub">Trait score 26+</div></div>
               </div>
             </div>
+            <div class="panel-foot">Rarity is set at hatch. You can improve traits later through mutations at milestone levels.</div>
           </aside>
-
         </div>
       </section>
 
+      <!-- LEADERBOARD -->
       <section class="section" style="padding-top:0;">
         <div class="container">
-          <div id="lb-container">
-            <div class="lb-loading">Loading leaderboard&hellip;</div>
-          </div>
+          <h2 style="margin-bottom:2px;">Top Creatures</h2>
+          <p class="muted" style="margin:0 0 4px; font-size:13px;">Ranked by level, then XP within the same level.</p>
+          <div id="lb-container"><div class="lb-loading">Loading&hellip;</div></div>
           <div class="lb-updated" id="lb-updated"></div>
+
+          <div class="no-pet-banner">
+            <div class="no-pet-icon">🥚</div>
+            <div>
+              <div class="no-pet-title">Don&rsquo;t have a Pulseling yet?</div>
+              <div class="no-pet-sub">
+                Join a CreatorPulse server and type <strong>/pet inspect</strong> in Discord. Your creature hatches automatically &mdash; no setup, no waiting. Every creature is unique to your account and stays with you across all servers.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS -->
+      <section class="section" style="padding-top:0;">
+        <div class="container">
+          <h2>How Pulselings work</h2>
+          <p class="muted">Think of it like a community Tamagotchi. Your creature lives in the server, and everyone can interact with it.</p>
+
+          <div class="guide-grid">
+            <div class="guide-item">
+              <div class="guide-item-head"><div class="guide-icon">🥚</div><div class="guide-title">Hatching your creature</div></div>
+              <div class="guide-sub">
+                Use <strong>/pet inspect</strong> for the first time and your creature hatches. It gets a name from a curated list of 325 names, and six traits are rolled randomly to determine its look and rarity. You can&rsquo;t re-roll &mdash; what you get is yours forever.
+              </div>
+            </div>
+            <div class="guide-item">
+              <div class="guide-item-head"><div class="guide-icon">📊</div><div class="guide-title">Three stats to manage</div></div>
+              <div class="guide-sub">
+                Your creature has <strong>Hunger</strong>, <strong>Happiness</strong>, and <strong>Health</strong>. Keep them all above 60% and you earn a <strong>1.25&times; XP bonus</strong> on every action. Stats decay naturally when you&rsquo;re away &mdash; hunger drops 8 points every 12 hours. Don&rsquo;t ghost your creature.
+              </div>
+            </div>
+            <div class="guide-item">
+              <div class="guide-item-head"><div class="guide-icon">🍖</div><div class="guide-title">Feed &mdash; every 8 hours</div></div>
+              <div class="guide-sub">
+                Feeding gives <strong>+25 Hunger</strong>, <strong>+5 Happiness</strong>, and <strong>10 base XP</strong>. Your first action of each day also stacks a <strong>+25 XP daily bonus</strong>. Make feeding your daily habit &mdash; it&rsquo;s the most consistent way to keep stats healthy.
+              </div>
+            </div>
+            <div class="guide-item">
+              <div class="guide-item-head"><div class="guide-icon">🎮</div><div class="guide-title">Play &mdash; every 4 hours</div></div>
+              <div class="guide-sub">
+                Playing gives <strong>+20 Happiness</strong> and <strong>15 base XP</strong> &mdash; the highest XP-per-action. It costs <strong>-5 Hunger</strong> though, so don&rsquo;t play on an empty stomach. Play has the shortest cooldown because happiness is the fastest stat to decay.
+              </div>
+            </div>
+            <div class="guide-item">
+              <div class="guide-item-head"><div class="guide-icon">💤</div><div class="guide-title">Rest &mdash; every 6 hours</div></div>
+              <div class="guide-sub">
+                Resting gives <strong>+30 Energy</strong>, <strong>+5 Health</strong>, and <strong>8 base XP</strong>. Health is slow to rebuild but important &mdash; if it drops alongside hunger, your creature enters a poor wellness state and XP slows to a crawl.
+              </div>
+            </div>
+            <div class="guide-item">
+              <div class="guide-item-head"><div class="guide-icon">🌿</div><div class="guide-title">Feed tokens &amp; community feeding</div></div>
+              <div class="guide-sub">
+                You hold up to <strong>5 feed tokens</strong>. Earn one per level-up, one per daily first action, and one whenever someone feeds your creature. Spend them to feed <em>other people&rsquo;s</em> showcased creatures. They get <strong>+15 Hunger + 5 XP</strong>, you get the good vibes &mdash; and a token back when they return the favour.
+              </div>
+            </div>
+          </div>
+
+          <div class="xp-tip">
+            <strong>Max XP tip:</strong> Keep all three stats above 60% for a <strong>1.25&times; multiplier</strong> on every action. If wellness drops below 30%, XP falls to zero. Your first action each day stacks a flat <strong>+25 bonus XP</strong> on top &mdash; use Play for that action to get the highest combined total (15 base &times; 1.25 + 25 bonus = ~44 XP in one shot).
+          </div>
+        </div>
+      </section>
+
+      <!-- LEVELING & HATS -->
+      <section class="section" style="padding-top:0;">
+        <div class="container two-col">
+          <div>
+            <h2>Leveling up</h2>
+            <div class="card">
+              <p class="muted" style="margin-bottom:12px;">XP required per level scales with your level. Early levels are quick. Later levels need daily consistency.</p>
+              <ul class="list">
+                <li>Each level-up gives <strong>+1 feed token</strong></li>
+                <li>Level 10 &mdash; guaranteed <strong>common hat drop</strong></li>
+                <li>Level 50 &mdash; guaranteed <strong>uncommon hat drop</strong></li>
+                <li>Level 100 &mdash; guaranteed <strong>rare hat drop</strong></li>
+                <li>Levels 25, 50, 75, 100+ &mdash; <strong>mutation offer</strong> (upgrade one trait slot)</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <h2>Hat drops</h2>
+            <div class="card">
+              <p class="muted" style="margin-bottom:12px;">Starting at level 10, each level-up has a random chance to drop a cosmetic hat your creature can wear. Shown on your showcase card.</p>
+              <table class="data-table">
+                <tr><td>Level 1&ndash;9</td><td>No drops</td></tr>
+                <tr><td>Level 10&ndash;19</td><td>15% chance</td></tr>
+                <tr><td>Level 20&ndash;29</td><td>25% chance</td></tr>
+                <tr><td>Level 30&ndash;49</td><td>30% chance</td></tr>
+                <tr><td>Level 50&ndash;74</td><td>35% chance</td></tr>
+                <tr><td>Level 75&ndash;99</td><td>40% chance</td></tr>
+                <tr><td>Level 100+</td><td>45% chance</td></tr>
+              </table>
+              <p class="muted" style="margin-top:10px; margin-bottom:0; font-size:12px;">Duplicate hat? It converts to <strong>+50 XP</strong> instead. Never a wasted drop.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SHOWCASE -->
+      <section class="section" style="padding-top:0; padding-bottom:48px;">
+        <div class="container">
+          <h2>Showcasing in the community</h2>
+          <div class="card">
+            <p class="muted" style="margin-bottom:12px;">
+              Use <strong>/pet showcase</strong> to post your creature card to the server&rsquo;s showcase channel. Your card shows your level, rarity, stats, age, and hat. Other members can click <strong>Feed</strong> to spend one of their tokens on your creature &mdash; boosting its hunger and XP without you having to do anything.
+            </p>
+            <ul class="list">
+              <li>Showcase posts auto-expire after <strong>23 hours</strong></li>
+              <li>You can re-showcase every <strong>24 hours</strong></li>
+              <li>Being fed gives your creature <strong>+15 Hunger, +3 Happiness, +5 XP</strong></li>
+              <li>You (the owner) also earn <strong>+1 feed token</strong> each time someone feeds you</li>
+            </ul>
+            <p class="muted" style="margin-top:10px; margin-bottom:0;">
+              Showcasing is the easiest way to get passive XP and tokens while you&rsquo;re offline. The more the community feeds each other, the faster everyone levels.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -244,85 +306,55 @@
     <script src="assets/site.js"></script>
     <script>
       (function () {
-        var API = "https://cd-shoutout-bot-live-production.up.railway.app/api/leaderboard";
+        var API    = "https://cd-shoutout-bot-live-production.up.railway.app/api/leaderboard";
         var MEDALS = ["🥇", "🥈", "🥉"];
 
-        function rarityLabel(r) {
-          return r.charAt(0).toUpperCase() + r.slice(1);
+        function esc(s) {
+          return String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
         }
+        function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
-        function renderRow(entry) {
-          var rank = entry.rank;
-          var rankDisplay = rank <= 3 ? MEDALS[rank - 1] : rank + ".";
-          var rankClass = rank <= 3 ? " lb-rank--" + rank : "";
-          var genesisHtml = entry.is_genesis
-            ? '<span class="lb-genesis-badge">&#10022; The First</span>'
-            : "";
-          var genesisCls = entry.is_genesis ? " lb-row--genesis" : "";
-          var rarity = entry.rarity || "common";
-
-          return '<div class="lb-row' + genesisCls + '">' +
-            '<div class="lb-rank' + rankClass + '">' + rankDisplay + '</div>' +
-            '<div class="lb-rarity-dot lb-rarity-dot--' + rarity + '"></div>' +
+        function renderRow(e) {
+          var r = e.rank, rarity = e.rarity || "common";
+          var rankDisplay = r <= 3 ? MEDALS[r - 1] : r + ".";
+          var rankCls = r <= 3 ? " lb-rank--" + r : "";
+          var genesis = e.is_genesis ? '<span class="lb-genesis-badge">&#10022; The First</span>' : "";
+          var rowCls  = e.is_genesis ? " lb-row--genesis" : "";
+          return '<div class="lb-row' + rowCls + '">' +
+            '<div class="lb-rank' + rankCls + '">' + rankDisplay + '</div>' +
+            '<div class="lb-dot lb-dot--' + rarity + '"></div>' +
             '<div class="lb-name">' +
-              '<div class="lb-name-main">' + escHtml(entry.display_name) + genesisHtml + '</div>' +
-              '<div class="lb-name-sub">' + discordMention(entry.user_discord_id) + '</div>' +
+              '<div class="lb-name-main">' + esc(e.display_name) + genesis + '</div>' +
+              '<div class="lb-name-sub">ID: ' + esc(e.user_discord_id) + '</div>' +
             '</div>' +
             '<div class="lb-stats">' +
-              '<div class="lb-stat">' +
-                '<div class="lb-stat-val">Lv.' + entry.level + '</div>' +
-                '<div class="lb-stat-label">Level</div>' +
-              '</div>' +
-              '<div class="lb-stat">' +
-                '<div class="lb-stat-val">' + entry.xp + '</div>' +
-                '<div class="lb-stat-label">XP</div>' +
-              '</div>' +
-              '<div class="lb-rarity-label lb-rarity-label--' + rarity + '">' + rarityLabel(rarity) + '</div>' +
+              '<div class="lb-stat"><div class="lb-stat-val">Lv.' + e.level + '</div><div class="lb-stat-label">Level</div></div>' +
+              '<div class="lb-stat"><div class="lb-stat-val">' + e.xp + '</div><div class="lb-stat-label">XP</div></div>' +
+              '<div class="lb-rarity-text lb-rarity-text--' + rarity + '">' + cap(rarity) + '</div>' +
             '</div>' +
           '</div>';
         }
 
-        function escHtml(str) {
-          return String(str || "")
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;");
-        }
-
-        function discordMention(id) {
-          if (!id) return "";
-          return '<span style="opacity:.55;">ID: ' + escHtml(id) + '</span>';
-        }
-
-        function load() {
+        document.addEventListener("DOMContentLoaded", function () {
           var container = document.getElementById("lb-container");
-          var updated = document.getElementById("lb-updated");
-
+          var updated   = document.getElementById("lb-updated");
           fetch(API, { cache: "no-store" })
-            .then(function (res) { return res.json(); })
+            .then(function (r) { return r.json(); })
             .then(function (data) {
               var rows = data && data.leaderboard;
               if (!rows || rows.length === 0) {
-                container.innerHTML = '<div class="lb-empty">No creatures yet. Be the first to hatch one!</div>';
+                container.innerHTML = '<div class="lb-empty">No creatures yet. Use /pet inspect in a CreatorPulse server to be first!</div>';
                 return;
               }
               var html = '<div class="leaderboard-grid">';
-              for (var i = 0; i < rows.length; i++) {
-                html += renderRow(rows[i]);
-              }
-              html += "</div>";
-              container.innerHTML = html;
-
-              var now = new Date();
-              updated.textContent = "Last fetched: " + now.toLocaleTimeString();
+              for (var i = 0; i < rows.length; i++) html += renderRow(rows[i]);
+              container.innerHTML = html + '</div>';
+              updated.textContent = "Last fetched: " + new Date().toLocaleTimeString();
             })
             .catch(function () {
               container.innerHTML = '<div class="lb-error">Could not load leaderboard. Try refreshing.</div>';
             });
-        }
-
-        document.addEventListener("DOMContentLoaded", load);
+        });
       })();
     </script>
   </body>
