@@ -197,6 +197,19 @@ a:hover{color:var(--accent2)}
   filter: drop-shadow(0 0 10px rgba(42,215,255,.18));
 }
 
+/* Logo PNG — black bg drops out against dark header */
+.brand-logo-img {
+  height: 36px;
+  width: auto;
+  display: block;
+  mix-blend-mode: lighten;
+  filter: drop-shadow(0 0 8px rgba(42,215,255,.35));
+  transition: filter .3s ease;
+}
+.brand:hover .brand-logo-img {
+  filter: drop-shadow(0 0 16px rgba(42,215,255,.7));
+}
+
 .brand-title{
   font-size:15px;
   letter-spacing:.2px;
@@ -575,3 +588,224 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 }
 .mini-left { opacity: .85; }
 .mini-right { white-space: nowrap; }
+
+
+/* =====================================================================
+   PULSE ANIMATIONS — alive, branded, subtle
+   ===================================================================== */
+
+/* 1. Brand pulse: the CreatorPulse wordmark breathes with cyan glow */
+@keyframes brand-pulse {
+  0%, 100% { text-shadow: 0 0 8px rgba(42,215,255,.0), 0 0 0px rgba(42,215,255,.0); }
+  50%       { text-shadow: 0 0 18px rgba(42,215,255,.45), 0 0 40px rgba(42,215,255,.18); }
+}
+
+.brand-title {
+  animation: brand-pulse 3.6s ease-in-out infinite;
+}
+
+/* 2. Header border: occasional pulse sweep — triggered by JS, not looping */
+@keyframes header-shimmer {
+  0%   { background-position: -200% center; opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { background-position: 200% center; opacity: 0; }
+}
+
+.site-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(42,215,255,.0) 15%,
+    rgba(42,215,255,.8) 50%,
+    rgba(42,215,255,.0) 85%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  opacity: 0;
+  pointer-events: none;
+  /* animation only plays when .is-pulsing class is added by JS */
+}
+
+.site-header.is-pulsing::after {
+  animation: header-shimmer 1.4s ease-in-out forwards;
+}
+
+/* 3. Live indicator dot on Limited Access pill — actual pulse */
+@keyframes dot-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(42,215,255,.7), 0 0 14px rgba(42,215,255,.55); transform: scale(1); }
+  50%       { box-shadow: 0 0 0 4px rgba(42,215,255,.0), 0 0 20px rgba(42,215,255,.8); transform: scale(1.15); }
+}
+
+.pill--limited::before {
+  animation: dot-pulse 2.2s ease-in-out infinite;
+}
+
+/* 4. Panel dots breathe */
+@keyframes dot-breathe {
+  0%, 100% { box-shadow: 0 0 8px rgba(42,215,255,.4); opacity: .92; }
+  50%       { box-shadow: 0 0 20px rgba(42,215,255,.85); opacity: 1; }
+}
+
+.panel-dot {
+  animation: dot-breathe 2.8s ease-in-out infinite;
+}
+
+/* 5. Card hover — lift + glow intensify */
+.card {
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 56px rgba(0,0,0,.44), 0 0 0 1px rgba(42,215,255,.14);
+}
+
+/* 6. Nav link hover — accent underline slides in */
+.nav-links a {
+  position: relative;
+  transition: border-color .18s ease, color .18s ease, background .18s ease;
+  overflow: hidden;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 60%;
+  height: 1px;
+  background: rgba(42,215,255,.65);
+  border-radius: 1px;
+  transition: transform .2s ease;
+  pointer-events: none;
+}
+.nav-links a:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* 7. Pulselings nav link — always has a tiny live dot */
+.nav-links a[href*="pulselings"]::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(42,215,255,.9);
+  box-shadow: 0 0 6px rgba(42,215,255,.7);
+  margin-right: 5px;
+  vertical-align: middle;
+  animation: dot-breathe 2.4s ease-in-out infinite;
+}
+
+/* 8. CTA primary button — shimmer sweep on hover */
+@keyframes btn-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.btn.primary {
+  background: linear-gradient(
+    90deg,
+    rgba(42,215,255,.12) 0%,
+    rgba(42,215,255,.22) 45%,
+    rgba(100,220,255,.30) 50%,
+    rgba(42,215,255,.22) 55%,
+    rgba(42,215,255,.12) 100%
+  );
+  background-size: 200% 100%;
+  transition: background-position .4s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.btn.primary:hover {
+  background-position: 100% center;
+  border-color: rgba(42,215,255,.6);
+  box-shadow: 0 0 22px rgba(42,215,255,.22);
+}
+
+.btn {
+  transition: border-color .18s ease, color .18s ease, background .18s ease;
+}
+.btn:hover {
+  background: rgba(255,255,255,.08);
+}
+
+/* 9. Footer — accent heartbeat line */
+@keyframes footer-pulse {
+  0%, 100% { opacity: .18; }
+  50%       { opacity: .40; }
+}
+
+.site-footer {
+  position: relative;
+}
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(42,215,255,.55), transparent);
+  animation: footer-pulse 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* 10. Availability dot — pulsing live signal */
+.availability-live .dot {
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+
+/* 11. Eyebrow label — gentle glow */
+@keyframes eyebrow-glow {
+  0%, 100% { opacity: .85; }
+  50%       { opacity: 1; text-shadow: 0 0 12px rgba(42,215,255,.5); }
+}
+.eyebrow {
+  animation: eyebrow-glow 4s ease-in-out infinite;
+}
+
+/* 12. "Request Access" nav link — stands out as the CTA */
+.nav-links a[href*="contact"] {
+  border-color: rgba(42,215,255,.28);
+  background: rgba(42,215,255,.08);
+  color: rgba(42,215,255,.92);
+  font-weight: 600;
+}
+.nav-links a[href*="contact"]:hover {
+  border-color: rgba(42,215,255,.55);
+  background: rgba(42,215,255,.14);
+  box-shadow: 0 0 14px rgba(42,215,255,.18);
+}
+
+/* 13. Ladder bar fill — progress shimmer */
+@keyframes bar-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.ladder-bar > span {
+  background: linear-gradient(
+    90deg,
+    rgba(0,180,255,.28) 0%,
+    rgba(42,215,255,.55) 40%,
+    rgba(100,230,255,.65) 50%,
+    rgba(42,215,255,.55) 60%,
+    rgba(0,180,255,.28) 100%
+  );
+  background-size: 200% 100%;
+  animation: bar-shimmer 3s linear infinite;
+}
+
+/* 14. Chip hover */
+.chip {
+  transition: border-color .18s ease, color .18s ease;
+}
+.chip:hover {
+  border-color: rgba(42,215,255,.35);
+  color: rgba(255,255,255,1);
+}
+

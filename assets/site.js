@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     includeHTML("#site-header", "assets/partials/header.html"),
     includeHTML("#site-footer", "assets/partials/footer.html")
   ]).then(function () {
-    // Sticky header shadow on scroll (if header exists)
+    // Sticky header shadow on scroll
     var header = document.querySelector(".site-header");
     if (header) {
       function onScroll() {
@@ -23,49 +23,55 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
+
+      // Occasional header pulse sweep — fires once, then rests 8–18s, repeats
+      // Feels like a heartbeat: present but not constant
+      function schedulePulse() {
+        var delay = 8000 + Math.random() * 10000; // 8–18s between pulses
+        setTimeout(function () {
+          header.classList.remove("is-pulsing");
+          // Force reflow so animation replays cleanly
+          void header.offsetWidth;
+          header.classList.add("is-pulsing");
+
+          // Remove class after animation completes (1.4s), then schedule next
+          setTimeout(function () {
+            header.classList.remove("is-pulsing");
+            schedulePulse();
+          }, 1500);
+        }, delay);
+      }
+
+      // First pulse fires after a short initial delay (2s after load)
+      setTimeout(function () {
+        header.classList.add("is-pulsing");
+        setTimeout(function () {
+          header.classList.remove("is-pulsing");
+          schedulePulse();
+        }, 1500);
+      }, 2000);
     }
   });
 
-  // Early access availability -- live from bot API
+  // Early access availability (reads JSON; updates the metric)
   (function updateAvailability() {
-    var API = "https://cd-shoutout-bot-live-production.up.railway.app/api/slots";
+    var el = document.getElementById("availabilityCount");
+    if (!el) return;
 
-    // Support both old single-element (availabilityCount) and new split (earlyFilled / earlyTotal)
-    var countEl  = document.getElementById("availabilityCount");
-    var filledEl = document.getElementById("earlyFilled");
-    var totalEl  = document.getElementById("earlyTotal");
-
-    if (!countEl && !filledEl) return;
-
-    fetch(API, { cache: "no-store" })
+    fetch("assets/data/availability.json", { cache: "no-store" })
       .then(function (res) { return res.json(); })
       .then(function (data) {
-        var used = Number(data && data.used);
-        var max  = Number(data && data.max);
+        var filled = Number(data && data.filled);
+        var cap = Number(data && data.capacity);
 
-        if (!isFinite(used) || used < 0) used = 0;
-        if (!isFinite(max)  || max  <= 0) max  = 5;
-        if (used > max) used = max;
+        if (!isFinite(filled) || filled < 0) filled = 0;
+        if (!isFinite(cap) || cap <= 0) cap = 5;
+        if (filled > cap) filled = cap;
 
-        if (countEl)  countEl.textContent  = used + " / " + max;
-        if (filledEl) filledEl.textContent = used;
-        if (totalEl)  totalEl.textContent  = max;
+        el.textContent = filled + " / " + cap;
       })
       .catch(function () {
-        // Fallback: try the local JSON file
-        fetch("assets/data/availability.json", { cache: "no-store" })
-          .then(function (res) { return res.json(); })
-          .then(function (data) {
-            var filled = Number(data && data.filled);
-            var cap    = Number(data && data.capacity);
-            if (!isFinite(filled) || filled < 0) filled = 0;
-            if (!isFinite(cap)    || cap    <= 0) cap    = 5;
-            if (filled > cap) filled = cap;
-            if (countEl)  countEl.textContent  = filled + " / " + cap;
-            if (filledEl) filledEl.textContent = filled;
-            if (totalEl)  totalEl.textContent  = cap;
-          })
-          .catch(function () { /* keep HTML fallback */ });
+        // Keep whatever is already in the HTML as the fallback.
       });
   })();
 });
