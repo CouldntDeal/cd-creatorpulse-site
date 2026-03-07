@@ -26,26 +26,46 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Early access availability (reads JSON; updates the metric)
-  // No backend required. Update assets/data/availability.json to change values.
+  // Early access availability -- live from bot API
   (function updateAvailability() {
-    var el = document.getElementById("availabilityCount");
-    if (!el) return;
+    var API = "https://cd-shoutout-bot-live-production.up.railway.app/api/slots";
 
-    fetch("assets/data/availability.json", { cache: "no-store" })
+    // Support both old single-element (availabilityCount) and new split (earlyFilled / earlyTotal)
+    var countEl  = document.getElementById("availabilityCount");
+    var filledEl = document.getElementById("earlyFilled");
+    var totalEl  = document.getElementById("earlyTotal");
+
+    if (!countEl && !filledEl) return;
+
+    fetch(API, { cache: "no-store" })
       .then(function (res) { return res.json(); })
       .then(function (data) {
-        var filled = Number(data && data.filled);
-        var cap = Number(data && data.capacity);
+        var used = Number(data && data.used);
+        var max  = Number(data && data.max);
 
-        if (!isFinite(filled) || filled < 0) filled = 0;
-        if (!isFinite(cap) || cap <= 0) cap = 5;
-        if (filled > cap) filled = cap;
+        if (!isFinite(used) || used < 0) used = 0;
+        if (!isFinite(max)  || max  <= 0) max  = 5;
+        if (used > max) used = max;
 
-        el.textContent = filled + " / " + cap;
+        if (countEl)  countEl.textContent  = used + " / " + max;
+        if (filledEl) filledEl.textContent = used;
+        if (totalEl)  totalEl.textContent  = max;
       })
       .catch(function () {
-        // Keep whatever is already in the HTML as the fallback.
+        // Fallback: try the local JSON file
+        fetch("assets/data/availability.json", { cache: "no-store" })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            var filled = Number(data && data.filled);
+            var cap    = Number(data && data.capacity);
+            if (!isFinite(filled) || filled < 0) filled = 0;
+            if (!isFinite(cap)    || cap    <= 0) cap    = 5;
+            if (filled > cap) filled = cap;
+            if (countEl)  countEl.textContent  = filled + " / " + cap;
+            if (filledEl) filledEl.textContent = filled;
+            if (totalEl)  totalEl.textContent  = cap;
+          })
+          .catch(function () { /* keep HTML fallback */ });
       });
   })();
 });

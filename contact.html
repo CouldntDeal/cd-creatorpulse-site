@@ -5,7 +5,78 @@
     <title>Request Access &mdash; CreatorPulse</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Request early access to CreatorPulse. We&rsquo;re rolling out to a small number of test servers for stability." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles.css">
+    <style>
+      .form-field {
+        display: block;
+        margin-bottom: 14px;
+      }
+      .form-field-title {
+        font-weight: 700;
+        font-size: 13px;
+        margin-bottom: 3px;
+      }
+      .form-field-sub {
+        font-size: 12px;
+        color: rgba(255,255,255,.55);
+        margin-bottom: 5px;
+      }
+      .form-field input,
+      .form-field select,
+      .form-field textarea {
+        width: 100%;
+        background: rgba(255,255,255,.06);
+        border: 1px solid rgba(255,255,255,.12);
+        border-radius: 10px;
+        color: rgba(255,255,255,.90);
+        font-size: 13px;
+        padding: 9px 12px;
+        outline: none;
+        font-family: inherit;
+        transition: border-color 0.15s;
+      }
+      .form-field input:focus,
+      .form-field select:focus,
+      .form-field textarea:focus {
+        border-color: rgba(42,215,255,.40);
+      }
+      .form-field select option {
+        background: #070b12;
+      }
+      .form-submit-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 16px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .form-status {
+        font-size: 13px;
+        margin-top: 10px;
+        padding: 10px 14px;
+        border-radius: 10px;
+        display: none;
+      }
+      .form-status--success {
+        background: rgba(42,215,120,.10);
+        border: 1px solid rgba(42,215,120,.28);
+        color: rgba(42,215,120,.90);
+        display: block;
+      }
+      .form-status--error {
+        background: rgba(255,80,80,.10);
+        border: 1px solid rgba(255,80,80,.25);
+        color: rgba(255,120,120,.90);
+        display: block;
+      }
+      .btn:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+      }
+    </style>
   </head>
 
   <body data-page="request-access">
@@ -27,7 +98,7 @@
             </p>
 
             <p class="lead-sub">
-              If you&rsquo;re accepted, we&rsquo;ll send you a custom invite link for the bot.
+              If you&rsquo;re accepted, we&rsquo;ll reach out on Discord with next steps.
             </p>
 
             <div class="card">
@@ -50,82 +121,65 @@
               <span class="panel-pill">Step 1</span>
             </div>
 
-            <p class="muted">
-              Fill this out and click <strong>Generate Email</strong>. It will open a draft to:
-              <strong>support@cdcreatorpulse.com</strong>
+            <p class="muted" style="margin-bottom:14px;">
+              Fill this out and we&rsquo;ll review your application directly.
             </p>
 
-            <form id="accessForm" class="panel-list" style="margin-top:12px;">
-              <label class="panel-item" style="display:block;">
-                <div class="panel-item-title">Your name</div>
-                <input name="name" type="text" required style="width:100%; margin-top:6px;">
+            <div id="accessForm">
+
+              <label class="form-field">
+                <div class="form-field-title">Discord username</div>
+                <div class="form-field-sub">So we know who to reach out to</div>
+                <input id="f-discord" type="text" placeholder="e.g. username#0000 or username" required>
               </label>
 
-              <label class="panel-item" style="display:block;">
-                <div class="panel-item-title">Discord username</div>
-                <div class="panel-item-sub">So we know who to talk to</div>
-                <input name="discord" type="text" required style="width:100%; margin-top:6px;">
+              <label class="form-field">
+                <div class="form-field-title">Creator platform</div>
+                <div class="form-field-sub">TikTok / YouTube / Twitch / Kick / other</div>
+                <input id="f-platform" type="text" placeholder="e.g. TikTok" required>
               </label>
 
-              <label class="panel-item" style="display:block;">
-                <div class="panel-item-title">Creator platform</div>
-                <div class="panel-item-sub">TikTok / YouTube / Twitch / Kick / other</div>
-                <input name="platform" type="text" required style="width:100%; margin-top:6px;">
+              <label class="form-field">
+                <div class="form-field-title">Community size</div>
+                <div class="form-field-sub">Approximate member count</div>
+                <input id="f-size" type="text" placeholder="e.g. ~350 members" required>
               </label>
 
-              <label class="panel-item" style="display:block;">
-                <div class="panel-item-title">Community size</div>
-                <div class="panel-item-sub">Approximate member count</div>
-                <input name="size" type="text" required style="width:100%; margin-top:6px;" placeholder="e.g., ~350 members">
-              </label>
-
-              <label class="panel-item" style="display:block;">
-                <div class="panel-item-title">Server status</div>
-                <div class="panel-item-sub">New server or existing server?</div>
-                <select name="serverStatus" required style="width:100%; margin-top:6px;">
-                  <option value="" selected disabled>Select one</option>
-                  <option>Existing server</option>
-                  <option>New server</option>
+              <label class="form-field">
+                <div class="form-field-title">Server status</div>
+                <select id="f-server-status" required>
+                  <option value="" disabled selected>Select one</option>
+                  <option value="Existing server">Existing server</option>
+                  <option value="New server">New server</option>
                 </select>
               </label>
 
-              <label class="panel-item" style="display:block;">
-                <div class="panel-item-title">What are you trying to improve?</div>
-                <div class="panel-item-sub">One short sentence is enough</div>
-                <input name="goal" type="text" required style="width:100%; margin-top:6px;" placeholder="e.g., clean onboarding + calm alerts">
-              </label>
-
-              <label class="panel-item" style="display:block;">
-                <div class="panel-item-title">Can you be a test server?</div>
-                <div class="panel-item-sub">Early updates + feedback expected</div>
-                <select name="testConsent" required style="width:100%; margin-top:6px;">
-                  <option value="" selected disabled>Select one</option>
-                  <option>Yes &mdash; we understand this is early access</option>
-                  <option>Not sure &mdash; we prefer a later, stable release</option>
+              <label class="form-field">
+                <div class="form-field-title">Can you be a test server?</div>
+                <div class="form-field-sub">Early updates + feedback expected</div>
+                <select id="f-test-server" required>
+                  <option value="" disabled selected>Select one</option>
+                  <option value="Yes - we understand this is early access">Yes &mdash; we understand this is early access</option>
+                  <option value="Not sure - we prefer a later, stable release">Not sure &mdash; we prefer a later, stable release</option>
                 </select>
               </label>
 
-              <label class="panel-item" style="display:block;">
-                <div class="panel-item-title">Timezone</div>
-                <div class="panel-item-sub">Helps us schedule support</div>
-                <input name="timezone" type="text" required style="width:100%; margin-top:6px;" placeholder="e.g., PST / EST / GMT">
+              <label class="form-field">
+                <div class="form-field-title">Timezone</div>
+                <div class="form-field-sub">Helps us schedule support</div>
+                <input id="f-timezone" type="text" placeholder="e.g. PST / EST / GMT" required>
               </label>
 
-              <label class="panel-item" style="display:block;">
-                <div class="panel-item-title">Anything else we should know?</div>
-                <div class="panel-item-sub">Optional</div>
-                <textarea name="notes" rows="3" style="width:100%; margin-top:6px;"></textarea>
-              </label>
-
-              <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
-                <button class="btn primary" type="submit">Generate Email <span aria-hidden="true">&rarr;</span></button>
-                <a class="btn" href="mailto:support@cdcreatorpulse.com?subject=CreatorPulse%20Access%20Request">Email without form</a>
+              <div class="form-submit-row">
+                <button class="btn primary" id="submitBtn" type="button">Submit Application &rarr;</button>
               </div>
 
-              <p class="muted" style="margin-top:10px; margin-bottom:0;">
+              <div class="form-status" id="formStatus"></div>
+
+              <p class="muted" style="margin-top:12px; margin-bottom:0; font-size:12px;">
                 We review requests in order and prioritize communities that match the current rollout goals.
               </p>
-            </form>
+            </div>
           </aside>
 
         </div>
@@ -135,43 +189,67 @@
     </main>
 
     <script src="assets/site.js"></script>
-
     <script>
       (function () {
-        var form = document.getElementById("accessForm");
-        if (!form) return;
+        var API = "https://cd-shoutout-bot-live-production.up.railway.app/api/apply";
 
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
+        var btn = document.getElementById("submitBtn");
+        var status = document.getElementById("formStatus");
 
-          function v(name) {
-            var el = form.elements[name];
-            if (!el) return "";
-            return String(el.value || "").trim();
+        function val(id) {
+          var el = document.getElementById(id);
+          return el ? String(el.value || "").trim() : "";
+        }
+
+        function setStatus(type, msg) {
+          status.className = "form-status form-status--" + type;
+          status.textContent = msg;
+        }
+
+        btn.addEventListener("click", function () {
+          var discord_username  = val("f-discord");
+          var creator_platform  = val("f-platform");
+          var community_size    = val("f-size");
+          var server_status     = val("f-server-status");
+          var test_server       = val("f-test-server");
+          var timezone          = val("f-timezone");
+
+          if (!discord_username || !creator_platform || !community_size ||
+              !server_status || !test_server || !timezone) {
+            setStatus("error", "Please fill in all fields before submitting.");
+            return;
           }
 
-          var subject = "CreatorPulse Early Access Request";
-          var bodyLines = [
-            "CreatorPulse Early Access Request",
-            "",
-            "Name: " + v("name"),
-            "Discord: " + v("discord"),
-            "Creator platform: " + v("platform"),
-            "Community size: " + v("size"),
-            "Server status: " + v("serverStatus"),
-            "Goal: " + v("goal"),
-            "Test server consent: " + v("testConsent"),
-            "Timezone: " + v("timezone"),
-            "Notes: " + v("notes"),
-            "",
-            "I understand this is early access and that stability is the priority."
-          ];
+          btn.disabled = true;
+          btn.textContent = "Submitting\u2026";
+          status.className = "form-status";
 
-          var mailto = "mailto:support@cdcreatorpulse.com"
-            + "?subject=" + encodeURIComponent(subject)
-            + "&body=" + encodeURIComponent(bodyLines.join("\n"));
-
-          window.location.href = mailto;
+          fetch(API, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              discord_username,
+              creator_platform,
+              community_size,
+              server_status,
+              test_server,
+              timezone,
+            }),
+          })
+            .then(function (res) { return res.json(); })
+            .then(function (data) {
+              if (data && data.ok) {
+                setStatus("success", "Application submitted! We\u2019ll be in touch on Discord.");
+                btn.textContent = "Submitted \u2713";
+              } else {
+                throw new Error("unexpected response");
+              }
+            })
+            .catch(function () {
+              setStatus("error", "Something went wrong. Please email support@cdcreatorpulse.com directly.");
+              btn.disabled = false;
+              btn.textContent = "Submit Application \u2192";
+            });
         });
       })();
     </script>

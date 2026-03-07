@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pulselings Leaderboard &mdash; CreatorPulse</title>
+    <meta name="description" content="Top Pulselings creatures across all CreatorPulse communities." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css" />
+    <style>
+      .leaderboard-grid {
+        display: grid;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .lb-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 14px 18px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,.08);
+        background: rgba(255,255,255,.04);
+        transition: border-color 0.15s, background 0.15s;
+      }
+      .lb-row:hover {
+        border-color: rgba(42,215,255,.22);
+        background: rgba(42,215,255,.04);
+      }
+
+      .lb-row--genesis {
+        border-color: rgba(255,215,0,.22);
+        background: rgba(255,215,0,.04);
+      }
+      .lb-row--genesis:hover {
+        border-color: rgba(255,215,0,.38);
+        background: rgba(255,215,0,.07);
+      }
+
+      .lb-rank {
+        font-size: 13px;
+        font-weight: 800;
+        min-width: 28px;
+        color: rgba(255,255,255,.50);
+        text-align: center;
+      }
+      .lb-rank--1 { color: #ffd700; font-size: 20px; }
+      .lb-rank--2 { color: #c0c0c0; font-size: 18px; }
+      .lb-rank--3 { color: #cd7f32; font-size: 18px; }
+
+      .lb-rarity-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .lb-rarity-dot--common    { background: rgba(180,180,180,.85); }
+      .lb-rarity-dot--uncommon  { background: rgba(80,200,100,.90); box-shadow: 0 0 8px rgba(80,200,100,.40); }
+      .lb-rarity-dot--rare      { background: rgba(80,140,255,.90); box-shadow: 0 0 8px rgba(80,140,255,.40); }
+      .lb-rarity-dot--epic      { background: rgba(170,80,255,.90); box-shadow: 0 0 8px rgba(170,80,255,.40); }
+      .lb-rarity-dot--legendary { background: rgba(255,200,40,.90); box-shadow: 0 0 10px rgba(255,200,40,.50); }
+      .lb-rarity-dot--mythic    { background: rgba(255,120,180,.90); box-shadow: 0 0 12px rgba(255,120,180,.55); }
+
+      .lb-name {
+        flex: 1;
+        min-width: 0;
+      }
+      .lb-name-main {
+        font-weight: 700;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .lb-genesis-badge {
+        font-size: 11px;
+        padding: 2px 7px;
+        border-radius: 999px;
+        border: 1px solid rgba(255,215,0,.35);
+        background: rgba(255,215,0,.10);
+        color: rgba(255,215,0,.90);
+        font-weight: 700;
+        letter-spacing: .04em;
+      }
+      .lb-name-sub {
+        font-size: 12px;
+        color: rgba(255,255,255,.50);
+        margin-top: 2px;
+      }
+
+      .lb-stats {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        flex-shrink: 0;
+      }
+      .lb-stat {
+        text-align: right;
+      }
+      .lb-stat-val {
+        font-size: 13px;
+        font-weight: 700;
+        color: rgba(255,255,255,.90);
+      }
+      .lb-stat-label {
+        font-size: 11px;
+        color: rgba(255,255,255,.40);
+        margin-top: 1px;
+      }
+
+      .lb-rarity-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+        min-width: 60px;
+        text-align: right;
+        color: rgba(255,255,255,.50);
+      }
+      .lb-rarity-label--uncommon  { color: rgba(80,200,100,.80); }
+      .lb-rarity-label--rare      { color: rgba(80,140,255,.85); }
+      .lb-rarity-label--epic      { color: rgba(170,80,255,.85); }
+      .lb-rarity-label--legendary { color: rgba(255,200,40,.85); }
+      .lb-rarity-label--mythic    { color: rgba(255,120,180,.90); }
+
+      .lb-loading, .lb-empty, .lb-error {
+        padding: 32px;
+        text-align: center;
+        color: rgba(255,255,255,.45);
+        font-size: 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,.07);
+        background: rgba(255,255,255,.03);
+      }
+
+      .lb-updated {
+        font-size: 12px;
+        color: rgba(255,255,255,.35);
+        margin-top: 12px;
+        text-align: right;
+      }
+
+      @media (max-width: 600px) {
+        .lb-stats { gap: 12px; }
+        .lb-rarity-label { display: none; }
+        .lb-row { padding: 12px 14px; gap: 12px; }
+      }
+    </style>
+  </head>
+
+  <body data-page="leaderboard">
+    <div class="bg"><div class="bg-glow"></div></div>
+
+    <div id="site-header"></div>
+
+    <main class="page">
+      <section class="hero">
+        <div class="container hero-grid">
+
+          <div class="hero-left">
+            <div class="eyebrow">PULSELINGS</div>
+            <h1>Leaderboard.</h1>
+            <p class="lead">
+              The top creatures across all CreatorPulse communities, ranked by level and XP.
+            </p>
+            <p class="lead-sub">
+              Hatch and level up your Pulseling with <strong>/pet</strong> in any CreatorPulse server.
+            </p>
+            <div class="chips">
+              <span class="chip">Updates every 30 min</span>
+              <span class="chip">All servers combined</span>
+            </div>
+          </div>
+
+          <aside class="hero-panel card">
+            <div class="panel-head">
+              <div class="panel-title">Rarity guide</div>
+              <span class="panel-pill">Traits</span>
+            </div>
+            <div class="panel-list">
+              <div class="panel-item">
+                <div class="panel-dot" style="background:rgba(180,180,180,.85);box-shadow:none;"></div>
+                <div>
+                  <div class="panel-item-title">Common</div>
+                  <div class="panel-item-sub">Trait score 6&ndash;9</div>
+                </div>
+              </div>
+              <div class="panel-item">
+                <div class="panel-dot" style="background:rgba(80,200,100,.90);box-shadow:0 0 10px rgba(80,200,100,.40);"></div>
+                <div>
+                  <div class="panel-item-title">Uncommon</div>
+                  <div class="panel-item-sub">Trait score 10&ndash;13</div>
+                </div>
+              </div>
+              <div class="panel-item">
+                <div class="panel-dot" style="background:rgba(80,140,255,.90);box-shadow:0 0 10px rgba(80,140,255,.40);"></div>
+                <div>
+                  <div class="panel-item-title">Rare</div>
+                  <div class="panel-item-sub">Trait score 14&ndash;17</div>
+                </div>
+              </div>
+              <div class="panel-item">
+                <div class="panel-dot" style="background:rgba(170,80,255,.90);box-shadow:0 0 10px rgba(170,80,255,.40);"></div>
+                <div>
+                  <div class="panel-item-title">Epic</div>
+                  <div class="panel-item-sub">Trait score 18&ndash;21</div>
+                </div>
+              </div>
+              <div class="panel-item">
+                <div class="panel-dot" style="background:rgba(255,200,40,.90);box-shadow:0 0 12px rgba(255,200,40,.50);"></div>
+                <div>
+                  <div class="panel-item-title">Legendary</div>
+                  <div class="panel-item-sub">Trait score 22&ndash;25</div>
+                </div>
+              </div>
+              <div class="panel-item">
+                <div class="panel-dot" style="background:rgba(255,120,180,.90);box-shadow:0 0 14px rgba(255,120,180,.55);"></div>
+                <div>
+                  <div class="panel-item-title">Mythic</div>
+                  <div class="panel-item-sub">Trait score 26+</div>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        </div>
+      </section>
+
+      <section class="section" style="padding-top:0;">
+        <div class="container">
+          <div id="lb-container">
+            <div class="lb-loading">Loading leaderboard&hellip;</div>
+          </div>
+          <div class="lb-updated" id="lb-updated"></div>
+        </div>
+      </section>
+
+      <div id="site-footer"></div>
+    </main>
+
+    <script src="assets/site.js"></script>
+    <script>
+      (function () {
+        var API = "https://cd-shoutout-bot-live-production.up.railway.app/api/leaderboard";
+        var MEDALS = ["🥇", "🥈", "🥉"];
+
+        function rarityLabel(r) {
+          return r.charAt(0).toUpperCase() + r.slice(1);
+        }
+
+        function renderRow(entry) {
+          var rank = entry.rank;
+          var rankDisplay = rank <= 3 ? MEDALS[rank - 1] : rank + ".";
+          var rankClass = rank <= 3 ? " lb-rank--" + rank : "";
+          var genesisHtml = entry.is_genesis
+            ? '<span class="lb-genesis-badge">&#10022; The First</span>'
+            : "";
+          var genesisCls = entry.is_genesis ? " lb-row--genesis" : "";
+          var rarity = entry.rarity || "common";
+
+          return '<div class="lb-row' + genesisCls + '">' +
+            '<div class="lb-rank' + rankClass + '">' + rankDisplay + '</div>' +
+            '<div class="lb-rarity-dot lb-rarity-dot--' + rarity + '"></div>' +
+            '<div class="lb-name">' +
+              '<div class="lb-name-main">' + escHtml(entry.display_name) + genesisHtml + '</div>' +
+              '<div class="lb-name-sub">' + discordMention(entry.user_discord_id) + '</div>' +
+            '</div>' +
+            '<div class="lb-stats">' +
+              '<div class="lb-stat">' +
+                '<div class="lb-stat-val">Lv.' + entry.level + '</div>' +
+                '<div class="lb-stat-label">Level</div>' +
+              '</div>' +
+              '<div class="lb-stat">' +
+                '<div class="lb-stat-val">' + entry.xp + '</div>' +
+                '<div class="lb-stat-label">XP</div>' +
+              '</div>' +
+              '<div class="lb-rarity-label lb-rarity-label--' + rarity + '">' + rarityLabel(rarity) + '</div>' +
+            '</div>' +
+          '</div>';
+        }
+
+        function escHtml(str) {
+          return String(str || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
+        }
+
+        function discordMention(id) {
+          if (!id) return "";
+          return '<span style="opacity:.55;">ID: ' + escHtml(id) + '</span>';
+        }
+
+        function load() {
+          var container = document.getElementById("lb-container");
+          var updated = document.getElementById("lb-updated");
+
+          fetch(API, { cache: "no-store" })
+            .then(function (res) { return res.json(); })
+            .then(function (data) {
+              var rows = data && data.leaderboard;
+              if (!rows || rows.length === 0) {
+                container.innerHTML = '<div class="lb-empty">No creatures yet. Be the first to hatch one!</div>';
+                return;
+              }
+              var html = '<div class="leaderboard-grid">';
+              for (var i = 0; i < rows.length; i++) {
+                html += renderRow(rows[i]);
+              }
+              html += "</div>";
+              container.innerHTML = html;
+
+              var now = new Date();
+              updated.textContent = "Last fetched: " + now.toLocaleTimeString();
+            })
+            .catch(function () {
+              container.innerHTML = '<div class="lb-error">Could not load leaderboard. Try refreshing.</div>';
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", load);
+      })();
+    </script>
+  </body>
+</html>
