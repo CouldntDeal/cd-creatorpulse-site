@@ -219,10 +219,15 @@
         transition: border-color .12s, background .12s;
       }
       .lb-row:hover { border-color: rgba(42,215,255,.18); background: rgba(42,215,255,.04); }
-      .lb-row--genesis  { border-color: rgba(255,215,0,.22);   background: rgba(255,215,0,.04); }
+      .lb-row--genesis    { border-color: rgba(255,215,0,.22);   background: rgba(255,215,0,.04); }
       .lb-row--genesis:hover  { border-color: rgba(255,215,0,.38);   background: rgba(255,215,0,.07); }
-      .lb-row--celestial { border-color: rgba(42,215,255,.15); background: rgba(42,215,255,.03); }
+      .lb-row--celestial  { border-color: rgba(42,215,255,.15); background: rgba(42,215,255,.03); }
       .lb-row--celestial:hover { border-color: rgba(42,215,255,.28); background: rgba(42,215,255,.06); }
+      .lb-row--architect  { border-color: rgba(160,180,220,.12); background: rgba(160,180,220,.02); }
+      .lb-row--architect:hover { border-color: rgba(160,180,220,.22); background: rgba(160,180,220,.04); }
+      .lb-row--awakened   { border-color: rgba(140,160,200,.10); background: transparent; }
+      .lb-row--wanderer   { border-color: rgba(120,140,180,.08); background: transparent; }
+      .lb-row--settled    { border-color: rgba(100,120,160,.06); background: transparent; }
 
       .lb-rank          { font-size: 12px; font-weight: 800; min-width: 24px; text-align: center; color: rgba(255,255,255,.38); flex-shrink: 0; }
       .lb-rank--1       { font-size: 18px; color: #ffd700; }
@@ -240,8 +245,12 @@
       .lb-name          { flex: 1; min-width: 0; }
       .lb-name-main     { display: flex; align-items: center; gap: 5px; font-weight: 700; font-size: 13px; }
       .lb-name-text     { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 110px; }
-      .lb-genesis-badge   { font-size: 9px; font-weight: 800; color: #ffd700;             white-space: nowrap; flex-shrink: 0; }
-      .lb-celestial-badge { font-size: 9px; font-weight: 800; color: rgba(42,215,255,.88); white-space: nowrap; flex-shrink: 0; }
+      .lb-genesis-badge    { font-size: 9px; font-weight: 800; color: #ffd700;               white-space: nowrap; flex-shrink: 0; }
+      .lb-celestial-badge  { font-size: 9px; font-weight: 800; color: rgba(42,215,255,.88);  white-space: nowrap; flex-shrink: 0; }
+      .lb-architect-badge  { font-size: 9px; font-weight: 700; color: rgba(180,195,230,.75); white-space: nowrap; flex-shrink: 0; }
+      .lb-awakened-badge   { font-size: 9px; font-weight: 600; color: rgba(160,175,210,.60); white-space: nowrap; flex-shrink: 0; }
+      .lb-wanderer-badge   { font-size: 9px; font-weight: 500; color: rgba(140,155,190,.50); white-space: nowrap; flex-shrink: 0; }
+      .lb-settled-badge    { font-size: 9px; font-weight: 400; color: rgba(120,135,170,.40); white-space: nowrap; flex-shrink: 0; }
       .lb-name-sub      { font-size: 10px; color: rgba(255,255,255,.26); margin-top: 1px; font-family: monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; }
 
       .lb-meta          { text-align: right; flex-shrink: 0; }
@@ -411,17 +420,38 @@
 
             <!-- Special titles -->
             <div class="section-h">Special titles</div>
-            <p class="section-intro">Two titles exist outside the normal rarity system. They can't be earned — only claimed by being first.</p>
+            <p class="section-intro">Six titles exist outside the normal rarity system. They can't be earned — only claimed by being first. The earlier you arrived, the more weight your title carries.</p>
             <div class="guide-grid">
               <div class="guide-item guide-item--gold">
                 <div class="guide-head"><span class="guide-icon">✦</span><span class="guide-title">Genesis — The First</span></div>
-                <div class="guide-body">The very first creature ever hatched across all of CreatorPulse holds the permanent title <strong>✦ The First</strong>. One exists. One will ever exist. Shown on the leaderboard with a gold badge.</div>
+                <div class="guide-body">The very first creature ever hatched across all of CreatorPulse holds the permanent title <strong>✦ The First ✦</strong>. One exists. One will ever exist. Shown on the leaderboard with a gold badge.</div>
               </div>
               <div class="guide-item guide-item--cyan">
-                <div class="guide-head"><span class="guide-icon">✵</span><span class="guide-title">Celestial — The Pioneers</span></div>
-                <div class="guide-body">The first 50 non-Genesis creatures across <em>all</em> servers earn the permanent title <strong>✵ Celestial</strong>. Among the first to emerge, before the worlds were full. This title closes once those 50 slots are claimed — it will never reopen.</div>
+                <div class="guide-head"><span class="guide-icon">✵</span><span class="guide-title">Celestial — The Pioneers (#2–50)</span></div>
+                <div class="guide-body">The first 50 non-Genesis creatures across <em>all</em> servers earn the permanent title <strong>✵ Celestial ✵</strong>. Among the first to emerge, before the worlds were full. This title closes once those 50 slots are claimed — it will never reopen.</div>
               </div>
             </div>
+            <div class="guide-grid" style="margin-top:10px;">
+              <div class="guide-item">
+                <div class="guide-head"><span class="guide-icon">⬡</span><span class="guide-title">Architect (#51–100)</span></div>
+                <div class="guide-body">The next 50 creatures carry the title <strong>⬡ Architect ⬡</strong>. Here when the foundation was being laid — before most people knew this existed.</div>
+              </div>
+              <div class="guide-item">
+                <div class="guide-head"><span class="guide-icon">◈</span><span class="guide-title">Awakened (#101–250)</span></div>
+                <div class="guide-body">Creatures #101–250 hold the title <strong>◈ Awakened ◈</strong>. Arrived while the world was still finding its shape. Respectable early presence.</div>
+              </div>
+            </div>
+            <div class="guide-grid" style="margin-top:10px;">
+              <div class="guide-item">
+                <div class="guide-head"><span class="guide-icon">⟡</span><span class="guide-title">Wanderer (#251–500)</span></div>
+                <div class="guide-body">Creatures #251–500 carry <strong>⟡ Wanderer ⟡</strong>. Found their way before the paths were worn. Still comfortably early — just less so.</div>
+              </div>
+              <div class="guide-item">
+                <div class="guide-head"><span class="guide-icon">·</span><span class="guide-title">Settled (#501–1000)</span></div>
+                <div class="guide-body">The last titled rank. Creatures #501–1000 hold <strong>· Settled ·</strong>. Here before the crowd. A quiet nod to early arrival — barely a flex, but real.</div>
+              </div>
+            </div>
+            <p class="section-intro" style="margin-top:10px;">After #1000, creatures carry no title. All titles are permanent from the moment of first hatch — they cannot be earned, traded, or transferred.</p>
 
             <!-- No pet banner -->
             <div class="no-pet">
@@ -489,13 +519,28 @@
         }
         list.innerHTML = rows.slice(0, 20).map(function(r, i) {
           var rarity = (r.rarity_tier || r.rarity || 'common').toLowerCase();
-          var isGenesis   = !!r.is_genesis;
-          var isCelestial = !r.is_genesis && !!r.is_pioneer;
-          var rowCls = isGenesis ? 'lb-row--genesis' : isCelestial ? 'lb-row--celestial' : '';
-          var badge  = isGenesis
-            ? '<span class="lb-genesis-badge">✦ The First</span>'
-            : isCelestial
-            ? '<span class="lb-celestial-badge">✵ Celestial</span>'
+          var title  = r.creation_title || null;
+
+          // Row highlight class — scales down with tier
+          var rowCls = '';
+          if (title === '✦ The First ✦')  rowCls = 'lb-row--genesis';
+          else if (title === '✵ Celestial ✵') rowCls = 'lb-row--celestial';
+          else if (title === '⬡ Architect ⬡') rowCls = 'lb-row--architect';
+          else if (title === '◈ Awakened ◈')  rowCls = 'lb-row--awakened';
+          else if (title === '⟡ Wanderer ⟡')  rowCls = 'lb-row--wanderer';
+          else if (title === '· Settled ·')    rowCls = 'lb-row--settled';
+
+          // Badge class — scales down with tier
+          var badgeCls = '';
+          if (title === '✦ The First ✦')      badgeCls = 'lb-genesis-badge';
+          else if (title === '✵ Celestial ✵') badgeCls = 'lb-celestial-badge';
+          else if (title === '⬡ Architect ⬡') badgeCls = 'lb-architect-badge';
+          else if (title === '◈ Awakened ◈')  badgeCls = 'lb-awakened-badge';
+          else if (title === '⟡ Wanderer ⟡')  badgeCls = 'lb-wanderer-badge';
+          else if (title === '· Settled ·')    badgeCls = 'lb-settled-badge';
+
+          var badge = title && badgeCls
+            ? '<span class="' + badgeCls + '">' + title + '</span>'
             : '';
           var icon = rankIcon(i);
           var rankHtml = icon
