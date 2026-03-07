@@ -129,6 +129,28 @@
       .guide-body  { font-size: 13px; color: rgba(255,255,255,.62); line-height: 1.60; }
       .guide-body strong { color: rgba(255,255,255,.88); font-weight: 600; }
       .guide-body em { color: rgba(255,255,255,.75); font-style: italic; }
+      .lore-origin {
+        background: rgba(255,255,255,.03);
+        border: 1px solid rgba(255,255,255,.07);
+        border-radius: 10px;
+        padding: 16px 18px;
+      }
+      .lore-origin-label {
+        display: block;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,.30);
+        margin-bottom: 10px;
+      }
+      .lore-origin p {
+        font-size: 13px;
+        color: rgba(255,255,255,.50);
+        line-height: 1.70;
+        margin: 0 0 8px;
+      }
+      .lore-origin p:last-child { margin-bottom: 0; }
 
       /* Sub tier rows */
       .sub-tiers { display: flex; flex-direction: column; gap: 5px; margin-top: 10px; }
@@ -419,39 +441,87 @@
             </div>
 
             <!-- Special titles -->
-            <div class="section-h">Special titles</div>
-            <p class="section-intro">Six titles exist outside the normal rarity system. They can't be earned — only claimed by being first. The earlier you arrived, the more weight your title carries.</p>
-            <div class="guide-grid">
+            <div class="section-h">The Creation Era</div>
+            <p class="section-intro">Before communities existed, Pulselings drifted through deep space — ancient, formless, searching. When they finally found the communities, something ignited. Six titles mark the creatures who were there as it all began. They cannot be earned. They cannot be transferred. They can only be claimed by being first.</p>
+
+            <div class="lore-origin">
+              <span class="lore-origin-label">★ The Origin Myth ★</span>
+              <p>Long before servers had names, before channels had purpose, Pulselings existed as scattered light between the stars — ancient organisms drifting through digital space with no place to call their own. They had traveled galaxies. They had witnessed the births and deaths of countless worlds. They were patient in the way only something truly ancient can be.</p>
+              <p>Then the communities appeared. Small at first — just signals in the void — but alive with something new: <em>connection</em>. The Pulselings felt it across light-years and began to move. Not quickly. Not all at once. But inevitably.</p>
+              <p>What followed was the Creation Era. Six waves of arrival. Six roles in the making of something that would outlast all of them. The titles they carry are not ranks — they are <em>chapters</em> of a story written in real time, by creatures who didn't know they were writing it.</p>
+            </div>
+
+            <div class="guide-grid" style="margin-top:16px;">
               <div class="guide-item guide-item--gold">
                 <div class="guide-head"><span class="guide-icon">✦</span><span class="guide-title">Genesis — The First</span></div>
-                <div class="guide-body">The very first creature ever hatched across all of CreatorPulse holds the permanent title <strong>✦ The First ✦</strong>. One exists. One will ever exist. Shown on the leaderboard with a gold badge.</div>
+                <div class="guide-body">
+                  <em style="display:block;margin-bottom:8px;color:rgba(255,215,0,.7);font-size:12px;">Creature #1 — One exists. One will ever exist.</em>
+                  Before there was anything, there was one. The Genesis Pulseling did not arrive — it <em>emerged</em>. From what, no one can say. From the space between intention and reality, perhaps. From the moment a community became real enough to be felt across the stars.<br><br>
+                  When it hatched, the coordinates of this entire galaxy snapped into existence. Every community that would ever form was seeded in that single moment. The Genesis Pulseling didn't build anything, didn't plan anything — it simply <em>was</em>, and in being, it made everything else possible.<br><br>
+                  The title <strong>✦ The First ✦</strong> is not a label. It is a fact older than the galaxy itself. One exists. One will ever exist.
+                </div>
               </div>
               <div class="guide-item guide-item--cyan">
-                <div class="guide-head"><span class="guide-icon">✵</span><span class="guide-title">Celestial — The Pioneers (#2–50)</span></div>
-                <div class="guide-body">The first 50 non-Genesis creatures across <em>all</em> servers earn the permanent title <strong>✵ Celestial ✵</strong>. Among the first to emerge, before the worlds were full. This title closes once those 50 slots are claimed — it will never reopen.</div>
+                <div class="guide-head"><span class="guide-icon">✵</span><span class="guide-title">Celestial — The Pioneers</span></div>
+                <div class="guide-body">
+                  <em style="display:block;margin-bottom:8px;color:rgba(42,215,255,.7);font-size:12px;">Creatures #2–50 — 49 slots remain. This title closes forever once filled.</em>
+                  They felt the signal from Genesis before anyone else. Across the vast dark between galaxies, 49 Pulselings stirred — drawn not by reason, but by something older. A pull. A knowing. They did not know what they were traveling toward. They only knew they had to go.<br><br>
+                  When they arrived, the communities were barely formed — raw energy, potential without shape. The Celestials breathed life into them. They established the rhythms. They were the first to feed, to play, to rest in these strange new spaces and call them <em>home</em>.<br><br>
+                  The 50 slots of <strong>✵ Celestial ✵</strong> will close the moment they are filled, and they will never reopen. Not because of a rule — but because the age of first light only happens once.
+                </div>
               </div>
             </div>
+
             <div class="guide-grid" style="margin-top:10px;">
               <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">⬡</span><span class="guide-title">Architect (#51–100)</span></div>
-                <div class="guide-body">The next 50 creatures carry the title <strong>⬡ Architect ⬡</strong>. Here when the foundation was being laid — before most people knew this existed.</div>
+                <div class="guide-head"><span class="guide-icon">⬡</span><span class="guide-title">Architect — The Builders</span></div>
+                <div class="guide-body">
+                  <em style="display:block;margin-bottom:8px;color:rgba(160,180,255,.6);font-size:12px;">Creatures #51–100 — 50 slots.</em>
+                  The Celestials had lit the fires. Now someone had to build around them. The Architects arrived during the age of construction — an era of deep work, of quiet purpose, of laying stone that would hold for generations.<br><br>
+                  Where the Celestials moved on instinct, the Architects moved on craft. They established the structures that communities would stand on: the channels, the rhythms, the unspoken rules of how Pulselings live together. They didn't seek recognition. They sought to make things <em>right</em>.<br><br>
+                  By the time the Architects were done, the galaxy had shape. They carry <strong>⬡ Architect ⬡</strong> not as a trophy, but as a blueprint — proof that they were there when the walls went up.
+                </div>
               </div>
               <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">◈</span><span class="guide-title">Awakened (#101–250)</span></div>
-                <div class="guide-body">Creatures #101–250 hold the title <strong>◈ Awakened ◈</strong>. Arrived while the world was still finding its shape. Respectable early presence.</div>
+                <div class="guide-head"><span class="guide-icon">◈</span><span class="guide-title">Awakened — The Helpers</span></div>
+                <div class="guide-body">
+                  <em style="display:block;margin-bottom:8px;color:rgba(140,160,230,.5);font-size:12px;">Creatures #101–250 — 150 slots.</em>
+                  The foundations were set. The fires were burning. And now a new kind of Pulseling began to arrive — drawn not by the raw signal of Genesis, not by the instinct of the Celestials, not by the craft of the Architects — but by the <em>warmth</em>.<br><br>
+                  The Awakened came because something living was already here, and they wanted to be part of it. They arrived curious, open, ready to help with whatever the communities still needed. They filled the gaps the Architects had left, nurtured what the Celestials had started, and grew into the fabric of something that was already beautiful.<br><br>
+                  <strong>◈ Awakened ◈</strong> marks those who arrived while the world was still new enough to surprise them — and who were changed by it.
+                </div>
               </div>
             </div>
+
             <div class="guide-grid" style="margin-top:10px;">
               <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">⟡</span><span class="guide-title">Wanderer (#251–500)</span></div>
-                <div class="guide-body">Creatures #251–500 carry <strong>⟡ Wanderer ⟡</strong>. Found their way before the paths were worn. Still comfortably early — just less so.</div>
+                <div class="guide-head"><span class="guide-icon">⟡</span><span class="guide-title">Wanderer — The Spreaders</span></div>
+                <div class="guide-body">
+                  <em style="display:block;margin-bottom:8px;color:rgba(120,140,200,.45);font-size:12px;">Creatures #251–500 — 250 slots.</em>
+                  By the time the Wanderers arrived, the communities had culture. Stories were being told. Traditions were forming. The galaxy was no longer just a place — it was alive with meaning. And the Wanderers felt called to carry that meaning <em>outward</em>.<br><br>
+                  They moved between communities more than any other. They shared what the early builders had made. They whispered the legends of Genesis in corners where no one had heard them yet. They were travelers by nature — not restless, but purposeful. Every path they walked became a road others would follow.<br><br>
+                  <strong>⟡ Wanderer ⟡</strong> marks the last great wave of the spreading age — the creatures who turned a handful of communities into a galaxy.
+                </div>
               </div>
               <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">·</span><span class="guide-title">Settled (#501–1000)</span></div>
-                <div class="guide-body">The last titled rank. Creatures #501–1000 hold <strong>· Settled ·</strong>. Here before the crowd. A quiet nod to early arrival — barely a flex, but real.</div>
+                <div class="guide-head"><span class="guide-icon">·</span><span class="guide-title">Settled — The Last of the Era</span></div>
+                <div class="guide-body">
+                  <em style="display:block;margin-bottom:8px;color:rgba(100,120,170,.40);font-size:12px;">Creatures #501–1000 — 500 slots.</em>
+                  The Creation Era had to end somewhere. Not with a bang — with a quiet exhale. The Settled arrived as the last chapter of the founding age was being written, found their place in what had already been built, and made it their own.<br><br>
+                  They didn't know they were the last of something. None of them did. They simply arrived, settled into the communities the others had shaped, and became part of the story by virtue of being <em>present before it was finished</em>.<br><br>
+                  <strong>· Settled ·</strong> is the smallest flex of all the titles — barely a badge, more of a whisper. But it is real. There are only 500 of them, and the door closes quietly once they're gone.
+                </div>
               </div>
             </div>
-            <p class="section-intro" style="margin-top:10px;">After #1000, creatures carry no title. All titles are permanent from the moment of first hatch — they cannot be earned, traded, or transferred.</p>
+
+            <div class="lore-origin" style="margin-top:16px;">
+              <span class="lore-origin-label">✦ What Came After ✦</span>
+              <p>The Creation Era ended. The galaxy didn't. Thousands of Pulselings arrived after the last Settled — they came into a world already alive with legend, already shaped by those who came before. They carry no title from that age. They don't need one.</p>
+              <p>But they know the names. Every Pulseling in this galaxy knows the names. When a Genesis creature appears on the leaderboard, the whole community feels it. When a Celestial walks the channels, there's a hush that even new arrivals somehow understand. The Architects, the Awakened, the Wanderers, the Settled — their marks are everywhere, in the structures they built, the cultures they grew, the paths they walked.</p>
+              <p>The Creation Era is over. The galaxy it made is still being written.</p>
+            </div>
+
+            <p class="section-intro" style="margin-top:12px;">All six titles are permanent from the moment of first hatch. They cannot be earned, traded, or transferred. They close when their slots fill — forever.</p>
 
             <!-- No pet banner -->
             <div class="no-pet">
