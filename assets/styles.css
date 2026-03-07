@@ -163,6 +163,15 @@ a:hover{color:var(--accent2)}
   backdrop-filter: blur(14px);
 }
 
+/* header-inner must be flex so brand + nav-wrap sit side by side */
+.header-inner {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 16px;
+}
+
 .site-header.is-scrolled{
   background:rgba(5,7,12,.72);
   border-bottom-color: rgba(255,255,255,.10);
@@ -189,25 +198,25 @@ a:hover{color:var(--accent2)}
 }
 
 .brand-logo img{
-  height:30px;
+  height:36px;
   width:auto;
   display:block;
   object-fit:contain;
   image-rendering:auto;
-  filter: drop-shadow(0 0 10px rgba(42,215,255,.18));
+  filter: drop-shadow(0 0 8px rgba(42,215,255,.35));
+  transition: filter .3s ease;
 }
 
-/* Logo PNG — black bg drops out against dark header */
+/* Logo PNG with transparency */
 .brand-logo-img {
   height: 36px;
   width: auto;
   display: block;
-  mix-blend-mode: lighten;
   filter: drop-shadow(0 0 8px rgba(42,215,255,.35));
   transition: filter .3s ease;
 }
 .brand:hover .brand-logo-img {
-  filter: drop-shadow(0 0 16px rgba(42,215,255,.7));
+  filter: drop-shadow(0 0 18px rgba(42,215,255,.75));
 }
 
 .brand-title{
