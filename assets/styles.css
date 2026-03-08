@@ -804,3 +804,95 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
   .nav-links { display: none; }
   .pill.pill-outline { display: none; }
 }
+/* ── Nav additions (append to styles.css) ── */
+
+/* Access bar below main header row */
+.header-access-bar {
+  border-top: 1px solid rgba(255,255,255,.05);
+  padding: 5px 0;
+  text-align: center;
+}
+.header-access-bar .pill {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,.5);
+  border-color: rgba(255,255,255,.08);
+  background: transparent;
+  padding: 4px 12px;
+}
+
+/* Pulselings nav link — distinct purple accent */
+.nav-links .nav-pulselings {
+  border-color: rgba(180, 122, 255, 0.30);
+  color: #c49aff;
+}
+.nav-links .nav-pulselings:hover {
+  border-color: rgba(180, 122, 255, 0.55);
+  background: rgba(180, 122, 255, 0.08);
+  color: #d4b4ff;
+}
+
+/* Request Access CTA — accent bordered */
+.nav-links .nav-cta {
+  border-color: rgba(42, 215, 255, 0.30);
+  color: var(--accent);
+  font-weight: 600;
+}
+.nav-links .nav-cta:hover {
+  border-color: rgba(42, 215, 255, 0.55);
+  background: rgba(42, 215, 255, 0.08);
+}
+
+/* Hamburger button */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+.nav-hamburger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: rgba(255,255,255,.75);
+  border-radius: 2px;
+}
+
+/* Mobile nav dropdown */
+.nav-mobile {
+  display: flex;
+  flex-direction: column;
+  background: rgba(5,7,12,.97);
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  padding: 12px 22px 20px;
+  gap: 4px;
+}
+.nav-mobile a {
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: rgba(255,255,255,.8);
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+.nav-mobile a:hover {
+  background: rgba(255,255,255,.05);
+  border-color: rgba(255,255,255,.08);
+}
+
+/* Remove old pill from nav-wrap since we moved it */
+.nav-wrap .pill-outline {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .nav-hamburger { display: flex; }
+  .nav-links { display: none; }
+}
