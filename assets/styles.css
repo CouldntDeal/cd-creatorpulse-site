@@ -1,13 +1,22 @@
-/* ---- Global background: single continuous layer (prevents scroll seams) ---- */
-html, body {
+/* ---- Global background: position:fixed layer on html — works on mobile too ---- */
+/* background-attachment:fixed is disabled by mobile Safari/Chrome for perf.      */
+/* Using html::before with position:fixed achieves the same seamless effect.       */
+html {
   min-height: 100%;
+  background: #05070c; /* solid fallback in case pseudo-element lags */
 }
-
-body {
-  background: radial-gradient(1200px 800px at 20% 10%, rgba(0, 160, 200, 0.18), rgba(0,0,0,0) 60%),
-              radial-gradient(900px 700px at 80% 20%, rgba(0, 120, 180, 0.16), rgba(0,0,0,0) 55%),
-              linear-gradient(180deg, rgba(6,10,14,1) 0%, rgba(4,7,10,1) 40%, rgba(2,4,6,1) 100%);
-  background-attachment: fixed;
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 800px at 20% 10%, rgba(0,160,200,.18), transparent 60%),
+    radial-gradient(900px 700px at 80% 20%, rgba(0,120,180,.16), transparent 55%),
+    radial-gradient(1200px 700px at 18% 10%, rgba(42,215,255,.10), transparent 60%),
+    radial-gradient(1000px 700px at 82% 35%, rgba(122,215,255,.06), transparent 55%),
+    linear-gradient(180deg, #070b12 0%, #05070c 40%, #03050a 100%);
 }
 /* Ensure page sections don't paint their own background */
 main, .page, .page-content, .content, .section {
@@ -36,10 +45,7 @@ body{
   margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
   color:var(--text);
-  background:
-    radial-gradient(1200px 700px at 18% 10%, rgba(42,215,255,.10), transparent 60%),
-    radial-gradient(1000px 700px at 82% 35%, rgba(122,215,255,.06), transparent 55%),
-    linear-gradient(180deg, var(--bg1), var(--bg0) 60%, #03050a);
+  background: transparent;
   padding-top: var(--headerH);
 }
 
