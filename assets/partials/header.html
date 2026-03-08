@@ -24,13 +24,13 @@
       </nav>
     </div>
   </div>
-
-  <div class="header-access-bar">
-    <div class="container">
-      <span class="pill pill--limited">⚡ Limited Early Access — small rollout for stability</span>
-    </div>
-  </div>
 </header>
+
+<div class="access-bar">
+  <div class="container">
+    <span>⚡ Limited Early Access — small rollout for stability</span>
+  </div>
+</div>
 
 <script>
 (function () {
@@ -40,6 +40,9 @@
   btn.addEventListener('click', function () {
     var open = wrap.classList.toggle('is-open');
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    // On mobile, nav-links inside drawer must be visible
+    var links = wrap.querySelector('.nav-links');
+    if (links) links.style.display = open ? 'flex' : '';
   });
 })();
 </script>
