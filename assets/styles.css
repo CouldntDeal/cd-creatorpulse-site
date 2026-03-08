@@ -939,3 +939,26 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
   .nav-hamburger { display: flex !important; }
   .nav-links { display: none !important; }
 }
+
+/* === FINAL NAV FIX: overrides all duplicate rules above === */
+.nav-hamburger {
+  display: none;
+}
+@media (max-width: 720px) {
+  .nav-hamburger {
+    display: flex !important;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+  .nav-links {
+    display: none !important;
+  }
+  .nav-mobile[hidden] {
+    display: none !important;
+  }
+}
