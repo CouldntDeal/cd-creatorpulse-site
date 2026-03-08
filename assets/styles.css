@@ -1,3 +1,20 @@
+/* ---- Global background: single continuous layer (prevents scroll seams) ---- */
+html, body {
+  min-height: 100%;
+}
+
+body {
+  background: radial-gradient(1200px 800px at 20% 10%, rgba(0, 160, 200, 0.18), rgba(0,0,0,0) 60%),
+              radial-gradient(900px 700px at 80% 20%, rgba(0, 120, 180, 0.16), rgba(0,0,0,0) 55%),
+              linear-gradient(180deg, rgba(6,10,14,1) 0%, rgba(4,7,10,1) 40%, rgba(2,4,6,1) 100%);
+  background-attachment: fixed;
+}
+/* Ensure page sections don't paint their own background */
+main, .page, .page-content, .content, .section {
+  background: transparent !important;
+}
+/* ------------------------------------------------------------------------- */
+
 :root{
   --bg0:#05070c;
   --bg1:#070b12;
@@ -14,71 +31,32 @@
 }
 
 *{box-sizing:border-box}
-
-html, body {
-  height: 100%;
-  min-height: 100%;
-}
-
-body {
-  margin: 0;
+html,body{height:100%}
+body{
+  margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-  color: var(--text);
-  padding-top: var(--headerH);
-
-  /* Single authoritative background — fixed so it never scrolls away.
-     Works identically on short pages (home) and long pages (pulselings). */
+  color:var(--text);
   background:
-    radial-gradient(1400px 900px at 18% 12%, rgba(42,215,255,.09), transparent 60%),
-    radial-gradient(1000px 800px at 82% 30%, rgba(100,180,255,.06), transparent 55%),
-    radial-gradient(800px 600px at 50% 70%, rgba(20,80,140,.12), transparent 65%),
-    linear-gradient(180deg, var(--bg1) 0%, #040710 40%, var(--bg0) 100%);
-  background-attachment: fixed;
+    radial-gradient(1200px 700px at 18% 10%, rgba(42,215,255,.10), transparent 60%),
+    radial-gradient(1000px 700px at 82% 35%, rgba(122,215,255,.06), transparent 55%),
+    linear-gradient(180deg, var(--bg1), var(--bg0) 60%, #03050a);
+  padding-top: var(--headerH);
 }
 
-/* Ensure no section or page element repaints the background */
-main, .page, .page-content, .content, .section {
-  background: transparent !important;
-}
-main::before, main::after,
-.page::before, .page::after,
-.section::before, .section::after {
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-/* List markers */
-ul {
-  list-style: none;
-  padding-left: 0;
-  margin-left: 0;
-}
-ul li {
-  position: relative;
-  padding-left: 14px;
-}
-ul li::before {
-  content: "-";
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0.7;
-}
-.card ul, .section ul, main ul {
-  list-style: none !important;
-  padding-left: 0 !important;
-  margin-left: 0 !important;
-}
-.card ul li, .section ul li, main ul li {
-  position: relative !important;
-  padding-left: 14px !important;
-}
-.card ul li::before, .section ul li::before, main ul li::before {
-  content: "-" !important;
-  position: absolute !important;
-  left: 0 !important;
-  top: 0 !important;
-  opacity: 0.7 !important;
+/* premium subtle texture */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(1100px 700px at 20% 10%, rgba(40,215,255,.10), transparent 60%),
+    radial-gradient(900px 700px at 80% 35%, rgba(122,215,255,.06), transparent 55%),
+    linear-gradient(transparent, transparent 83px, rgba(255,255,255,.016) 84px),
+    linear-gradient(90deg, transparent, transparent 83px, rgba(255,255,255,.012) 84px);
+  background-size: auto, auto, 84px 84px, 84px 84px;
+  opacity:.18;
+  filter:saturate(110%) blur(.25px);
 }
 
 a{color:inherit}
@@ -102,7 +80,6 @@ a:hover{color:var(--accent2)}
   padding:16px 16px;
 }
 
-/* subtle rail so the right stack feels placed, not random */
 .card::before{
   content:"";
   position:absolute;
@@ -150,7 +127,9 @@ a:hover{color:var(--accent2)}
   border-color:rgba(42,215,255,.35);
 }
 
-/* HEADER */
+/* ============================================================
+   HEADER
+   ============================================================ */
 .site-header{
   position:fixed;
   top:0; left:0; right:0;
@@ -161,15 +140,7 @@ a:hover{color:var(--accent2)}
   background:rgba(5,7,12,.55);
   border-bottom:1px solid rgba(255,255,255,.08);
   backdrop-filter: blur(14px);
-}
-
-/* header-inner must be flex so brand + nav-wrap sit side by side */
-.header-inner {
-  display: flex !important;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  gap: 16px;
+  transition: background 0.2s, border-color 0.2s;
 }
 
 .site-header.is-scrolled{
@@ -177,10 +148,12 @@ a:hover{color:var(--accent2)}
   border-bottom-color: rgba(255,255,255,.10);
 }
 
-.nav-wrap{
-  display:flex;
+/* header-inner: brand left, nav-wrap right */
+.header-inner{
+  display:flex !important;
   align-items:center;
   justify-content:space-between;
+  width:100%;
   gap:16px;
 }
 
@@ -190,6 +163,7 @@ a:hover{color:var(--accent2)}
   gap:10px;
   text-decoration:none;
   min-width:0;
+  flex-shrink:0;
 }
 
 .brand-logo{
@@ -197,26 +171,17 @@ a:hover{color:var(--accent2)}
   align-items:center;
 }
 
-.brand-logo img{
-  height:36px;
+.brand-logo-img{
+  height:30px;
   width:auto;
   display:block;
   object-fit:contain;
   image-rendering:auto;
-  filter: drop-shadow(0 0 8px rgba(42,215,255,.35));
-  transition: filter .3s ease;
+  filter: drop-shadow(0 0 10px rgba(42,215,255,.18));
+  transition: filter 0.3s ease;
 }
-
-/* Logo PNG with transparency */
-.brand-logo-img {
-  height: 36px;
-  width: auto;
-  display: block;
-  filter: drop-shadow(0 0 8px rgba(42,215,255,.35));
-  transition: filter .3s ease;
-}
-.brand:hover .brand-logo-img {
-  filter: drop-shadow(0 0 18px rgba(42,215,255,.75));
+.brand:hover .brand-logo-img{
+  filter: drop-shadow(0 0 18px rgba(42,215,255,.55));
 }
 
 .brand-title{
@@ -225,7 +190,7 @@ a:hover{color:var(--accent2)}
   white-space:nowrap;
 }
 
-/* Limited Access pill: premium, subtle glow, stays near brand */
+/* Limited Access pill */
 .pill{
   display:inline-flex;
   align-items:center;
@@ -253,12 +218,21 @@ a:hover{color:var(--accent2)}
   box-shadow: 0 0 14px rgba(42,215,255,.55);
 }
 
-/* Nav pills: keep premium + stop awkward wraps */
+/* nav-wrap: pill + links in a row */
+.nav-wrap{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  min-width:0;
+}
+
+/* Nav links */
 .nav-links{
   display:flex;
-  flex-wrap:wrap;
-  gap:10px;
+  flex-wrap:nowrap;
+  gap:6px;
   justify-content:flex-end;
+  align-items:center;
 }
 .nav-links a{
   text-decoration:none;
@@ -268,12 +242,86 @@ a:hover{color:var(--accent2)}
   background:rgba(255,255,255,.04);
   font-size:12px;
   color:rgba(255,255,255,.86);
+  white-space:nowrap;
+  transition: border-color 0.15s;
 }
 .nav-links a:hover{
   border-color:rgba(42,215,255,.30);
+  color:var(--text);
 }
 
-/* HERO (slightly tighter) */
+/* Hamburger button — hidden by default, shown on mobile */
+.nav-toggle{
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  width:38px;
+  height:38px;
+  padding:0;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;
+  background:rgba(255,255,255,.05);
+  cursor:pointer;
+  flex-shrink:0;
+  transition: border-color 0.15s, background 0.15s;
+}
+.nav-toggle:hover{
+  border-color:rgba(42,215,255,.30);
+  background:rgba(42,215,255,.08);
+}
+.nav-toggle-bar{
+  display:block;
+  width:18px;
+  height:2px;
+  background:rgba(255,255,255,.85);
+  border-radius:2px;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+/* Animated X when open */
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1){
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2){
+  opacity:0;
+  transform: scaleX(0);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3){
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================================
+   HEADER PULSE ANIMATION
+   ============================================================ */
+@keyframes header-shimmer{
+  0%  { background-position:200% center; opacity:.38; }
+  40% { opacity:.62; }
+  100%{ background-position:-200% center; opacity:.38; }
+}
+.site-header.is-pulsing::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(42,215,255,.12) 45%,
+    rgba(42,215,255,.22) 50%,
+    rgba(42,215,255,.12) 55%,
+    transparent 100%
+  );
+  background-size:200% 100%;
+  animation: header-shimmer 1.6s ease-in-out forwards;
+  opacity:0;
+  border-radius:0;
+  mix-blend-mode: screen;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
 .hero{
   padding:48px 0 22px;
 }
@@ -287,16 +335,14 @@ a:hover{color:var(--accent2)}
 
 .hero-left{max-width:650px}
 
-/* right side becomes an intentional stack */
 .hero-right{
   display:flex;
   flex-direction:column;
-  gap:12px; /* tighter stack */
+  gap:12px;
   align-self:start;
   position:relative;
 }
 
-/* subtle rail so the right stack feels placed, not random */
 .hero-right::before{
   content:"";
   position:absolute;
@@ -362,9 +408,9 @@ a:hover{color:var(--accent2)}
   color:rgba(255,255,255,.86);
 }
 
-/* Right card - tighter interior rhythm */
+/* Hero panel */
 .hero-panel{
-  padding:16px 16px 14px 16px; /* reduced */
+  padding:16px 16px 14px 16px;
 }
 
 .panel-head{
@@ -372,7 +418,7 @@ a:hover{color:var(--accent2)}
   align-items:center;
   justify-content:space-between;
   gap:12px;
-  margin-bottom:10px; /* reduced */
+  margin-bottom:10px;
 }
 
 .panel-title{font-weight:800}
@@ -387,14 +433,14 @@ a:hover{color:var(--accent2)}
 .panel-list{
   display:flex;
   flex-direction:column;
-  gap:8px; /* tighter */
+  gap:8px;
 }
 
 .panel-item{
   display:flex;
   gap:12px;
   padding-bottom:8px;
-  border-bottom:1px solid rgba(255,255,255,.06); /* makes space feel intentional */
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
 .panel-item:last-child{
   padding-bottom:0;
@@ -405,6 +451,7 @@ a:hover{color:var(--accent2)}
   width:7px; height:7px;
   border-radius:999px;
   margin-top:6px;
+  flex-shrink:0;
   background:rgba(42,215,255,.95);
   box-shadow: 0 0 14px rgba(42,215,255,.50);
 }
@@ -413,15 +460,17 @@ a:hover{color:var(--accent2)}
 .panel-item-sub{
   font-size:12px;
   color:rgba(255,255,255,.70);
-  line-height:1.35; /* slightly tighter */
+  line-height:1.35;
 }
 .panel-foot{
-  margin-top:12px; /* reduced */
+  margin-top:12px;
   font-size:12px;
   color:rgba(255,255,255,.72)
 }
 
-/* Sections (tighter) */
+/* ============================================================
+   SECTIONS
+   ============================================================ */
 .section{padding:26px 0 30px}
 
 .two-col{
@@ -441,19 +490,19 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 }
 .list li{margin:0 0 8px 0; color:rgba(255,255,255,.86)}
 
-/* Early access tracker: tighten interior so it feels engineered */
+/* Early access tracker */
 .availability-card{
   margin-top:0;
   width:100%;
   max-width:none;
-  padding:12px 14px; /* reduced */
+  padding:12px 14px;
 }
 
 .availability-top{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:4px; /* reduced */
+  margin-bottom:4px;
 }
 
 .availability-label{
@@ -487,7 +536,7 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
   display:flex;
   align-items:baseline;
   gap:8px;
-  margin-bottom:2px; /* reduced */
+  margin-bottom:2px;
 }
 
 .availability-count{
@@ -508,15 +557,13 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
   line-height:1.35;
 }
 
-/* Neutral availability pill (no status dot) */
-.availability-live--neutral{
-  gap:0;
-}
-.availability-live--neutral .dot{
-  display:none;
-}
+/* Neutral availability pill */
+.availability-live--neutral{ gap:0; }
+.availability-live--neutral .dot{ display:none; }
 
-/* FOOTER (tight + premium) */
+/* ============================================================
+   FOOTER
+   ============================================================ */
 .site-footer{
   border-top: 0;
   margin-top:18px;
@@ -525,14 +572,55 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
   padding:8px 22px;
   display:flex;
   justify-content:space-between;
+  align-items:center;
   gap:14px;
   font-size:12px;
   color:rgba(255,255,255,.70);
+  flex-wrap:wrap;
 }
 .site-footer a{color:rgba(255,255,255,.78)}
 .site-footer a:hover{color:var(--accent2)}
 
-/* Responsive */
+/* ============================================================
+   PARTNERSHIP LADDER
+   ============================================================ */
+.ladder { display: grid; gap: 12px; margin-top: 14px; }
+.ladder-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+}
+.ladder-icon {
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.ladder-label {
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(42,215,255,.78);
+  margin-bottom: 4px;
+}
+.ladder-title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.ladder-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,.68);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   RESPONSIVE — 980px (tablet landscape)
+   ============================================================ */
 @media (max-width: 980px){
   .hero{padding:36px 0 18px}
   .hero-grid{grid-template-columns:1fr; gap:18px}
@@ -540,281 +628,102 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
   .two-col{grid-template-columns:1fr}
 }
 
-@media (max-width: 880px){
-  .nav-wrap{flex-direction:column; align-items:flex-start}
-  .nav-links{justify-content:flex-start}
-  body{padding-top:96px}
-  .hero-left h1{font-size:38px}
+/* ============================================================
+   RESPONSIVE — 768px (tablet portrait / small laptop)
+   Hamburger kicks in here
+   ============================================================ */
+@media (max-width: 768px){
+  :root{ --headerH:60px; }
+
+  /* Show hamburger, hide nav-wrap by default */
+  .nav-toggle{
+    display:flex;
+  }
+
+  /* nav-wrap becomes the dropdown drawer */
+  .nav-wrap{
+    display:none;
+    position:fixed;
+    top:var(--headerH);
+    left:0; right:0;
+    background:rgba(5,7,12,.96);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(255,255,255,.10);
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    padding:12px 16px 16px;
+    z-index:999;
+    box-shadow:0 16px 40px rgba(0,0,0,.5);
+  }
+  .nav-wrap.is-open{
+    display:flex;
+  }
+
+  .pill--limited{
+    margin-left:0;
+    align-self:flex-start;
+    margin-bottom:8px;
+  }
+
+  .nav-links{
+    flex-direction:column;
+    flex-wrap:nowrap;
+    gap:4px;
+    justify-content:flex-start;
+  }
+  .nav-links a{
+    padding:11px 14px;
+    border-radius:12px;
+    font-size:14px;
+    text-align:left;
+    border-color:rgba(255,255,255,.08);
+  }
+  .nav-links a:hover{
+    background:rgba(42,215,255,.08);
+  }
 }
 
-/* Partnership ladder visuals */
-.ladder { display: grid; gap: 12px; margin-top: 14px; }
-.ladder-step {
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 12px 14px;
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 14px;
-  background: rgba(0,0,0,.16);
-}
-.ladder-step-title { font-weight: 700; }
-.ladder-step-sub { opacity: .75; font-size: 12px; margin-top: 2px; }
-.ladder-pct { text-align: right; min-width: 140px; display: flex; flex-direction: column; justify-content: center; }
-.ladder-pct .pct { font-weight: 800; }
-.ladder-pct .pct-sub { opacity: .7; font-size: 12px; margin-top: 2px; }
+/* ============================================================
+   RESPONSIVE — 600px (large phone landscape / small phone)
+   ============================================================ */
+@media (max-width: 600px){
+  body{ padding-top: var(--headerH); }
 
-.ladder-bar {
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.08);
-  overflow: hidden;
-  margin-top: 10px;
-}
-.ladder-bar > span { display: block; height: 100%; background: rgba(0,180,255,.35); }
+  .container{ padding:0 16px; }
 
-.note {
-  margin-top: 14px;
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.08);
-  background: rgba(255,255,255,.04);
-  color: rgba(255,255,255,.85);
-  font-size: 13px;
+  .hero{ padding:28px 0 14px; }
+  .hero-left h1{ font-size:34px; }
+  .lead{ font-size:14px; }
+
+  .cta-row{ flex-direction:column; align-items:stretch; }
+  .cta-row .btn{ justify-content:center; padding:12px 16px; font-size:14px; }
+
+  .section{ padding:20px 0 24px; }
+
+  h2{ font-size:18px; }
+
+  .two-col{ gap:20px; }
+
+  .card{ padding:14px; }
+
+  .site-footer .container{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:6px;
+    padding:12px 16px;
+  }
 }
 
-.mini-table { margin-top: 10px; display: grid; gap: 10px; }
-.mini-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.08);
-  background: rgba(0,0,0,.14);
-}
-.mini-left { opacity: .85; }
-.mini-right { white-space: nowrap; }
+/* ============================================================
+   RESPONSIVE — 420px (small phones — iPhone SE etc)
+   ============================================================ */
+@media (max-width: 420px){
+  .hero-left h1{ font-size:28px; }
+  .brand-title{ font-size:14px; }
+  .eyebrow{ font-size:10px; }
 
-
-/* =====================================================================
-   PULSE ANIMATIONS — alive, branded, subtle
-   ===================================================================== */
-
-/* 1. Brand pulse: the CreatorPulse wordmark breathes with cyan glow */
-@keyframes brand-pulse {
-  0%, 100% { text-shadow: 0 0 8px rgba(42,215,255,.0), 0 0 0px rgba(42,215,255,.0); }
-  50%       { text-shadow: 0 0 18px rgba(42,215,255,.45), 0 0 40px rgba(42,215,255,.18); }
+  .availability-count{ font-size:15px; }
+  .panel-item-title{ font-size:12px; }
 }
-
-.brand-title {
-  animation: brand-pulse 3.6s ease-in-out infinite;
-}
-
-/* 2. Header border: occasional pulse sweep — triggered by JS, not looping */
-@keyframes header-shimmer {
-  0%   { background-position: -200% center; opacity: 0; }
-  8%   { opacity: 1; }
-  92%  { opacity: 1; }
-  100% { background-position: 200% center; opacity: 0; }
-}
-
-.site-header::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(42,215,255,.0) 15%,
-    rgba(42,215,255,.8) 50%,
-    rgba(42,215,255,.0) 85%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  opacity: 0;
-  pointer-events: none;
-  /* animation only plays when .is-pulsing class is added by JS */
-}
-
-.site-header.is-pulsing::after {
-  animation: header-shimmer 1.4s ease-in-out forwards;
-}
-
-/* 3. Live indicator dot on Limited Access pill — actual pulse */
-@keyframes dot-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(42,215,255,.7), 0 0 14px rgba(42,215,255,.55); transform: scale(1); }
-  50%       { box-shadow: 0 0 0 4px rgba(42,215,255,.0), 0 0 20px rgba(42,215,255,.8); transform: scale(1.15); }
-}
-
-.pill--limited::before {
-  animation: dot-pulse 2.2s ease-in-out infinite;
-}
-
-/* 4. Panel dots breathe */
-@keyframes dot-breathe {
-  0%, 100% { box-shadow: 0 0 8px rgba(42,215,255,.4); opacity: .92; }
-  50%       { box-shadow: 0 0 20px rgba(42,215,255,.85); opacity: 1; }
-}
-
-.panel-dot {
-  animation: dot-breathe 2.8s ease-in-out infinite;
-}
-
-/* 5. Card hover — lift + glow intensify */
-.card {
-  transition: transform .22s ease, box-shadow .22s ease;
-}
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 22px 56px rgba(0,0,0,.44), 0 0 0 1px rgba(42,215,255,.14);
-}
-
-/* 6. Nav link hover — accent underline slides in */
-.nav-links a {
-  position: relative;
-  transition: border-color .18s ease, color .18s ease, background .18s ease;
-  overflow: hidden;
-}
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  bottom: 3px;
-  left: 50%;
-  transform: translateX(-50%) scaleX(0);
-  width: 60%;
-  height: 1px;
-  background: rgba(42,215,255,.65);
-  border-radius: 1px;
-  transition: transform .2s ease;
-  pointer-events: none;
-}
-.nav-links a:hover::after {
-  transform: translateX(-50%) scaleX(1);
-}
-
-/* 7. Pulselings nav link — always has a tiny live dot */
-.nav-links a[href*="pulselings"]::before {
-  content: "";
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: rgba(42,215,255,.9);
-  box-shadow: 0 0 6px rgba(42,215,255,.7);
-  margin-right: 5px;
-  vertical-align: middle;
-  animation: dot-breathe 2.4s ease-in-out infinite;
-}
-
-/* 8. CTA primary button — shimmer sweep on hover */
-@keyframes btn-shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-.btn.primary {
-  background: linear-gradient(
-    90deg,
-    rgba(42,215,255,.12) 0%,
-    rgba(42,215,255,.22) 45%,
-    rgba(100,220,255,.30) 50%,
-    rgba(42,215,255,.22) 55%,
-    rgba(42,215,255,.12) 100%
-  );
-  background-size: 200% 100%;
-  transition: background-position .4s ease, border-color .2s ease, box-shadow .2s ease;
-}
-.btn.primary:hover {
-  background-position: 100% center;
-  border-color: rgba(42,215,255,.6);
-  box-shadow: 0 0 22px rgba(42,215,255,.22);
-}
-
-.btn {
-  transition: border-color .18s ease, color .18s ease, background .18s ease;
-}
-.btn:hover {
-  background: rgba(255,255,255,.08);
-}
-
-/* 9. Footer — accent heartbeat line */
-@keyframes footer-pulse {
-  0%, 100% { opacity: .18; }
-  50%       { opacity: .40; }
-}
-
-.site-footer {
-  position: relative;
-}
-.site-footer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(42,215,255,.55), transparent);
-  animation: footer-pulse 3.5s ease-in-out infinite;
-  pointer-events: none;
-}
-
-/* 10. Availability dot — pulsing live signal */
-.availability-live .dot {
-  animation: dot-pulse 2s ease-in-out infinite;
-}
-
-/* 11. Eyebrow label — gentle glow */
-@keyframes eyebrow-glow {
-  0%, 100% { opacity: .85; }
-  50%       { opacity: 1; text-shadow: 0 0 12px rgba(42,215,255,.5); }
-}
-.eyebrow {
-  animation: eyebrow-glow 4s ease-in-out infinite;
-}
-
-/* 12. "Request Access" nav link — stands out as the CTA */
-.nav-links a[href*="contact"] {
-  border-color: rgba(42,215,255,.28);
-  background: rgba(42,215,255,.08);
-  color: rgba(42,215,255,.92);
-  font-weight: 600;
-}
-.nav-links a[href*="contact"]:hover {
-  border-color: rgba(42,215,255,.55);
-  background: rgba(42,215,255,.14);
-  box-shadow: 0 0 14px rgba(42,215,255,.18);
-}
-
-/* 13. Ladder bar fill — progress shimmer */
-@keyframes bar-shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-.ladder-bar > span {
-  background: linear-gradient(
-    90deg,
-    rgba(0,180,255,.28) 0%,
-    rgba(42,215,255,.55) 40%,
-    rgba(100,230,255,.65) 50%,
-    rgba(42,215,255,.55) 60%,
-    rgba(0,180,255,.28) 100%
-  );
-  background-size: 200% 100%;
-  animation: bar-shimmer 3s linear infinite;
-}
-
-/* 14. Chip hover */
-.chip {
-  transition: border-color .18s ease, color .18s ease;
-}
-.chip:hover {
-  border-color: rgba(42,215,255,.35);
-  color: rgba(255,255,255,1);
-}
-

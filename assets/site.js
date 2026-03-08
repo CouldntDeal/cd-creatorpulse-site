@@ -12,9 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   Promise.all([
     includeHTML("#site-header", "assets/partials/header.html"),
-    includeHTML("#site-footer", "assets/partials/footer.html")
+    includeHTML("#site-footer",  "assets/partials/footer.html")
   ]).then(function () {
-    // Sticky header shadow on scroll
+
+    // ── Sticky header shadow on scroll ────────────────────────
     var header = document.querySelector(".site-header");
     if (header) {
       function onScroll() {
@@ -23,55 +24,76 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
+    }
 
-      // Occasional header pulse sweep — fires once, then rests 8–18s, repeats
-      // Feels like a heartbeat: present but not constant
+    // ── Hamburger menu toggle ──────────────────────────────────
+    var toggle  = document.querySelector(".nav-toggle");
+    var navWrap = document.querySelector(".nav-wrap");
+
+    if (toggle && navWrap) {
+      toggle.addEventListener("click", function () {
+        var isOpen = navWrap.classList.toggle("is-open");
+        toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+
+      // Close menu when a nav link is tapped
+      navWrap.addEventListener("click", function (e) {
+        if (e.target.tagName === "A") {
+          navWrap.classList.remove("is-open");
+          toggle.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener("click", function (e) {
+        if (!header.contains(e.target) && navWrap.classList.contains("is-open")) {
+          navWrap.classList.remove("is-open");
+          toggle.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      // Close menu on resize back to desktop
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 768) {
+          navWrap.classList.remove("is-open");
+          toggle.setAttribute("aria-expanded", "false");
+        }
+      }, { passive: true });
+    }
+
+    // ── Occasional header pulse ────────────────────────────────
+    if (header) {
       function schedulePulse() {
-        var delay = 8000 + Math.random() * 10000; // 8–18s between pulses
+        var delay = 8000 + Math.random() * 10000;
         setTimeout(function () {
-          header.classList.remove("is-pulsing");
-          // Force reflow so animation replays cleanly
-          void header.offsetWidth;
           header.classList.add("is-pulsing");
-
-          // Remove class after animation completes (1.4s), then schedule next
           setTimeout(function () {
             header.classList.remove("is-pulsing");
             schedulePulse();
-          }, 1500);
+          }, 1800);
         }, delay);
       }
-
-      // First pulse fires after a short initial delay (2s after load)
-      setTimeout(function () {
-        header.classList.add("is-pulsing");
-        setTimeout(function () {
-          header.classList.remove("is-pulsing");
-          schedulePulse();
-        }, 1500);
-      }, 2000);
+      setTimeout(schedulePulse, 2000);
     }
   });
 
-  // Early access availability (reads JSON; updates the metric)
+  // ── Early access availability ──────────────────────────────
   (function updateAvailability() {
-    var el = document.getElementById("availabilityCount");
-    if (!el) return;
+    var filledEl = document.getElementById("earlyFilled");
+    var totalEl  = document.getElementById("earlyTotal");
+    if (!filledEl) return;
 
     fetch("assets/data/availability.json", { cache: "no-store" })
       .then(function (res) { return res.json(); })
       .then(function (data) {
         var filled = Number(data && data.filled);
-        var cap = Number(data && data.capacity);
-
+        var cap    = Number(data && data.capacity);
         if (!isFinite(filled) || filled < 0) filled = 0;
         if (!isFinite(cap) || cap <= 0) cap = 5;
         if (filled > cap) filled = cap;
-
-        el.textContent = filled + " / " + cap;
+        if (filledEl) filledEl.textContent = filled;
+        if (totalEl)  totalEl.textContent  = cap;
       })
-      .catch(function () {
-        // Keep whatever is already in the HTML as the fallback.
-      });
+      .catch(function () { /* keep HTML defaults */ });
   })();
 });
