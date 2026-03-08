@@ -62,8 +62,15 @@
         align-items: start;
       }
       @media (max-width: 900px) {
-        .pulselings-body { grid-template-columns: 1fr; }
-        .pulselings-sidebar { order: -1; }  /* leaderboard above content on mobile */
+        .pulselings-body { display: flex; flex-direction: column; }
+        .pulselings-sidebar { order: -1; position: static; max-height: none; overflow-y: visible; width: 100%; }
+        .pulselings-main { width: 100%; }
+      }
+      @media (max-width: 600px) {
+        .pulse-hero { padding: 28px 0 14px; }
+        .pulse-hero h1 { font-size: 28px; }
+        .guide-grid { grid-template-columns: 1fr; }
+        .lb-xp, .lb-id { display: none; }
       }
 
       /* ─────────────────────────────────────────
