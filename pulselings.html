@@ -235,12 +235,16 @@
          RIGHT COLUMN: sticky leaderboard
          ───────────────────────────────────────── */
       .pulselings-sidebar {
-        position: sticky;
-        top: 88px; /* clears the fixed header */
-        max-height: calc(100vh - 112px);
         overflow-y: auto;
         scrollbar-width: thin;
         scrollbar-color: rgba(255,255,255,.10) transparent;
+      }
+      @media (min-width: 901px) {
+        .pulselings-sidebar {
+          position: sticky;
+          top: 88px;
+          max-height: calc(100vh - 112px);
+        }
       }
       .pulselings-sidebar::-webkit-scrollbar { width: 3px; }
       .pulselings-sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 2px; }
