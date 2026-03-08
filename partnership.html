@@ -3,109 +3,309 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Partnership  -  CreatorPulse</title>
-  <meta name="description" content="CreatorPulse revenue share facts for optional Discord subscriptions. Separate from external platforms." />
+  <title>Partnership — CreatorPulse</title>
+  <meta name="description" content="How CreatorPulse revenue sharing works for optional Discord subscriptions. Transparent, milestone-based, creator-first." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css" />
   <script defer src="assets/site.js"></script>
+  <style>
+    /* ── Partnership-specific styles ── */
+    .important-callout {
+      background: linear-gradient(135deg, rgba(255, 180, 50, 0.10), rgba(255, 140, 0, 0.06));
+      border: 1px solid rgba(255, 180, 50, 0.35);
+      border-left: 4px solid rgba(255, 180, 50, 0.8);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 28px 0 40px;
+    }
+    .important-callout strong {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 180, 50, 0.9);
+      margin-bottom: 8px;
+    }
+    .important-callout p {
+      color: var(--muted);
+      font-size: 0.925rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+    .important-callout p b {
+      color: var(--text);
+    }
+
+    /* Milestone ladder table */
+    .milestone-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+    .milestone-table th {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 10px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .milestone-table td {
+      padding: 14px 16px;
+      font-size: 0.9rem;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+      vertical-align: top;
+    }
+    .milestone-table tr:last-child td {
+      border-bottom: none;
+    }
+    .milestone-table tr:hover td {
+      background: rgba(255,255,255,.025);
+    }
+    .milestone-name {
+      font-weight: 700;
+      color: var(--text);
+    }
+    .milestone-req {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-top: 3px;
+    }
+    .milestone-split {
+      font-weight: 700;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+    .milestone-split .creator-pct {
+      color: var(--accent);
+    }
+    .milestone-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .milestone-default {
+      display: inline-block;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .milestone-bar {
+      height: 4px;
+      background: rgba(255,255,255,.06);
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    .milestone-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, rgba(42,215,255,.5), rgba(42,215,255,.8));
+      border-radius: 2px;
+    }
+
+    /* No lock-in section */
+    .no-lockin {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .no-lockin-item {
+      flex: 1;
+      min-width: 160px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 12px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .no-lockin-item::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+  </style>
 </head>
 <body>
   <div id="site-header"></div>
 
   <main class="page">
-    <section class="section">
-      <div class="container">
-        <div class="eyebrow">PARTNERSHIP</div>
-        <h1>Revenue share facts (optional).</h1>
-        <p class="lead">
-          CreatorPulse can optionally manage paid content inside your Discord using Stripe.
-          This page explains the revenue share model for those optional Discord subscriptions.
+
+    <!-- ── HERO ── -->
+    <section class="section" style="padding-bottom: 0;">
+      <div class="container" style="max-width: 780px;">
+        <div class="eyebrow" style="font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:16px;">Partnership</div>
+        <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.03em; margin: 0 0 20px; line-height: 1.1;">
+          The more you grow,<br>the more you keep.
+        </h1>
+        <p class="lead" style="max-width: 600px;">
+          CreatorPulse can optionally manage paid Discord subscriptions for your community. If you choose to enable them, revenue is split transparently — and the split gets better as your community grows.
         </p>
-        <p class="muted">
-          Important: these are NOT Twitch subscriptions, YouTube memberships, TikTok monetization, Patreon, or any external platform revenue.
-          CreatorPulse does not access or take a share of your platform income. Revenue share applies only to optional Discord subscriptions you enable inside your server.
-        </p>
-      </div>
-    </section>
 
-    <section class="section">
-      <div class="container two-col">
-        <div>
-          <h2>When revenue share applies</h2>
-          <div class="card">
-            <ul class="list">
-              <li>Only if you enable paid Discord subscriptions through Stripe</li>
-              <li>Only on successful subscription payments</li>
-              <li>If you do not enable subscriptions, there is no revenue share</li>
-            </ul>
-          </div>
-        </div>
-
-        <div>
-          <h2>How milestones unlock</h2>
-          <div class="card">
-            <p class="muted" style="margin-bottom:12px;">
-              Milestones are hybrid. Each milestone requires BOTH:
-            </p>
-            <ul class="list">
-              <li>A minimum number of active supporters</li>
-              <li>A minimum monthly gross revenue floor</li>
-            </ul>
-            <p class="muted" style="margin-top:12px;">
-              Milestones are permanent once unlocked (no downgrades).
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <h2>Milestone ladder</h2>
-        <div class="card">
-          <p class="muted" style="margin-bottom:12px;">Splits shown as Creator / Platform.</p>
-          <ul class="list">
-            <li><strong>Starter</strong>  -  Default  -  <strong>50% / 50%</strong></li>
-            <li><strong>Momentum</strong>  -  10 supporters AND $50/month gross  -  <strong>60% / 40%</strong></li>
-            <li><strong>Growing</strong>  -  25 supporters AND $125/month gross  -  <strong>70% / 30%</strong></li>
-            <li><strong>Breakthrough</strong>  -  50 supporters AND $250/month gross  -  <strong>80% / 20%</strong></li>
-            <li><strong>Established</strong>  -  100 supporters AND $500/month gross  -  <strong>85% / 15%</strong></li>
-            <li><strong>Scale</strong>  -  250 supporters AND $1,250/month gross  -  <strong>90% / 10%</strong></li>
-          </ul>
-          <p class="muted" style="margin-top:12px;">
-            The platform share never goes below 10%.
+        <div class="important-callout">
+          <strong>⚠ Important — Read This First</strong>
+          <p>
+            These are <b>not</b> your Twitch subscriptions, YouTube memberships, TikTok monetization, Patreon income, or any other external platform revenue.
+            <b>CreatorPulse has zero access to and takes zero share of your platform income.</b>
+            Revenue share applies only to optional Discord subscriptions you choose to enable inside your server through Stripe.
+            If you never enable subscriptions, this page doesn't apply to you at all.
           </p>
         </div>
       </div>
     </section>
 
+    <!-- ── WHEN IT APPLIES ── -->
     <section class="section">
-      <div class="container two-col">
-        <div>
-          <h2>How revenue is measured</h2>
-          <div class="card">
-            <ul class="list">
-              <li>Monthly gross is based on successful Stripe subscription invoice payments</li>
-              <li>Only completed payments count toward milestones</li>
-              <li>Stripe processing fees are separate and handled by Stripe</li>
-            </ul>
-          </div>
-        </div>
-
-        <div>
-          <h2>No lock-in</h2>
-          <div class="card">
-            <ul class="list">
-              <li>No contracts</li>
-              <li>No required monetization</li>
-              <li>No surprise pricing changes</li>
-            </ul>
-          </div>
+      <div class="container" style="max-width: 780px;">
+        <h2 style="font-size: 1.3rem; font-weight: 700; margin: 0 0 20px;">When does revenue share apply?</h2>
+        <div class="card">
+          <ul class="list">
+            <li>Only if you choose to enable paid Discord subscriptions through Stripe</li>
+            <li>Only on successful, completed subscription payments — partial or failed payments don't count</li>
+            <li>Stripe's own processing fees are handled by Stripe, separate from the revenue share</li>
+            <li>If you never enable subscriptions, revenue share never applies — the bot is free to use</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
+    <!-- ── MILESTONE LADDER ── -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container" style="max-width: 900px;">
+        <h2 style="font-size: 1.3rem; font-weight: 700; margin: 0 0 8px;">Milestone ladder</h2>
+        <p class="muted" style="margin: 0 0 24px; font-size: 0.9rem; line-height: 1.6;">
+          Milestones unlock permanently as your community grows — no downgrades, ever. Each milestone requires both a supporter count <em>and</em> a monthly revenue floor. Revenue is measured from successful Stripe subscription invoice payments only.
+        </p>
+
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <table class="milestone-table">
+            <thead>
+              <tr>
+                <th>Milestone</th>
+                <th>Requirements</th>
+                <th>Your cut</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="milestone-name">Starter <span class="milestone-default">Default</span></div>
+                  <div class="milestone-bar"><div class="milestone-bar-fill" style="width: 50%;"></div></div>
+                </td>
+                <td>
+                  <div style="color: var(--muted); font-size: 0.85rem;">No requirements — this is where everyone begins.</div>
+                </td>
+                <td>
+                  <div class="milestone-split"><span class="creator-pct">50%</span> creator / 50% platform</div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="milestone-name">Momentum</div>
+                  <div class="milestone-bar"><div class="milestone-bar-fill" style="width: 60%;"></div></div>
+                </td>
+                <td>
+                  <div style="color: var(--text); font-size: 0.85rem; font-weight: 600;">10 supporters + $50/mo gross</div>
+                  <div class="milestone-note">Milestone permanently unlocked once both are met</div>
+                </td>
+                <td>
+                  <div class="milestone-split"><span class="creator-pct">60%</span> creator / 40% platform</div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="milestone-name">Growing</div>
+                  <div class="milestone-bar"><div class="milestone-bar-fill" style="width: 70%;"></div></div>
+                </td>
+                <td>
+                  <div style="color: var(--text); font-size: 0.85rem; font-weight: 600;">25 supporters + $125/mo gross</div>
+                  <div class="milestone-note">Milestone permanently unlocked once both are met</div>
+                </td>
+                <td>
+                  <div class="milestone-split"><span class="creator-pct">70%</span> creator / 30% platform</div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="milestone-name">Breakthrough</div>
+                  <div class="milestone-bar"><div class="milestone-bar-fill" style="width: 80%;"></div></div>
+                </td>
+                <td>
+                  <div style="color: var(--text); font-size: 0.85rem; font-weight: 600;">50 supporters + $250/mo gross</div>
+                  <div class="milestone-note">Milestone permanently unlocked once both are met</div>
+                </td>
+                <td>
+                  <div class="milestone-split"><span class="creator-pct">80%</span> creator / 20% platform</div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="milestone-name">Established</div>
+                  <div class="milestone-bar"><div class="milestone-bar-fill" style="width: 85%;"></div></div>
+                </td>
+                <td>
+                  <div style="color: var(--text); font-size: 0.85rem; font-weight: 600;">100 supporters + $500/mo gross</div>
+                  <div class="milestone-note">Milestone permanently unlocked once both are met</div>
+                </td>
+                <td>
+                  <div class="milestone-split"><span class="creator-pct">85%</span> creator / 15% platform</div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="milestone-name">Scale</div>
+                  <div class="milestone-bar"><div class="milestone-bar-fill" style="width: 90%;"></div></div>
+                </td>
+                <td>
+                  <div style="color: var(--text); font-size: 0.85rem; font-weight: 600;">250 supporters + $1,250/mo gross</div>
+                  <div class="milestone-note">Milestone permanently unlocked once both are met</div>
+                </td>
+                <td>
+                  <div class="milestone-split"><span class="creator-pct">90%</span> creator / 10% platform</div>
+                  <div class="milestone-note">Platform share floor — never goes lower than 10%</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="muted" style="font-size: 0.8rem; margin-top: 14px; line-height: 1.6;">
+          Milestones are evaluated automatically from ledger data. Once unlocked, they are permanent — your split can only improve, never decrease.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── NO LOCK IN ── -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container" style="max-width: 780px;">
+        <h2 style="font-size: 1.3rem; font-weight: 700; margin: 0 0 20px;">No gotchas.</h2>
+        <div class="no-lockin">
+          <div class="no-lockin-item">No contracts</div>
+          <div class="no-lockin-item">No required monetization</div>
+          <div class="no-lockin-item">No surprise pricing changes</div>
+          <div class="no-lockin-item">Free to use without subscriptions</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container" style="max-width: 780px;">
         <div class="cta-row">
           <a class="btn primary" href="contact.html">Request Early Access</a>
           <a class="btn" href="legal.html">Read Policies</a>
@@ -113,7 +313,8 @@
       </div>
     </section>
 
-    <div id="site-footer"></div>
   </main>
+
+  <div id="site-footer"></div>
 </body>
 </html>

@@ -1,0 +1,1711 @@
+﻿
+// FILE: assets\data\availability.json
+{
+  "filled": 0,
+  "capacity": 5
+}
+
+// FILE: assets\partials\footer.html
+<footer class="site-footer">
+  <div class="container">
+    <div>&copy; 2026 CD-CreatorPulse</div>
+    <div><a href="mailto:support@cdcreatorpulse.com">support@cdcreatorpulse.com</a></div>
+  </div>
+</footer>
+
+// FILE: assets\partials\header.html
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="CreatorPulse Home">
+      <img src="assets/mark.svg" alt="" />
+      <span>CreatorPulse</span>
+    </a>
+
+    <div class="nav-wrap">
+      <span class="pill pill-outline">Limited Access</span>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="setup.html">Setup</a>
+        <a href="partnership.html">Partnership</a>
+        <a href="legal.html">Legal</a>
+        <a href="contact.html">Request Access</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+// FILE: assets\site.js
+document.addEventListener("DOMContentLoaded", function () {
+  // Header/Footer includes
+  function includeHTML(selector, url) {
+    var el = document.querySelector(selector);
+    if (!el) return Promise.resolve();
+
+    return fetch(url, { cache: "no-store" })
+      .then(function (res) { return res.text(); })
+      .then(function (html) { el.innerHTML = html; })
+      .catch(function () { /* fail quietly */ });
+  }
+
+  Promise.all([
+    includeHTML("#site-header", "assets/partials/header.html"),
+    includeHTML("#site-footer", "assets/partials/footer.html")
+  ]).then(function () {
+    // Sticky header shadow on scroll (if header exists)
+    var header = document.querySelector(".site-header");
+    if (header) {
+      function onScroll() {
+        if (window.scrollY > 8) header.classList.add("is-scrolled");
+        else header.classList.remove("is-scrolled");
+      }
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    }
+  });
+
+  // Early access availability (reads JSON; updates the metric)
+  // No backend required. Update assets/data/availability.json to change values.
+  (function updateAvailability() {
+    var el = document.getElementById("availabilityCount");
+    if (!el) return;
+
+    fetch("assets/data/availability.json", { cache: "no-store" })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        var filled = Number(data && data.filled);
+        var cap = Number(data && data.capacity);
+
+        if (!isFinite(filled) || filled < 0) filled = 0;
+        if (!isFinite(cap) || cap <= 0) cap = 5;
+        if (filled > cap) filled = cap;
+
+        el.textContent = filled + " / " + cap;
+      })
+      .catch(function () {
+        // Keep whatever is already in the HTML as the fallback.
+      });
+  })();
+});
+
+// FILE: assets\styles.css
+/* ---- Global background: single continuous layer (prevents scroll seams) ---- */
+html, body {
+  min-height: 100%;
+}
+
+body {
+  background: radial-gradient(1200px 800px at 20% 10%, rgba(0, 160, 200, 0.18), rgba(0,0,0,0) 60%),
+              radial-gradient(900px 700px at 80% 20%, rgba(0, 120, 180, 0.16), rgba(0,0,0,0) 55%),
+              linear-gradient(180deg, rgba(6,10,14,1) 0%, rgba(4,7,10,1) 40%, rgba(2,4,6,1) 100%);
+  background-attachment: fixed;
+}
+/* Ensure page sections don't paint their own background */
+main, .page, .page-content, .content, .section {
+  background: transparent !important;
+}
+/* ------------------------------------------------------------------------- */
+
+:root{
+  --bg0:#05070c;
+  --bg1:#070b12;
+  --card:rgba(255,255,255,.06);
+  --card2:rgba(255,255,255,.08);
+  --stroke:rgba(255,255,255,.10);
+  --text:rgba(255,255,255,.92);
+  --muted:rgba(255,255,255,.70);
+  --accent:#2ad7ff;
+  --accent2:#7ad7ff;
+  --container:1120px;
+  --radius:18px;
+  --headerH:72px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color:var(--text);
+  background:
+    radial-gradient(1200px 700px at 18% 10%, rgba(42,215,255,.10), transparent 60%),
+    radial-gradient(1000px 700px at 82% 35%, rgba(122,215,255,.06), transparent 55%),
+    linear-gradient(180deg, var(--bg1), var(--bg0) 60%, #03050a);
+  padding-top: var(--headerH);
+}
+
+/* premium subtle texture (no obvious squares) */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(1100px 700px at 20% 10%, rgba(40,215,255,.10), transparent 60%),
+    radial-gradient(900px 700px at 80% 35%, rgba(122,215,255,.06), transparent 55%),
+    linear-gradient(transparent, transparent 83px, rgba(255,255,255,.016) 84px),
+    linear-gradient(90deg, transparent, transparent 83px, rgba(255,255,255,.012) 84px);
+  background-size: auto, auto, 84px 84px, 84px 84px;
+  opacity:.18;
+  filter:saturate(110%) blur(.25px);
+}
+
+a{color:inherit}
+a:hover{color:var(--accent2)}
+
+.container{
+  width:100%;
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 22px;
+}
+
+.card{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:var(--radius);
+  box-shadow: 0 16px 46px rgba(0,0,0,.34);
+  backdrop-filter: blur(10px);
+  padding:16px 16px;
+}
+
+/* subtle rail so the right stack feels placed, not random */
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background:
+    radial-gradient(600px 240px at 18% 12%, rgba(42,215,255,.12), transparent 60%),
+    radial-gradient(520px 240px at 86% 18%, rgba(122,215,255,.09), transparent 62%),
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
+  opacity:.55;
+  mix-blend-mode:screen;
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  box-shadow:
+    0 0 0 1px rgba(42,215,255,.06) inset,
+    0 0 22px rgba(42,215,255,.06);
+  opacity:.85;
+}
+
+/* BUTTONS */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.05);
+  color:var(--text);
+  text-decoration:none;
+  gap:10px;
+  font-weight:600;
+  font-size:14px;
+}
+.btn:hover{border-color:rgba(42,215,255,.35)}
+.btn.primary{
+  background:rgba(42,215,255,.12);
+  border-color:rgba(42,215,255,.35);
+}
+
+/* HEADER */
+.site-header{
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:1000;
+  height:var(--headerH);
+  display:flex;
+  align-items:center;
+  background:rgba(5,7,12,.55);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(14px);
+}
+
+.site-header.is-scrolled{
+  background:rgba(5,7,12,.72);
+  border-bottom-color: rgba(255,255,255,.10);
+}
+
+.nav-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.brand{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  min-width:0;
+}
+
+.brand-logo{
+  display:inline-flex;
+  align-items:center;
+}
+
+.brand-logo img{
+  height:30px;
+  width:auto;
+  display:block;
+  object-fit:contain;
+  image-rendering:auto;
+  filter: drop-shadow(0 0 10px rgba(42,215,255,.18));
+}
+
+.brand-title{
+  font-size:15px;
+  letter-spacing:.2px;
+  white-space:nowrap;
+}
+
+/* Limited Access pill: premium, subtle glow, stays near brand */
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.2px;
+  white-space:nowrap;
+}
+
+.pill--limited{
+  margin-left:6px;
+  background:rgba(42,215,255,.10);
+  border-color:rgba(42,215,255,.28);
+  box-shadow: 0 0 0 1px rgba(42,215,255,.10) inset, 0 0 18px rgba(42,215,255,.10);
+}
+.pill--limited::before{
+  content:"";
+  width:8px; height:8px;
+  border-radius:50%;
+  background:rgba(42,215,255,.92);
+  box-shadow: 0 0 14px rgba(42,215,255,.55);
+}
+
+/* Nav pills: keep premium + stop awkward wraps */
+.nav-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:flex-end;
+}
+.nav-links a{
+  text-decoration:none;
+  padding:7px 11px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.04);
+  font-size:12px;
+  color:rgba(255,255,255,.86);
+}
+.nav-links a:hover{
+  border-color:rgba(42,215,255,.30);
+}
+
+/* HERO (slightly tighter) */
+.hero{
+  padding:48px 0 22px;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns: 1.08fr .92fr;
+  gap:38px;
+  align-items:start;
+}
+
+.hero-left{max-width:650px}
+
+/* right side becomes an intentional stack */
+.hero-right{
+  display:flex;
+  flex-direction:column;
+  gap:12px; /* tighter stack */
+  align-self:start;
+  position:relative;
+}
+
+/* subtle rail so the right stack feels placed, not random */
+.hero-right::before{
+  content:"";
+  position:absolute;
+  left:-18px;
+  top:6px;
+  bottom:6px;
+  width:1px;
+  background:linear-gradient(180deg, rgba(42,215,255,.12), rgba(255,255,255,.05), rgba(42,215,255,.10));
+  opacity:.45;
+  pointer-events:none;
+}
+
+.eyebrow{
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:rgba(42,215,255,.85);
+  margin-bottom:10px;
+}
+
+.hero-left h1{
+  margin:0 0 12px 0;
+  font-size:42px;
+  line-height:1.06;
+  letter-spacing:-.01em;
+}
+
+.lead{
+  margin:0 0 10px 0;
+  font-size:15px;
+  line-height:1.62;
+  color:rgba(255,255,255,.74);
+  max-width:620px;
+}
+
+.lead-sub{
+  margin:0 0 14px 0;
+  font-size:13px;
+  color:rgba(255,255,255,.82);
+}
+
+.cta-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:0 0 12px 0;
+}
+
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:12px;
+}
+
+.chip{
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.04);
+  font-size:12px;
+  color:rgba(255,255,255,.86);
+}
+
+/* Right card - tighter interior rhythm */
+.hero-panel{
+  padding:16px 16px 14px 16px; /* reduced */
+}
+
+.panel-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px; /* reduced */
+}
+
+.panel-title{font-weight:800}
+.panel-pill{
+  font-size:11px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(42,215,255,.30);
+  background:rgba(42,215,255,.10);
+}
+
+.panel-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px; /* tighter */
+}
+
+.panel-item{
+  display:flex;
+  gap:12px;
+  padding-bottom:8px;
+  border-bottom:1px solid rgba(255,255,255,.06); /* makes space feel intentional */
+}
+.panel-item:last-child{
+  padding-bottom:0;
+  border-bottom:none;
+}
+
+.panel-dot{
+  width:7px; height:7px;
+  border-radius:999px;
+  margin-top:6px;
+  background:rgba(42,215,255,.95);
+  box-shadow: 0 0 14px rgba(42,215,255,.50);
+}
+
+.panel-item-title{font-weight:700; font-size:13px}
+.panel-item-sub{
+  font-size:12px;
+  color:rgba(255,255,255,.70);
+  line-height:1.35; /* slightly tighter */
+}
+.panel-foot{
+  margin-top:12px; /* reduced */
+  font-size:12px;
+  color:rgba(255,255,255,.72)
+}
+
+/* Sections (tighter) */
+.section{padding:26px 0 30px}
+
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  align-items:start;
+}
+
+h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
+
+.muted{color:rgba(255,255,255,.70)}
+
+.list{
+  margin:10px 0 0 0;
+  padding-left:18px;
+}
+.list li{margin:0 0 8px 0; color:rgba(255,255,255,.86)}
+
+/* Early access tracker: tighten interior so it feels engineered */
+.availability-card{
+  margin-top:0;
+  width:100%;
+  max-width:none;
+  padding:12px 14px; /* reduced */
+}
+
+.availability-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:4px; /* reduced */
+}
+
+.availability-label{
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  font-size:11px;
+  color:rgba(140,214,255,.92);
+}
+
+.availability-live{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  color:rgba(220,240,255,.88);
+  padding:5px 9px;
+  border-radius:999px;
+  border:1px solid rgba(120,200,255,.22);
+  background:rgba(15,28,45,.30);
+}
+
+.availability-live .dot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:rgba(120,230,255,.95);
+  box-shadow:0 0 12px rgba(120,230,255,.35);
+}
+
+.availability-metric{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+  margin-bottom:2px; /* reduced */
+}
+
+.availability-count{
+  font-weight:900;
+  font-size:18px;
+  color:rgba(240,250,255,.96);
+}
+
+.availability-text{
+  font-weight:650;
+  font-size:13px;
+  color:rgba(220,240,255,.72);
+}
+
+.availability-sub{
+  font-size:12px;
+  color:rgba(220,240,255,.60);
+  line-height:1.35;
+}
+
+/* FOOTER (tight + premium) */
+.site-footer{
+  border-top: 0;
+  margin-top:18px;
+}
+.site-footer .container{
+  padding:8px 22px;
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  font-size:12px;
+  color:rgba(255,255,255,.70);
+}
+.site-footer a{color:rgba(255,255,255,.78)}
+.site-footer a:hover{color:var(--accent2)}
+
+/* Responsive */
+@media (max-width: 980px){
+  .hero{padding:36px 0 18px}
+  .hero-grid{grid-template-columns:1fr; gap:18px}
+  .hero-right::before{display:none}
+  .two-col{grid-template-columns:1fr}
+}
+
+@media (max-width: 880px){
+  .nav-wrap{flex-direction:column; align-items:flex-start}
+  .nav-links{justify-content:flex-start}
+  body{padding-top:96px}
+  .hero-left h1{font-size:38px}
+}
+/* Neutral availability pill (no status dot) */
+.availability-live--neutral{
+  gap:0;
+}
+.availability-live--neutral .dot{
+  display:none;
+}
+
+/* Partnership ladder visuals */
+.ladder { display: grid; gap: 12px; margin-top: 14px; }
+.ladder-step {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  background: rgba(0,0,0,.16);
+}
+.ladder-step-title { font-weight: 700; }
+.ladder-step-sub { opacity: .75; font-size: 12px; margin-top: 2px; }
+.ladder-pct { text-align: right; min-width: 140px; display: flex; flex-direction: column; justify-content: center; }
+.ladder-pct .pct { font-weight: 800; }
+.ladder-pct .pct-sub { opacity: .7; font-size: 12px; margin-top: 2px; }
+
+.ladder-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  overflow: hidden;
+  margin-top: 10px;
+}
+.ladder-bar > span { display: block; height: 100%; background: rgba(0,180,255,.35); }
+
+.note {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  color: rgba(255,255,255,.85);
+  font-size: 13px;
+}
+
+.mini-table { margin-top: 10px; display: grid; gap: 10px; }
+.mini-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(0,0,0,.14);
+}
+.mini-left { opacity: .85; }
+.mini-right { white-space: nowrap; }
+
+
+/* --- CreatorPulse: background seam fix (scroll pages) --- */
+/* Ensure the glow background covers the full viewport while scrolling. */
+html, body { min-height: 100%; }
+
+.bg {
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.bg-glow {
+  position: absolute;
+  inset: 0;
+}
+/* --- end seam fix --- */
+
+
+/* --- CreatorPulse: force ONE continuous background (seam fix) --- */
+html, body { min-height: 100%; }
+
+/* Stop any page/section background bands from creating seams */
+.page,
+.section,
+main,
+main.page {
+  background: transparent !important;
+}
+
+/* Use a single fixed background behind everything */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+
+  /* Keep the same "premium dark + glow" feel */
+  background:
+    radial-gradient(900px 500px at 18% 10%, rgba(40, 120, 180, 0.28), rgba(0, 0, 0, 0) 60%),
+    radial-gradient(700px 420px at 70% 25%, rgba(30, 90, 140, 0.20), rgba(0, 0, 0, 0) 62%),
+    linear-gradient(180deg, rgba(7, 12, 18, 1) 0%, rgba(6, 10, 16, 1) 55%, rgba(5, 8, 12, 1) 100%);
+}
+
+/* If you still include the old .bg element, neutralize it so it can't create seams */
+.bg { display: none !important; }
+/* --- end seam fix --- */
+
+
+
+/* ---- Seam fix: remove hard edges caused by section overlays ---- */
+.section,
+.page,
+.page-content,
+main {
+  background: transparent !important;
+}
+
+.section::before,
+.section::after,
+.page::before,
+.page::after,
+main::before,
+main::after {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+  content: none !important;
+}
+/* -------------------------------------------------------------- */
+
+/* ---- List marker fix: remove broken glyph boxes ---- */
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+ul li {
+  position: relative;
+  padding-left: 14px;
+}
+
+ul li::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.7;
+}
+/* --------------------------------------------------- */
+
+
+/* ---- List marker override: force stable markers in content cards ---- */
+.card ul, .section ul, main ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+.card ul li, .section ul li, main ul li {
+  position: relative !important;
+  padding-left: 14px !important;
+}
+
+.card ul li::before, .section ul li::before, main ul li::before {
+  content: "-" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  opacity: 0.7 !important;
+}
+/* -------------------------------------------------------------------- */
+
+
+/* ---- Disable page overlay pseudo-elements (prevents scroll seam) ---- */
+body::before,
+body::after {
+  content: none !important;
+  display: none !important;
+}
+/* ------------------------------------------------------------------- */
+
+
+// FILE: contact.html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Request Access &mdash; CreatorPulse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Request early access to CreatorPulse. We&rsquo;re rolling out to a small number of test servers for stability." />
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+
+  <body data-page="request-access">
+    <div class="bg"><div class="bg-glow"></div></div>
+
+    <div id="site-header"></div>
+
+    <main class="page">
+      <section class="hero">
+        <div class="container hero-grid">
+
+          <div class="hero-left">
+            <div class="eyebrow">Request access</div>
+            <h1>Early access, on purpose.</h1>
+
+            <p class="lead">
+              CreatorPulse is in a small rollout so stability stays high. If you join as a test server, you&rsquo;ll get access sooner &mdash;
+              and you&rsquo;ll help validate the experience in a real community.
+            </p>
+
+            <p class="lead-sub">
+              If you&rsquo;re accepted, we&rsquo;ll send you a custom invite link for the bot.
+            </p>
+
+            <div class="card">
+              <h2 style="margin-top:0;">What to expect</h2>
+              <ul class="list">
+                <li>You&rsquo;re an early test server (not a finished public launch yet)</li>
+                <li>You may receive updates earlier than the general rollout</li>
+                <li>We want calm feedback: what feels good, what feels confusing, what would help your community</li>
+                <li>We will not ask you to market the bot &mdash; stability comes first</li>
+              </ul>
+              <p class="muted" style="margin-bottom:0;">
+                The bot is free. The goal is a professional, reliable system creators can trust long-term.
+              </p>
+            </div>
+          </div>
+
+          <aside class="hero-panel card">
+            <div class="panel-head">
+              <div class="panel-title">Access intake</div>
+              <span class="panel-pill">Step 1</span>
+            </div>
+
+            <p class="muted">
+              Fill this out and click <strong>Generate Email</strong>. It will open a draft to:
+              <strong>support@cdcreatorpulse.com</strong>
+            </p>
+
+            <form id="accessForm" class="panel-list" style="margin-top:12px;">
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">Your name</div>
+                <input name="name" type="text" required style="width:100%; margin-top:6px;">
+              </label>
+
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">Discord username</div>
+                <div class="panel-item-sub">So we know who to talk to</div>
+                <input name="discord" type="text" required style="width:100%; margin-top:6px;">
+              </label>
+
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">Creator platform</div>
+                <div class="panel-item-sub">TikTok / YouTube / Twitch / Kick / other</div>
+                <input name="platform" type="text" required style="width:100%; margin-top:6px;">
+              </label>
+
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">Community size</div>
+                <div class="panel-item-sub">Approximate member count</div>
+                <input name="size" type="text" required style="width:100%; margin-top:6px;" placeholder="e.g., ~350 members">
+              </label>
+
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">Server status</div>
+                <div class="panel-item-sub">New server or existing server?</div>
+                <select name="serverStatus" required style="width:100%; margin-top:6px;">
+                  <option value="" selected disabled>Select one</option>
+                  <option>Existing server</option>
+                  <option>New server</option>
+                </select>
+              </label>
+
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">What are you trying to improve?</div>
+                <div class="panel-item-sub">One short sentence is enough</div>
+                <input name="goal" type="text" required style="width:100%; margin-top:6px;" placeholder="e.g., clean onboarding + calm alerts">
+              </label>
+
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">Can you be a test server?</div>
+                <div class="panel-item-sub">Early updates + feedback expected</div>
+                <select name="testConsent" required style="width:100%; margin-top:6px;">
+                  <option value="" selected disabled>Select one</option>
+                  <option>Yes &mdash; we understand this is early access</option>
+                  <option>Not sure &mdash; we prefer a later, stable release</option>
+                </select>
+              </label>
+
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">Timezone</div>
+                <div class="panel-item-sub">Helps us schedule support</div>
+                <input name="timezone" type="text" required style="width:100%; margin-top:6px;" placeholder="e.g., PST / EST / GMT">
+              </label>
+
+              <label class="panel-item" style="display:block;">
+                <div class="panel-item-title">Anything else we should know?</div>
+                <div class="panel-item-sub">Optional</div>
+                <textarea name="notes" rows="3" style="width:100%; margin-top:6px;"></textarea>
+              </label>
+
+              <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
+                <button class="btn primary" type="submit">Generate Email <span aria-hidden="true">&rarr;</span></button>
+                <a class="btn" href="mailto:support@cdcreatorpulse.com?subject=CreatorPulse%20Access%20Request">Email without form</a>
+              </div>
+
+              <p class="muted" style="margin-top:10px; margin-bottom:0;">
+                We review requests in order and prioritize communities that match the current rollout goals.
+              </p>
+            </form>
+          </aside>
+
+        </div>
+      </section>
+
+      <div id="site-footer"></div>
+    </main>
+
+    <script src="assets/site.js"></script>
+
+    <script>
+      (function () {
+        var form = document.getElementById("accessForm");
+        if (!form) return;
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          function v(name) {
+            var el = form.elements[name];
+            if (!el) return "";
+            return String(el.value || "").trim();
+          }
+
+          var subject = "CreatorPulse Early Access Request";
+          var bodyLines = [
+            "CreatorPulse Early Access Request",
+            "",
+            "Name: " + v("name"),
+            "Discord: " + v("discord"),
+            "Creator platform: " + v("platform"),
+            "Community size: " + v("size"),
+            "Server status: " + v("serverStatus"),
+            "Goal: " + v("goal"),
+            "Test server consent: " + v("testConsent"),
+            "Timezone: " + v("timezone"),
+            "Notes: " + v("notes"),
+            "",
+            "I understand this is early access and that stability is the priority."
+          ];
+
+          var mailto = "mailto:support@cdcreatorpulse.com"
+            + "?subject=" + encodeURIComponent(subject)
+            + "&body=" + encodeURIComponent(bodyLines.join("\n"));
+
+          window.location.href = mailto;
+        });
+      })();
+    </script>
+  </body>
+</html>
+
+// FILE: faq.html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FAQ  -  CreatorPulse</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script defer src="assets/site.js"></script>
+</head>
+<body>
+  <div data-include="assets/partials/header.html"></div>
+
+  <main class="page">
+    <section class="hero-grid">
+      <div class="hero-left">
+        <div class="eyebrow">FAQ</div>
+        <h1 class="hero-title">Answers, without the hype.</h1>
+        <p class="hero-subtitle">
+          CreatorPulse is a Discord assistant platform for creators. It helps structure and manage your community
+          so you can focus on content creation.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="contact.html">Request Early Access</a>
+          <a class="btn btn-secondary" href="how-it-works.html">How It Works</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="panel">
+          <div class="panel-top">
+            <div class="panel-title">Quick facts</div>
+            <span class="panel-pill">Clear</span>
+          </div>
+          <div class="panel-body">
+            <ul class="bullets">
+              <li>Designed for calm structure (no message spam).</li>
+              <li>Guided setup inside Discord.</li>
+              <li>Early access is limited intentionally for stability.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <div class="card">
+        <div class="card-title">Is CreatorPulse public?</div>
+        <p class="muted">
+          Not yet. Right now it's limited access while we validate stability in real communities.
+          Once the platform is rollout-ready, it will be open to any Discord server.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">What does it do first?</div>
+        <p class="muted">
+          From the moment it's invited, it begins helping. It guides the owner/admin through setup
+          and provisions clean, bot-managed surfaces where needed.
+        </p>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <div class="card">
+        <div class="card-title">Does it take over my server?</div>
+        <p class="muted">
+          No. The creator stays in control. CreatorPulse focuses on structure and bot-managed surfaces,
+          and avoids destructive changes to your community culture.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">How does the platform sustain itself?</div>
+        <p class="muted">
+          Through a partnership revenue share on subscription revenue. The split is designed to scale in your favor
+          as you grow. See the Partnership page for the ladder and examples.
+        </p>
+        <p class="muted"><a href="partnership.html">Read Partnership details</a></p>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="assets/partials/footer.html"></div>
+</body>
+</html>
+
+// FILE: how-it-works.html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How It Works - CreatorPulse</title>
+    <meta name="description" content="CreatorPulse helps streamers and creators run Discord without needing to understand roles, permissions, or server structure." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+
+  <body data-page="how-it-works">
+    <div class="bg"><div class="bg-glow"></div></div>
+
+    <div id="site-header"></div>
+
+    <main class="page">
+      <section class="section">
+        <div class="container">
+          <div class="eyebrow">HOW IT WORKS</div>
+          <h1>You don't need to know Discord.</h1>
+          <p class="lead">
+            Most streamers and content creators don't want to learn roles, permissions, and channel setup.
+            CreatorPulse handles the structure behind the scenes so your community stays organized.
+          </p>
+          <p class="muted">
+            This helps your members too  -  they don't need to guess where to go or ask for access manually.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container two-col">
+          <div>
+            <h2>What happens when you install it</h2>
+            <div class="card">
+              <ul class="list">
+                <li>CreatorPulse reviews your server safely</li>
+                <li>It sets up clean structure where needed</li>
+                <li>It configures permissions correctly</li>
+                <li>It prepares clear onboarding for members</li>
+              </ul>
+              <p class="muted" style="margin-top:12px;">
+                Nothing is deleted. Your existing channels stay yours.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h2>What your community experiences</h2>
+            <div class="card">
+              <ul class="list">
+                <li>Clear places to start</li>
+                <li>Less clutter and confusion</li>
+                <li>Important info stays pinned and updated</li>
+                <li>Subscriber areas unlock automatically (if enabled)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container two-col">
+          <div>
+            <h2>Optional: Discord-based subscriptions</h2>
+            <div class="card">
+              <p class="muted" style="margin-bottom:12px;">
+                Important: these are optional subscriptions inside Discord.
+                They are separate from YouTube memberships, Twitch subscriptions, TikTok monetization, Patreon, or any external platform revenue.
+              </p>
+              <ul class="list">
+                <li>Members subscribe inside your Discord</li>
+                <li>Roles are applied automatically</li>
+                <li>Paid channels unlock automatically</li>
+                <li>Access is removed automatically if they cancel</li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <h2>After setup</h2>
+            <div class="card">
+              <ul class="list">
+                <li>CreatorPulse runs quietly in the background</li>
+                <li>Structure stays consistent as you grow</li>
+                <li>Updates happen in place (no spam)</li>
+                <li>You spend less time in Discord settings</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="cta-row">
+            <a class="btn primary" href="setup.html">See Setup</a>
+            <a class="btn" href="contact.html">Request Early Access</a>
+          </div>
+        </div>
+      </section>
+
+      <div id="site-footer"></div>
+    </main>
+
+    <script src="assets/site.js"></script>
+  </body>
+</html>
+
+// FILE: index.html
+<!doctype html> <html lang="en">   <head>     <meta charset="utf-8" />     <meta name="viewport" content="width=device-width, initial-scale=1" />     <title>CreatorPulse</title>     <meta name="description" content="CreatorPulse manages your Discord community so you can focus on content creation." />     <link rel="preconnect" href="https://fonts.googleapis.com">     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">     <link rel="stylesheet" href="assets/styles.css" />   </head>    <body data-page="home">     <div class="bg"><div class="bg-glow"></div></div>      <div id="site-header"></div>      <main class="page">       <section class="hero">         <div class="container hero-grid">           <div class="hero-left">             <div class="eyebrow">BUILT FOR STREAMERS & CONTENT CREATORS</div>             <h1>Your Discord. Managed.</h1>              <p class="lead">               CreatorPulse organizes your server, manages subscriber access, and keeps things clean  -  so you can focus on creating.             </p>             <p class="lead-sub">               You don't need to understand Discord roles, permissions, or channel setup. CreatorPulse handles the structure behind the scenes.             </p>              <div class="cta-row">               <a class="btn primary" href="contact.html">Request Early Access <span aria-hidden="true">-></span></a>               <a class="btn" href="how-it-works.html">How It Works</a>             </div>           </div>            <div class="hero-right">             <aside class="hero-panel card">               <div class="panel-head">                 <div class="panel-title">What it handles</div>                 <span class="panel-pill">Core</span>               </div>                <div class="panel-list">                 <div class="panel-item">                   <div class="panel-dot"></div>                   <div>                     <div class="panel-item-title">Clean server structure</div>                     <div class="panel-item-sub">Channels and permissions set up correctly</div>                   </div>                 </div>                  <div class="panel-item">                   <div class="panel-dot"></div>                   <div>                     <div class="panel-item-title">Subscriber access</div>                     <div class="panel-item-sub">Roles and gated channels managed automatically</div>                   </div>                 </div>                  <div class="panel-item">                   <div class="panel-dot"></div>                   <div>                     <div class="panel-item-title">Calm updates</div>                     <div class="panel-item-sub">Important info stays pinned and refreshed</div>                   </div>                 </div>               </div>                <div class="panel-foot">                 Less Discord work. More time creating.               </div>             </aside>              <aside class="availability-card card">               <div class="availability-top">                 <div class="availability-label">EARLY ACCESS</div>                 <div class="availability-live availability-live--neutral">Slots</div>               </div>                <div class="availability-metric">                 <div class="availability-count"><span id="earlyFilled">0</span> / <span id="earlyTotal">5</span></div>                 <div class="availability-text">slots filled</div>               </div>                <div class="availability-sub">Small rollout for stability.</div>             </aside>           </div>         </div>       </section>        <section class="section">         <div class="container two-col">           <div>             <h2>What It Helps With</h2>             <div class="card">               <ul class="list">                 <li>Server structure that stays organized as you grow</li>                 <li>Subscriber roles and access handled automatically</li>                 <li>Live alerts and announcements without spam</li>                 <li>Clear onboarding so members know where to go</li>                 <li>Less time fixing Discord, more time creating</li>               </ul>             </div>           </div>            <div>             <h2>Who It Is For</h2>             <div class="card">               <ul class="list">                 <li>Streamers and content creators building a community</li>                 <li>Creators who don't want to learn Discord "the hard way"</li>                 <li>Communities that need structure without constant admin work</li>                 <li>Creators who want Discord to run like an assistant is managing it</li>               </ul>               <p class="muted" style="margin-top:12px;">                 Early access is limited intentionally while we validate stability in real communities.               </p>             </div>           </div>         </div>       </section>        <div id="site-footer"></div>     </main>      <script src="assets/site.js"></script>   </body> </html>
+
+// FILE: legal.html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Legal - CreatorPulse</title>
+    <meta name="description" content="Terms, privacy, and refund policy for CreatorPulse." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+
+  <body data-page="legal">
+    <div class="bg"><div class="bg-glow"></div></div>
+
+    <div id="site-header"></div>
+
+    <main class="page">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-left">
+            <div class="eyebrow">LEGAL</div>
+            <h1>Clear policies, calm expectations.</h1>
+            <p class="lead">
+              CreatorPulse is built for stability and trust. These pages explain how we handle privacy,
+              terms of use, and refunds.
+            </p>
+            <p class="lead-sub">
+              Questions? Email support@cdcreatorpulse.com
+            </p>
+          </div>
+
+          <aside class="hero-panel card">
+            <div class="panel-head">
+              <div class="panel-title">Documents</div>
+              <span class="panel-pill">Active</span>
+            </div>
+
+            <div class="panel-list">
+              <div class="panel-item">
+                <div class="panel-dot"></div>
+                <div>
+                  <div class="panel-item-title"><a href="terms.html">Terms of Service</a></div>
+                  <div class="panel-item-sub">Use and access rules</div>
+                </div>
+              </div>
+
+              <div class="panel-item">
+                <div class="panel-dot"></div>
+                <div>
+                  <div class="panel-item-title"><a href="privacy.html">Privacy Policy</a></div>
+                  <div class="panel-item-sub">How data is handled</div>
+                </div>
+              </div>
+
+              <div class="panel-item">
+                <div class="panel-dot"></div>
+                <div>
+                  <div class="panel-item-title"><a href="refunds.html">Refund Policy</a></div>
+                  <div class="panel-item-sub">Refund terms (when applicable)</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-foot">
+              Built to keep expectations clear.
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top:0;">
+        <div class="container two-col">
+          <div>
+            <h2>Privacy, simply</h2>
+            <div class="card">
+              <p>
+                CreatorPulse is designed to operate with minimal data needed to provide the service.
+                The privacy policy explains what is collected and why.
+              </p>
+              <p class="muted">
+                When in doubt, we prefer collecting less.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h2>Refunds, when applicable</h2>
+            <div class="card">
+              <p>
+                CreatorPulse is free during early access. If any paid features exist later, refund rules will be
+                governed by the refund policy.
+              </p>
+              <p class="muted">
+                Transparent policies, no surprises.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="site-footer"></div>
+    </main>
+
+    <script src="assets/site.js"></script>
+  </body>
+</html>
+
+// FILE: partnership.html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Partnership  - Â CreatorPulse</title>
+  <meta name="description" content="CreatorPulse revenue share facts for optional Discord subscriptions. Separate from external platforms." />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script defer src="assets/site.js"></script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="page">
+    <section class="section">
+      <div class="container">
+        <div class="eyebrow">PARTNERSHIP</div>
+        <h1>Revenue share facts (optional).</h1>
+        <p class="lead">
+          CreatorPulse can optionally manage paid content inside your Discord using Stripe.
+          This page explains the revenue share model for those optional Discord subscriptions.
+        </p>
+        <p class="muted">
+          Important: these are NOT Twitch subscriptions, YouTube memberships, TikTok monetization, Patreon, or any external platform revenue.
+          CreatorPulse does not access or take a share of your platform income. Revenue share applies only to optional Discord subscriptions you enable inside your server.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container two-col">
+        <div>
+          <h2>When revenue share applies</h2>
+          <div class="card">
+            <ul class="list">
+              <li>Only if you enable paid Discord subscriptions through Stripe</li>
+              <li>Only on successful subscription payments</li>
+              <li>If you do not enable subscriptions, there is no revenue share</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <h2>How milestones unlock</h2>
+          <div class="card">
+            <p class="muted" style="margin-bottom:12px;">
+              Milestones are hybrid. Each milestone requires BOTH:
+            </p>
+            <ul class="list">
+              <li>A minimum number of active supporters</li>
+              <li>A minimum monthly gross revenue floor</li>
+            </ul>
+            <p class="muted" style="margin-top:12px;">
+              Milestones are permanent once unlocked (no downgrades).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Milestone ladder</h2>
+        <div class="card">
+          <p class="muted" style="margin-bottom:12px;">Splits shown as Creator / Platform.</p>
+          <ul class="list">
+            <li><strong>Starter</strong>  - Â Default  - Â <strong>50% / 50%</strong></li>
+            <li><strong>Momentum</strong>  - Â 10 supporters AND $50/month gross  - Â <strong>60% / 40%</strong></li>
+            <li><strong>Growing</strong>  - Â 25 supporters AND $125/month gross  - Â <strong>70% / 30%</strong></li>
+            <li><strong>Breakthrough</strong>  - Â 50 supporters AND $250/month gross  - Â <strong>80% / 20%</strong></li>
+            <li><strong>Established</strong>  - Â 100 supporters AND $500/month gross  - Â <strong>85% / 15%</strong></li>
+            <li><strong>Scale</strong>  - Â 250 supporters AND $1,250/month gross  - Â <strong>90% / 10%</strong></li>
+          </ul>
+          <p class="muted" style="margin-top:12px;">
+            The platform share never goes below 10%.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container two-col">
+        <div>
+          <h2>How revenue is measured</h2>
+          <div class="card">
+            <ul class="list">
+              <li>Monthly gross is based on successful Stripe subscription invoice payments</li>
+              <li>Only completed payments count toward milestones</li>
+              <li>Stripe processing fees are separate and handled by Stripe</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <h2>No lock-in</h2>
+          <div class="card">
+            <ul class="list">
+              <li>No contracts</li>
+              <li>No required monetization</li>
+              <li>No surprise pricing changes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-row">
+          <a class="btn primary" href="contact.html">Request Early Access</a>
+          <a class="btn" href="legal.html">Read Policies</a>
+        </div>
+      </div>
+    </section>
+
+    <div id="site-footer"></div>
+  </main>
+</body>
+</html>
+
+// FILE: pricing.html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CreatorPulse - Pricing</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <!-- Header include (if your site uses partial injection, keep as-is) -->
+  <!--#include file="partials/header.html" -->
+
+  <main class="page">
+    <section class="hero">
+      <div class="container">
+        <p class="kicker">PRICING + REVENUE SPLIT</p>
+        <h1>Free to install. Clear revenue sharing.</h1>
+        <p class="lead">
+          CreatorPulse is built to manage Discord so creators can focus on content.
+          The bot is free to install. Monetization is handled through paid subscriptions
+          processed by Stripe, with a transparent revenue share model.
+        </p>
+
+        <div class="section-grid" style="margin-top:18px;">
+          <div class="card">
+            <h2>What you pay</h2>
+            <p>
+              There is no install fee. If you choose to offer paid tiers to your community,
+              payments run through Stripe. CreatorPulse takes a platform share based on your
+              growth stage. The intent is simple: as creators grow, the creator share increases.
+            </p>
+          </div>
+
+          <div class="card">
+            <h2>What we handle</h2>
+            <ul>
+              <li>Stripe Checkout + subscription flows</li>
+              <li>Role assignment and enforcement (highest tier wins)</li>
+              <li>Bot-managed dashboards and pinned updates (no spam)</li>
+              <li>Creator support intake at support@cdcreatorpulse.com</li>
+            </ul>
+          </div>
+
+          <div class="card" style="grid-column:1 / -1;">
+            <h2>Revenue share ladder (milestone based)</h2>
+            <p>
+              This is the intended model: higher platform share for small communities,
+              progressively lower platform share as you grow.
+            </p>
+
+            <div class="card" style="background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.08); box-shadow:none;">
+              <p style="margin:0 0 10px;">
+                Example ladder (illustrative - subject to final rollout readiness):
+              </p>
+              <ul>
+                <li>Early stage: ~50% platform / 50% creator</li>
+                <li>Growing: steps down in milestones (platform share decreases)</li>
+                <li>Large communities: can reach ~10% platform / 90% creator</li>
+              </ul>
+              <p style="margin:12px 0 0;">
+                The final ladder and triggers will be documented here as it is finalized.
+              </p>
+            </div>
+
+            <p style="margin-top:12px;">
+              Transparency note: this page is the canonical reference. Any changes will be
+              reflected here first.
+            </p>
+          </div>
+
+          <div class="card" style="grid-column:1 / -1;">
+            <h2>Request access</h2>
+            <p>
+              CreatorPulse is currently Limited Access. To request access, email:
+              <strong>support@cdcreatorpulse.com</strong>
+            </p>
+            <p style="margin-top:8px;">
+              Recommended subject: <strong>[ACCESS] CreatorPulse</strong>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer include -->
+  <!--#include file="partials/footer.html" -->
+</body>
+</html>
+
+// FILE: privacy.html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy - CD-CreatorPulse</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body data-page="privacy">
+  <div id="site-header"></div>
+
+  <main>
+    <div class="container">
+      <section class="legal">
+        <h1>Privacy Policy</h1>
+
+        <p>CD-CreatorPulse stores only minimal operational data.</p>
+
+        <h2>Data Stored</h2>
+        <ul>
+          <li>Discord guild IDs</li>
+          <li>Discord role IDs</li>
+          <li>Stripe subscription references</li>
+          <li>Configuration data</li>
+        </ul>
+
+        <h2>Data Not Stored</h2>
+        <ul>
+          <li>Credit card numbers</li>
+          <li>Full payment details</li>
+        </ul>
+
+        <h2>Third-Party Processing</h2>
+        <p>Payments are processed by Stripe. Discord operates independently under its own privacy policies.</p>
+      </section>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/site.js" defer></script>
+</body>
+</html>
+
+// FILE: refunds.html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Refunds - CD-CreatorPulse</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body data-page="refunds">
+  <div id="site-header"></div>
+
+  <main>
+    <div class="container">
+      <section class="legal">
+        <h1>Refund &amp; Cancellation Policy</h1>
+
+        <p>Subscriptions are managed through Stripe.</p>
+
+        <h2>Cancellation</h2>
+        <p>Subscriptions may be cancelled via Stripe?s customer portal.</p>
+
+        <h2>Refunds</h2>
+        <p>Refund requests must be submitted via email and are evaluated case-by-case.</p>
+      </section>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/site.js" defer></script>
+</body>
+</html>
+
+// FILE: setup.html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Setup - CreatorPulse</title>
+    <meta name="description" content="CreatorPulse setup is guided and safe. No Discord expertise required." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+
+  <body data-page="setup">
+    <div class="bg"><div class="bg-glow"></div></div>
+
+    <div id="site-header"></div>
+
+    <main class="page">
+      <section class="section">
+        <div class="container">
+          <div class="eyebrow">SETUP</div>
+          <h1>Safe setup inside Discord.</h1>
+          <p class="lead">
+            CreatorPulse asks a few simple questions so it can configure your server correctly.
+            You don't need to understand roles or permissions  -  the goal is to remove Discord confusion.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container two-col">
+          <div>
+            <h2>What it will do</h2>
+            <div class="card">
+              <ul class="list">
+                <li>Create organized categories and channels where needed</li>
+                <li>Configure permissions safely</li>
+                <li>Set up onboarding surfaces for members</li>
+                <li>Prepare optional subscriber channels (if enabled)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <h2>What it will not do</h2>
+            <div class="card">
+              <ul class="list">
+                <li>Delete your existing channels</li>
+                <li>Randomly override unrelated roles</li>
+                <li>Spam announcements repeatedly</li>
+                <li>Touch your external platform revenue (Twitch/YouTube/TikTok/etc.)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container two-col">
+          <div>
+            <h2>If you enable subscriptions</h2>
+            <div class="card">
+              <p class="muted" style="margin-bottom:12px;">
+                These are optional Discord-based subscriptions through Stripe. They are separate from your platform monetization.
+              </p>
+              <ul class="list">
+                <li>Members subscribe inside your Discord</li>
+                <li>Roles update automatically</li>
+                <li>Paid channels unlock automatically</li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <h2>Time required</h2>
+            <div class="card">
+              <ul class="list">
+                <li>Usually a few minutes to configure</li>
+                <li>After setup, CreatorPulse runs quietly</li>
+                <li>Your server stays organized as you grow</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="cta-row">
+            <a class="btn primary" href="contact.html">Request Early Access</a>
+            <a class="btn" href="partnership.html">Revenue Share Facts</a>
+          </div>
+        </div>
+      </section>
+
+      <div id="site-footer"></div>
+    </main>
+
+    <script src="assets/site.js"></script>
+  </body>
+</html>
+
+// FILE: terms.html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terms - CD-CreatorPulse</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body data-page="terms">
+  <div id="site-header"></div>
+
+  <main>
+    <div class="container">
+      <section class="legal">
+        <h1>Terms of Service</h1>
+
+        <p>CD-CreatorPulse is a SaaS automation tool for Discord communities.</p>
+
+        <h2>Service Description</h2>
+        <p>
+          The service provides subscription handling, revenue distribution via Stripe Connect,
+          Discord automation, and operational tools for creators.
+        </p>
+
+        <h2>Payments</h2>
+        <p>All payments are processed through Stripe. CD-CreatorPulse does not store or process credit card information directly.</p>
+
+        <h2>Platform Dependencies</h2>
+        <p>The service depends on Discord and Stripe APIs. CD-CreatorPulse is not responsible for outages caused by third-party platforms.</p>
+
+        <h2>Creator Responsibility</h2>
+        <p>Creators are responsible for their community moderation and compliance.</p>
+
+        <h2>Limitation of Liability</h2>
+        <p>The service is provided ?as-is? without warranties of uninterrupted operation.</p>
+      </section>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/site.js" defer></script>
+</body>
+</html>

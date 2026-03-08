@@ -3,109 +3,309 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>How It Works - CreatorPulse</title>
-    <meta name="description" content="CreatorPulse helps streamers and creators run Discord without needing to understand roles, permissions, or server structure." />
+    <title>How It Works — CreatorPulse</title>
+    <meta name="description" content="How CreatorPulse manages your Discord community — structure, subscribers, live alerts, and Pulselings. Built for streamers and content creators." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles.css" />
+    <style>
+      .how-section-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 10px;
+      }
+
+      /* Step-by-step blocks */
+      .steps {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        position: relative;
+      }
+      .steps::before {
+        content: '';
+        position: absolute;
+        left: 23px;
+        top: 48px;
+        bottom: 48px;
+        width: 1px;
+        background: linear-gradient(180deg, rgba(42,215,255,.3), rgba(42,215,255,.05));
+      }
+      .step {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 20px;
+        padding: 28px 0;
+        position: relative;
+      }
+      .step-num {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, rgba(42,215,255,.15), rgba(42,215,255,.05));
+        border: 1px solid rgba(42,215,255,.25);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 0.9rem;
+        color: var(--accent);
+        flex-shrink: 0;
+        position: relative;
+        z-index: 1;
+      }
+      .step-body h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin: 10px 0 8px;
+        letter-spacing: -0.01em;
+      }
+      .step-body p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.65;
+        margin: 0;
+      }
+      .step-tag {
+        display: inline-block;
+        background: rgba(42,215,255,.08);
+        border: 1px solid rgba(42,215,255,.15);
+        border-radius: 6px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        padding: 3px 8px;
+        margin-bottom: 6px;
+      }
+
+      /* Feature detail cards */
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 32px;
+      }
+      @media (max-width: 640px) {
+        .feature-grid { grid-template-columns: 1fr; }
+      }
+      .feature-card {
+        background: linear-gradient(160deg, rgba(255,255,255,.065), rgba(255,255,255,.035));
+        border: 1px solid rgba(255,255,255,.09);
+        border-radius: 16px;
+        padding: 24px;
+      }
+      .feature-card-icon {
+        font-size: 1.5rem;
+        margin-bottom: 12px;
+        display: block;
+      }
+      .feature-card h3 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin: 0 0 8px;
+      }
+      .feature-card p {
+        font-size: 0.85rem;
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      /* Subscription section */
+      .sub-callout {
+        background: linear-gradient(135deg, rgba(42,215,255,.07), rgba(42,215,255,.03));
+        border: 1px solid rgba(42,215,255,.15);
+        border-radius: 16px;
+        padding: 32px;
+        margin-top: 40px;
+      }
+      .sub-callout h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin: 0 0 10px;
+      }
+      .sub-callout p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.65;
+        margin: 0 0 16px;
+      }
+      .sub-callout .note {
+        font-size: 0.78rem;
+        color: var(--muted);
+        background: rgba(255,255,255,.04);
+        border: 1px solid rgba(255,255,255,.07);
+        border-radius: 8px;
+        padding: 10px 14px;
+        line-height: 1.55;
+      }
+
+      .page-hero-h1 {
+        font-size: clamp(2rem, 4.5vw, 3.2rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        margin: 0 0 18px;
+      }
+    </style>
   </head>
 
   <body data-page="how-it-works">
-    <div class="bg"><div class="bg-glow"></div></div>
-
     <div id="site-header"></div>
 
     <main class="page">
-      <section class="section">
-        <div class="container">
-          <div class="eyebrow">HOW IT WORKS</div>
-          <h1>You don't need to know Discord.</h1>
+
+      <!-- ── HERO ── -->
+      <section class="section" style="padding-bottom: 0;">
+        <div class="container" style="max-width: 760px;">
+          <div class="how-section-label">How It Works</div>
+          <h1 class="page-hero-h1">You don't need to know Discord.<br>We handle it.</h1>
           <p class="lead">
-            Most streamers and content creators don't want to learn roles, permissions, and channel setup.
-            CreatorPulse handles the structure behind the scenes so your community stays organized.
-          </p>
-          <p class="muted">
-            This helps your members too  -  they don't need to guess where to go or ask for access manually.
+            Most streamers pick up Discord because their community needs a home — not because they want to learn permissions, roles, and channel hierarchies. CreatorPulse handles all of that so you can focus on the thing that actually matters: your content.
           </p>
         </div>
       </section>
 
+      <!-- ── HOW IT SETS UP ── -->
       <section class="section">
-        <div class="container two-col">
-          <div>
-            <h2>What happens when you install it</h2>
-            <div class="card">
-              <ul class="list">
-                <li>CreatorPulse reviews your server safely</li>
-                <li>It sets up clean structure where needed</li>
-                <li>It configures permissions correctly</li>
-                <li>It prepares clear onboarding for members</li>
-              </ul>
-              <p class="muted" style="margin-top:12px;">
-                Nothing is deleted. Your existing channels stay yours.
-              </p>
-            </div>
-          </div>
+        <div class="container" style="max-width: 760px;">
+          <div class="how-section-label">Setup</div>
+          <h2 style="font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 32px;">What happens when CreatorPulse joins your server</h2>
 
-          <div>
-            <h2>What your community experiences</h2>
-            <div class="card">
-              <ul class="list">
-                <li>Clear places to start</li>
-                <li>Less clutter and confusion</li>
-                <li>Important info stays pinned and updated</li>
-                <li>Subscriber areas unlock automatically (if enabled)</li>
-              </ul>
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <span class="step-tag">Safe</span>
+                <h3>It reviews your server without touching anything</h3>
+                <p>CreatorPulse reads your existing structure first. Nothing is deleted, moved, or changed until it knows what's there. Your existing channels, your existing members — all untouched.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <span class="step-tag">Structure</span>
+                <h3>It sets up clean structure where it's needed</h3>
+                <p>Channels are organized correctly. Permissions are applied properly. A clear onboarding path is created so new members know exactly where to go — without asking in chat.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <span class="step-tag">Ongoing</span>
+                <h3>It runs quietly in the background, forever</h3>
+                <p>Once set up, CreatorPulse maintains everything. Rules and community info stay pinned and current. Structure stays consistent as your community grows. You never have to touch it again.</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section">
-        <div class="container two-col">
-          <div>
-            <h2>Optional: Discord-based subscriptions</h2>
-            <div class="card">
-              <p class="muted" style="margin-bottom:12px;">
-                Important: these are optional subscriptions inside Discord.
-                They are separate from YouTube memberships, Twitch subscriptions, TikTok monetization, Patreon, or any external platform revenue.
-              </p>
-              <ul class="list">
-                <li>Members subscribe inside your Discord</li>
-                <li>Roles are applied automatically</li>
-                <li>Paid channels unlock automatically</li>
-                <li>Access is removed automatically if they cancel</li>
-              </ul>
-            </div>
-          </div>
+      <!-- ── WHAT IT MANAGES ── -->
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          <div class="how-section-label">Core Features</div>
+          <h2 style="font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 8px;">What CreatorPulse manages for you</h2>
+          <p class="muted" style="margin: 0 0 0; font-size: 0.9rem;">Every feature runs automatically. No commands to run, no settings to check.</p>
 
-          <div>
-            <h2>After setup</h2>
-            <div class="card">
-              <ul class="list">
-                <li>CreatorPulse runs quietly in the background</li>
-                <li>Structure stays consistent as you grow</li>
-                <li>Updates happen in place (no spam)</li>
-                <li>You spend less time in Discord settings</li>
-              </ul>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <span class="feature-card-icon">🏗️</span>
+              <h3>Server structure</h3>
+              <p>Channels, categories, and permissions set up correctly from the start and maintained as you grow. No more cleaning up a messy channel list every few months.</p>
+            </div>
+
+            <div class="feature-card">
+              <span class="feature-card-icon">📌</span>
+              <h3>Pinned community info</h3>
+              <p>Rules, guides, and important announcements stay pinned and refreshed in place. No duplicate posts, no stale pinned messages from two years ago.</p>
+            </div>
+
+            <div class="feature-card">
+              <span class="feature-card-icon">🔴</span>
+              <h3>Live alerts</h3>
+              <p>When you go live, your community knows. Alerts post to the right channel automatically — without spam, without duplicates, without manual posting every stream.</p>
+            </div>
+
+            <div class="feature-card">
+              <span class="feature-card-icon">👥</span>
+              <h3>Member onboarding</h3>
+              <p>New members get a clear path from the moment they join. They know where to go, what the community is about, and how to get started — all without needing to ask.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section">
+      <!-- ── SUBSCRIPTIONS ── -->
+      <section class="section" style="padding-top: 0;">
+        <div class="container" style="max-width: 760px;">
+          <div class="how-section-label">Optional</div>
+          <h2 style="font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 8px;">Discord-based subscriptions</h2>
+          <p class="muted" style="margin: 0 0 20px; font-size: 0.9rem;">Completely optional. If you want to offer your community paid access to exclusive content, CreatorPulse handles the whole flow.</p>
+
+          <div class="card">
+            <ul class="list">
+              <li>Members subscribe directly inside Discord — no external checkout flow to manage</li>
+              <li>Subscriber roles are applied the moment payment clears</li>
+              <li>Exclusive paid channels unlock automatically for subscribers</li>
+              <li>Access is removed automatically if a subscription cancels or lapses</li>
+              <li>Multiple subscription tiers supported — members always get the highest tier they've paid for</li>
+            </ul>
+          </div>
+
+          <div class="sub-callout" style="margin-top: 20px;">
+            <h3>Not connected to your platform revenue</h3>
+            <p>These Discord subscriptions are completely separate from Twitch subs, YouTube memberships, TikTok monetization, Patreon, or any other platform. CreatorPulse has zero access to and takes zero share of your external income.</p>
+            <div class="note">
+              Revenue share applies only to Discord subscriptions you choose to enable. If you never enable them, there's nothing to share. <a href="partnership.html" style="color: var(--accent);">Read the full partnership model →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── PULSELINGS ── -->
+      <section class="section" style="padding-top: 0;">
+        <div class="container" style="max-width: 760px;">
+          <div class="how-section-label">Community Feature</div>
+          <h2 style="font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 8px;">Pulselings — the game your community didn't know it needed</h2>
+          <p class="muted" style="margin: 0 0 20px; font-size: 0.9rem;">Every CreatorPulse server comes with Pulselings included. No setup required.</p>
+
+          <div class="card">
+            <p style="margin: 0 0 14px; font-size: 0.9rem; color: var(--muted); line-height: 1.65;">
+              Pulselings is a creature-raising game built directly into Discord. Every member hatches their own unique Pulseling and levels it up through daily activity in your server. They can feed each other's creatures, show them off in a showcase channel, and compete on a live leaderboard.
+            </p>
+            <p style="margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.65;">
+              The result: members come back every day. They interact with each other. They care about your server. Not because you told them to — because they have a creature to take care of.
+            </p>
+          </div>
+
+          <div style="margin-top: 16px;">
+            <a class="btn" href="pulselings.html" style="border-color: rgba(180,122,255,.4); color: #b47aff;">Explore Pulselings ✦</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── CTA ── -->
+      <section class="section" style="padding-top: 0;">
         <div class="container">
           <div class="cta-row">
-            <a class="btn primary" href="setup.html">See Setup</a>
-            <a class="btn" href="contact.html">Request Early Access</a>
+            <a class="btn primary" href="contact.html">Request Early Access →</a>
+            <a class="btn" href="partnership.html">Partnership Model</a>
           </div>
         </div>
       </section>
 
-      <div id="site-footer"></div>
     </main>
 
+    <div id="site-footer"></div>
     <script src="assets/site.js"></script>
   </body>
 </html>

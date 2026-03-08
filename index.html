@@ -1,1 +1,439 @@
-<!doctype html> <html lang="en">   <head>     <meta charset="utf-8" />     <meta name="viewport" content="width=device-width, initial-scale=1" />     <title>CreatorPulse</title>     <meta name="description" content="CreatorPulse manages your Discord community so you can focus on content creation." />     <link rel="preconnect" href="https://fonts.googleapis.com">     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">     <link rel="stylesheet" href="assets/styles.css" />   </head>    <body data-page="home">     <div class="bg"><div class="bg-glow"></div></div>      <div id="site-header"></div>      <main class="page">       <section class="hero">         <div class="container hero-grid">           <div class="hero-left">             <div class="eyebrow">BUILT FOR STREAMERS & CONTENT CREATORS</div>             <h1>Your Discord. Managed.</h1>              <p class="lead">               CreatorPulse organizes your server, manages subscriber access, and keeps things clean  -  so you can focus on creating.             </p>             <p class="lead-sub">               You don't need to understand Discord roles, permissions, or channel setup. CreatorPulse handles the structure behind the scenes.             </p>              <div class="cta-row">               <a class="btn primary" href="contact.html">Request Early Access <span aria-hidden="true">-></span></a>               <a class="btn" href="how-it-works.html">How It Works</a>             </div>           </div>            <div class="hero-right">             <aside class="hero-panel card">               <div class="panel-head">                 <div class="panel-title">What it handles</div>                 <span class="panel-pill">Core</span>               </div>                <div class="panel-list">                 <div class="panel-item">                   <div class="panel-dot"></div>                   <div>                     <div class="panel-item-title">Clean server structure</div>                     <div class="panel-item-sub">Channels and permissions set up correctly</div>                   </div>                 </div>                  <div class="panel-item">                   <div class="panel-dot"></div>                   <div>                     <div class="panel-item-title">Subscriber access</div>                     <div class="panel-item-sub">Roles and gated channels managed automatically</div>                   </div>                 </div>                  <div class="panel-item">                   <div class="panel-dot"></div>                   <div>                     <div class="panel-item-title">Calm updates</div>                     <div class="panel-item-sub">Important info stays pinned and refreshed</div>                   </div>                 </div>               </div>                <div class="panel-foot">                 Less Discord work. More time creating.               </div>             </aside>              <aside class="availability-card card">               <div class="availability-top">                 <div class="availability-label">EARLY ACCESS</div>                 <div class="availability-live availability-live--neutral">Slots</div>               </div>                <div class="availability-metric">                 <div class="availability-count"><span id="earlyFilled">0</span> / <span id="earlyTotal">5</span></div>                 <div class="availability-text">slots filled</div>               </div>                <div class="availability-sub">Small rollout for stability.</div>             </aside>           </div>         </div>       </section>        <section class="section">         <div class="container two-col">           <div>             <h2>What It Helps With</h2>             <div class="card">               <ul class="list">                 <li>Server structure that stays organized as you grow</li>                 <li>Subscriber roles and access handled automatically</li>                 <li>Live alerts and announcements without spam</li>                 <li>Clear onboarding so members know where to go</li>                 <li>Less time fixing Discord, more time creating</li>               </ul>             </div>           </div>            <div>             <h2>Who It Is For</h2>             <div class="card">               <ul class="list">                 <li>Streamers and content creators building a community</li>                 <li>Creators who don't want to learn Discord "the hard way"</li>                 <li>Communities that need structure without constant admin work</li>                 <li>Creators who want Discord to run like an assistant is managing it</li>               </ul>               <p class="muted" style="margin-top:12px;">                 Early access is limited intentionally while we validate stability in real communities.               </p>             </div>           </div>         </div>       </section>        <div id="site-footer"></div>     </main>      <script src="assets/site.js"></script>   </body> </html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CreatorPulse — Discord, managed.</title>
+    <meta name="description" content="CreatorPulse runs your Discord community so you can focus on creating. Built for streamers and content creators." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css" />
+    <style>
+      /* ── Homepage-specific styles ── */
+      .hero-eyebrow {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 18px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.4rem, 5vw, 3.8rem);
+        font-weight: 800;
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        margin: 0 0 22px;
+      }
+
+      .hero h1 em {
+        font-style: normal;
+        color: var(--accent);
+      }
+
+      .pain-statement {
+        font-size: 1.1rem;
+        color: var(--muted);
+        line-height: 1.65;
+        max-width: 520px;
+        margin: 0 0 32px;
+      }
+
+      /* Three pillars */
+      .pillars {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin: 64px 0;
+      }
+      @media (max-width: 720px) {
+        .pillars { grid-template-columns: 1fr; }
+      }
+
+      .pillar {
+        background: linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+        border: 1px solid rgba(255,255,255,.09);
+        border-radius: 16px;
+        padding: 28px 24px;
+        position: relative;
+        overflow: hidden;
+      }
+      .pillar::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: radial-gradient(400px 200px at 50% 0%, rgba(42,215,255,.07), transparent 70%);
+        pointer-events: none;
+      }
+      .pillar-icon {
+        font-size: 1.6rem;
+        margin-bottom: 14px;
+        display: block;
+      }
+      .pillar h3 {
+        font-size: 1rem;
+        font-weight: 700;
+        margin: 0 0 8px;
+        letter-spacing: -0.01em;
+      }
+      .pillar p {
+        font-size: 0.875rem;
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      /* Pulselings teaser */
+      .pulselings-teaser {
+        background: linear-gradient(135deg, rgba(120, 60, 220, 0.12), rgba(42,215,255,.06));
+        border: 1px solid rgba(120, 60, 220, 0.25);
+        border-radius: 20px;
+        padding: 48px 40px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 32px;
+        align-items: center;
+        margin: 0 0 64px;
+        position: relative;
+        overflow: hidden;
+      }
+      @media (max-width: 640px) {
+        .pulselings-teaser { grid-template-columns: 1fr; padding: 32px 24px; }
+      }
+      .pulselings-teaser::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: radial-gradient(600px 300px at 80% 50%, rgba(120,60,220,.10), transparent 70%);
+        pointer-events: none;
+      }
+      .pulselings-teaser .eyebrow {
+        color: #b47aff;
+        margin-bottom: 12px;
+      }
+      .pulselings-teaser h2 {
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        font-weight: 800;
+        margin: 0 0 12px;
+        letter-spacing: -0.02em;
+      }
+      .pulselings-teaser p {
+        color: var(--muted);
+        line-height: 1.65;
+        margin: 0 0 24px;
+        max-width: 520px;
+      }
+      .pulselings-creature {
+        font-size: 5rem;
+        text-align: center;
+        line-height: 1;
+        filter: drop-shadow(0 0 32px rgba(120,60,220,.5));
+        animation: float 4s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+
+      /* Who it's for */
+      .for-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 32px;
+      }
+      @media (max-width: 600px) {
+        .for-grid { grid-template-columns: 1fr; }
+      }
+      .for-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 16px;
+        background: rgba(255,255,255,.04);
+        border: 1px solid rgba(255,255,255,.07);
+        border-radius: 12px;
+      }
+      .for-item-icon {
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .for-item-text {
+        font-size: 0.875rem;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .for-item-text strong {
+        display: block;
+        color: var(--text);
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+
+      /* Section heading style */
+      .section-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 12px;
+      }
+      .section-headline {
+        font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        margin: 0 0 14px;
+        line-height: 1.15;
+      }
+      .section-sub {
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.65;
+        max-width: 540px;
+        margin: 0 0 40px;
+      }
+
+      /* Availability badge */
+      .avail-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(42,215,255,.08);
+        border: 1px solid rgba(42,215,255,.2);
+        border-radius: 100px;
+        padding: 6px 14px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--accent);
+        margin-bottom: 20px;
+      }
+      .avail-dot {
+        width: 7px;
+        height: 7px;
+        background: var(--accent);
+        border-radius: 50%;
+        animation: pulse-dot 2s ease-in-out infinite;
+      }
+      @keyframes pulse-dot {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+      }
+
+      /* Bottom CTA strip */
+      .cta-strip {
+        background: linear-gradient(135deg, rgba(42,215,255,.07), rgba(42,215,255,.03));
+        border: 1px solid rgba(42,215,255,.15);
+        border-radius: 20px;
+        padding: 48px 40px;
+        text-align: center;
+        margin-bottom: 64px;
+      }
+      .cta-strip h2 {
+        font-size: clamp(1.5rem, 3vw, 2.2rem);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        margin: 0 0 12px;
+      }
+      .cta-strip p {
+        color: var(--muted);
+        margin: 0 0 28px;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+
+  <body data-page="home">
+    <div id="site-header"></div>
+
+    <main class="page">
+
+      <!-- ── HERO ── -->
+      <section class="hero" style="padding: 80px 0 48px;">
+        <div class="container hero-grid">
+          <div class="hero-left">
+            <div class="hero-eyebrow">Built for Streamers &amp; Content Creators</div>
+
+            <h1>Your community<br>deserves better than<br><em>Discord chaos.</em></h1>
+
+            <p class="pain-statement">
+              You started streaming to create — not to manage roles, fix broken channels, or figure out why your members can't find anything. CreatorPulse runs your Discord so you don't have to.
+            </p>
+
+            <div class="cta-row">
+              <a class="btn primary" href="contact.html">Request Early Access <span aria-hidden="true">→</span></a>
+              <a class="btn" href="how-it-works.html">See How It Works</a>
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <aside class="hero-panel card">
+              <div class="panel-head">
+                <div class="panel-title">What CreatorPulse handles</div>
+                <span class="panel-pill">Always On</span>
+              </div>
+
+              <div class="panel-list">
+                <div class="panel-item">
+                  <div class="panel-dot"></div>
+                  <div>
+                    <div class="panel-item-title">Server structure</div>
+                    <div class="panel-item-sub">Channels, categories, and permissions — set up correctly from day one</div>
+                  </div>
+                </div>
+
+                <div class="panel-item">
+                  <div class="panel-dot"></div>
+                  <div>
+                    <div class="panel-item-title">Subscriber access</div>
+                    <div class="panel-item-sub">Paid tiers unlock automatically. Cancellations remove access automatically.</div>
+                  </div>
+                </div>
+
+                <div class="panel-item">
+                  <div class="panel-dot"></div>
+                  <div>
+                    <div class="panel-item-title">Live &amp; announcement alerts</div>
+                    <div class="panel-item-sub">Your community knows when you go live. No spam, no noise.</div>
+                  </div>
+                </div>
+
+                <div class="panel-item">
+                  <div class="panel-dot"></div>
+                  <div>
+                    <div class="panel-item-title">Pinned info that stays current</div>
+                    <div class="panel-item-sub">Rules, guides, and community info refresh in place — no stale messages.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-foot">
+                Less Discord work. More time creating.
+              </div>
+            </aside>
+
+            <aside class="availability-card card" style="margin-top:16px;">
+              <div class="availability-top">
+                <div class="availability-label">EARLY ACCESS</div>
+                <div class="availability-live availability-live--neutral">Slots</div>
+              </div>
+              <div class="availability-metric">
+                <div class="availability-count"><span id="availabilityCount">0 / 5</span></div>
+                <div class="availability-text">slots filled</div>
+              </div>
+              <div class="availability-sub">Small rollout. Intentionally limited for stability.</div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── THREE PILLARS ── -->
+      <section class="section">
+        <div class="container">
+          <div class="section-label">What it does</div>
+          <div class="section-headline">One bot. Three things done right.</div>
+          <p class="section-sub">CreatorPulse is not a toolbox you have to configure. It's an assistant that handles the hard parts of running a Discord community — automatically.</p>
+
+          <div class="pillars">
+            <div class="pillar">
+              <span class="pillar-icon">🏗️</span>
+              <h3>Structure, handled</h3>
+              <p>Clean channels, correct permissions, clear onboarding for every new member. Your server stays organized as you grow — without you touching a single setting.</p>
+            </div>
+            <div class="pillar">
+              <span class="pillar-icon">🔐</span>
+              <h3>Subscribers, automated</h3>
+              <p>Members subscribe inside Discord. Roles apply instantly. Paid channels unlock. Access removes itself if they cancel. You never manually manage a subscriber again.</p>
+            </div>
+            <div class="pillar">
+              <span class="pillar-icon">📣</span>
+              <h3>Updates, calm</h3>
+              <p>Go-live alerts, announcements, and pinned community info — all managed in place. No spam. No duplicate posts. Your community always knows what's happening.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── PULSELINGS TEASER ── -->
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          <div class="pulselings-teaser">
+            <div>
+              <div class="eyebrow section-label" style="color:#b47aff;">Community Feature</div>
+              <h2>Your community gets Pulselings.</h2>
+              <p>Every CreatorPulse server comes with Pulselings — a creature game built directly into Discord. Members hatch their own unique creature, level it up through daily activity, and show it off to the community. It's the most fun your chat has had in a while.</p>
+              <div class="cta-row" style="margin-bottom:0;">
+                <a class="btn" href="pulselings.html" style="border-color: rgba(180,122,255,.4); color: #b47aff;">Explore Pulselings ✦</a>
+              </div>
+            </div>
+            <div class="pulselings-creature" aria-hidden="true">🥚</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── WHO IT'S FOR ── -->
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          <div class="section-label">Who it's for</div>
+          <div class="section-headline">Built for creators, not sysadmins.</div>
+          <p class="section-sub">If you've ever avoided opening Discord settings because you didn't want to break something — this is for you.</p>
+
+          <div class="for-grid">
+            <div class="for-item">
+              <span class="for-item-icon">🎮</span>
+              <div class="for-item-text">
+                <strong>Streamers growing a community</strong>
+                You want members to stick around, not get lost in a confusing server.
+              </div>
+            </div>
+            <div class="for-item">
+              <span class="for-item-icon">📹</span>
+              <div class="for-item-text">
+                <strong>Content creators with subscribers</strong>
+                Give your supporters a real home with exclusive access that manages itself.
+              </div>
+            </div>
+            <div class="for-item">
+              <span class="for-item-icon">⏱️</span>
+              <div class="for-item-text">
+                <strong>Creators short on time</strong>
+                You create. CreatorPulse manages the Discord. That's the deal.
+              </div>
+            </div>
+            <div class="for-item">
+              <span class="for-item-icon">📈</span>
+              <div class="for-item-text">
+                <strong>Communities ready to grow</strong>
+                Structure that scales with you — so a bigger audience doesn't mean more admin work.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── BOTTOM CTA ── -->
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          <div class="cta-strip">
+            <div class="avail-badge"><span class="avail-dot"></span> Early Access Open</div>
+            <h2>Ready to stop managing Discord?</h2>
+            <p>Early access is intentionally small. A few creators, real communities, real stability testing.</p>
+            <div class="cta-row" style="justify-content: center; margin-bottom: 0;">
+              <a class="btn primary" href="contact.html">Request Early Access →</a>
+              <a class="btn" href="how-it-works.html">How It Works</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="assets/site.js"></script>
+  </body>
+</html>
