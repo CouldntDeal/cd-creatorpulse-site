@@ -177,7 +177,7 @@ a:hover{color:var(--accent2)}
   align-items:center;
 }
 
-.brand-logo-img{
+.brand-logo-img, .brand img{
   height:30px;
   width:auto;
   display:block;
@@ -186,7 +186,7 @@ a:hover{color:var(--accent2)}
   filter: drop-shadow(0 0 10px rgba(42,215,255,.18));
   transition: filter 0.3s ease;
 }
-.brand:hover .brand-logo-img{
+.brand:hover .brand-logo-img, .brand img{
   filter: drop-shadow(0 0 18px rgba(42,215,255,.55));
 }
 
