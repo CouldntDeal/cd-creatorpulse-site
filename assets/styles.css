@@ -898,3 +898,19 @@ h2{margin:0 0 12px 0; font-size:20px; letter-spacing:-.01em}
 }
 
 .nav-mobile[hidden] { display: none !important; }
+
+/* Logo image: blend mode removes grey bg on dark header */
+.brand-logo img, .brand img {
+  height: 34px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 8px rgba(42,215,255,.25));
+}
+
+/* Hamburger: ensure visible on mobile */
+@media (max-width: 720px) {
+  .nav-hamburger { display: flex !important; }
+  .nav-links { display: none !important; }
+}
