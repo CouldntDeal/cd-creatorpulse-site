@@ -1,44 +1,182 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Terms - CD-CreatorPulse</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service - CreatorPulse</title>
+  <meta name="description" content="Terms of Service for CD-CreatorPulse — the Discord automation platform for content creators." />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
-<body data-page="terms">
-  <div id="site-header"></div>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="CreatorPulse Home">
+        <div class="brand-logo">
+          <img src="assets/images/logo-header-fullpulse.png" alt="CreatorPulse logo" />
+        </div>
+        <span class="brand-title">CreatorPulse</span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <div class="nav-wrap">
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="pulselings.html" class="nav-pulselings">Pulselings ✦</a>
+          <a href="how-it-works.html">How It Works</a>
+          <a href="partnership.html">Partnership</a>
+          <a href="legal.html" class="active">Legal</a>
+          <a href="contact.html" class="nav-cta">Request Access</a>
+        </nav>
+      </div>
+    </div>
+  </header>
 
   <main>
     <div class="container">
       <section class="legal">
+
         <h1>Terms of Service</h1>
+        <p class="legal-meta">Effective date: March 1, 2026 &nbsp;·&nbsp; CD-CreatorPulse, operated by Kaide Clarin &nbsp;·&nbsp; <a href="mailto:support@cdcreatorpulse.com">support@cdcreatorpulse.com</a></p>
 
-        <p>CD-CreatorPulse is a SaaS automation tool for Discord communities.</p>
+        <p>These Terms of Service ("Terms") govern your access to and use of the CD-CreatorPulse platform ("CreatorPulse," "the Service," "we," "us," or "our"), including the CreatorPulse Discord bot, the Pulselings creature game, any associated websites, and all related tools and services. By accessing or using CreatorPulse in any capacity — as a creator, a community member, or a subscriber — you agree to be bound by these Terms. If you do not agree, do not use the Service.</p>
 
-        <h2>Service Description</h2>
-        <p>
-          The service provides subscription handling, revenue distribution via Stripe Connect,
-          Discord automation, and operational tools for creators.
-        </p>
+        <hr />
 
-        <h2>Payments</h2>
-        <p>All payments are processed through Stripe. CD-CreatorPulse does not store or process credit card information directly.</p>
+        <h2>1. Who We Are</h2>
+        <p>CD-CreatorPulse is a Software-as-a-Service (SaaS) platform that provides Discord community automation for content creators. We provide tools for channel structure, subscriber access management, live alerts, pinned community information, and community engagement features including the Pulselings creature game. We operate as an independent platform and are not affiliated with Discord Inc. or Stripe Inc., though we integrate with both services.</p>
 
-        <h2>Platform Dependencies</h2>
-        <p>The service depends on Discord and Stripe APIs. CD-CreatorPulse is not responsible for outages caused by third-party platforms.</p>
+        <h2>2. Eligibility</h2>
+        <p>You must be at least 13 years of age to use CreatorPulse, consistent with Discord's own minimum age requirements. If you are between the ages of 13 and 18, you represent that your parent or legal guardian has reviewed and agreed to these Terms on your behalf. By using the Service, you represent that all information you provide is accurate, that you have the legal capacity to enter into this agreement, and that your use of the Service will comply with all applicable laws and regulations.</p>
 
-        <h2>Creator Responsibility</h2>
-        <p>Creators are responsible for their community moderation and compliance.</p>
+        <h2>3. The Service</h2>
+        <p>CreatorPulse operates as a Discord bot installed into Discord servers ("servers" or "guilds") by content creators ("creators" or "tenants"). The Service provides the following core functionality:</p>
+        <ul>
+          <li><strong>Server structure automation:</strong> Automatic provisioning and maintenance of Discord channels, categories, and permission structures.</li>
+          <li><strong>Subscriber access management:</strong> Integration with Stripe to manage paid subscription tiers, automatic role assignment and removal based on subscription status.</li>
+          <li><strong>Live and announcement alerts:</strong> Automated notifications to community members when a creator goes live on supported platforms (TikTok, YouTube, Twitch, Kick).</li>
+          <li><strong>Pinned community information:</strong> Bot-managed pinned messages that update in place to reflect current server information, rules, and community guides.</li>
+          <li><strong>Pulselings:</strong> A community creature game embedded in Discord, described further in Section 10.</li>
+        </ul>
+        <p>We reserve the right to modify, suspend, or discontinue any feature of the Service at any time with or without notice, though we will make reasonable efforts to communicate significant changes.</p>
 
-        <h2>Limitation of Liability</h2>
-        <p>The service is provided ?as-is? without warranties of uninterrupted operation.</p>
+        <h2>4. Accounts and Access</h2>
+        <p>CreatorPulse does not operate its own account system. Access to the Service is managed through your Discord account. You are responsible for maintaining the security of your Discord account. We are not liable for any loss or damage arising from unauthorized access to your Discord account.</p>
+        <p>Creator access to the platform is currently granted by invitation during early access. We may revoke or suspend access at our discretion, including for violations of these Terms, misuse of the Service, or conduct that we determine to be harmful to other users or the platform.</p>
+
+        <h2>5. Payments, Subscriptions, and Revenue Sharing</h2>
+
+        <h3>5.1 Creator Subscriptions (Platform Fee)</h3>
+        <p>Creators who use CreatorPulse may be subject to platform service fees as described in the applicable partnership agreement. All platform fees are billed and processed through Stripe.</p>
+
+        <h3>5.2 Community Member Subscriptions</h3>
+        <p>Community members may subscribe to individual creator servers through the CreatorPulse bot using the <code>/subscribe</code> command. These subscriptions are payments made to the creator of that server, processed via Stripe Connect. CD-CreatorPulse receives a platform share of each transaction as described in the applicable revenue sharing agreement. Subscription tiers, pricing, and benefits are set by the individual creator for their server.</p>
+
+        <h3>5.3 Stripe Connect</h3>
+        <p>Creators who accept subscriber payments must complete Stripe Express Connect onboarding and agree to Stripe's Connected Account Agreement and Stripe's Terms of Service. By accepting subscriber payments through CreatorPulse, you authorize CD-CreatorPulse to instruct Stripe to transfer funds to your connected account after deducting the applicable platform share. CD-CreatorPulse acts as the platform operator, not as a payment processor. All payment processing is performed by Stripe.</p>
+
+        <h3>5.4 No Storage of Payment Information</h3>
+        <p>CD-CreatorPulse does not store, process, or have access to credit card numbers, bank account details, or any other sensitive financial information. All such data is handled exclusively by Stripe.</p>
+
+        <h3>5.5 Pulselings Name Change Tokens</h3>
+        <p>One-time purchases of Pulselings name change tokens are non-refundable once the token has been applied to a creature rename. Unused tokens may be refunded at our discretion within 14 days of purchase. See the Refund Policy for details.</p>
+
+        <h2>6. Creator Responsibilities</h2>
+        <p>Creators who install and operate CreatorPulse in their Discord servers accept the following responsibilities:</p>
+        <ul>
+          <li><strong>Community moderation:</strong> CreatorPulse provides automation tools. You remain solely responsible for the content posted in your server, the behavior of your community members, and ensuring that your server complies with Discord's Community Guidelines and Terms of Service.</li>
+          <li><strong>Content compliance:</strong> You must not use CreatorPulse to facilitate the distribution of illegal content, hate speech, harassment, NSFW content in non-age-gated channels, or any content that violates applicable law or Discord's policies.</li>
+          <li><strong>Subscriber representations:</strong> You must not misrepresent subscription benefits to your community. The benefits you advertise for each subscription tier must be accurate and delivered.</li>
+          <li><strong>Tax obligations:</strong> You are solely responsible for determining and fulfilling any tax obligations arising from subscription revenue you receive through the platform. CD-CreatorPulse does not provide tax advice and is not responsible for your tax compliance.</li>
+          <li><strong>Discord Terms compliance:</strong> Your use of CreatorPulse must comply with Discord's Developer Terms of Service and any applicable Discord policies at all times.</li>
+          <li><strong>Stripe Terms compliance:</strong> Your acceptance of subscriber payments requires ongoing compliance with Stripe's Terms of Service and Connected Account Agreement.</li>
+        </ul>
+
+        <h2>7. Community Member Responsibilities</h2>
+        <p>Community members who interact with CreatorPulse — including using the <code>/pulse</code> or <code>/subscribe</code> commands — agree to:</p>
+        <ul>
+          <li>Use the Service only for its intended purposes.</li>
+          <li>Not attempt to exploit, manipulate, or abuse any feature of the Service, including the Pulselings XP system.</li>
+          <li>Not attempt to reverse engineer, interfere with, or disrupt the bot or any associated infrastructure.</li>
+          <li>Comply with the rules of the individual Discord server in which they are using the Service.</li>
+        </ul>
+
+        <h2>8. Prohibited Conduct</h2>
+        <p>The following conduct is strictly prohibited for all users of the Service:</p>
+        <ul>
+          <li>Using the Service to harass, threaten, or harm any individual.</li>
+          <li>Attempting to gain unauthorized access to any system, account, or data associated with CreatorPulse.</li>
+          <li>Using automated tools, bots, scripts, or exploits to manipulate any feature of the Service, including but not limited to XP farming in Pulselings.</li>
+          <li>Impersonating CD-CreatorPulse, its staff, or any other user.</li>
+          <li>Using the Service in any manner that violates applicable local, national, or international law.</li>
+          <li>Distributing malware, spam, or any harmful content through features of the Service.</li>
+          <li>Attempting to circumvent any anti-abuse, rate limiting, or security measure implemented by the Service.</li>
+        </ul>
+        <p>We reserve the right to suspend or permanently ban any user or creator found to be engaging in prohibited conduct, without prior notice and without refund.</p>
+
+        <h2>9. Platform Dependencies and Third-Party Services</h2>
+        <p>CreatorPulse is built on and depends on third-party platforms, including Discord and Stripe. We have no control over the availability, reliability, or policy changes of these platforms. CreatorPulse is not responsible for any service interruption, data loss, or functionality degradation caused by changes to or outages of Discord, Stripe, or any other third-party service we integrate with.</p>
+        <p>Links or integrations with third-party services do not constitute our endorsement of those services. Your use of third-party services is governed by their respective terms and policies.</p>
+
+        <h2>10. Pulselings</h2>
+        <p>Pulselings is a community creature game embedded in the CreatorPulse Discord bot. The following terms apply specifically to Pulselings:</p>
+        <ul>
+          <li><strong>One creature per Discord account:</strong> Each Discord user ID is entitled to exactly one Pulselings creature, globally across all CreatorPulse servers. Creatures are never reset or reassigned.</li>
+          <li><strong>No creature transfers:</strong> Pulselings creatures are permanently tied to the Discord account that hatched them. They cannot be transferred, traded, sold, or reassigned.</li>
+          <li><strong>Virtual items have no real-world value:</strong> All Pulselings items, including creatures, hats, rarity tiers, XP, levels, and titles, are virtual in-game items with no monetary value and cannot be exchanged for real currency.</li>
+          <li><strong>Genesis and Creation Era titles:</strong> Creation Era titles (Genesis, Celestial, Architect, Awakened, Wanderer, Settled) are assigned based on hatch order and close permanently once their allocation is filled. These titles confer no rights, entitlements, or monetary value. We reserve the right to make final determinations on title assignment.</li>
+          <li><strong>Anti-abuse:</strong> We monitor XP accrual and may flag, suspend, or permanently restrict Pulselings access for accounts found to be exploiting the XP system or any other game mechanic.</li>
+          <li><strong>Service changes:</strong> Pulselings is a live game feature. We may adjust XP curves, drop rates, mechanics, and other game parameters at any time without notice.</li>
+          <li><strong>Name change tokens:</strong> Name change tokens are one-time-use virtual items purchased for real currency. See Section 5.5 and the Refund Policy for applicable terms.</li>
+        </ul>
+
+        <h2>11. Intellectual Property</h2>
+        <p>All content, design, code, branding, and materials associated with CreatorPulse — including the Pulselings game, creature designs, lore, and visual assets — are the exclusive intellectual property of CD-CreatorPulse and its owner. You may not reproduce, distribute, modify, create derivative works from, or commercially exploit any part of the Service without our explicit written permission.</p>
+        <p>You retain ownership of any content you post in your Discord server. By using CreatorPulse, you grant us a limited, non-exclusive license to access and process content within your server solely as necessary to provide the Service.</p>
+
+        <h2>12. Privacy</h2>
+        <p>Your use of the Service is subject to our <a href="privacy.html">Privacy Policy</a>, which is incorporated into these Terms by reference. Please review the Privacy Policy to understand how we collect, use, and store information.</p>
+
+        <h2>13. Disclaimers</h2>
+        <p>THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, OR NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED, ERROR-FREE, SECURE, OR FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS.</p>
+        <p>We do not warrant that any specific feature will remain available or function in a particular way. Early access users understand and accept that the Service is in active development and may experience instability, bugs, or significant changes.</p>
+
+        <h2>14. Limitation of Liability</h2>
+        <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, CD-CREATORPULSE AND ITS OWNER SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, LOSS OF DATA, LOSS OF GOODWILL, SERVICE INTERRUPTION, OR ANY OTHER INTANGIBLE LOSSES, ARISING OUT OF OR IN CONNECTION WITH YOUR USE OF OR INABILITY TO USE THE SERVICE, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+        <p>IN NO EVENT SHALL OUR TOTAL LIABILITY TO YOU FOR ALL CLAIMS ARISING FROM OR RELATING TO THESE TERMS OR THE SERVICE EXCEED THE GREATER OF (A) THE TOTAL AMOUNT YOU PAID US IN THE TWELVE MONTHS PRECEDING THE CLAIM, OR (B) ONE HUNDRED DOLLARS (USD $100).</p>
+
+        <h2>15. Indemnification</h2>
+        <p>You agree to indemnify, defend, and hold harmless CD-CreatorPulse and its owner from and against any and all claims, liabilities, damages, losses, costs, and expenses (including reasonable legal fees) arising out of or in connection with: (a) your use of the Service; (b) your violation of these Terms; (c) your violation of any applicable law or regulation; (d) content posted in your Discord server; or (e) any dispute between you and another user of the Service.</p>
+
+        <h2>16. Termination</h2>
+        <p>We may suspend or terminate your access to the Service at any time, with or without notice, for any reason including violation of these Terms, abusive conduct, or at our sole discretion. Upon termination, your right to use the Service ceases immediately. Sections 11 (Intellectual Property), 13 (Disclaimers), 14 (Limitation of Liability), 15 (Indemnification), and 18 (Governing Law) survive termination.</p>
+        <p>You may discontinue use of the Service at any time. Creators may request removal of the bot from their server at any time. Active subscriptions must be cancelled through the Stripe customer portal.</p>
+
+        <h2>17. Changes to These Terms</h2>
+        <p>We reserve the right to modify these Terms at any time. When we make material changes, we will update the effective date at the top of this page and, where appropriate, notify affected users via Discord or email. Your continued use of the Service after the effective date of any changes constitutes your acceptance of the updated Terms. If you do not agree to the updated Terms, you must discontinue use of the Service.</p>
+
+        <h2>18. Governing Law</h2>
+        <p>These Terms are governed by and construed in accordance with the laws of the United States. Any disputes arising from these Terms or your use of the Service shall be subject to the exclusive jurisdiction of the applicable courts. If any provision of these Terms is found to be unenforceable, the remaining provisions shall continue in full force and effect.</p>
+
+        <h2>19. Entire Agreement</h2>
+        <p>These Terms, together with the <a href="privacy.html">Privacy Policy</a> and <a href="refunds.html">Refund Policy</a>, constitute the entire agreement between you and CD-CreatorPulse with respect to the Service and supersede all prior agreements, understandings, and representations.</p>
+
+        <h2>20. Contact</h2>
+        <p>If you have questions about these Terms, please contact us at <a href="mailto:support@cdcreatorpulse.com">support@cdcreatorpulse.com</a>.</p>
+
       </section>
     </div>
   </main>
 
-  <div id="site-footer"></div>
+  <footer class="site-footer">
+    <div class="container">
+      <div>&copy; 2026 CD-CreatorPulse</div>
+      <div><a href="mailto:support@cdcreatorpulse.com">support@cdcreatorpulse.com</a></div>
+    </div>
+  </footer>
 
-  <script src="assets/site.js" defer></script>
 </body>
 </html>

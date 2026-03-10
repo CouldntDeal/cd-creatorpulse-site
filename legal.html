@@ -1,108 +1,76 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Legal - CreatorPulse</title>
-    <meta name="description" content="Terms, privacy, and refund policy for CreatorPulse." />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/styles.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legal - CreatorPulse</title>
+  <meta name="description" content="Legal documents for CD-CreatorPulse — Terms of Service, Privacy Policy, and Refund Policy." />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
 
-  <body data-page="legal">
-    <div class="bg"><div class="bg-glow"></div></div>
-
-    <div id="site-header"></div>
-
-    <main class="page">
-      <section class="hero">
-        <div class="container hero-grid">
-          <div class="hero-left">
-            <div class="eyebrow">LEGAL</div>
-            <h1>Clear policies, calm expectations.</h1>
-            <p class="lead">
-              CreatorPulse is built for stability and trust. These pages explain how we handle privacy,
-              terms of use, and refunds.
-            </p>
-            <p class="lead-sub">
-              Questions? Email support@cdcreatorpulse.com
-            </p>
-          </div>
-
-          <aside class="hero-panel card">
-            <div class="panel-head">
-              <div class="panel-title">Documents</div>
-              <span class="panel-pill">Active</span>
-            </div>
-
-            <div class="panel-list">
-              <div class="panel-item">
-                <div class="panel-dot"></div>
-                <div>
-                  <div class="panel-item-title"><a href="terms.html">Terms of Service</a></div>
-                  <div class="panel-item-sub">Use and access rules</div>
-                </div>
-              </div>
-
-              <div class="panel-item">
-                <div class="panel-dot"></div>
-                <div>
-                  <div class="panel-item-title"><a href="privacy.html">Privacy Policy</a></div>
-                  <div class="panel-item-sub">How data is handled</div>
-                </div>
-              </div>
-
-              <div class="panel-item">
-                <div class="panel-dot"></div>
-                <div>
-                  <div class="panel-item-title"><a href="refunds.html">Refund Policy</a></div>
-                  <div class="panel-item-sub">Refund terms (when applicable)</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel-foot">
-              Built to keep expectations clear.
-            </div>
-          </aside>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="CreatorPulse Home">
+        <div class="brand-logo">
+          <img src="assets/images/logo-header-fullpulse.png" alt="CreatorPulse logo" />
         </div>
+        <span class="brand-title">CreatorPulse</span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <div class="nav-wrap">
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="pulselings.html" class="nav-pulselings">Pulselings ✦</a>
+          <a href="how-it-works.html">How It Works</a>
+          <a href="partnership.html">Partnership</a>
+          <a href="legal.html" class="active">Legal</a>
+          <a href="contact.html" class="nav-cta">Request Access</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="legal">
+
+        <h1>Legal</h1>
+        <p>Clear policies, calm expectations. CreatorPulse is built for stability and trust. These documents govern your use of the platform and explain how we handle your data, payments, and refunds.</p>
+        <p>Questions? Email <a href="mailto:support@cdcreatorpulse.com">support@cdcreatorpulse.com</a></p>
+
+        <hr />
+
+        <h2><a href="terms.html">Terms of Service</a></h2>
+        <p>Governs access to and use of the CreatorPulse platform for creators, community members, and subscribers. Covers the Service description, payments and Stripe Connect, creator and member responsibilities, Pulselings rules, intellectual property, disclaimers, and liability.</p>
+        <p><a href="terms.html">Read Terms of Service &rarr;</a></p>
+
+        <h2><a href="privacy.html">Privacy Policy</a></h2>
+        <p>Explains what data CreatorPulse collects (Discord IDs, Pulselings creature data, subscription references), how it is used, how long it is retained, and your rights. We operate on a minimal data principle — we collect what is necessary to run the Service and nothing more.</p>
+        <p><a href="privacy.html">Read Privacy Policy &rarr;</a></p>
+
+        <h2><a href="refunds.html">Refund &amp; Cancellation Policy</a></h2>
+        <p>Covers cancellation of community member subscriptions, refund eligibility criteria, Pulselings name change token refunds, and how to submit a refund request. All payments are processed by Stripe.</p>
+        <p><a href="refunds.html">Read Refund Policy &rarr;</a></p>
+
+        <hr />
+
+        <p>All policies are effective as of March 1, 2026. We will update the effective date on each document when material changes are made.</p>
+
       </section>
+    </div>
+  </main>
 
-      <section class="section" style="padding-top:0;">
-        <div class="container two-col">
-          <div>
-            <h2>Privacy, simply</h2>
-            <div class="card">
-              <p>
-                CreatorPulse is designed to operate with minimal data needed to provide the service.
-                The privacy policy explains what is collected and why.
-              </p>
-              <p class="muted">
-                When in doubt, we prefer collecting less.
-              </p>
-            </div>
-          </div>
+  <footer class="site-footer">
+    <div class="container">
+      <div>&copy; 2026 CD-CreatorPulse</div>
+      <div><a href="mailto:support@cdcreatorpulse.com">support@cdcreatorpulse.com</a></div>
+    </div>
+  </footer>
 
-          <div>
-            <h2>Refunds, when applicable</h2>
-            <div class="card">
-              <p>
-                CreatorPulse is free during early access. If any paid features exist later, refund rules will be
-                governed by the refund policy.
-              </p>
-              <p class="muted">
-                Transparent policies, no surprises.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div id="site-footer"></div>
-    </main>
-
-    <script src="assets/site.js"></script>
-  </body>
+</body>
 </html>

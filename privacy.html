@@ -1,43 +1,174 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Privacy - CD-CreatorPulse</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy - CreatorPulse</title>
+  <meta name="description" content="Privacy Policy for CD-CreatorPulse — how we collect, use, and protect your data." />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
-<body data-page="privacy">
-  <div id="site-header"></div>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="CreatorPulse Home">
+        <div class="brand-logo">
+          <img src="assets/images/logo-header-fullpulse.png" alt="CreatorPulse logo" />
+        </div>
+        <span class="brand-title">CreatorPulse</span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <div class="nav-wrap">
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="pulselings.html" class="nav-pulselings">Pulselings ✦</a>
+          <a href="how-it-works.html">How It Works</a>
+          <a href="partnership.html">Partnership</a>
+          <a href="legal.html" class="active">Legal</a>
+          <a href="contact.html" class="nav-cta">Request Access</a>
+        </nav>
+      </div>
+    </div>
+  </header>
 
   <main>
     <div class="container">
       <section class="legal">
+
         <h1>Privacy Policy</h1>
+        <p class="legal-meta">Effective date: March 1, 2026 &nbsp;·&nbsp; CD-CreatorPulse, operated by Kaide Clarin &nbsp;·&nbsp; <a href="mailto:support@cdcreatorpulse.com">support@cdcreatorpulse.com</a></p>
 
-        <p>CD-CreatorPulse stores only minimal operational data.</p>
+        <p>This Privacy Policy explains how CD-CreatorPulse ("CreatorPulse," "we," "us," or "our") collects, uses, stores, and protects information when you use the CreatorPulse Discord bot, the Pulselings creature game, and any associated websites or services. We are committed to operating with the minimum data necessary to provide the Service.</p>
 
-        <h2>Data Stored</h2>
+        <hr />
+
+        <h2>1. Information We Collect</h2>
+
+        <h3>1.1 Information Collected Automatically Through Discord</h3>
+        <p>When the CreatorPulse bot is added to a Discord server or when you interact with it, we collect and store the following information automatically:</p>
         <ul>
-          <li>Discord guild IDs</li>
-          <li>Discord role IDs</li>
-          <li>Stripe subscription references</li>
-          <li>Configuration data</li>
+          <li><strong>Discord Guild (Server) ID:</strong> The unique identifier for the Discord server where CreatorPulse is installed. Used to associate configuration and service state with the correct server.</li>
+          <li><strong>Discord User ID:</strong> The unique identifier for your Discord account. Used to associate your Pulselings creature, subscription status, XP log, and other user-specific data with your account. We do not collect your Discord username, display name, or avatar unless explicitly provided as part of a bot interaction.</li>
+          <li><strong>Discord Role IDs:</strong> Identifiers for roles within a server that CreatorPulse manages. Used to assign and remove subscriber roles automatically.</li>
+          <li><strong>Discord Channel IDs:</strong> Identifiers for specific channels within a server. Used to bind bot-managed surfaces (live placards, community guides, member center) to the correct channels.</li>
+          <li><strong>Interaction data:</strong> When you use a slash command (e.g., <code>/pulse</code>, <code>/subscribe</code>) or interact with a bot-managed button or menu, we process the interaction to deliver the response. This interaction data is not stored beyond what is necessary for that session unless it produces a persistent record (e.g., a Pulselings XP log entry).</li>
         </ul>
 
-        <h2>Data Not Stored</h2>
+        <h3>1.2 Pulselings-Specific Data</h3>
+        <p>If you use the Pulselings creature game, we collect and store the following:</p>
         <ul>
-          <li>Credit card numbers</li>
-          <li>Full payment details</li>
+          <li><strong>Creature data:</strong> Your creature's traits, rarity, level, XP, stat values (hunger, happiness, health), hatch name, player-set name (if applicable), Genesis status, Creation Era title, and hatch timestamp.</li>
+          <li><strong>XP log:</strong> A timestamped record of XP-granting actions (feed, play, rest, daily bonus, community interactions) associated with your Discord User ID. This log is used to enforce cooldowns and detect XP abuse.</li>
+          <li><strong>Cooldown timestamps:</strong> The last time you performed each cooldown-gated action (feed, play, rest, daily bonus), used to enforce cooldown periods.</li>
+          <li><strong>Feed tokens:</strong> The number of feed tokens currently held by your account.</li>
+          <li><strong>Hat inventory:</strong> Records of any cosmetic hat items your creature has received.</li>
+          <li><strong>Showcase log:</strong> A record of when you used the showcase feature in a given server, used to enforce the 24-hour showcase cooldown.</li>
+          <li><strong>Name change token records:</strong> A record of name change tokens purchased and used, associated with your Discord User ID.</li>
+          <li><strong>Anti-abuse flags:</strong> If your account is flagged for XP abuse, we record the flag timestamp and flag status. This record is used to enforce the XP suspension and is reviewed by platform staff.</li>
         </ul>
 
-        <h2>Third-Party Processing</h2>
-        <p>Payments are processed by Stripe. Discord operates independently under its own privacy policies.</p>
+        <h3>1.3 Subscription and Billing Data</h3>
+        <p>If you subscribe to a creator's server through CreatorPulse:</p>
+        <ul>
+          <li>We store your Discord User ID, the server (guild ID) you subscribed to, your subscription tier, your Stripe customer ID, and your Stripe subscription ID. This data is used to manage your access, assign roles, and reconcile subscription status.</li>
+          <li>We do not store credit card numbers, bank account details, or any other sensitive financial information. All payment data is processed and stored exclusively by Stripe.</li>
+        </ul>
+        <p>If you are a creator who accepts subscriber payments:</p>
+        <ul>
+          <li>We store your Stripe Connect account ID in association with your Discord server's guild ID. This is used to route subscription payments to your connected account.</li>
+          <li>We store aggregated revenue records in our internal ledger for the purposes of milestone tracking, revenue split calculation, and platform financial reporting. This data is associated with your server's guild ID, not your personal Discord User ID.</li>
+        </ul>
+
+        <h3>1.4 Server Configuration Data</h3>
+        <p>We store configuration data associated with each Discord server where CreatorPulse is installed, including: bound channel IDs, creator identity information (Discord User ID of the server's designated creator), social media links, subscription tier configuration, and operational settings. This data is used solely to operate the Service within that server.</p>
+
+        <h3>1.5 Information We Do Not Collect</h3>
+        <p>We do not collect:</p>
+        <ul>
+          <li>The content of messages posted in Discord channels (we do not read or log chat messages).</li>
+          <li>Discord usernames, display names, email addresses, or profile information beyond what is described above.</li>
+          <li>IP addresses of Discord users.</li>
+          <li>Browsing data or cookies from third-party websites.</li>
+          <li>Any data from Discord servers where CreatorPulse is not installed.</li>
+        </ul>
+
+        <h2>2. How We Use Your Information</h2>
+        <p>We use the information we collect solely to provide and operate the Service:</p>
+        <ul>
+          <li>To provision and maintain Discord server structure for creator servers.</li>
+          <li>To manage subscriber roles and enforce subscription access gates.</li>
+          <li>To operate the Pulselings creature game, including creature state, XP progression, cooldown enforcement, and anti-abuse monitoring.</li>
+          <li>To process and route subscription payments via Stripe Connect.</li>
+          <li>To generate platform financial reports for internal operations and for creator revenue tracking.</li>
+          <li>To identify and address abuse, exploitation, or violations of our Terms of Service.</li>
+          <li>To communicate with you regarding your account or the Service when necessary.</li>
+        </ul>
+        <p>We do not sell, rent, or trade your information to any third party. We do not use your information for advertising purposes.</p>
+
+        <h2>3. Data Sharing</h2>
+        <p>We share your information only in the following limited circumstances:</p>
+        <ul>
+          <li><strong>Stripe:</strong> We share Discord User IDs and subscription details with Stripe as necessary to process payments and manage subscription state. Stripe's use of your data is governed by Stripe's Privacy Policy.</li>
+          <li><strong>Discord:</strong> The Service operates through the Discord platform. Your interactions with the bot are transmitted through Discord's API. Discord's use of your data is governed by Discord's Privacy Policy.</li>
+          <li><strong>Legal obligations:</strong> We may disclose your information if required to do so by law, court order, or valid governmental request.</li>
+          <li><strong>Protection of rights:</strong> We may disclose information where we believe it is necessary to protect the rights, safety, or property of CD-CreatorPulse, our users, or the public.</li>
+        </ul>
+        <p>We do not share your information with any other third parties.</p>
+
+        <h2>4. Data Retention</h2>
+        <p>We retain data for as long as necessary to provide the Service and fulfil the purposes described in this Policy:</p>
+        <ul>
+          <li><strong>Pulselings creature data:</strong> Retained indefinitely while the Service operates, as creature permanence is a core feature of the game. If you request deletion, we will remove your creature data subject to Section 6.</li>
+          <li><strong>XP log:</strong> Retained for a rolling period sufficient for anti-abuse monitoring and cooldown enforcement. Older log entries beyond operational need are periodically purged.</li>
+          <li><strong>Subscription and entitlement records:</strong> Retained for the duration of the subscription and for a reasonable period thereafter to support refund handling, dispute resolution, and revenue reconciliation.</li>
+          <li><strong>Server configuration data:</strong> Retained while CreatorPulse is installed in a given server. If the bot is removed, configuration data may be retained for a reasonable transition period and then deleted.</li>
+          <li><strong>Financial ledger records:</strong> Retained for a minimum of seven years to comply with standard financial record-keeping practices.</li>
+        </ul>
+
+        <h2>5. Data Security</h2>
+        <p>We implement reasonable technical and organizational measures to protect the information we hold against unauthorized access, disclosure, alteration, or destruction. Our database is hosted on Railway's managed PostgreSQL infrastructure with access controls enforced at the infrastructure level. We do not expose database credentials in client-facing code, and sensitive configuration values are managed through environment variables rather than hardcoded values.</p>
+        <p>No method of transmission or storage is completely secure. We cannot guarantee absolute security, and we are not responsible for breaches caused by factors beyond our reasonable control, including Discord or Stripe infrastructure incidents.</p>
+
+        <h2>6. Your Rights and Data Requests</h2>
+        <p>You have the following rights with respect to your personal data:</p>
+        <ul>
+          <li><strong>Access:</strong> You may request a summary of the data we hold associated with your Discord User ID.</li>
+          <li><strong>Correction:</strong> If you believe data we hold about you is inaccurate, you may request correction.</li>
+          <li><strong>Deletion:</strong> You may request deletion of your personal data. Note that deletion of Pulselings creature data is permanent and irreversible. Financial ledger records may be exempt from deletion where retention is required by law. We will inform you of any data we are unable to delete and the reason why.</li>
+          <li><strong>Restriction:</strong> You may request that we restrict processing of your data in certain circumstances.</li>
+        </ul>
+        <p>To exercise any of these rights, contact us at <a href="mailto:support@cdcreatorpulse.com">support@cdcreatorpulse.com</a> with your Discord User ID and the nature of your request. We will respond within a reasonable timeframe.</p>
+
+        <h2>7. Children's Privacy</h2>
+        <p>CreatorPulse is not directed at children under the age of 13, consistent with Discord's minimum age requirement. We do not knowingly collect personal information from children under 13. If we become aware that we have collected data from a child under 13, we will delete it promptly. If you believe we may have collected data from a child under 13, please contact us immediately at <a href="mailto:support@cdcreatorpulse.com">support@cdcreatorpulse.com</a>.</p>
+
+        <h2>8. Third-Party Links and Services</h2>
+        <p>The Service integrates with Discord and Stripe, and may reference links to external platforms (e.g., creator social media profiles). We are not responsible for the privacy practices of any third-party platform. We encourage you to review the privacy policies of Discord and Stripe directly:</p>
+        <ul>
+          <li><a href="https://discord.com/privacy" target="_blank" rel="noopener noreferrer">Discord Privacy Policy</a></li>
+          <li><a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer">Stripe Privacy Policy</a></li>
+        </ul>
+
+        <h2>9. Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. When we make material changes, we will update the effective date at the top of this page. Where appropriate, we will notify affected users via Discord or email. Your continued use of the Service after any changes constitutes your acceptance of the updated Policy.</p>
+
+        <h2>10. Contact</h2>
+        <p>If you have questions, concerns, or requests regarding this Privacy Policy or your data, please contact us at <a href="mailto:support@cdcreatorpulse.com">support@cdcreatorpulse.com</a>.</p>
+
       </section>
     </div>
   </main>
 
-  <div id="site-footer"></div>
+  <footer class="site-footer">
+    <div class="container">
+      <div>&copy; 2026 CD-CreatorPulse</div>
+      <div><a href="mailto:support@cdcreatorpulse.com">support@cdcreatorpulse.com</a></div>
+    </div>
+  </footer>
 
-  <script src="assets/site.js" defer></script>
 </body>
 </html>
