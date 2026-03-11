@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles.css" />
     <style>
-      /* ── Scroll CTA button ── */
+      /* â”€â”€ Scroll CTA button â”€â”€ */
       .btn-scroll {
         display: inline-flex; align-items: center; gap: 8px;
         margin-top: 20px; padding: 11px 22px; border-radius: 999px;
@@ -23,7 +23,7 @@
       .btn-scroll-arrow { font-size: 16px; transition: transform 0.15s; }
       .btn-scroll:hover .btn-scroll-arrow { transform: translateY(3px); }
 
-      /* ── Guide cards ── */
+      /* â”€â”€ Guide cards â”€â”€ */
       .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
       .guide-item {
         padding: 16px 18px; border-radius: 14px;
@@ -62,7 +62,7 @@
       }
       .early-hatcher-note strong { color: rgba(255,215,0,1); }
 
-      /* ── XP tip ── */
+      /* â”€â”€ XP tip â”€â”€ */
       .xp-tip {
         margin-top: 14px; padding: 12px 16px; border-radius: 12px;
         border: 1px solid rgba(42,215,255,.18); background: rgba(42,215,255,.06);
@@ -70,7 +70,7 @@
       }
       .xp-tip strong { color: rgba(42,215,255,.90); }
 
-      /* ── data table ── */
+      /* â”€â”€ data table â”€â”€ */
       .data-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
       .data-table td {
         padding: 6px 10px; font-size: 12px;
@@ -80,7 +80,7 @@
       .data-table td:last-child { text-align: right; color: rgba(255,255,255,.50); }
       .data-table tr:last-child td { border-bottom: none; }
 
-      /* ── Leaderboard section ── */
+      /* â”€â”€ Leaderboard section â”€â”€ */
       .lb-section-head {
         display: flex; align-items: baseline; justify-content: space-between;
         gap: 12px; flex-wrap: wrap; margin-bottom: 4px;
@@ -154,7 +154,7 @@
       }
       .lb-updated { font-size: 11px; color: rgba(255,255,255,.28); margin-top: 10px; text-align: right; }
 
-      /* ── No-pet banner ── */
+      /* â”€â”€ No-pet banner â”€â”€ */
       .no-pet-banner {
         margin-top: 20px; padding: 20px 24px; border-radius: 16px;
         border: 1px solid rgba(42,215,255,.18); background: rgba(42,215,255,.05);
@@ -180,7 +180,7 @@
 
     <main class="page">
 
-      <!-- ── HERO ── -->
+      <!-- â”€â”€ HERO â”€â”€ -->
       <section class="hero">
         <div class="container hero-grid">
           <div class="hero-left">
@@ -195,7 +195,7 @@
               The more active you are in the community, the stronger your creature gets.
             </p>
             <a href="#leaderboard" class="btn-scroll">
-              View the Leaderboard <span class="btn-scroll-arrow">↓</span>
+              View the Leaderboard <span class="btn-scroll-arrow">â†“</span>
             </a>
             <div class="chips" style="margin-top: 14px;">
               <span class="chip">/pet inspect to hatch</span>
@@ -240,7 +240,7 @@
         </div>
       </section>
 
-      <!-- ── HOW IT WORKS ── -->
+      <!-- â”€â”€ HOW IT WORKS â”€â”€ -->
       <section class="section" style="padding-top:0;">
         <div class="container">
           <h2>How Pulselings work</h2>
@@ -249,42 +249,42 @@
           <div class="guide-grid">
 
             <div class="guide-item">
-              <div class="guide-item-head"><div class="guide-icon">🥚</div><div class="guide-title">Hatching your creature</div></div>
+              <div class="guide-item-head"><div class="guide-icon">ðŸ¥š</div><div class="guide-title">Hatching your creature</div></div>
               <div class="guide-sub">
                 Type <strong>/pet inspect</strong> in any CreatorPulse server and your creature hatches on the spot. It gets a name from a curated pool of 325 names, and six trait slots are rolled to determine its appearance and rarity. You can&rsquo;t re-roll &mdash; what hatches is yours permanently.
               </div>
             </div>
 
             <div class="guide-item">
-              <div class="guide-item-head"><div class="guide-icon">📊</div><div class="guide-title">Three stats to manage</div></div>
+              <div class="guide-item-head"><div class="guide-icon">ðŸ“Š</div><div class="guide-title">Three stats to manage</div></div>
               <div class="guide-sub">
                 Your creature has <strong>Hunger</strong>, <strong>Happiness</strong>, and <strong>Health</strong>. Keep all three above 60% and every action earns a <strong>1.25&times; XP multiplier</strong>. Drop below 30% wellness and XP falls to zero. Stats decay naturally while you&rsquo;re away, so daily check-ins matter.
               </div>
             </div>
 
             <div class="guide-item">
-              <div class="guide-item-head"><div class="guide-icon">🍖</div><div class="guide-title">Feed &mdash; every 8 hours</div></div>
+              <div class="guide-item-head"><div class="guide-icon">ðŸ–</div><div class="guide-title">Feed &mdash; every 8 hours</div></div>
               <div class="guide-sub">
                 Feeding gives <strong>+25 Hunger</strong>, <strong>+5 Happiness</strong>, and <strong>10 base XP</strong>. Your very first action of each day also stacks a flat <strong>+25 XP daily bonus</strong> on top, regardless of which action you take. Hunger decays 8 points every 12 hours, so feeding is your core daily ritual.
               </div>
             </div>
 
             <div class="guide-item">
-              <div class="guide-item-head"><div class="guide-icon">🎮</div><div class="guide-title">Play &mdash; every 4 hours</div></div>
+              <div class="guide-item-head"><div class="guide-icon">ðŸŽ®</div><div class="guide-title">Play &mdash; every 4 hours</div></div>
               <div class="guide-sub">
                 Playing gives <strong>+20 Happiness</strong> and <strong>15 base XP</strong> &mdash; the highest XP of any single action. It costs <strong>-5 Hunger</strong>, so keep your creature fed first. Play has the shortest cooldown because happiness degrades the fastest when neglected.
               </div>
             </div>
 
             <div class="guide-item">
-              <div class="guide-item-head"><div class="guide-icon">💤</div><div class="guide-title">Rest &mdash; every 6 hours</div></div>
+              <div class="guide-item-head"><div class="guide-icon">ðŸ’¤</div><div class="guide-title">Rest &mdash; every 6 hours</div></div>
               <div class="guide-sub">
                 Resting gives <strong>+30 Energy</strong>, <strong>+5 Health</strong>, and <strong>8 base XP</strong>. Health is the slowest stat to rebuild, so neglecting rest compounds over time. A creature with high hunger and happiness will slowly recover health on its own &mdash; but resting speeds that up significantly.
               </div>
             </div>
 
             <div class="guide-item">
-              <div class="guide-item-head"><div class="guide-icon">🌿</div><div class="guide-title">Feed tokens &amp; community feeding</div></div>
+              <div class="guide-item-head"><div class="guide-icon">ðŸŒ¿</div><div class="guide-title">Feed tokens &amp; community feeding</div></div>
               <div class="guide-sub">
                 You hold up to <strong>5 feed tokens</strong>. Earn one per level-up, one on your first daily action, and one whenever someone else feeds your creature. Spend tokens to feed others&rsquo; showcased creatures &mdash; they get <strong>+15 Hunger, +3 Happiness, +5 XP</strong>. The community that feeds together levels together.
               </div>
@@ -292,7 +292,7 @@
 
             <!-- SUBSCRIBER XP BOOST CARD -->
             <div class="guide-item guide-item--sub">
-              <div class="guide-item-head"><div class="guide-icon">⚡</div><div class="guide-title">Subscriber XP boost</div></div>
+              <div class="guide-item-head"><div class="guide-icon">âš¡</div><div class="guide-title">Subscriber XP boost</div></div>
               <div class="guide-sub">
                 Subscribing to a creator&rsquo;s Discord server through CreatorPulse boosts your Pulseling&rsquo;s XP gain across <em>all</em> your actions &mdash; not just in that server. The more creators you support, the bigger the bonus.
                 <div class="sub-tiers">
@@ -320,7 +320,7 @@
             </div>
 
             <div class="guide-item">
-              <div class="guide-item-head"><div class="guide-icon">🧬</div><div class="guide-title">Mutations</div></div>
+              <div class="guide-item-head"><div class="guide-icon">ðŸ§¬</div><div class="guide-title">Mutations</div></div>
               <div class="guide-sub">
                 At levels 25, 50, 75, and every 25 levels after 100, your creature is offered a <strong>mutation</strong>. This upgrades one of its six trait slots to a higher rarity version &mdash; permanently improving its overall rarity score. You have 48 hours to accept or decline. Accepting is irreversible.
               </div>
@@ -334,7 +334,7 @@
         </div>
       </section>
 
-      <!-- ── LEVELING & HATS ── -->
+      <!-- â”€â”€ LEVELING & HATS â”€â”€ -->
       <section class="section" style="padding-top:0;">
         <div class="container two-col">
           <div>
@@ -369,7 +369,7 @@
         </div>
       </section>
 
-      <!-- ── SHOWCASE ── -->
+      <!-- â”€â”€ SHOWCASE â”€â”€ -->
       <section class="section" style="padding-top:0;">
         <div class="container">
           <h2>Showcasing in the community</h2>
@@ -390,12 +390,12 @@
         </div>
       </section>
 
-      <!-- ── LEADERBOARD ── -->
+      <!-- â”€â”€ LEADERBOARD â”€â”€ -->
       <section class="section" style="padding-top:0; padding-bottom:56px;" id="leaderboard">
         <div class="container">
           <div class="lb-section-head">
             <h2>Top Creatures</h2>
-            <a href="#" class="lb-back-top">↑ Back to top</a>
+            <a href="#" class="lb-back-top">â†‘ Back to top</a>
           </div>
           <p class="muted" style="margin:0 0 4px; font-size:13px;">Ranked by level, then XP within the same level. Updates every 30 minutes across all servers.</p>
 
@@ -403,7 +403,7 @@
           <div class="lb-updated" id="lb-updated"></div>
 
           <div class="no-pet-banner">
-            <div class="no-pet-icon">🥚</div>
+            <div class="no-pet-icon">ðŸ¥š</div>
             <div>
               <div class="no-pet-title">Don&rsquo;t have a Pulseling yet?</div>
               <div class="no-pet-sub">
@@ -420,8 +420,8 @@
     <script src="assets/site.js"></script>
     <script>
       (function () {
-        var API    = "https://cd-shoutout-bot-live-production.up.railway.app/api/leaderboard";
-        var MEDALS = ["🥇", "🥈", "🥉"];
+        var API    = "https://cd-creatorpulse-production.up.railway.app/api/leaderboard";
+        var MEDALS = ["ðŸ¥‡", "ðŸ¥ˆ", "ðŸ¥‰"];
 
         function esc(s) {
           return String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
@@ -475,3 +475,7 @@
     </script>
   </body>
 </html>
+
+
+---
+
