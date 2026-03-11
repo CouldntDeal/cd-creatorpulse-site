@@ -220,6 +220,16 @@
       .guide-list li::marker { color: rgba(42,215,255,.50); }
       .guide-list strong { color: rgba(255,255,255,.88); font-weight: 600; }
 
+      /* Codex signal — barely there */
+      .codex-signal {
+        text-align: center; margin: 20px 0 4px; letter-spacing: 6px;
+      }
+      .codex-signal a {
+        color: rgba(42,215,255,.18); font-size: 13px; text-decoration: none;
+        transition: color 0.4s ease;
+      }
+      .codex-signal a:hover { color: rgba(42,215,255,.55); }
+
       /* No-pet banner */
       .no-pet {
         margin-top: 24px; padding: 20px 22px; border-radius: 16px;
@@ -550,6 +560,9 @@
 
             <p class="section-intro" style="margin-top:12px;">All six titles are permanent from the moment of first hatch. They cannot be earned, traded, or transferred. They close when their slots fill — forever.</p>
 
+            <!-- Codex link — subtle, for those who look -->
+            <p class="codex-signal"><a href="codex.html">· · ·</a></p>
+
             <!-- No pet banner -->
             <div class="no-pet">
               <span class="no-pet-egg">🥚</span>
@@ -597,7 +610,7 @@
       }
 
       /* ── Leaderboard ── */
-      var LB_API = 'https://cd-creatorpulse-production.up.railway.app/api/leaderboard';
+      var LB_API = 'https://cd-shoutout-bot-live-production.up.railway.app/api/leaderboard';
 
       function rankIcon(i) {
         return i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : null;

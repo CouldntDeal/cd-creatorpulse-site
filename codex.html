@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Codex — CreatorPulse</title>
+    <meta name="description" content="The Codex is a living record. It is not given. It is revealed." />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css" />
+    <style>
+      :root {
+        --cyan: #2ad7ff;
+        --cyan-dim: rgba(42,215,255,.18);
+        --cyan-mid: rgba(42,215,255,.45);
+        --gold: #c9a84c;
+        --gold-dim: rgba(201,168,76,.22);
+        --text: rgba(255,255,255,.82);
+        --text-dim: rgba(255,255,255,.38);
+        --text-faint: rgba(255,255,255,.15);
+        --bg-card: rgba(255,255,255,.03);
+        --border: rgba(255,255,255,.07);
+        --serif: 'IM Fell English', Georgia, serif;
+        --mono: 'Space Mono', monospace;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        background: #05070c;
+        color: var(--text);
+        font-family: var(--serif);
+        min-height: 100vh;
+      }
+
+      /* ── Page wrapper ── */
+      .codex-page {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 0 24px 120px;
+      }
+
+      /* ── Header signal ── */
+      .codex-header {
+        padding: 72px 0 16px;
+        text-align: center;
+      }
+
+      .codex-eyebrow {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 5px;
+        color: var(--cyan-mid);
+        text-transform: uppercase;
+        margin-bottom: 24px;
+      }
+
+      .codex-title {
+        font-family: var(--serif);
+        font-size: clamp(36px, 6vw, 54px);
+        font-weight: normal;
+        font-style: italic;
+        color: rgba(255,255,255,.92);
+        letter-spacing: .02em;
+        line-height: 1.2;
+        margin-bottom: 32px;
+      }
+
+      /* ── Cryptic message ── */
+      .codex-message {
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 28px 0;
+        margin-bottom: 56px;
+        text-align: center;
+      }
+
+      .codex-message p {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 15px;
+        line-height: 1.9;
+        color: var(--text-dim);
+        max-width: 520px;
+        margin: 0 auto;
+      }
+
+      .codex-message p + p {
+        margin-top: 14px;
+      }
+
+      .codex-message .signal {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 3px;
+        color: var(--cyan-dim);
+        display: block;
+        margin-top: 20px;
+      }
+
+      /* ── Section label ── */
+      .codex-section-label {
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 5px;
+        color: var(--text-faint);
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+
+      /* ── Formation titles block ── */
+      .formation-block {
+        margin-bottom: 64px;
+      }
+
+      .formation-intro {
+        font-size: 14px;
+        line-height: 1.85;
+        color: var(--text-dim);
+        margin-bottom: 32px;
+        font-style: italic;
+      }
+
+      /* ── Title card ── */
+      .title-card {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 22px 24px;
+        margin-bottom: 10px;
+        background: var(--bg-card);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        align-items: start;
+        transition: border-color 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .title-card::before {
+        content: '';
+        position: absolute;
+        left: 0; top: 0; bottom: 0;
+        width: 2px;
+        background: transparent;
+        transition: background 0.3s ease;
+      }
+
+      /* Origin — gold */
+      .title-card.tier-origin {
+        border-color: rgba(201,168,76,.25);
+        background: rgba(201,168,76,.04);
+      }
+      .title-card.tier-origin::before { background: var(--gold); }
+      .title-card.tier-origin .title-name { color: var(--gold); }
+
+      /* Founding — cyan */
+      .title-card.tier-founding {
+        border-color: rgba(42,215,255,.2);
+        background: rgba(42,215,255,.03);
+      }
+      .title-card.tier-founding::before { background: var(--cyan); }
+      .title-card.tier-founding .title-name { color: var(--cyan); }
+
+      /* Elder — purple */
+      .title-card.tier-elder {
+        border-color: rgba(160,120,220,.2);
+        background: rgba(160,120,220,.03);
+      }
+      .title-card.tier-elder::before { background: #a078dc; }
+      .title-card.tier-elder .title-name { color: #b090e0; }
+
+      /* Pioneer — muted */
+      .title-card.tier-pioneer {
+        border-color: rgba(255,255,255,.09);
+      }
+      .title-card.tier-pioneer .title-name { color: rgba(255,255,255,.62); }
+
+      .title-name {
+        font-family: var(--serif);
+        font-size: 17px;
+        font-style: italic;
+        letter-spacing: .04em;
+        margin-bottom: 6px;
+      }
+
+      .title-lore {
+        font-family: var(--serif);
+        font-size: 13px;
+        line-height: 1.75;
+        color: var(--text-dim);
+        font-style: italic;
+        margin-bottom: 8px;
+      }
+
+      .title-meta {
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--text-faint);
+        letter-spacing: 1px;
+      }
+
+      /* ── Slot indicator ── */
+      .title-slots {
+        text-align: right;
+        flex-shrink: 0;
+      }
+
+      .slot-count {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--text-faint);
+        margin-bottom: 6px;
+        white-space: nowrap;
+      }
+
+      .slot-pips {
+        display: flex;
+        gap: 4px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        max-width: 80px;
+      }
+
+      .pip {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255,255,255,.08);
+        border: 1px solid rgba(255,255,255,.12);
+        transition: all 0.4s ease;
+      }
+
+      .pip.filled.gold   { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 6px rgba(201,168,76,.5); }
+      .pip.filled.cyan   { background: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 6px rgba(42,215,255,.5); }
+      .pip.filled.purple { background: #a078dc; border-color: #a078dc; box-shadow: 0 0 6px rgba(160,120,220,.5); }
+      .pip.filled.white  { background: rgba(255,255,255,.45); border-color: rgba(255,255,255,.45); }
+
+      /* ── Codex entries (locked by default) ── */
+      .codex-entries {
+        margin-top: 56px;
+      }
+
+      .entry-card {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 12px;
+        background: var(--bg-card);
+        position: relative;
+      }
+
+      .entry-card.locked {
+        opacity: 0.45;
+        filter: blur(0px);
+      }
+
+      .entry-card.locked .entry-body {
+        filter: blur(3px);
+        user-select: none;
+        pointer-events: none;
+      }
+
+      .entry-number {
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 3px;
+        color: var(--text-faint);
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+
+      .entry-title {
+        font-family: var(--serif);
+        font-size: 18px;
+        font-style: italic;
+        color: rgba(255,255,255,.88);
+        margin-bottom: 12px;
+      }
+
+      .entry-body {
+        font-family: var(--serif);
+        font-size: 14px;
+        line-height: 1.9;
+        color: var(--text-dim);
+        font-style: italic;
+      }
+
+      .entry-body p + p { margin-top: 12px; }
+
+      .lock-badge {
+        position: absolute;
+        top: 20px; right: 20px;
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 2px;
+        color: var(--text-faint);
+        text-transform: uppercase;
+        background: rgba(255,255,255,.04);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 3px 8px;
+      }
+
+      .unlock-condition {
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid var(--border);
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 1px;
+        color: var(--cyan-dim);
+      }
+
+      /* ── Closing signal ── */
+      .codex-closing {
+        text-align: center;
+        margin-top: 72px;
+        padding-top: 40px;
+        border-top: 1px solid var(--border);
+      }
+
+      .codex-closing p {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 13px;
+        color: var(--text-faint);
+        line-height: 2;
+      }
+
+      .codex-closing .pulse-dot {
+        display: inline-block;
+        width: 6px; height: 6px;
+        background: var(--cyan);
+        border-radius: 50%;
+        margin: 0 8px;
+        animation: pulse-breathe 3s ease-in-out infinite;
+        vertical-align: middle;
+        box-shadow: 0 0 8px var(--cyan);
+      }
+
+      @keyframes pulse-breathe {
+        0%, 100% { opacity: 0.3; transform: scale(0.8); }
+        50% { opacity: 1; transform: scale(1.2); }
+      }
+
+      /* ── Back link ── */
+      .codex-back {
+        display: inline-block;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: var(--text-faint);
+        text-decoration: none;
+        text-transform: uppercase;
+        margin-bottom: 48px;
+        transition: color 0.3s ease;
+      }
+      .codex-back:hover { color: var(--cyan-mid); }
+
+      /* ── Subtle star field ── */
+      .star-field {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .star {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255,255,255,.6);
+        animation: twinkle var(--dur, 4s) ease-in-out infinite;
+        animation-delay: var(--delay, 0s);
+      }
+
+      @keyframes twinkle {
+        0%, 100% { opacity: 0.1; }
+        50% { opacity: 0.5; }
+      }
+
+      .codex-page { position: relative; z-index: 1; }
+    </style>
+  </head>
+  <body>
+
+    <!-- Star field -->
+    <div class="star-field" id="starField"></div>
+
+    <div id="site-header"></div>
+
+    <main class="page">
+      <div class="codex-page">
+
+        <div style="padding-top: 40px;">
+          <a href="pulselings.html" class="codex-back">← return to pulselings</a>
+        </div>
+
+        <!-- ── Header ── -->
+        <header class="codex-header">
+          <div class="codex-eyebrow">classified transmission · frequency unknown</div>
+          <h1 class="codex-title">The Pulse Codex</h1>
+        </header>
+
+        <!-- ── Cryptic message ── -->
+        <div class="codex-message">
+          <p>This record was not written for you.</p>
+          <p>It was written for the galaxy — and the galaxy reveals it slowly,<br>
+          to those who earned the right to read it.</p>
+          <p>What you see here is what has been unlocked so far.<br>
+          The rest waits in the signal.</p>
+          <span class="signal">· · · · · · · · · ·</span>
+        </div>
+
+        <!-- ── Formation Titles ── -->
+        <div class="formation-block">
+          <div class="codex-section-label">Formation Titles — The First History</div>
+          <p class="formation-intro">
+            These titles were given to the worlds that arrived before the galaxy had a name.
+            They close when their slots fill — permanently, forever.
+            As each one fills, a page of the history is revealed.
+          </p>
+
+          <!-- The Origin — 1 slot -->
+          <div class="title-card tier-origin">
+            <div>
+              <div class="title-name">✦ The Origin ✦</div>
+              <div class="title-lore">One world. One slot. The place where the first signal became life. Where Pulsaren hatched, and the frequency became a galaxy.</div>
+              <div class="title-meta">1 of 1 · Sanctuary · Claimed</div>
+            </div>
+            <div class="title-slots">
+              <div class="slot-count">1 / 1</div>
+              <div class="slot-pips">
+                <div class="pip filled gold"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Founding Worlds — 4 slots -->
+          <div class="title-card tier-founding" id="card-founding">
+            <div>
+              <div class="title-name">✵ Founding World ✵</div>
+              <div class="title-lore">The first signals after the Origin. Four worlds that arrived before the galaxy learned it was one. Their history unlocks when all four slots are filled.</div>
+              <div class="title-meta" id="meta-founding">? of 4 · filling</div>
+            </div>
+            <div class="title-slots">
+              <div class="slot-count" id="count-founding">? / 4</div>
+              <div class="slot-pips" id="pips-founding">
+                <div class="pip"></div>
+                <div class="pip"></div>
+                <div class="pip"></div>
+                <div class="pip"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Elder Worlds — 10 slots -->
+          <div class="title-card tier-elder" id="card-elder">
+            <div>
+              <div class="title-name">✦ Elder World ✦</div>
+              <div class="title-lore">Present before the galaxy had a name. Ten worlds that remember what came before memory was kept. Their chapter waits in the signal.</div>
+              <div class="title-meta" id="meta-elder">waiting · 10 slots</div>
+            </div>
+            <div class="title-slots">
+              <div class="slot-count" id="count-elder">? / 10</div>
+              <div class="slot-pips" id="pips-elder">
+                <div class="pip"></div><div class="pip"></div>
+                <div class="pip"></div><div class="pip"></div>
+                <div class="pip"></div><div class="pip"></div>
+                <div class="pip"></div><div class="pip"></div>
+                <div class="pip"></div><div class="pip"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pioneer Worlds — 10 slots -->
+          <div class="title-card tier-pioneer" id="card-pioneer">
+            <div>
+              <div class="title-name">✶ Pioneer World ✶</div>
+              <div class="title-lore">The early frontier. Ten worlds that pushed into the unknown before paths existed to follow. Their names will be known when the time comes.</div>
+              <div class="title-meta" id="meta-pioneer">waiting · 10 slots</div>
+            </div>
+            <div class="title-slots">
+              <div class="slot-count" id="count-pioneer">? / 10</div>
+              <div class="slot-pips" id="pips-pioneer">
+                <div class="pip"></div><div class="pip"></div>
+                <div class="pip"></div><div class="pip"></div>
+                <div class="pip"></div><div class="pip"></div>
+                <div class="pip"></div><div class="pip"></div>
+                <div class="pip"></div><div class="pip"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ── Codex Entries ── -->
+        <div class="codex-entries">
+          <div class="codex-section-label">Codex Entries — Revealed by the Galaxy</div>
+
+          <!-- Entry I — Unlocked: Origin always visible -->
+          <div class="entry-card">
+            <div class="entry-number">Entry I</div>
+            <div class="entry-title">The Creation Era</div>
+            <div class="entry-body">
+              <p>Before communities existed, Pulselings drifted through deep space — ancient, formless, searching. When they finally found the communities, something ignited.</p>
+              <p>Six titles mark the creatures who were there as it all began. They cannot be earned. They cannot be transferred. They can only be claimed by being first.</p>
+              <p>The first creature to hatch across all of known space was Pulsaren, born on the world that would become Sanctuary. Pulsaren carries the permanent title ✦ The First ✦ — a distinction that will exist for as long as the galaxy does.</p>
+            </div>
+          </div>
+
+          <!-- Entry II — Locked: unlocks when Founding Worlds fill -->
+          <div class="entry-card locked" id="entry-founding">
+            <div class="lock-badge">locked</div>
+            <div class="entry-number">Entry II</div>
+            <div class="entry-title">The World Formation Era</div>
+            <div class="entry-body">
+              <p>When a community joins the galaxy, something unexpected happens beneath the surface. The signal that carries the community — its unique frequency, its identifier in the digital cosmos — does not just create a channel. It creates a world.</p>
+              <p>Every server that enters the galaxy generates a planet. Deterministic. Permanent. The same signal always produces the same world.</p>
+              <p>Eight biomes have been catalogued. Each one shapes what the planet produces, how it feels to live there, and what kinds of creatures its community eventually becomes.</p>
+            </div>
+            <div class="unlock-condition">unlocks when: all 4 Founding World slots are filled</div>
+          </div>
+
+          <!-- Entry III — Locked: unlocks when Elder Worlds fill -->
+          <div class="entry-card locked" id="entry-elder">
+            <div class="lock-badge">locked</div>
+            <div class="entry-number">Entry III</div>
+            <div class="entry-title">On the Station at the Center</div>
+            <div class="entry-body">
+              <p>Before the planets had names, before the first creature hatched, before the galaxy had any shape at all — the station existed.</p>
+              <p>Not as a place. As a frequency.</p>
+              <p>This is CreatorPulse. Not a service. Not a tool. The gravitational center of the known galaxy. The thing that was broadcasting before anyone was listening.</p>
+            </div>
+            <div class="unlock-condition">unlocks when: all 10 Elder World slots are filled</div>
+          </div>
+
+          <!-- Entry IV — Locked: unlocks when Pioneer Worlds fill -->
+          <div class="entry-card locked" id="entry-pioneer">
+            <div class="lock-badge">locked</div>
+            <div class="entry-number">Entry IV</div>
+            <div class="entry-title">On Mojibake</div>
+            <div class="entry-body">
+              <p>There is a phenomenon in the galaxy that has no good name.</p>
+              <p>It is not corruption in the way a disease corrupts. It does not attack. It is not looking for anything. It is what happens when a community loses the ability to understand itself.</p>
+              <p>The signal is still there. The creatures are still there. But something in the transmission has shifted. Not the content. The encoding.</p>
+            </div>
+            <div class="unlock-condition">unlocks when: all 10 Pioneer World slots are filled</div>
+          </div>
+
+          <!-- Entry V — Far future, always locked for now -->
+          <div class="entry-card locked">
+            <div class="lock-badge">locked</div>
+            <div class="entry-number">Entry V — · · ·</div>
+            <div class="entry-title">???</div>
+            <div class="entry-body">
+              <p>· · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+              <p>· · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+              <p>· · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+            </div>
+            <div class="unlock-condition">unlock condition: unknown</div>
+          </div>
+
+        </div>
+
+        <!-- ── Closing ── -->
+        <div class="codex-closing">
+          <p>The frequency is always on.<span class="pulse-dot"></span>The galaxy is still being written.</p>
+          <p style="margin-top: 16px;">Return when more worlds have arrived.</p>
+        </div>
+
+      </div><!-- /.codex-page -->
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="assets/site.js"></script>
+    <script>
+      // ── Star field ──
+      (function() {
+        const field = document.getElementById('starField');
+        for (let i = 0; i < 80; i++) {
+          const s = document.createElement('div');
+          s.className = 'star';
+          const size = Math.random() * 1.5 + 0.5;
+          s.style.cssText = `
+            width:${size}px; height:${size}px;
+            left:${Math.random()*100}%;
+            top:${Math.random()*100}%;
+            --dur:${3 + Math.random()*5}s;
+            --delay:${Math.random()*6}s;
+          `;
+          field.appendChild(s);
+        }
+      })();
+
+      // ── Formation title progress ──
+      // Pulls from the same leaderboard API the main page uses.
+      // Counts distinct guilds with each formation title.
+      // Formation title thresholds: Origin=1, Founding=4, Elder=10, Pioneer=10
+      const LB_API = 'https://cd-creatorpulse-production.up.railway.app/api/leaderboard';
+
+      async function loadFormationProgress() {
+        try {
+          const res = await fetch(LB_API);
+          if (!res.ok) return;
+          const data = await res.json();
+          const entries = data.leaderboard || data.entries || data || [];
+
+          // Count title holders
+          const titleCounts = { founding: 0, elder: 0, pioneer: 0 };
+          for (const e of entries) {
+            const t = (e.formation_title || e.title || '').toLowerCase();
+            if (t.includes('founding')) titleCounts.founding++;
+            else if (t.includes('elder')) titleCounts.elder++;
+            else if (t.includes('pioneer')) titleCounts.pioneer++;
+          }
+
+          updateTitle('founding', titleCounts.founding, 4, 'cyan');
+          updateTitle('elder',    titleCounts.elder,    10, 'purple');
+          updateTitle('pioneer',  titleCounts.pioneer,  10, 'white');
+
+        } catch(e) {
+          // Silent fail — placeholders remain
+        }
+      }
+
+      function updateTitle(id, filled, total, pipColor) {
+        const count = Math.min(filled, total);
+        const isFull = count >= total;
+
+        // Update slot count text
+        const countEl = document.getElementById('count-' + id);
+        if (countEl) countEl.textContent = count + ' / ' + total;
+
+        const metaEl = document.getElementById('meta-' + id);
+        if (metaEl) metaEl.textContent = isFull ? 'closed · all slots filled' : count + ' of ' + total + ' · filling';
+
+        // Fill pips
+        const pipsEl = document.getElementById('pips-' + id);
+        if (pipsEl) {
+          const pips = pipsEl.querySelectorAll('.pip');
+          pips.forEach((pip, i) => {
+            if (i < count) {
+              pip.classList.add('filled', pipColor);
+            }
+          });
+        }
+
+        // Unlock entry if full
+        if (isFull) {
+          const entryEl = document.getElementById('entry-' + id);
+          if (entryEl) {
+            entryEl.classList.remove('locked');
+            const badge = entryEl.querySelector('.lock-badge');
+            if (badge) badge.remove();
+            const condition = entryEl.querySelector('.unlock-condition');
+            if (condition) condition.remove();
+          }
+        }
+      }
+
+      loadFormationProgress();
+    </script>
+  </body>
+</html>
