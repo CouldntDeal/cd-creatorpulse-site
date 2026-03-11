@@ -314,6 +314,84 @@
         color: var(--cyan-dim);
       }
 
+      /* ── Keyhole ── */
+      .keyhole-entry { padding-bottom: 56px; }
+      .keyhole-wrap {
+        position: absolute;
+        bottom: 20px; right: 24px;
+      }
+      .keyhole {
+        opacity: 0.25;
+        transition: opacity 0.4s ease;
+        cursor: default;
+      }
+      .keyhole:hover { opacity: 0.5; }
+
+      /* ── I was here ── */
+      .i-was-here {
+        margin: 48px 0 0;
+        padding: 36px 0;
+        border-top: 1px solid var(--border);
+        text-align: center;
+      }
+
+      .iwh-label {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 18px;
+        color: rgba(255,255,255,.55);
+        margin-bottom: 10px;
+      }
+
+      .iwh-sub {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 1px;
+        color: var(--text-faint);
+        margin-bottom: 24px;
+        line-height: 1.7;
+      }
+
+      .iwh-btn {
+        background: transparent;
+        border: 1px solid var(--cyan-dim);
+        color: var(--cyan-mid);
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        padding: 12px 28px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .iwh-btn:hover {
+        border-color: var(--cyan-mid);
+        color: var(--cyan);
+        box-shadow: 0 0 16px rgba(42,215,255,.12);
+      }
+      .iwh-btn:disabled {
+        opacity: 0.35;
+        cursor: default;
+        box-shadow: none;
+      }
+
+      .iwh-first {
+        margin-top: 20px;
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 13px;
+        color: var(--text-faint);
+        line-height: 1.8;
+        min-height: 24px;
+      }
+
+      .iwh-first .discovery {
+        color: var(--cyan-mid);
+        display: block;
+        margin-top: 6px;
+      }
+
       /* ── Closing signal ── */
       .codex-closing {
         text-align: center;
@@ -551,19 +629,39 @@
             <div class="unlock-condition">unlocks when: all 10 Pioneer World slots are filled</div>
           </div>
 
-          <!-- Entry V — Far future, always locked for now -->
-          <div class="entry-card locked">
+          <!-- Entry V — The Keyhole -->
+          <div class="entry-card locked keyhole-entry">
             <div class="lock-badge">locked</div>
-            <div class="entry-number">Entry V — · · ·</div>
+            <div class="entry-number">Entry V — Final</div>
             <div class="entry-title">???</div>
             <div class="entry-body">
               <p>· · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
               <p>· · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
               <p>· · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
             </div>
+            <div class="keyhole-wrap">
+              <div class="keyhole" title="something belongs here">
+                <svg width="28" height="40" viewBox="0 0 28 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="14" cy="12" r="8" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+                  <path d="M10 18 L8 38 L14 34 L20 38 L18 18" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" fill="none"/>
+                </svg>
+              </div>
+            </div>
             <div class="unlock-condition">unlock condition: unknown</div>
           </div>
 
+        </div>
+
+        <!-- ── I was here ── -->
+        <div class="i-was-here" id="iWasHere">
+          <div class="iwh-inner">
+            <div class="iwh-label">you found this.</div>
+            <div class="iwh-sub">If you have an active Pulseling, you can claim your place in the record.</div>
+            <button class="iwh-btn" id="iWhBtn" onclick="claimCuriosity()">
+              <span id="iWhBtnText">I was here.</span>
+            </button>
+            <div class="iwh-first" id="iWhFirst"></div>
+          </div>
         </div>
 
         <!-- ── Closing ── -->
@@ -664,6 +762,76 @@
       }
 
       loadFormationProgress();
+
+      // ── I was here / Claim Curiosity ──
+      // Fetches the current first-finder record from the API.
+      // If unclaimed and user has a Pulseling, allows claiming.
+      const CODEX_API = 'https://cd-creatorpulse-production.up.railway.app/api/codex';
+
+      async function loadCodexRecord() {
+        try {
+          const res = await fetch(CODEX_API + '/curious');
+          if (!res.ok) return;
+          const data = await res.json();
+          if (data.claimed && data.discovery) {
+            showDiscovery(data.discovery);
+            disableClaimBtn('already claimed');
+          }
+        } catch(e) { /* silent */ }
+      }
+
+      function showDiscovery(d) {
+        const el = document.getElementById('iWhFirst');
+        if (!el) return;
+        el.innerHTML = `First found by <span class="discovery">${escHtml(d.pulseling_name)} · ${escHtml(d.username)} · ${escHtml(d.planet_name)} · ${escHtml(d.date)}</span>`;
+      }
+
+      function disableClaimBtn(reason) {
+        const btn = document.getElementById('iWhBtn');
+        if (btn) {
+          btn.disabled = true;
+          document.getElementById('iWhBtnText').textContent = reason || 'claimed';
+        }
+      }
+
+      async function claimCuriosity() {
+        const btn = document.getElementById('iWhBtn');
+        if (!btn || btn.disabled) return;
+        btn.disabled = true;
+        document.getElementById('iWhBtnText').textContent = 'claiming · · ·';
+
+        try {
+          const res = await fetch(CODEX_API + '/claim-curious', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include'
+          });
+          const data = await res.json();
+          if (data.success && data.discovery) {
+            showDiscovery(data.discovery);
+            document.getElementById('iWhBtnText').textContent = 'recorded';
+          } else if (data.error === 'already_claimed') {
+            if (data.discovery) showDiscovery(data.discovery);
+            disableClaimBtn('already claimed');
+          } else if (data.error === 'no_pulseling') {
+            btn.disabled = false;
+            document.getElementById('iWhBtnText').textContent = 'I was here.';
+            document.getElementById('iWhFirst').textContent = 'no active Pulseling found on your account.';
+          } else {
+            btn.disabled = false;
+            document.getElementById('iWhBtnText').textContent = 'I was here.';
+          }
+        } catch(e) {
+          btn.disabled = false;
+          document.getElementById('iWhBtnText').textContent = 'I was here.';
+        }
+      }
+
+      function escHtml(str) {
+        return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      }
+
+      loadCodexRecord();
     </script>
   </body>
 </html>
