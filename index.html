@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CreatorPulse — Discord, managed.</title>
-    <meta name="description" content="CreatorPulse runs your Discord community so you can focus on creating. Built for streamers and content creators." />
+    <meta name="description" content="CreatorPulse runs your Discord community so you can focus on creating. Always free. Built for streamers and content creators." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -38,7 +38,26 @@
         color: var(--muted);
         line-height: 1.65;
         max-width: 520px;
-        margin: 0 0 32px;
+        margin: 0 0 16px;
+      }
+
+      /* Free badge */
+      .free-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(42,215,255,.08);
+        border: 1px solid rgba(42,215,255,.22);
+        border-radius: 100px;
+        padding: 5px 13px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 24px;
+      }
+      .free-badge::before {
+        content: '✓';
+        font-weight: 800;
       }
 
       /* Three pillars */
@@ -86,6 +105,41 @@
         margin: 0;
       }
 
+      /* Dashboards grid */
+      .dashboards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 32px;
+      }
+      @media (max-width: 640px) {
+        .dashboards-grid { grid-template-columns: 1fr; }
+      }
+      .dashboard-item {
+        background: linear-gradient(160deg, rgba(255,255,255,.065), rgba(255,255,255,.035));
+        border: 1px solid rgba(255,255,255,.09);
+        border-radius: 16px;
+        padding: 22px 20px;
+      }
+      .dashboard-item-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+      }
+      .dashboard-item-icon { font-size: 1.2rem; }
+      .dashboard-item h3 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin: 0;
+      }
+      .dashboard-item p {
+        font-size: 0.85rem;
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0;
+      }
+
       /* Pulselings teaser */
       .pulselings-teaser {
         background: linear-gradient(135deg, rgba(120, 60, 220, 0.12), rgba(42,215,255,.06));
@@ -124,8 +178,26 @@
       .pulselings-teaser p {
         color: var(--muted);
         line-height: 1.65;
-        margin: 0 0 24px;
+        margin: 0 0 10px;
         max-width: 520px;
+      }
+      .pulselings-highlights {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0 0 24px;
+      }
+      .pulse-hl {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 4px 11px;
+        border-radius: 100px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        background: rgba(180,122,255,.10);
+        border: 1px solid rgba(180,122,255,.22);
+        color: #c99fff;
       }
       .pulselings-creature {
         font-size: 5rem;
@@ -242,9 +314,15 @@
       }
       .cta-strip p {
         color: var(--muted);
-        margin: 0 0 28px;
+        margin: 0 0 10px;
         font-size: 1rem;
       }
+      .cta-strip .cta-fine {
+        font-size: 0.78rem;
+        color: rgba(255,255,255,.40);
+        margin: 16px 0 0;
+      }
+      .cta-strip .cta-fine a { color: rgba(42,215,255,.65); }
     </style>
   </head>
 
@@ -265,8 +343,10 @@
               You started streaming to create — not to manage roles, fix broken channels, or figure out why your members can't find anything. CreatorPulse runs your Discord so you don't have to.
             </p>
 
+            <div class="free-badge">Always free — optional paid features</div>
+
             <div class="cta-row">
-              <a class="btn primary" href="contact.html">Request Early Access <span aria-hidden="true">→</span></a>
+              <a class="btn primary" href="contact.html">Apply for Access <span aria-hidden="true">→</span></a>
               <a class="btn" href="how-it-works.html">See How It Works</a>
             </div>
           </div>
@@ -283,7 +363,23 @@
                   <div class="panel-dot"></div>
                   <div>
                     <div class="panel-item-title">Server structure</div>
-                    <div class="panel-item-sub">Channels, categories, and permissions — set up correctly from day one</div>
+                    <div class="panel-item-sub">Channels, categories, and permissions — set up correctly from day one, maintained automatically.</div>
+                  </div>
+                </div>
+
+                <div class="panel-item">
+                  <div class="panel-dot"></div>
+                  <div>
+                    <div class="panel-item-title">Multi-platform live alerts</div>
+                    <div class="panel-item-sub">Your community knows when you go live. No spam, no noise, no manual posting.</div>
+                  </div>
+                </div>
+
+                <div class="panel-item">
+                  <div class="panel-dot"></div>
+                  <div>
+                    <div class="panel-item-title">Creator &amp; team dashboards</div>
+                    <div class="panel-item-sub">Full control from inside Discord — go live, manage your team, view earnings.</div>
                   </div>
                 </div>
 
@@ -292,14 +388,6 @@
                   <div>
                     <div class="panel-item-title">Subscriber access</div>
                     <div class="panel-item-sub">Paid tiers unlock automatically. Cancellations remove access automatically.</div>
-                  </div>
-                </div>
-
-                <div class="panel-item">
-                  <div class="panel-dot"></div>
-                  <div>
-                    <div class="panel-item-title">Live &amp; announcement alerts</div>
-                    <div class="panel-item-sub">Your community knows when you go live. No spam, no noise.</div>
                   </div>
                 </div>
 
@@ -316,18 +404,6 @@
                 Less Discord work. More time creating.
               </div>
             </aside>
-
-            <aside class="availability-card card" style="margin-top:16px;">
-              <div class="availability-top">
-                <div class="availability-label">EARLY ACCESS</div>
-                <div class="availability-live availability-live--neutral">Slots</div>
-              </div>
-              <div class="availability-metric">
-                <div class="availability-count"><span id="availabilityCount">0 / 5</span></div>
-                <div class="availability-text">slots filled</div>
-              </div>
-              <div class="availability-sub">Small rollout. Intentionally limited for stability.</div>
-            </aside>
           </div>
         </div>
       </section>
@@ -336,7 +412,7 @@
       <section class="section">
         <div class="container">
           <div class="section-label">What it does</div>
-          <div class="section-headline">One bot. Three things done right.</div>
+          <div class="section-headline">One bot. Everything handled.</div>
           <p class="section-sub">CreatorPulse is not a toolbox you have to configure. It's an assistant that handles the hard parts of running a Discord community — automatically.</p>
 
           <div class="pillars">
@@ -346,14 +422,54 @@
               <p>Clean channels, correct permissions, clear onboarding for every new member. Your server stays organized as you grow — without you touching a single setting.</p>
             </div>
             <div class="pillar">
+              <span class="pillar-icon">🔴</span>
+              <h3>Live alerts, automatic</h3>
+              <p>Multi-platform live detection. When you go live your community knows instantly. When you go offline the placard updates. Always accurate, never manual.</p>
+            </div>
+            <div class="pillar">
               <span class="pillar-icon">🔐</span>
               <h3>Subscribers, automated</h3>
               <p>Members subscribe inside Discord. Roles apply instantly. Paid channels unlock. Access removes itself if they cancel. You never manually manage a subscriber again.</p>
             </div>
-            <div class="pillar">
-              <span class="pillar-icon">📣</span>
-              <h3>Updates, calm</h3>
-              <p>Go-live alerts, announcements, and pinned community info — all managed in place. No spam. No duplicate posts. Your community always knows what's happening.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── DASHBOARDS ── -->
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          <div class="section-label">Full Control</div>
+          <div class="section-headline">Dashboards for your whole team.</div>
+          <p class="section-sub">CreatorPulse gives you and your team dedicated control surfaces — all inside Discord, all updated in real time.</p>
+
+          <div class="dashboards-grid">
+            <div class="dashboard-item">
+              <div class="dashboard-item-head">
+                <span class="dashboard-item-icon">🎙️</span>
+                <h3>Creator Dashboard</h3>
+              </div>
+              <p>Go live, go offline, view subscriber counts and earnings, post announcements, manage your team, and open your web dashboard — all from one pinned embed.</p>
+            </div>
+            <div class="dashboard-item">
+              <div class="dashboard-item-head">
+                <span class="dashboard-item-icon">🛣️</span>
+                <h3>Manager Dashboard</h3>
+              </div>
+              <p>Give your manager real tools. Stream titles, schedules, content updates, announcements — without granting full server admin access.</p>
+            </div>
+            <div class="dashboard-item">
+              <div class="dashboard-item-head">
+                <span class="dashboard-item-icon">🛡️</span>
+                <h3>Mod Dashboard</h3>
+              </div>
+              <p>Clean tools for warnings, timeouts, channel locks, slow mode, and VOD posts — with every action automatically logged to your staff channel.</p>
+            </div>
+            <div class="dashboard-item">
+              <div class="dashboard-item-head">
+                <span class="dashboard-item-icon">💻</span>
+                <h3>Web Dashboard</h3>
+              </div>
+              <p>Deeper controls in your browser. Financial summaries, subscriber management, and platform settings — accessed via a secure link from inside Discord.</p>
             </div>
           </div>
         </div>
@@ -366,7 +482,13 @@
             <div>
               <div class="eyebrow section-label" style="color:#b47aff;">Community Feature</div>
               <h2>Your community gets Pulselings.</h2>
-              <p>Every CreatorPulse server comes with Pulselings — a creature game built directly into Discord. Members hatch their own unique creature, level it up through daily activity, and show it off to the community. It's the most fun your chat has had in a while.</p>
+              <p>Every CreatorPulse server comes with Pulselings — a creature game built directly into Discord. Members hatch their own unique creature, level it up through daily activity, and show it off to the community.</p>
+              <div class="pulselings-highlights">
+                <span class="pulse-hl">🥚 325 unique creatures</span>
+                <span class="pulse-hl">⭐ 6 rarity tiers</span>
+                <span class="pulse-hl">🌍 Planet system</span>
+                <span class="pulse-hl">🏆 Galaxy leaderboard</span>
+              </div>
               <div class="cta-row" style="margin-bottom:0;">
                 <a class="btn" href="pulselings.html" style="border-color: rgba(180,122,255,.4); color: #b47aff;">Explore Pulselings ✦</a>
               </div>
@@ -421,12 +543,13 @@
         <div class="container">
           <div class="cta-strip">
             <div class="avail-badge"><span class="avail-dot"></span> Early Access Open</div>
-            <h2>Ready to stop managing Discord?</h2>
-            <p>Early access is intentionally small. A few creators, real communities, real stability testing.</p>
+            <h2>Always free. Apply to get started.</h2>
+            <p>CreatorPulse is free to use. Early access is intentionally small — we review every application personally and onboard creators who are the right fit.</p>
             <div class="cta-row" style="justify-content: center; margin-bottom: 0;">
-              <a class="btn primary" href="contact.html">Request Early Access →</a>
+              <a class="btn primary" href="contact.html">Apply for Access →</a>
               <a class="btn" href="how-it-works.html">How It Works</a>
             </div>
+            <p class="cta-fine">No subscription required. Revenue share applies only if you choose to enable optional Discord subscriptions. <a href="partnership.html">Read the full model →</a></p>
           </div>
         </div>
       </section>

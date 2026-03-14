@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Request Access &mdash; CreatorPulse</title>
+    <title>Apply for Access &mdash; CreatorPulse</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Request early access to CreatorPulse. We&rsquo;re rolling out to a small number of test servers for stability." />
+    <meta name="description" content="Apply for early access to CreatorPulse. Applications reviewed personally. Always free." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -89,36 +89,31 @@
         <div class="container hero-grid">
 
           <div class="hero-left">
-            <div class="eyebrow">Request access</div>
-            <h1>Early access, on purpose.</h1>
+            <div class="eyebrow">Apply for access</div>
+            <h1>Early access,<br>by application.</h1>
 
             <p class="lead">
-              CreatorPulse is in a small rollout so stability stays high. If you join as a test server, you&rsquo;ll get access sooner &mdash;
-              and you&rsquo;ll help validate the experience in a real community.
-            </p>
-
-            <p class="lead-sub">
-              If you&rsquo;re accepted, we&rsquo;ll reach out on Discord with next steps.
+              CreatorPulse is free &mdash; but early access is intentionally small. We review every application personally and onboard the creators who are the best fit for this stage. If you&rsquo;re accepted, we&rsquo;ll reach out on Discord with your invite.
             </p>
 
             <div class="card">
               <h2 style="margin-top:0;">What to expect</h2>
               <ul class="list">
-                <li>You&rsquo;re an early test server (not a finished public launch yet)</li>
-                <li>You may receive updates earlier than the general rollout</li>
-                <li>We want calm feedback: what feels good, what feels confusing, what would help your community</li>
-                <li>We will not ask you to market the bot &mdash; stability comes first</li>
+                <li>You&rsquo;re joining a small, intentional first cohort of creators</li>
+                <li>The bot is fully functional &mdash; this is a controlled rollout, not a beta</li>
+                <li>We want communities where CreatorPulse can genuinely run and make a difference</li>
+                <li>If something ever feels off, tell us &mdash; we&rsquo;re reachable and responsive</li>
               </ul>
               <p class="muted" style="margin-bottom:0;">
-                The bot is free. The goal is a professional, reliable system creators can trust long-term.
+                <strong style="color:var(--accent);">&#x2713; Always free</strong> &mdash; no subscription required.
               </p>
             </div>
           </div>
 
           <aside class="hero-panel card">
             <div class="panel-head">
-              <div class="panel-title">Access intake</div>
-              <span class="panel-pill">Step 1</span>
+              <div class="panel-title">Application</div>
+              <span class="panel-pill">Apply</span>
             </div>
 
             <p class="muted" style="margin-bottom:14px;">
@@ -131,6 +126,12 @@
                 <div class="form-field-title">Discord username</div>
                 <div class="form-field-sub">So we know who to reach out to</div>
                 <input id="f-discord" type="text" placeholder="e.g. username#0000 or username" required>
+              </label>
+
+              <label class="form-field">
+                <div class="form-field-title">Email address</div>
+                <div class="form-field-sub">We&rsquo;ll confirm acceptance here</div>
+                <input id="f-email" type="email" placeholder="e.g. you@email.com" required>
               </label>
 
               <label class="form-field">
@@ -155,19 +156,21 @@
               </label>
 
               <label class="form-field">
-                <div class="form-field-title">Can you be a test server?</div>
-                <div class="form-field-sub">Early updates + feedback expected</div>
-                <select id="f-test-server" required>
-                  <option value="" disabled selected>Select one</option>
-                  <option value="Yes - we understand this is early access">Yes &mdash; we understand this is early access</option>
-                  <option value="Not sure - we prefer a later, stable release">Not sure &mdash; we prefer a later, stable release</option>
-                </select>
+                <div class="form-field-title">What do you want CreatorPulse to handle?</div>
+                <div class="form-field-sub">Tell us what&rsquo;s taking up your time, or what you wish your server did automatically</div>
+                <textarea id="f-why" rows="3" placeholder="e.g. I want live alerts, subscriber tiers, and to stop manually managing channels..." required style="resize: vertical;"></textarea>
               </label>
 
               <label class="form-field">
-                <div class="form-field-title">Timezone</div>
-                <div class="form-field-sub">Helps us schedule support</div>
-                <input id="f-timezone" type="text" placeholder="e.g. PST / EST / GMT" required>
+                <div class="form-field-title">Interested in subscriber tiers?</div>
+                <div class="form-field-sub">Completely optional &mdash; the core bot is free either way</div>
+                <select id="f-subs">
+                  <option value="" disabled selected>Select one (optional)</option>
+                  <option value="Yes, soon">Yes, soon</option>
+                  <option value="Yes, eventually">Yes, eventually</option>
+                  <option value="No, just the bot features">No, just the bot features</option>
+                  <option value="Not sure yet">Not sure yet</option>
+                </select>
               </label>
 
               <div class="form-submit-row">
@@ -208,15 +211,16 @@
 
         btn.addEventListener("click", function () {
           var discord_username  = val("f-discord");
+          var email             = val("f-email");
           var creator_platform  = val("f-platform");
           var community_size    = val("f-size");
           var server_status     = val("f-server-status");
-          var test_server       = val("f-test-server");
-          var timezone          = val("f-timezone");
+          var why               = val("f-why");
+          var interested_subs   = val("f-subs");
 
-          if (!discord_username || !creator_platform || !community_size ||
-              !server_status || !test_server || !timezone) {
-            setStatus("error", "Please fill in all fields before submitting.");
+          if (!discord_username || !email || !creator_platform || !community_size ||
+              !server_status || !why) {
+            setStatus("error", "Please fill in all required fields before submitting.");
             return;
           }
 
@@ -229,11 +233,12 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               discord_username,
+              email,
               creator_platform,
               community_size,
               server_status,
-              test_server,
-              timezone,
+              why,
+              interested_subs,
             }),
           })
             .then(function (res) { return res.json(); })
@@ -258,4 +263,6 @@
 
 
 ---
+
+
 
