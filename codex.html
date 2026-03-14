@@ -595,10 +595,10 @@
             <div class="lock-badge">locked</div>
             <div class="entry-number">Entry II</div>
             <div class="entry-title">The World Formation Era</div>
-            <div class="entry-body">
-              <p>When a community joins the galaxy, something unexpected happens beneath the surface. The signal that carries the community — its unique frequency, its identifier in the digital cosmos — does not just create a channel. It creates a world.</p>
-              <p>Every server that enters the galaxy generates a planet. Deterministic. Permanent. The same signal always produces the same world.</p>
-              <p>Eight biomes have been catalogued. Each one shapes what the planet produces, how it feels to live there, and what kinds of creatures its community eventually becomes.</p>
+            <div class="entry-body" id="body-founding">
+              <p>· · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+              <p>· · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+              <p>· · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
             </div>
             <div class="unlock-condition">unlocks when: all 4 Founding World slots are filled</div>
           </div>
@@ -608,10 +608,10 @@
             <div class="lock-badge">locked</div>
             <div class="entry-number">Entry III</div>
             <div class="entry-title">On the Station at the Center</div>
-            <div class="entry-body">
-              <p>Before the planets had names, before the first creature hatched, before the galaxy had any shape at all — the station existed.</p>
-              <p>Not as a place. As a frequency.</p>
-              <p>This is CreatorPulse. Not a service. Not a tool. The gravitational center of the known galaxy. The thing that was broadcasting before anyone was listening.</p>
+            <div class="entry-body" id="body-elder">
+              <p>· · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+              <p>· · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+              <p>· · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
             </div>
             <div class="unlock-condition">unlocks when: all 10 Elder World slots are filled</div>
           </div>
@@ -621,10 +621,10 @@
             <div class="lock-badge">locked</div>
             <div class="entry-number">Entry IV</div>
             <div class="entry-title">On Mojibake</div>
-            <div class="entry-body">
-              <p>There is a phenomenon in the galaxy that has no good name.</p>
-              <p>It is not corruption in the way a disease corrupts. It does not attack. It is not looking for anything. It is what happens when a community loses the ability to understand itself.</p>
-              <p>The signal is still there. The creatures are still there. But something in the transmission has shifted. Not the content. The encoding.</p>
+            <div class="entry-body" id="body-pioneer">
+              <p>· · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+              <p>· · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+              <p>· · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
             </div>
             <div class="unlock-condition">unlocks when: all 10 Pioneer World slots are filled</div>
           </div>
@@ -748,8 +748,28 @@
           });
         }
 
-        // Unlock entry if full
+        // Unlock entry if full — fetch and inject content, THEN reveal
         if (isFull) {
+          injectEntryContent(id);
+        }
+      }
+
+      // Fetch real entry content from API, inject it, then unlock the card.
+      // Content is never present in the DOM until this fires.
+      async function injectEntryContent(id) {
+        try {
+          const res = await fetch(
+            'https://cd-creatorpulse-production.up.railway.app/api/codex/entry/' + id
+          );
+          if (!res.ok) return; // silent fail — keep locked if API unreachable
+
+          const data = await res.json();
+          if (!data.html) return;
+
+          const bodyEl = document.getElementById('body-' + id);
+          if (bodyEl) bodyEl.innerHTML = data.html;
+
+          // Now reveal the card
           const entryEl = document.getElementById('entry-' + id);
           if (entryEl) {
             entryEl.classList.remove('locked');
@@ -758,6 +778,8 @@
             const condition = entryEl.querySelector('.unlock-condition');
             if (condition) condition.remove();
           }
+        } catch(e) {
+          // Silent fail — entry stays locked if network unavailable
         }
       }
 
@@ -835,3 +857,4 @@
     </script>
   </body>
 </html>
+
