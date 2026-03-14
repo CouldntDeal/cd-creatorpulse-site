@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboards — CreatorPulse</title>
+    <meta name="description" content="How to use the CreatorPulse Creator Dashboard in Discord and the Web Dashboard — everything you can do from both control surfaces." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css" />
+    <style>
+
+      .page-hero-h1 {
+        font-size: clamp(2rem, 4.5vw, 3.2rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        margin: 0 0 18px;
+      }
+
+      /* Section label */
+      .how-section-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 10px;
+      }
+
+      /* Dashboard switcher tabs */
+      .dash-switcher {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+      }
+      .dash-tab {
+        padding: 10px 22px;
+        border-radius: 100px;
+        border: 1px solid rgba(255,255,255,.12);
+        background: rgba(255,255,255,.04);
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all .15s;
+      }
+      .dash-tab.active,
+      .dash-tab:hover {
+        background: rgba(42,215,255,.10);
+        border-color: rgba(42,215,255,.30);
+        color: var(--accent);
+      }
+
+      /* Button row display */
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0 20px;
+      }
+      .discord-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 14px;
+        border-radius: 6px;
+        background: rgba(255,255,255,.07);
+        border: 1px solid rgba(255,255,255,.12);
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--text);
+        white-space: nowrap;
+      }
+      .discord-btn.primary {
+        background: rgba(42,215,255,.12);
+        border-color: rgba(42,215,255,.28);
+        color: var(--accent);
+      }
+      .discord-btn.danger {
+        background: rgba(255,80,80,.08);
+        border-color: rgba(255,80,80,.22);
+        color: rgba(255,120,120,.90);
+      }
+      .discord-btn.success {
+        background: rgba(42,215,120,.08);
+        border-color: rgba(42,215,120,.22);
+        color: rgba(42,215,120,.90);
+      }
+      .discord-btn.stripe {
+        background: rgba(100,80,240,.10);
+        border-color: rgba(100,80,240,.25);
+        color: rgba(160,140,255,.90);
+      }
+
+      /* Feature cards grid */
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 32px;
+      }
+      @media (max-width: 640px) {
+        .feature-grid { grid-template-columns: 1fr; }
+      }
+      .feature-card {
+        background: linear-gradient(160deg, rgba(255,255,255,.065), rgba(255,255,255,.035));
+        border: 1px solid rgba(255,255,255,.09);
+        border-radius: 16px;
+        padding: 24px;
+      }
+      .feature-card-icon {
+        font-size: 1.5rem;
+        margin-bottom: 12px;
+        display: block;
+      }
+      .feature-card h3 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin: 0 0 8px;
+      }
+      .feature-card p {
+        font-size: 0.85rem;
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      /* Action block */
+      .action-block {
+        background: linear-gradient(160deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+        border: 1px solid rgba(255,255,255,.08);
+        border-radius: 14px;
+        padding: 20px 22px;
+        margin-bottom: 14px;
+      }
+      .action-block-head {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+      .action-block-icon {
+        font-size: 1.25rem;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .action-block h3 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin: 0 0 3px;
+      }
+      .action-block p {
+        font-size: 0.85rem;
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      /* Web tab grid */
+      .web-tab-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin-top: 28px;
+      }
+      @media (max-width: 640px) {
+        .web-tab-grid { grid-template-columns: 1fr; }
+      }
+      .web-tab-card {
+        background: linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+        border: 1px solid rgba(255,255,255,.09);
+        border-radius: 14px;
+        padding: 20px 20px;
+      }
+      .web-tab-card-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .web-tab-label {
+        display: inline-block;
+        background: rgba(42,215,255,.08);
+        border: 1px solid rgba(42,215,255,.18);
+        border-radius: 6px;
+        padding: 2px 9px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--accent);
+        white-space: nowrap;
+      }
+      .web-tab-card h3 {
+        font-size: 0.92rem;
+        font-weight: 700;
+        margin: 0;
+      }
+      .web-tab-card ul {
+        margin: 0;
+        padding-left: 16px;
+        font-size: 0.83rem;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+      .web-tab-card ul li::marker { color: rgba(42,215,255,.40); }
+
+      /* Access callout */
+      .access-callout {
+        background: linear-gradient(135deg, rgba(42,215,255,.06), rgba(42,215,255,.02));
+        border: 1px solid rgba(42,215,255,.14);
+        border-radius: 14px;
+        padding: 22px 24px;
+        margin-top: 32px;
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+      .access-callout strong { color: var(--text); }
+
+      /* Role badge */
+      .role-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 5px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .role-badge.creator  { background: rgba(255,200,40,.12); color: rgba(255,200,40,.90); border: 1px solid rgba(255,200,40,.22); }
+      .role-badge.manager  { background: rgba(80,140,255,.12); color: rgba(80,160,255,.90); border: 1px solid rgba(80,140,255,.22); }
+      .role-badge.mod      { background: rgba(80,200,100,.10); color: rgba(80,200,100,.85); border: 1px solid rgba(80,200,100,.20); }
+
+    </style>
+  </head>
+
+  <body data-page="dashboards">
+    <div id="site-header"></div>
+
+    <main class="page">
+
+      <!-- ── HERO ── -->
+      <section class="section" style="padding-bottom: 0;">
+        <div class="container" style="max-width: 820px;">
+          <div class="how-section-label">Dashboards</div>
+          <h1 class="page-hero-h1">Two control surfaces.<br>Everything in one place.</h1>
+          <p class="lead">
+            CreatorPulse gives you and your team two ways to control your community —
+            a Discord-native dashboard embedded directly in your server, and a web dashboard
+            for deeper settings and financial visibility. Both are always in sync.
+          </p>
+
+          <div class="dash-switcher" style="margin-top: 28px;">
+            <a href="#creator-dashboard" class="dash-tab active">🎙️ Creator Dashboard (Discord)</a>
+            <a href="#web-dashboard"     class="dash-tab">💻 Web Dashboard</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════
+           CREATOR DASHBOARD (DISCORD)
+           ════════════════════════════════════════════ -->
+
+      <section class="section" id="creator-dashboard">
+        <div class="container" style="max-width: 820px;">
+          <div class="how-section-label">Creator Dashboard</div>
+          <h2 style="font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 10px;">
+            Your command center — inside Discord.
+          </h2>
+          <p class="lead" style="font-size: 0.95rem; margin-bottom: 28px;">
+            The Creator Dashboard is a pinned embed in your private staff channel. It shows
+            your server's live stats and gives you one-click access to every major action.
+            No logins. No tabs. Just Discord.
+          </p>
+
+          <!-- WHERE TO FIND IT -->
+          <div class="action-block" style="border-color: rgba(42,215,255,.15); background: linear-gradient(135deg, rgba(42,215,255,.05), transparent);">
+            <div class="action-block-head">
+              <span class="action-block-icon">📍</span>
+              <div>
+                <h3>Where to find it</h3>
+                <p>Your Creator Dashboard lives in <strong style="color:var(--text);">#📊・creator-dashboard</strong> — a private channel only you and your staff can see. It's always pinned at the top and auto-refreshes with your latest stats.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- WHAT IT SHOWS -->
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin: 32px 0 14px;">What the embed shows</h3>
+          <div class="feature-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="feature-card">
+              <span class="feature-card-icon">🔴</span>
+              <h3>Live status</h3>
+              <p>Whether you're currently live, how long you've been streaming, and which platform detected the signal.</p>
+            </div>
+            <div class="feature-card">
+              <span class="feature-card-icon">👥</span>
+              <h3>Subscriber count</h3>
+              <p>Active subscribers across all tiers, updated in real time as members join and cancel.</p>
+            </div>
+            <div class="feature-card">
+              <span class="feature-card-icon">💰</span>
+              <h3>Earnings summary</h3>
+              <p>Month-to-date and all-time creator earnings from Discord subscriptions, with your current milestone split.</p>
+            </div>
+          </div>
+
+          <!-- ROW-BY-ROW BUTTON GUIDE -->
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin: 36px 0 6px;">Button reference</h3>
+          <p style="font-size: 0.88rem; color: var(--muted); margin: 0 0 20px;">
+            Buttons appear in rows beneath the embed. Each button triggers an action or opens a modal — all without leaving Discord.
+          </p>
+
+          <!-- ROW 1 -->
+          <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,.30); margin-bottom: 8px;">Row 1 — General</div>
+          <div class="button-row">
+            <span class="discord-btn primary">🔄 Refresh</span>
+            <span class="discord-btn">✏️ Set Name</span>
+            <span class="discord-btn">👤 My Account</span>
+          </div>
+          <div class="action-block">
+            <div class="action-block-head"><span class="action-block-icon">🔄</span><div><h3>Refresh</h3></div></div>
+            <p>Forces the embed to re-fetch all live data and redraw itself. Use this if the display looks stale after going live or offline.</p>
+          </div>
+          <div class="action-block">
+            <div class="action-block-head"><span class="action-block-icon">✏️</span><div><h3>Set Name</h3></div></div>
+            <p>Opens a modal to update the creator name shown in your community's placards, welcome messages, and live alerts. Doesn't affect your Discord username.</p>
+          </div>
+          <div class="action-block">
+            <div class="action-block-head"><span class="action-block-icon">👤</span><div><h3>My Account</h3></div></div>
+            <p>Shows your current account status — milestone tier, Stripe Connect status, total subscribers, and a quick link to the web dashboard.</p>
+          </div>
+
+          <!-- ROW 2 -->
+          <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,.30); margin: 24px 0 8px;">Row 2 — Content & Announcements</div>
+          <div class="button-row">
+            <span class="discord-btn">🌐 Update Socials</span>
+            <span class="discord-btn">💬 Offline Bio</span>
+            <span class="discord-btn">🖼️ Live Banner</span>
+            <span class="discord-btn">📣 Post Announcement</span>
+          </div>
+          <div class="action-block">
+            <div class="action-block-head"><span class="action-block-icon">🌐</span><div><h3>Update Socials</h3></div></div>
+            <p>Update your linked platform usernames (TikTok, YouTube, Twitch, Kick). These are what CreatorPulse monitors for live detection. Keep them accurate.</p>
+          </div>
+          <div class="action-block">
+            <div class="action-block-head"><span class="action-block-icon">💬</span><div><h3>Offline Bio</h3></div></div>
+            <p>The short description shown on your live placard and community guide when you're not streaming. Update it to reflect what you're working on.</p>
+          </div>
+          <div class="action-block">
+            <div class="action-block-head"><span class="action-block-icon">🖼️</span><div><h3>Live Banner</h3></div></div>
+            <p>Set a custom image URL that appears on your live placard when you go live. Great for branded stream thumbnails or campaign art.</p>
+          </div>
+          <div class="action-block">
+            <div class="action-block-head"><span class="action-block-icon">📣</span><div><h3>Post Announcement</h3></div></div>
+            <p>Opens a modal to write and post an announcement directly to your community's announcement channel. Supports your saved announcement templates.</p>
+          </div>
+
+          <!-- ROW 3 -->
+          <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,.30); margin: 24px 0 8px;">Row 3 — Subscription Tiers</div>
+          <div class="button-row">
+            <span class="discord-btn">🏷️ Tier Names</span>
+            <span class="discord-btn">💲 Tier Prices</span>
+            <span class="discord-btn">💬 Feedback</span>
+          </div>
+          <div class="action-block">
+            <div class="action-block-head"><span class="action-block-icon">🏷️</span><div><h3>Tier Names</h3></div></div>
+            <p>Rename your subscription tiers. The names you set here appear on your subscriber roles, tier channels, and the subscribe command in Discord.</p>
+          </div>
+          <div class="action-block">
+            <div class="action-block-head"><span class="action-block-icon">💲</span><div><h3>Tier Prices</h3></div></div>
+            <p>Adjust the monthly price for each subscription tier. Price changes only affect new subscribers — existing subscribers stay at their current price.</p>
+          </div>
+          <div class="action-block">
+            <div class="action-block-head"><span class="action-block-icon">💬</span><div><h3>Feedback</h3></div></div>
+            <p>Send feedback directly to the CreatorPulse team. Bug reports, feature requests, things that feel off — this goes straight to us.</p>
+          </div>
+
+          <!-- ROW 4 -->
+          <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,.30); margin: 24px 0 8px;">Row 4 — Live Controls</div>
+          <div class="button-row">
+            <span class="discord-btn success">🔴 Go Live</span>
+            <span class="discord-btn danger">⚫ Go Offline</span>
+          </div>
+          <div class="action-block">
+            <div class="action-block-head"><span class="action-block-icon">🔴</span><div><h3>Go Live</h3></div></div>
+            <p>Manually trigger a live alert even if the bot hasn't detected your stream yet. Useful for new platforms, API delays, or unlinked streams.</p>
+          </div>
+          <div class="action-block">
+            <div class="action-block-head"><span class="action-block-icon">⚫</span><div><h3>Go Offline</h3></div></div>
+            <p>Manually mark yourself as offline and update the live placard. Use this if the bot hasn't detected that your stream ended.</p>
+          </div>
+
+          <!-- ROW 5 (conditional) -->
+          <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,.30); margin: 24px 0 8px;">Row 5 — Stripe (shows until connected)</div>
+          <div class="button-row">
+            <span class="discord-btn stripe">💳 Connect Stripe Payouts</span>
+          </div>
+          <div class="action-block" style="border-color: rgba(100,80,240,.20); background: rgba(100,80,240,.05);">
+            <div class="action-block-head"><span class="action-block-icon">💳</span><div><h3>Connect Stripe Payouts</h3></div></div>
+            <p>Opens your Stripe Connect onboarding flow in the browser. Once your Stripe account is connected and verified, this button disappears — subscriber payments go directly to your bank account from that point on. You only need to do this once.</p>
+          </div>
+
+          <!-- ACCESS CALLOUT -->
+          <div class="access-callout">
+            <strong>Who has access:</strong> The Creator Dashboard is only visible in your private staff channel.
+            Only your Discord account (the registered creator) sees the full button set.
+            Your manager and mods have their own separate dashboards with appropriate permissions.
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════
+           WEB DASHBOARD
+           ════════════════════════════════════════════ -->
+
+      <section class="section" id="web-dashboard" style="padding-top: 0;">
+        <div class="container" style="max-width: 820px;">
+
+          <div style="height: 1px; background: rgba(255,255,255,.07); margin-bottom: 48px;"></div>
+
+          <div class="how-section-label">Web Dashboard</div>
+          <h2 style="font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 10px;">
+            Deeper controls in your browser.
+          </h2>
+          <p class="lead" style="font-size: 0.95rem; margin-bottom: 28px;">
+            The web dashboard gives you access to settings and data that go beyond what fits
+            in Discord. It's organized into tabs, each covering a different area of your community.
+            Access it via the <strong style="color:var(--text);">My Account</strong> button in your Creator Dashboard — no separate login required.
+          </p>
+
+          <!-- HOW TO ACCESS -->
+          <div class="action-block" style="border-color: rgba(42,215,255,.15); background: linear-gradient(135deg, rgba(42,215,255,.05), transparent); margin-bottom: 36px;">
+            <div class="action-block-head">
+              <span class="action-block-icon">🔗</span>
+              <div>
+                <h3>How to access it</h3>
+                <p>Click <strong style="color:var(--text);">My Account</strong> in your Creator Dashboard, then click <strong style="color:var(--text);">Open Web Dashboard</strong>. You'll receive a secure one-time link that expires after 15 minutes. Each visit generates a fresh link — there's no saved password.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ROLE ACCESS TABLE -->
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin: 0 0 14px;">Who can access what</h3>
+          <div style="background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; overflow: hidden; margin-bottom: 36px;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+              <thead>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,.08);">
+                  <th style="padding: 12px 16px; text-align: left; color: var(--muted); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;">Role</th>
+                  <th style="padding: 12px 16px; text-align: left; color: var(--muted); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;">Access level</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,.05);">
+                  <td style="padding: 13px 16px;"><span class="role-badge creator">Creator</span></td>
+                  <td style="padding: 13px 16px; color: var(--muted);">Full read and write across all tabs. Only role that can manage Stripe, staff, and billing.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,.05);">
+                  <td style="padding: 13px 16px;"><span class="role-badge manager">Manager</span></td>
+                  <td style="padding: 13px 16px; color: var(--muted);">Read everywhere. Write on Platforms, Guide, Roles, and Templates. Financial access only if granted by creator.</td>
+                </tr>
+                <tr>
+                  <td style="padding: 13px 16px;"><span class="role-badge mod">Moderator</span></td>
+                  <td style="padding: 13px 16px; color: var(--muted);">Overview and subscriber list only. No settings access.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- TAB-BY-TAB GUIDE -->
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin: 0 0 6px;">Settings tabs</h3>
+          <p style="font-size: 0.88rem; color: var(--muted); margin: 0 0 20px;">Each tab covers a specific area of your community configuration.</p>
+
+          <div class="web-tab-grid">
+
+            <div class="web-tab-card">
+              <div class="web-tab-card-head">
+                <span class="web-tab-label">🎮 Platforms</span>
+              </div>
+              <h3>Platforms &amp; Identity</h3>
+              <ul>
+                <li>Creator display name</li>
+                <li>Platform usernames (TikTok, YouTube, Twitch, Kick)</li>
+                <li>Offline bio text</li>
+                <li>Live banner image URL</li>
+                <li>Stream title and schedule</li>
+              </ul>
+            </div>
+
+            <div class="web-tab-card">
+              <div class="web-tab-card-head">
+                <span class="web-tab-label">📖 Guide</span>
+              </div>
+              <h3>Community Guide</h3>
+              <ul>
+                <li>Up to 5 custom sections in your community guide channel</li>
+                <li>Each section has a title and body text</li>
+                <li>Saves and re-renders the guide placard immediately</li>
+              </ul>
+            </div>
+
+            <div class="web-tab-card">
+              <div class="web-tab-card-head">
+                <span class="web-tab-label">🏷️ Roles</span>
+              </div>
+              <h3>Community Roles</h3>
+              <ul>
+                <li>Rename and re-emoji any platform default role</li>
+                <li>Add custom cosmetic roles (up to 10)</li>
+                <li>Remove roles from the roles picker</li>
+                <li>Changes sync live to Discord immediately</li>
+              </ul>
+            </div>
+
+            <div class="web-tab-card">
+              <div class="web-tab-card-head">
+                <span class="web-tab-label">💳 Billing</span>
+              </div>
+              <h3>Billing &amp; Stripe</h3>
+              <ul>
+                <li>Connect or reconnect your Stripe account</li>
+                <li>Set tier display names and descriptions</li>
+                <li>Adjust monthly prices per tier</li>
+                <li>View Stripe Connect status and account ID</li>
+              </ul>
+            </div>
+
+            <div class="web-tab-card">
+              <div class="web-tab-card-head">
+                <span class="web-tab-label">📢 Templates</span>
+              </div>
+              <h3>Announcement Templates</h3>
+              <ul>
+                <li>Save reusable announcement templates</li>
+                <li>Use <code style="font-size:.78rem;background:rgba(255,255,255,.06);padding:1px 5px;border-radius:4px;">[brackets]</code> for dynamic placeholders</li>
+                <li>Up to 10 templates — use them from the Creator Dashboard</li>
+              </ul>
+            </div>
+
+            <div class="web-tab-card">
+              <div class="web-tab-card-head">
+                <span class="web-tab-label">👤 Staff</span>
+                <span style="font-size:.72rem;color:rgba(255,215,0,.70);font-weight:700;">Creator only</span>
+              </div>
+              <h3>Staff Management</h3>
+              <ul>
+                <li>Add or remove managers and moderators by Discord user ID</li>
+                <li>Toggle manager financial access</li>
+                <li>Set mod permissions (warn, timeout, lock, VOD, and more)</li>
+              </ul>
+            </div>
+
+            <div class="web-tab-card">
+              <div class="web-tab-card-head">
+                <span class="web-tab-label">❓ FAQ</span>
+              </div>
+              <h3>FAQ Entries</h3>
+              <ul>
+                <li>Add up to 19 custom FAQ entries</li>
+                <li>Each entry has a question and answer</li>
+                <li>Saves and re-renders the FAQ channel placard immediately</li>
+              </ul>
+            </div>
+
+            <div class="web-tab-card" style="border-color: rgba(42,215,255,.14);">
+              <div class="web-tab-card-head">
+                <span class="web-tab-label" style="background:rgba(42,215,255,.08);border-color:rgba(42,215,255,.22);">📊 Overview</span>
+              </div>
+              <h3>Dashboard Overview</h3>
+              <ul>
+                <li>Live / offline status at a glance</li>
+                <li>Subscriber counts per tier</li>
+                <li>Month-to-date and all-time earnings</li>
+                <li>Current milestone and revenue split</li>
+                <li>Member count</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- FINANCIALS SECTION -->
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin: 36px 0 14px;">Financials page</h3>
+          <div class="action-block">
+            <div class="action-block-head">
+              <span class="action-block-icon">💰</span>
+              <div>
+                <h3>Payment history &amp; earnings</h3>
+              </div>
+            </div>
+            <p>The financials page shows a full ledger of completed subscription payments — date, subscriber, tier, gross amount, your cut, and platform fee. Sorted newest first, up to the last 200 transactions. Accessible to the creator by default. Managers can be granted access from the Staff tab.</p>
+          </div>
+
+          <!-- SUBSCRIBERS PAGE -->
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin: 32px 0 14px;">Subscribers page</h3>
+          <div class="action-block">
+            <div class="action-block-head">
+              <span class="action-block-icon">👥</span>
+              <div>
+                <h3>Active subscriber list</h3>
+              </div>
+            </div>
+            <p>A live list of all active, trialing, and past-due subscribers — their Discord ID, tier, status, and join date. Readable by creators, managers, and mods. Up to 500 most recent shown.</p>
+          </div>
+
+          <!-- ACCESS CALLOUT -->
+          <div class="access-callout">
+            <strong>Dashboard links expire after 15 minutes.</strong> This is intentional — it keeps your dashboard secure without requiring a password.
+            If your link expires, just click <strong>My Account</strong> &rarr; <strong>Open Web Dashboard</strong> in Discord to get a fresh one.
+            Each role (creator, manager, mod) gets a different link with different permissions scoped to that role.
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── CTA ── -->
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          <div class="cta-row">
+            <a class="btn primary" href="contact.html">Apply for Access &rarr;</a>
+            <a class="btn" href="how-it-works.html">How It Works</a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="assets/site.js"></script>
+
+    <!-- Smooth scroll to sections when clicking the switcher tabs -->
+    <script>
+      document.querySelectorAll('.dash-tab').forEach(function(tab) {
+        tab.addEventListener('click', function(e) {
+          var href = tab.getAttribute('href');
+          var target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          document.querySelectorAll('.dash-tab').forEach(function(t) { t.classList.remove('active'); });
+          tab.classList.add('active');
+        });
+      });
+
+      // Update active tab on scroll
+      var sections = [
+        { id: 'creator-dashboard', tab: 0 },
+        { id: 'web-dashboard',     tab: 1 },
+      ];
+      window.addEventListener('scroll', function() {
+        var scrollY = window.scrollY + 120;
+        sections.forEach(function(s) {
+          var el = document.getElementById(s.id);
+          if (el && el.offsetTop <= scrollY) {
+            document.querySelectorAll('.dash-tab').forEach(function(t, i) {
+              t.classList.toggle('active', i === s.tab);
+            });
+          }
+        });
+      }, { passive: true });
+    </script>
+
+  </body>
+</html>
