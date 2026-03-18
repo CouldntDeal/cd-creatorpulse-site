@@ -18,20 +18,14 @@
         <a href="index.html">Home</a>
         <a href="pulselings.html" class="nav-pulselings">Pulselings ✦</a>
         <a href="how-it-works.html">How It Works</a>
-        <a href="dashboards.html">Dashboards</a>
-        <a href="partnership.html">Partnership</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="faq.html">FAQ</a>
         <a href="legal.html">Legal</a>
-        <a href="contact.html" class="nav-cta">Apply for Access</a>
+        <a href="https://discord.com/api/oauth2/authorize?client_id=1472442641353281628&permissions=268921969&scope=bot%20applications.commands" class="nav-cta" target="_blank" rel="noopener">Add to Discord →</a>
       </nav>
     </div>
   </div>
 </header>
-
-<div class="access-bar">
-  <div class="container">
-    <span>⚡ Limited Early Access — applications reviewed personally</span>
-  </div>
-</div>
 
 <script>
 (function () {
@@ -41,7 +35,6 @@
   btn.addEventListener('click', function () {
     var open = wrap.classList.toggle('is-open');
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    // On mobile, nav-links inside drawer must be visible
     var links = wrap.querySelector('.nav-links');
     if (links) links.style.display = open ? 'flex' : '';
   });
