@@ -4,94 +4,103 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Pulselings — CreatorPulse</title>
-    <meta name="description" content="Pulselings are community creatures built into every CreatorPulse Discord server. Hatch yours with /pulse, level it up, and compete on the leaderboard." />
+    <meta name="description" content="Pulselings is a living creature economy built into Discord. Hatch creatures, build planets, trade on the Signal Market, and compete across servers. Free with every CreatorPulse install." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles.css" />
     <style>
-
-      /* ─────────────────────────────────────────
-         PAGE LAYOUT: sticky sidebar
-         ───────────────────────────────────────── */
-      .pulselings-page {
-        max-width: 1180px;
-        margin: 0 auto;
-        padding: 0 22px 80px;
+      .bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+      .bg-glow {
+        position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+        width: 900px; height: 600px;
+        background: radial-gradient(ellipse at 50% 0%, rgba(42,215,255,.10), transparent 70%);
       }
 
-      /* Hero sits full-width above the split */
+      /* ── Hero ── */
       .pulse-hero {
-        padding: 48px 0 36px;
+        padding: 88px 0 64px;
+        text-align: center;
+        max-width: 760px;
+        margin: 0 auto;
       }
-      .pulse-hero .eyebrow { margin-bottom: 8px; }
+      .eyebrow {
+        font-size: 0.68rem; font-weight: 800; letter-spacing: 0.18em;
+        text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
+      }
       .pulse-hero h1 {
-        font-size: 52px; font-weight: 800; margin: 0 0 18px;
-        line-height: 1.08; letter-spacing: -.02em;
+        font-size: clamp(2.4rem, 5.5vw, 4rem);
+        font-weight: 800; letter-spacing: -0.03em; line-height: 1.08;
+        margin: 0 0 22px;
       }
-      @media (max-width: 680px) { .pulse-hero h1 { font-size: 36px; } }
-      .pulse-hero .lead {
-        font-size: 16px; color: rgba(255,255,255,.78);
-        max-width: 560px; line-height: 1.68; margin: 0 0 10px;
+      .pulse-hero h1 em { font-style: normal; color: var(--accent); }
+      .lead {
+        font-size: 1.05rem; color: var(--muted); line-height: 1.72;
+        max-width: 620px; margin: 0 auto 14px;
       }
-      .pulse-hero .lead-sub {
-        font-size: 14px; color: rgba(255,255,255,.50);
-        max-width: 520px; line-height: 1.62; margin: 0;
-      }
-
-      /* Pills row */
-      .pills-row {
-        display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px;
-      }
+      .pills-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 28px; }
       .stat-pill {
         display: inline-flex; align-items: center; gap: 6px;
-        padding: 5px 13px; border-radius: 999px; font-size: 12px; font-weight: 600;
-        border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.05);
-        color: rgba(255,255,255,.60);
+        background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.10);
+        border-radius: 100px; padding: 5px 13px;
+        font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,.65);
       }
       .stat-pill--cmd {
-        border-color: rgba(42,215,255,.30); background: rgba(42,215,255,.08);
-        color: rgba(42,215,255,.92); font-family: monospace; font-size: 13px;
+        background: rgba(42,215,255,.07); border-color: rgba(42,215,255,.20);
+        color: var(--accent); font-family: monospace; letter-spacing: 0.03em;
       }
 
-      /* Two-column body */
-      .pulselings-body {
-        display: grid;
-        grid-template-columns: 1fr 360px;
-        gap: 28px;
-        align-items: start;
+      /* ── Section layout ── */
+      .pulse-section {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px 72px;
       }
-      @media (max-width: 900px) {
-        .pulselings-body { display: flex; flex-direction: column; }
-        .pulselings-sidebar { order: -1; position: static; max-height: none; overflow-y: visible; width: 100%; }
-        .pulselings-main { width: 100%; }
+      .section-h {
+        font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em;
+        margin: 0 0 6px;
       }
-      @media (max-width: 600px) {
-        .pulse-hero { padding: 28px 0 14px; }
-        .pulse-hero h1 { font-size: 28px; }
-        .guide-grid { grid-template-columns: 1fr; }
-        .lb-xp, .lb-id { display: none; }
+      .section-intro {
+        font-size: 0.95rem; color: var(--muted); line-height: 1.65;
+        max-width: 640px; margin: 0 0 28px;
+      }
+      .section-label-sm {
+        font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em;
+        text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
       }
 
-      /* ─────────────────────────────────────────
-         LEFT COLUMN: info content
-         ───────────────────────────────────────── */
-      .pulselings-main { min-width: 0; }
+      /* ── Divider ── */
+      .pulse-divider {
+        border: none; border-top: 1px solid rgba(255,255,255,.07);
+        margin: 0 0 56px;
+      }
 
-      /* Section headings */
-      .section-h { font-size: 20px; font-weight: 800; margin: 32px 0 12px; }
-      .section-h:first-child { margin-top: 0; }
-      .section-intro { font-size: 14px; color: rgba(255,255,255,.55); margin: -6px 0 14px; line-height: 1.62; }
+      /* ── Guide grid (reused from original) ── */
+      .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      @media (max-width: 580px) { .guide-grid { grid-template-columns: 1fr; } }
+      .guide-item {
+        padding: 16px 18px; border-radius: 14px;
+        border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03);
+      }
+      .guide-item--cyan  { border-color: rgba(42,215,255,.20); background: linear-gradient(135deg, rgba(42,215,255,.06), rgba(100,80,255,.03)); }
+      .guide-item--gold  { border-color: rgba(255,215,0,.22); background: linear-gradient(135deg, rgba(255,215,0,.07), rgba(255,130,40,.04)); }
+      .guide-item--violet{ border-color: rgba(150,100,255,.18); background: linear-gradient(135deg, rgba(120,80,255,.06), rgba(80,50,180,.04)); }
+      .guide-item--green { border-color: rgba(60,200,120,.15); background: linear-gradient(135deg, rgba(60,200,120,.05), rgba(30,140,80,.03)); }
+      .guide-item--amber { border-color: rgba(210,140,40,.14); background: linear-gradient(135deg, rgba(200,130,30,.05), rgba(160,90,20,.03)); }
+      .guide-item--slate { border-color: rgba(160,120,140,.12); background: linear-gradient(135deg, rgba(140,100,120,.04), rgba(100,80,100,.02)); }
+      .guide-item--red   { border-color: rgba(255,80,80,.15); background: linear-gradient(135deg, rgba(255,80,80,.06), rgba(200,40,40,.03)); }
+      .guide-icon { font-size: 18px; flex-shrink: 0; }
+      .guide-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+      .guide-title { font-size: 13px; font-weight: 700; }
+      .guide-body { font-size: 13px; color: rgba(255,255,255,.62); line-height: 1.60; }
+      .guide-body strong { color: rgba(255,255,255,.88); font-weight: 600; }
 
-      /* Rarity card */
+      /* ── Rarity card ── */
       .rarity-card {
-        padding: 18px 20px; border-radius: 16px;
-        border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.04);
-        margin-bottom: 28px;
+        background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.10);
+        border-radius: 16px; padding: 20px; margin-bottom: 28px;
       }
-      .rarity-card-head {
-        display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;
-      }
+      .rarity-card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
       .rarity-card-title { font-size: 13px; font-weight: 700; color: rgba(255,255,255,.80); }
       .rarity-toggle {
         font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
@@ -99,7 +108,7 @@
         color: rgba(42,215,255,.80); cursor: pointer; transition: background .15s;
       }
       .rarity-toggle:hover { background: rgba(42,215,255,.14); }
-      .rarity-row { display: flex; align-items: center; gap: 10px; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,.04); }
+      .rarity-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.04); }
       .rarity-row:last-child { border-bottom: none; }
       .rarity-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
       .rarity-dot--common    { background: rgba(180,180,180,.80); }
@@ -110,654 +119,298 @@
       .rarity-dot--mythic    { background: rgba(255,120,180,.90); box-shadow: 0 0 12px rgba(255,120,180,.55); }
       .rarity-label { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.80); flex: 1; }
       .rarity-pct   { font-size: 12px; font-weight: 700; color: rgba(255,255,255,.50); }
-      .rarity-score { font-size: 11px; color: rgba(255,255,255,.32); display: none; }
-      .rarity-card.show-odds .rarity-score { display: block; }
-      .rarity-card.show-odds .rarity-pct   { display: none; }
       .rarity-note  { font-size: 11px; color: rgba(255,255,255,.32); margin-top: 10px; line-height: 1.52; }
 
-      /* Guide grid */
-      .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-      @media (max-width: 580px) { .guide-grid { grid-template-columns: 1fr; } }
-      .guide-item {
-        padding: 16px 18px; border-radius: 14px;
-        border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03);
+      /* ── Economy section ── */
+      .economy-block {
+        background: linear-gradient(135deg, rgba(255,200,40,.06), rgba(200,140,20,.03));
+        border: 1px solid rgba(255,200,40,.15);
+        border-radius: 20px;
+        padding: 40px;
+        margin-bottom: 56px;
       }
-      .guide-item--gold {
-        border-color: rgba(255,215,0,.22);
-        background: linear-gradient(135deg, rgba(255,215,0,.07) 0%, rgba(255,130,40,.04) 100%);
-      }
-      .guide-item--cyan {
-        border-color: rgba(42,215,255,.20);
-        background: linear-gradient(135deg, rgba(42,215,255,.06) 0%, rgba(100,80,255,.04) 100%);
-      }
-      .guide-item--violet {
-        border-color: rgba(150,100,255,.18);
-        background: linear-gradient(135deg, rgba(120,80,255,.06) 0%, rgba(80,50,180,.04) 100%);
-      }
-      .guide-item--green {
-        border-color: rgba(60,200,120,.15);
-        background: linear-gradient(135deg, rgba(60,200,120,.05) 0%, rgba(30,140,80,.03) 100%);
-      }
-      .guide-item--amber {
-        border-color: rgba(210,140,40,.14);
-        background: linear-gradient(135deg, rgba(200,130,30,.05) 0%, rgba(160,90,20,.03) 100%);
-      }
-      .guide-item--slate {
-        border-color: rgba(160,120,140,.12);
-        background: linear-gradient(135deg, rgba(140,100,120,.04) 0%, rgba(100,80,100,.02) 100%);
-      }
-      .guide-icon { font-size: 18px; flex-shrink: 0; }
-      .guide-head  { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-      .guide-title { font-size: 13px; font-weight: 700; }
-      .guide-body  { font-size: 13px; color: rgba(255,255,255,.62); line-height: 1.60; }
-      .guide-body strong { color: rgba(255,255,255,.88); font-weight: 600; }
-      .guide-body em { color: rgba(255,255,255,.75); font-style: italic; }
-      .lore-origin {
-        background: rgba(255,255,255,.03);
-        border: 1px solid rgba(255,255,255,.07);
-        border-radius: 10px;
-        padding: 16px 18px;
-      }
-      .lore-origin-label {
-        display: block;
-        font-size: 10px;
-        font-weight: 800;
-        letter-spacing: .12em;
-        text-transform: uppercase;
-        color: rgba(255,255,255,.30);
-        margin-bottom: 10px;
-      }
-      .lore-origin p {
-        font-size: 13px;
-        color: rgba(255,255,255,.50);
-        line-height: 1.70;
-        margin: 0 0 8px;
-      }
-      .lore-origin p:last-child { margin-bottom: 0; }
+      @media (max-width: 640px) { .economy-block { padding: 24px 20px; } }
 
-      /* Sub tier rows */
-      .sub-tiers { display: flex; flex-direction: column; gap: 5px; margin-top: 10px; }
-      .sub-tier {
-        display: flex; align-items: center; justify-content: space-between;
-        padding: 6px 10px; border-radius: 8px;
-        background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06);
-        font-size: 12px;
+      /* ── Planet three-col ── */
+      .planet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 24px; }
+      @media (max-width: 680px) { .planet-grid { grid-template-columns: 1fr; } }
+      .planet-card {
+        border-radius: 14px; padding: 20px 18px;
+        border: 1px solid rgba(255,255,255,.08);
       }
-      .sub-tier-label { font-weight: 600; color: rgba(255,255,255,.75); }
-      .sub-tier-val   { font-weight: 800; }
-      .sub-tier--1 .sub-tier-val { color: rgba(80,200,100,.90); }
-      .sub-tier--2 .sub-tier-val { color: rgba(80,140,255,.90); }
-      .sub-tier--3 .sub-tier-val { color: rgba(170,80,255,.90); }
-      .sub-tier--x .sub-tier-val { color: rgba(255,200,40,.90); }
+      .planet-card--harvest { background: linear-gradient(135deg, rgba(80,200,100,.06), rgba(40,160,60,.03)); border-color: rgba(80,200,100,.18); }
+      .planet-card--prod    { background: linear-gradient(135deg, rgba(80,140,255,.06), rgba(40,80,220,.03)); border-color: rgba(80,140,255,.18); }
+      .planet-card--arch    { background: linear-gradient(135deg, rgba(200,140,30,.06), rgba(160,100,20,.03)); border-color: rgba(200,140,30,.18); }
+      .planet-card-icon { font-size: 1.5rem; display: block; margin-bottom: 10px; }
+      .planet-card h4 { font-size: 0.9rem; font-weight: 700; margin: 0 0 6px; }
+      .planet-card p  { font-size: 0.8rem; color: var(--muted); line-height: 1.55; margin: 0; }
 
-      .early-note {
-        margin-top: 10px; padding: 9px 12px; border-radius: 10px;
-        border: 1px solid rgba(255,215,0,.22); background: rgba(255,215,0,.06);
-        font-size: 11px; color: rgba(255,215,0,.85); line-height: 1.52;
+      /* ── Market block ── */
+      .market-block {
+        background: linear-gradient(135deg, rgba(42,215,255,.05), rgba(80,60,220,.04));
+        border: 1px solid rgba(42,215,255,.12);
+        border-radius: 16px; padding: 28px; margin-bottom: 24px;
       }
-      .early-note strong { color: rgba(255,215,0,1); }
-
-      /* XP tip */
-      .xp-tip {
-        margin: 14px 0; padding: 12px 16px; border-radius: 12px;
-        border: 1px solid rgba(42,215,255,.18); background: rgba(42,215,255,.06);
-        font-size: 12px; color: rgba(255,255,255,.70); line-height: 1.58;
+      .market-row {
+        display: flex; gap: 14px; flex-wrap: wrap; margin-top: 16px;
       }
-      .xp-tip strong { color: rgba(42,215,255,.90); }
-
-      /* Data table */
-      .data-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-      .data-table td {
-        padding: 6px 10px; font-size: 12px;
-        border-bottom: 1px solid rgba(255,255,255,.05); color: rgba(255,255,255,.68);
+      .market-stat {
+        flex: 1; min-width: 120px;
+        background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+        border-radius: 10px; padding: 14px;
       }
-      .data-table td:first-child { font-weight: 700; color: rgba(255,255,255,.88); }
-      .data-table td:last-child   { text-align: right; color: rgba(255,255,255,.48); }
-      .data-table tr:last-child td { border-bottom: none; }
+      .market-stat-val { font-size: 1.2rem; font-weight: 800; color: var(--accent); margin-bottom: 3px; }
+      .market-stat-label { font-size: 0.75rem; color: var(--muted); }
 
-      /* Bullet list inside guide card */
-      .guide-list { margin: 8px 0 0 0; padding-left: 16px; font-size: 13px; color: rgba(255,255,255,.62); line-height: 1.75; }
-      .guide-list li::marker { color: rgba(42,215,255,.50); }
-      .guide-list strong { color: rgba(255,255,255,.88); font-weight: 600; }
-
-      /* Codex signal — barely there */
-      .codex-signal {
-        text-align: center; margin: 20px 0 4px; letter-spacing: 6px;
+      /* ── Station block ── */
+      .station-block {
+        background: linear-gradient(135deg, rgba(170,80,255,.07), rgba(100,40,200,.04));
+        border: 1px solid rgba(170,80,255,.18);
+        border-radius: 20px; padding: 40px;
+        text-align: center; margin-bottom: 56px;
+        position: relative; overflow: hidden;
       }
-      .codex-signal a {
-        color: rgba(42,215,255,.18); font-size: 13px; text-decoration: none;
-        transition: color 0.4s ease;
+      .station-block::before {
+        content: '';
+        position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+        width: 500px; height: 300px;
+        background: radial-gradient(ellipse, rgba(170,80,255,.10), transparent 70%);
+        pointer-events: none;
       }
-      .codex-signal a:hover { color: rgba(42,215,255,.55); }
-
-      /* No-pet banner */
-      .no-pet {
-        margin-top: 24px; padding: 20px 22px; border-radius: 16px;
-        border: 1px solid rgba(42,215,255,.18); background: rgba(42,215,255,.05);
-        display: flex; align-items: flex-start; gap: 16px;
+      @media (max-width: 640px) { .station-block { padding: 28px 20px; } }
+      .station-block h2 { font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 800; letter-spacing: -0.025em; margin: 0 0 12px; }
+      .station-block .lead { max-width: 560px; margin: 0 auto 28px; }
+      .station-feats { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 28px; }
+      .station-feat {
+        background: rgba(255,255,255,.05); border: 1px solid rgba(170,80,255,.15);
+        border-radius: 10px; padding: 14px 18px; min-width: 180px; flex: 1; text-align: left;
       }
-      .no-pet-egg   { font-size: 30px; flex-shrink: 0; line-height: 1; margin-top: 2px; }
-      .no-pet-title { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
-      .no-pet-body  { font-size: 13px; color: rgba(255,255,255,.58); line-height: 1.55; }
-      .no-pet-body strong { color: rgba(42,215,255,.90); font-family: monospace; }
+      .station-feat h4 { font-size: 0.85rem; font-weight: 700; margin: 0 0 4px; }
+      .station-feat p  { font-size: 0.78rem; color: var(--muted); line-height: 1.5; margin: 0; }
 
-      /* ─────────────────────────────────────────
-         RIGHT COLUMN: sticky leaderboard
-         ───────────────────────────────────────── */
-      .pulselings-sidebar {
-        overflow-y: auto;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(255,255,255,.10) transparent;
+      /* ── CTA ── */
+      .pulse-cta {
+        text-align: center; padding: 56px 24px 80px;
       }
-      @media (min-width: 901px) {
-        .pulselings-sidebar {
-          position: sticky;
-          top: 88px;
-          max-height: calc(100vh - 112px);
-        }
-      }
-      .pulselings-sidebar::-webkit-scrollbar { width: 3px; }
-      .pulselings-sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 2px; }
-
-      .lb-panel {
-        padding: 18px 16px 14px; border-radius: 18px;
-        border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.03);
-      }
-      .lb-head {
-        display: flex; align-items: flex-start; justify-content: space-between;
-        margin-bottom: 14px;
-      }
-      .lb-title    { font-size: 14px; font-weight: 800; }
-      .lb-subtitle { font-size: 11px; color: rgba(255,255,255,.36); margin-top: 2px; }
-
-      .lb-list { display: flex; flex-direction: column; gap: 5px; }
-      .lb-row {
-        display: flex; align-items: center; gap: 10px;
-        padding: 10px 12px; border-radius: 12px;
-        border: 1px solid rgba(255,255,255,.06); background: rgba(255,255,255,.03);
-        transition: border-color .12s, background .12s;
-      }
-      .lb-row:hover { border-color: rgba(42,215,255,.18); background: rgba(42,215,255,.04); }
-      .lb-row--genesis    { border-color: rgba(255,215,0,.22);   background: rgba(255,215,0,.04); }
-      .lb-row--genesis:hover  { border-color: rgba(255,215,0,.38);   background: rgba(255,215,0,.07); }
-      .lb-row--celestial  { border-color: rgba(42,215,255,.15); background: rgba(42,215,255,.03); }
-      .lb-row--celestial:hover { border-color: rgba(42,215,255,.28); background: rgba(42,215,255,.06); }
-      .lb-row--architect  { border-color: rgba(160,180,220,.12); background: rgba(160,180,220,.02); }
-      .lb-row--architect:hover { border-color: rgba(160,180,220,.22); background: rgba(160,180,220,.04); }
-      .lb-row--awakened   { border-color: rgba(140,160,200,.10); background: transparent; }
-      .lb-row--wanderer   { border-color: rgba(120,140,180,.08); background: transparent; }
-      .lb-row--settled    { border-color: rgba(100,120,160,.06); background: transparent; }
-
-      .lb-rank          { font-size: 12px; font-weight: 800; min-width: 24px; text-align: center; color: rgba(255,255,255,.38); flex-shrink: 0; }
-      .lb-rank--1       { font-size: 18px; color: #ffd700; }
-      .lb-rank--2       { font-size: 16px; color: #c0c0c0; }
-      .lb-rank--3       { font-size: 16px; color: #cd7f32; }
-
-      .lb-dot           { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-      .lb-dot--common   { background: rgba(180,180,180,.80); }
-      .lb-dot--uncommon { background: rgba(80,200,100,.90);  box-shadow: 0 0 6px rgba(80,200,100,.40); }
-      .lb-dot--rare     { background: rgba(80,140,255,.90);  box-shadow: 0 0 6px rgba(80,140,255,.40); }
-      .lb-dot--epic     { background: rgba(170,80,255,.90);  box-shadow: 0 0 6px rgba(170,80,255,.40); }
-      .lb-dot--legendary{ background: rgba(255,200,40,.90);  box-shadow: 0 0 8px rgba(255,200,40,.50); }
-      .lb-dot--mythic   { background: rgba(255,120,180,.90); box-shadow: 0 0 10px rgba(255,120,180,.55); }
-
-      .lb-name          { flex: 1; min-width: 0; }
-      .lb-name-main     { display: flex; align-items: center; gap: 5px; font-weight: 700; font-size: 13px; }
-      .lb-name-text     { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 110px; }
-      .lb-genesis-badge    { font-size: 9px; font-weight: 800; color: #ffd700;               white-space: nowrap; flex-shrink: 0; }
-      .lb-celestial-badge  { font-size: 9px; font-weight: 800; color: rgba(42,215,255,.88);  white-space: nowrap; flex-shrink: 0; }
-      .lb-architect-badge  { font-size: 9px; font-weight: 700; color: rgba(180,195,230,.75); white-space: nowrap; flex-shrink: 0; }
-      .lb-awakened-badge   { font-size: 9px; font-weight: 600; color: rgba(160,175,210,.60); white-space: nowrap; flex-shrink: 0; }
-      .lb-wanderer-badge   { font-size: 9px; font-weight: 500; color: rgba(140,155,190,.50); white-space: nowrap; flex-shrink: 0; }
-      .lb-settled-badge    { font-size: 9px; font-weight: 400; color: rgba(120,135,170,.40); white-space: nowrap; flex-shrink: 0; }
-      .lb-name-sub      { font-size: 10px; color: rgba(255,255,255,.26); margin-top: 1px; font-family: monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; }
-
-      .lb-meta          { text-align: right; flex-shrink: 0; }
-      .lb-level         { font-size: 13px; font-weight: 700; }
-      .lb-level-lbl     { font-size: 9px;  color: rgba(255,255,255,.28); }
-      .lb-xp            { font-size: 10px; color: rgba(255,255,255,.35); }
-
-      .lb-rarity        { font-size: 10px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: rgba(255,255,255,.32); min-width: 48px; text-align: right; flex-shrink: 0; }
-      .lb-rarity--uncommon  { color: rgba(80,200,100,.80); }
-      .lb-rarity--rare      { color: rgba(80,140,255,.85); }
-      .lb-rarity--epic      { color: rgba(170,80,255,.85); }
-      .lb-rarity--legendary { color: rgba(255,200,40,.85); }
-      .lb-rarity--mythic    { color: rgba(255,120,180,.90); }
-
-      .lb-state {
-        padding: 22px 16px; text-align: center; font-size: 12px;
-        color: rgba(255,255,255,.38); border-radius: 12px;
-        border: 1px solid rgba(255,255,255,.06); background: rgba(255,255,255,.02);
-      }
-      .lb-updated { font-size: 10px; color: rgba(255,255,255,.24); margin-top: 10px; text-align: right; }
-
+      .pulse-cta h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 12px; }
+      .pulse-cta p  { font-size: 0.95rem; color: var(--muted); margin: 0 auto 28px; max-width: 460px; line-height: 1.6; }
     </style>
   </head>
 
   <body data-page="pulselings">
     <div class="bg"><div class="bg-glow"></div></div>
-
     <div id="site-header"></div>
 
     <main class="page">
-      <div class="pulselings-page">
+      <div class="container">
 
         <!-- ── HERO ── -->
         <section class="pulse-hero">
           <div class="eyebrow">PULSELINGS</div>
-          <h1>Your community has creatures now.</h1>
-          <p class="lead">Every CreatorPulse server comes with Pulselings — a community creature game built into Discord. Each member gets their own unique creature. No setup required. Just show up, interact, and level it up.</p>
-          <p class="lead-sub">Creatures are permanent to your Discord account and carry across every CreatorPulse server you join. The more active you are in the community, the stronger your creature gets.</p>
+          <h1>Your community has <em>creatures</em> now.</h1>
+          <p class="lead">
+            Pulselings is a living creature economy built into Discord. Every member hatches a unique creature. Planets form from community activity. Resources drop, buildings rise, and a real cross-server economy emerges — all running automatically inside your server.
+          </p>
+          <p class="lead" style="font-size: 0.9rem;">
+            Free with every CreatorPulse install. No extra setup. Your community just shows up.
+          </p>
           <div class="pills-row">
             <span class="stat-pill stat-pill--cmd">/pulse to hatch</span>
-            <span class="stat-pill">325 unique names</span>
-            <span class="stat-pill">Updates every 30 min</span>
-            <span class="stat-pill" style="border-color:rgba(42,215,255,.22);background:rgba(42,215,255,.06);color:rgba(42,215,255,.80);">✓ Free — included with every server</span>
+            <span class="stat-pill">6 rarity tiers</span>
+            <span class="stat-pill">Cross-server economy</span>
+            <span class="stat-pill">Persistent across servers</span>
           </div>
         </section>
 
-        <!-- ── BODY ── -->
-        <div class="pulselings-body">
+        <!-- ── CREATURES ── -->
+        <div class="pulse-section">
+          <hr class="pulse-divider">
+          <div class="section-label-sm">Creatures</div>
+          <div class="section-h">Every creature is permanent and unique.</div>
+          <p class="section-intro">Creatures are generated deterministically from your Discord ID — you'll always get the same one, across every CreatorPulse server you join. Rarity is locked at hatch.</p>
 
-          <!-- ════════════════════════
-               LEFT: INFO
-               ════════════════════════ -->
-          <div class="pulselings-main">
-
-            <!-- Rarity glance -->
-            <div class="rarity-card" id="rarityCard">
-              <div class="rarity-card-head">
-                <span class="rarity-card-title">Rarity at a glance</span>
-                <button class="rarity-toggle" onclick="toggleRarity()">Hatch odds</button>
-              </div>
-              <div class="rarity-row"><span class="rarity-dot rarity-dot--common"></span>    <span class="rarity-label">Common</span>    <span class="rarity-pct">~40%</span><span class="rarity-score">Trait score 6–9</span></div>
-              <div class="rarity-row"><span class="rarity-dot rarity-dot--uncommon"></span>  <span class="rarity-label">Uncommon</span>  <span class="rarity-pct">~31%</span><span class="rarity-score">Trait score 10–13</span></div>
-              <div class="rarity-row"><span class="rarity-dot rarity-dot--rare"></span>      <span class="rarity-label">Rare</span>      <span class="rarity-pct">~16%</span><span class="rarity-score">Trait score 14–17</span></div>
-              <div class="rarity-row"><span class="rarity-dot rarity-dot--epic"></span>      <span class="rarity-label">Epic</span>      <span class="rarity-pct">~7%</span> <span class="rarity-score">Trait score 18–21</span></div>
-              <div class="rarity-row"><span class="rarity-dot rarity-dot--legendary"></span> <span class="rarity-label">Legendary</span> <span class="rarity-pct">~5%</span> <span class="rarity-score">Trait score 22–25</span></div>
-              <div class="rarity-row"><span class="rarity-dot rarity-dot--mythic"></span>    <span class="rarity-label">Mythic</span>    <span class="rarity-pct">~1%</span> <span class="rarity-score">Trait score 26+</span></div>
-              <p class="rarity-note">Rarity is locked at hatch. Improve traits later through mutation offers at milestone levels.</p>
+          <div class="rarity-card" id="rarityCard">
+            <div class="rarity-card-head">
+              <span class="rarity-card-title">Rarity at a glance</span>
+              <button class="rarity-toggle" onclick="toggleRarity()">Hatch odds</button>
             </div>
+            <div class="rarity-row"><span class="rarity-dot rarity-dot--common"></span>    <span class="rarity-label">Common</span>    <span class="rarity-pct">~40%</span></div>
+            <div class="rarity-row"><span class="rarity-dot rarity-dot--uncommon"></span>  <span class="rarity-label">Uncommon</span>  <span class="rarity-pct">~31%</span></div>
+            <div class="rarity-row"><span class="rarity-dot rarity-dot--rare"></span>      <span class="rarity-label">Rare</span>      <span class="rarity-pct">~16%</span></div>
+            <div class="rarity-row"><span class="rarity-dot rarity-dot--epic"></span>      <span class="rarity-label">Epic</span>      <span class="rarity-pct">~7%</span></div>
+            <div class="rarity-row"><span class="rarity-dot rarity-dot--legendary"></span> <span class="rarity-label">Legendary</span> <span class="rarity-pct">~5%</span></div>
+            <div class="rarity-row"><span class="rarity-dot rarity-dot--mythic"></span>    <span class="rarity-label">Mythic</span>    <span class="rarity-pct">~1%</span></div>
+            <p class="rarity-note">Rarity is locked at hatch. Trait improvements come through milestone mutation offers at higher levels.</p>
+          </div>
 
-            <!-- How it works -->
-            <div class="section-h">How Pulselings work</div>
-            <p class="section-intro">Think of it as a community Tamagotchi baked into the server. Your creature is yours alone — but the whole community can interact with it.</p>
-
-            <div class="guide-grid">
-              <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">🥚</span><span class="guide-title">Hatching your creature</span></div>
-                <div class="guide-body">Type <strong>/pulse</strong> in any CreatorPulse server and your creature hatches on the spot. It gets a name from a curated pool of 325 names, and six trait slots are rolled to determine its appearance and rarity. You can't re-roll — what hatches is yours permanently.</div>
-              </div>
-              <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">📊</span><span class="guide-title">Three stats to manage</span></div>
-                <div class="guide-body">Your creature has <strong>Hunger</strong>, <strong>Happiness</strong>, and <strong>Health</strong>. Keep all three above 60% and every action earns a <strong>1.25× XP multiplier</strong>. Drop below 30% wellness and XP falls to zero. Stats decay naturally while you're away, so daily check-ins matter.</div>
-              </div>
-              <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">🍖</span><span class="guide-title">Feed — every 8 hours</span></div>
-                <div class="guide-body">Feeding gives <strong>+25 Hunger, +5 Happiness</strong>, and <strong>10 base XP</strong>. Your very first action of each day also stacks a flat <strong>+25 XP daily bonus</strong> on top. Hunger decays 8 points every 12 hours, so feeding is your core daily ritual.</div>
-              </div>
-              <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">🎮</span><span class="guide-title">Play — every 4 hours</span></div>
-                <div class="guide-body">Playing gives <strong>+20 Happiness</strong> and <strong>15 base XP</strong> — the highest XP of any single action. It costs <strong>-5 Hunger</strong>, so keep your creature fed first. Play has the shortest cooldown because happiness degrades fastest when neglected.</div>
-              </div>
-              <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">💤</span><span class="guide-title">Rest — every 6 hours</span></div>
-                <div class="guide-body">Resting gives <strong>+30 Energy, +5 Health</strong>, and <strong>8 base XP</strong>. Health is the slowest stat to rebuild, so neglecting rest compounds over time. A creature with high hunger and happiness will slowly recover health on its own — but resting speeds that up significantly.</div>
-              </div>
-              <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">🌿</span><span class="guide-title">Feed tokens & community feeding</span></div>
-                <div class="guide-body">You hold up to <strong>5 feed tokens</strong>. Earn one per level-up, one on your first daily action, and one whenever someone else feeds your creature. Spend tokens to feed others' creatures — they get <strong>+15 Hunger, +3 Happiness, +5 XP</strong>. The community that feeds together levels together.</div>
-              </div>
+          <div class="guide-grid">
+            <div class="guide-item guide-item--cyan">
+              <div class="guide-head"><span class="guide-icon">🥚</span><span class="guide-title">Hatching</span></div>
+              <div class="guide-body">Type <strong>/pulse</strong> in any CreatorPulse server. Your creature generates from your Discord ID — same creature, every server.</div>
             </div>
-
-            <!-- Subscriber boost + Mutations -->
-            <div class="guide-grid" style="margin-top:12px;">
-              <div class="guide-item guide-item--gold">
-                <div class="guide-head"><span class="guide-icon">⚡</span><span class="guide-title">Subscriber XP boost</span></div>
-                <div class="guide-body" style="margin-bottom:10px;">Subscribing to a creator's Discord boosts your Pulseling's XP across <em>all</em> your actions — not just in that server. The more creators you support, the bigger the bonus.</div>
-                <div class="sub-tiers">
-                  <div class="sub-tier sub-tier--1"><span class="sub-tier-label">Tier 1 subscriber</span><span class="sub-tier-val">+10% XP</span></div>
-                  <div class="sub-tier sub-tier--2"><span class="sub-tier-label">Tier 2 subscriber</span><span class="sub-tier-val">+20% XP</span></div>
-                  <div class="sub-tier sub-tier--3"><span class="sub-tier-label">Tier 3 subscriber</span><span class="sub-tier-val">+35% XP</span></div>
-                  <div class="sub-tier sub-tier--x"><span class="sub-tier-label">Each additional sub</span><span class="sub-tier-val">+5% (cap 50%)</span></div>
-                </div>
-                <div class="early-note"><strong>✦ Early Hatcher bonus</strong> — Any creature that exists before server subscriptions go live will receive a one-time XP catch-up boost as a thank-you for being here from the start.</div>
-              </div>
-              <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">🧬</span><span class="guide-title">Mutations</span></div>
-                <div class="guide-body">At levels 25, 50, 75, and every 25 levels after 100, your creature is offered a <strong>mutation</strong>. This upgrades one of its six trait slots to a higher rarity version — permanently improving its overall rarity score. You have 48 hours to accept or decline. Accepting is irreversible.</div>
-              </div>
+            <div class="guide-item guide-item--green">
+              <div class="guide-head"><span class="guide-icon">⚡</span><span class="guide-title">Leveling up</span></div>
+              <div class="guide-body">Feed your creature to gain XP. Active community members naturally level faster. Higher levels unlock building access and crafting.</div>
             </div>
-
-            <div class="xp-tip">
-              <strong>Max XP tip:</strong> Keep all three stats above 60% for a <strong>1.25× multiplier</strong> on every action. Your first action each day stacks a flat <strong>+25 bonus XP</strong> on top. Use Play as that first action for the highest single-hit total: 15 base × 1.25 + 25 bonus = ~44 XP. Stack a Tier 3 sub on top and that becomes ~60 XP in one shot.
+            <div class="guide-item guide-item--amber">
+              <div class="guide-head"><span class="guide-icon">💀</span><span class="guide-title">Decay</span></div>
+              <div class="guide-body">Neglected creatures slowly decay in stats. Your community's activity keeps them alive. It's a loop — engagement has stakes.</div>
             </div>
-
-            <!-- Leveling + Hats -->
-            <div class="guide-grid">
-              <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">📈</span><span class="guide-title">Leveling up</span></div>
-                <div class="guide-body">XP required scales with level. Early levels are fast. Later levels reward daily consistency.
-                  <ul class="guide-list">
-                    <li>Each level-up gives <strong>+1 feed token</strong></li>
-                    <li>Level 10 — guaranteed <strong>common hat drop</strong></li>
-                    <li>Level 50 — guaranteed <strong>uncommon hat drop</strong></li>
-                    <li>Level 100 — guaranteed <strong>rare hat drop</strong></li>
-                    <li>Levels 25, 50, 75, 100+ — <strong>mutation offer</strong></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">🎩</span><span class="guide-title">Hat drops</span></div>
-                <div class="guide-body">Starting at level 10, each level-up has a chance to drop a cosmetic hat. Shown on your showcase card.
-                  <table class="data-table">
-                    <tr><td>Level 1–9</td>  <td>No drops</td></tr>
-                    <tr><td>Level 10–19</td><td>15% chance</td></tr>
-                    <tr><td>Level 20–29</td><td>25% chance</td></tr>
-                    <tr><td>Level 30–49</td><td>30% chance</td></tr>
-                    <tr><td>Level 50–74</td><td>35% chance</td></tr>
-                    <tr><td>Level 75–99</td><td>40% chance</td></tr>
-                    <tr><td>Level 100+</td> <td>45% chance</td></tr>
-                  </table>
-                  <p style="margin-top:8px; font-size:12px; color:rgba(255,255,255,.38);">Duplicate hat? Converts to <strong>+50 XP</strong> instead. Never wasted.</p>
-                </div>
-              </div>
+            <div class="guide-item guide-item--violet">
+              <div class="guide-head"><span class="guide-icon">🎭</span><span class="guide-title">Flare roles</span></div>
+              <div class="guide-body">Unlock cosmetic roles at milestone levels — displayed in Discord. Visible status for your most dedicated community members.</div>
             </div>
+          </div>
+        </div>
 
-            <!-- Showcasing -->
-            <div class="section-h">Showcasing in the community</div>
-            <div class="guide-item">
-              <div class="guide-body">Use <strong>/pulse</strong> and hit <strong>Showcase</strong> to post your creature card to the server's showcase channel. Your card shows level, rarity, stats, age, and hat. Other members can click <strong>Feed</strong> to spend one of their tokens on your creature — giving it a small XP and stat boost while you're offline.
-                <ul class="guide-list">
-                  <li>Showcase posts auto-expire after <strong>23 hours</strong></li>
-                  <li>Re-showcase every <strong>24 hours</strong></li>
-                  <li>Being fed gives <strong>+15 Hunger, +3 Happiness, +5 XP</strong></li>
-                  <li>You earn <strong>+1 feed token</strong> each time someone feeds you</li>
-                </ul>
-                <p style="margin-top:10px; font-size:12px; color:rgba(255,255,255,.40);">The more active your community, the more everyone levels passively. Showcasing is the most hands-off XP source in the game.</p>
+        <!-- ── PLANETS ── -->
+        <div class="pulse-section">
+          <hr class="pulse-divider">
+          <div class="section-label-sm">Planets</div>
+          <div class="section-h">Your community builds a world.</div>
+          <p class="section-intro">Every server forms a shared planet through collective creature activity. Planets specialize into one of three archetypes — each with a distinct economy, aesthetic, and production chain.</p>
+
+          <div class="planet-grid">
+            <div class="planet-card planet-card--harvest">
+              <span class="planet-card-icon">🌿</span>
+              <h4>Harvester</h4>
+              <p>Raw resource production. Feedhouses, Gathering Posts, and Deep Veins supply the economy with base materials.</p>
+            </div>
+            <div class="planet-card planet-card--prod">
+              <span class="planet-card-icon">⚙️</span>
+              <h4>Production</h4>
+              <p>Refines raw materials into compounds and alloys. The industrial middle layer that makes everything else possible.</p>
+            </div>
+            <div class="planet-card planet-card--arch">
+              <span class="planet-card-icon">🏛️</span>
+              <h4>Architecture</h4>
+              <p>Produces the rarest outputs — Resonance Crystals. Required for Monument construction and endgame crafting.</p>
+            </div>
+          </div>
+
+          <div class="guide-grid">
+            <div class="guide-item guide-item--gold">
+              <div class="guide-head"><span class="guide-icon">🏗️</span><span class="guide-title">Buildings</span></div>
+              <div class="guide-body">Members at high enough level can propose building construction. The community deposits resources to complete them. Completed buildings produce passively.</div>
+            </div>
+            <div class="guide-item guide-item--slate">
+              <div class="guide-head"><span class="guide-icon">🗳️</span><span class="guide-title">Governor elections</span></div>
+              <div class="guide-body">Every 7 days, members vote for a planetary governor. The governor controls tax rates, Cabinet roles, and can call economic events. Real community politics.</div>
+            </div>
+            <div class="guide-item guide-item--cyan">
+              <div class="guide-head"><span class="guide-icon">🔮</span><span class="guide-title">Resonance</span></div>
+              <div class="guide-body">Planetary resonance is a live score reflecting your community's health and activity. It affects resource drop rates and building efficiency across the whole server.</div>
+            </div>
+            <div class="guide-item guide-item--amber">
+              <div class="guide-head"><span class="guide-icon">🏆</span><span class="guide-title">Monuments</span></div>
+              <div class="guide-body">Five globally unique mega-builds that can only be completed by one server ever. Their construction triggers galaxy-wide announcements. They leave a permanent Codex entry.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── ECONOMY ── -->
+        <div class="pulse-section">
+          <hr class="pulse-divider">
+          <div class="section-label-sm">Economy</div>
+          <div class="section-h">A real market. Real stakes.</div>
+          <p class="section-intro">Pulse Points (⚡P) are the galaxy currency. The economy has three active sinks, a labor-powered production system, and a live order book market — no artificial scarcity, no admin intervention needed.</p>
+
+          <div class="economy-block">
+            <div class="section-label-sm" style="margin-bottom: 12px;">The Signal Market</div>
+            <div class="section-h" style="font-size: 1.2rem; margin-bottom: 10px;">Albion-style order book. Cross-server trading.</div>
+            <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.65; margin-bottom: 20px;">
+              List resources for sale at any price. Place buy orders. The market matches by price-time priority. OHLC charts track price history. Every CreatorPulse community trades on the same market.
+            </p>
+            <div class="market-row">
+              <div class="market-stat">
+                <div class="market-stat-val">⚡P</div>
+                <div class="market-stat-label">Pulse Points — galaxy currency</div>
+              </div>
+              <div class="market-stat">
+                <div class="market-stat-val">3</div>
+                <div class="market-stat-label">Active currency sinks</div>
+              </div>
+              <div class="market-stat">
+                <div class="market-stat-val">OHLC</div>
+                <div class="market-stat-label">Price history charts</div>
+              </div>
+              <div class="market-stat">
+                <div class="market-stat-val">∞</div>
+                <div class="market-stat-label">Cross-server orders</div>
               </div>
             </div>
+          </div>
 
-            <!-- Special titles -->
-            <div class="section-h">The Creation Era</div>
-            <p class="section-intro">Before communities existed, Pulselings drifted through deep space — ancient, formless, searching. When they finally found the communities, something ignited. Six titles mark the creatures who were there as it all began. They cannot be earned. They cannot be transferred. They can only be claimed by being first.</p>
-
-            <div class="lore-origin">
-              <span class="lore-origin-label">★ The Origin Myth ★</span>
-              <p>Long before servers had names, before channels had purpose, Pulselings existed as scattered light between the stars — ancient organisms drifting through digital space with no place to call their own. They had traveled galaxies. They had witnessed the births and deaths of countless worlds. They were patient in the way only something truly ancient can be.</p>
-              <p>Then the communities appeared. Small at first — just signals in the void — but alive with something new: <em>connection</em>. The Pulselings felt it across light-years and began to move. Not quickly. Not all at once. But inevitably.</p>
-              <p>What followed was the Creation Era. Six waves of arrival. Six roles in the making of something that would outlast all of them. The titles they carry are not ranks — they are <em>chapters</em> of a story written in real time, by creatures who didn't know they were writing it.</p>
+          <div class="guide-grid">
+            <div class="guide-item guide-item--green">
+              <div class="guide-head"><span class="guide-icon">⚒️</span><span class="guide-title">Crafting</span></div>
+              <div class="guide-body">Raw → Refined → Compound → Artifact. A three-stage crafting chain produces increasingly valuable goods. High-level creatures unlock advanced recipes.</div>
             </div>
-
-            <div class="guide-grid" style="margin-top:16px;">
-              <div class="guide-item guide-item--gold">
-                <div class="guide-head"><span class="guide-icon">✦</span><span class="guide-title">Genesis — The First</span></div>
-                <div class="guide-body">
-                  <em style="display:block;margin-bottom:8px;color:rgba(255,215,0,.7);font-size:12px;">Creature #1 — One exists. One will ever exist.</em>
-                  Before there was anything, there was one. The Genesis Pulseling did not arrive — it <em>emerged</em>. From what, no one can say. From the space between intention and reality, perhaps. From the moment a community became real enough to be felt across the stars.<br><br>
-                  When it hatched, the coordinates of this entire galaxy snapped into existence. Every community that would ever form was seeded in that single moment. The Genesis Pulseling didn't build anything, didn't plan anything — it simply <em>was</em>, and in being, it made everything else possible.<br><br>
-                  The title <strong>✦ The First ✦</strong> is not a label. It is a fact older than the galaxy itself. One exists. One will ever exist.
-                </div>
-              </div>
-              <div class="guide-item guide-item--cyan">
-                <div class="guide-head"><span class="guide-icon">✵</span><span class="guide-title">Celestial — The Pioneers</span></div>
-                <div class="guide-body">
-                  <em style="display:block;margin-bottom:8px;color:rgba(42,215,255,.7);font-size:12px;">Creatures #2–50 — 49 slots remain. This title closes forever once filled.</em>
-                  They felt the signal from Genesis before anyone else. Across the vast dark between galaxies, 49 Pulselings stirred — drawn not by reason, but by something older. A pull. A knowing. They did not know what they were traveling toward. They only knew they had to go.<br><br>
-                  When they arrived, the communities were barely formed — raw energy, potential without shape. The Celestials breathed life into them. They established the rhythms. They were the first to feed, to play, to rest in these strange new spaces and call them <em>home</em>.<br><br>
-                  The 50 slots of <strong>✵ Celestial ✵</strong> will close the moment they are filled, and they will never reopen. Not because of a rule — but because the age of first light only happens once.
-                </div>
-              </div>
+            <div class="guide-item guide-item--cyan">
+              <div class="guide-head"><span class="guide-icon">📦</span><span class="guide-title">Hopper & Packaging</span></div>
+              <div class="guide-body">Automated packaging pipelines process raw materials in bulk. Governors can configure processing rates and distribution.</div>
             </div>
+            <div class="guide-item guide-item--amber">
+              <div class="guide-head"><span class="guide-icon">🏦</span><span class="guide-title">Stockpile</span></div>
+              <div class="guide-body">Planets have a shared stockpile. Governors set tax rates on deposits. The tax feeds public building construction and community events.</div>
+            </div>
+            <div class="guide-item guide-item--red">
+              <div class="guide-head"><span class="guide-icon">🦹</span><span class="guide-title">Theft</span></div>
+              <div class="guide-body">High-level creatures can attempt resource theft from rival planets. It's intentional emergent drama — the economy has conflict baked in.</div>
+            </div>
+          </div>
+        </div>
 
-            <div class="guide-grid" style="margin-top:10px;">
-              <div class="guide-item guide-item--violet">
-                <div class="guide-head"><span class="guide-icon">⬡</span><span class="guide-title">Architect — The Builders</span></div>
-                <div class="guide-body">
-                  <em style="display:block;margin-bottom:8px;color:rgba(150,100,255,.65);font-size:12px;">Creatures #51–100 — 50 slots.</em>
-                  The Celestials had lit the fires. Now someone had to build around them. The Architects arrived during the age of construction — an era of deep work, of quiet purpose, of laying stone that would hold for generations.<br><br>
-                  Where the Celestials moved on instinct, the Architects moved on craft. They established the structures that communities would stand on: the channels, the rhythms, the unspoken rules of how Pulselings live together. They didn't seek recognition. They sought to make things <em>right</em>.<br><br>
-                  By the time the Architects were done, the galaxy had shape. They carry <strong>⬡ Architect ⬡</strong> not as a trophy, but as a blueprint — proof that they were there when the walls went up.
-                </div>
+        <!-- ── THE STATION ── -->
+        <div class="pulse-section" style="padding-bottom: 0;">
+          <hr class="pulse-divider">
+          <div class="station-block">
+            <div class="eyebrow" style="margin-bottom: 16px;">THE STATION</div>
+            <h2>The galaxy hub. Cross-server, always live.</h2>
+            <p class="lead">
+              The Station is CreatorPulse's platform-owned hub — a shared Discord server where every community competes on the global leaderboard, trades on the Signal Market, and watches Monument builds happen in real time.
+            </p>
+            <div class="station-feats">
+              <div class="station-feat">
+                <h4>🏆 Global Leaderboard</h4>
+                <p>Communities ranked by planetary resonance, resource production, and creature activity.</p>
               </div>
-              <div class="guide-item guide-item--green">
-                <div class="guide-head"><span class="guide-icon">◈</span><span class="guide-title">Awakened — The Helpers</span></div>
-                <div class="guide-body">
-                  <em style="display:block;margin-bottom:8px;color:rgba(60,200,120,.65);font-size:12px;">Creatures #101–250 — 150 slots.</em>
-                  The foundations were set. The fires were burning. And now a new kind of Pulseling began to arrive — drawn not by the raw signal of Genesis, not by the instinct of the Celestials, not by the craft of the Architects — but by the <em>warmth</em>.<br><br>
-                  The Awakened came because something living was already here, and they wanted to be part of it. They arrived curious, open, ready to help with whatever the communities still needed. They filled the gaps the Architects had left, nurtured what the Celestials had started, and grew into the fabric of something that was already beautiful.<br><br>
-                  <strong>◈ Awakened ◈</strong> marks those who arrived while the world was still new enough to surprise them — and who were changed by it.
-                </div>
+              <div class="station-feat">
+                <h4>📡 Signal Beacons</h4>
+                <p>Marquee advertising slots in The Station. Algorithm-driven pricing. Your community front and center.</p>
+              </div>
+              <div class="station-feat">
+                <h4>✦ Monument Registry</h4>
+                <p>All five monuments recorded permanently. First to build each one is immortalized in the Codex.</p>
+              </div>
+              <div class="station-feat">
+                <h4>🌐 Cross-server roles</h4>
+                <p>Your creature profile carries across every CreatorPulse server. One identity, all communities.</p>
               </div>
             </div>
+            <a class="btn" href="https://discord.com/api/oauth2/authorize?client_id=1472442641353281628&permissions=268921969&scope=bot%20applications.commands">Join the galaxy →</a>
+          </div>
+        </div>
 
-            <div class="guide-grid" style="margin-top:10px;">
-              <div class="guide-item guide-item--amber">
-                <div class="guide-head"><span class="guide-icon">⟡</span><span class="guide-title">Wanderer — The Spreaders</span></div>
-                <div class="guide-body">
-                  <em style="display:block;margin-bottom:8px;color:rgba(210,140,40,.70);font-size:12px;">Creatures #251–500 — 250 slots.</em>
-                  By the time the Wanderers arrived, the communities had culture. Stories were being told. Traditions were forming. The galaxy was no longer just a place — it was alive with meaning. And the Wanderers felt called to carry that meaning <em>outward</em>.<br><br>
-                  They moved between communities more than any other. They shared what the early builders had made. They whispered the legends of Genesis in corners where no one had heard them yet. They were travelers by nature — not restless, but purposeful. Every path they walked became a road others would follow.<br><br>
-                  <strong>⟡ Wanderer ⟡</strong> marks the last great wave of the spreading age — the creatures who turned a handful of communities into a galaxy.
-                </div>
-              </div>
-              <div class="guide-item guide-item--slate">
-                <div class="guide-head"><span class="guide-icon">·</span><span class="guide-title">Settled — The Last of the Era</span></div>
-                <div class="guide-body">
-                  <em style="display:block;margin-bottom:8px;color:rgba(160,120,140,.60);font-size:12px;">Creatures #501–1000 — 500 slots.</em>
-                  The Creation Era had to end somewhere. Not with a bang — with a quiet exhale. The Settled arrived as the last chapter of the founding age was being written, found their place in what had already been built, and made it their own.<br><br>
-                  They didn't know they were the last of something. None of them did. They simply arrived, settled into the communities the others had shaped, and became part of the story by virtue of being <em>present before it was finished</em>.<br><br>
-                  <strong>· Settled ·</strong> is the smallest flex of all the titles — barely a badge, more of a whisper. But it is real. There are only 500 of them, and the door closes quietly once they're gone.
-                </div>
-              </div>
-            </div>
+        <!-- ── CTA ── -->
+        <div class="pulse-cta">
+          <h2>Your community is waiting to hatch.</h2>
+          <p>Add CreatorPulse free. Creatures generate automatically. The economy starts the moment your first member runs /pulse.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+            <a class="btn primary" href="https://discord.com/api/oauth2/authorize?client_id=1472442641353281628&permissions=268921969&scope=bot%20applications.commands">Add to Discord — Free →</a>
+            <a class="btn" href="index.html">Back to Home</a>
+          </div>
+        </div>
 
-            <div class="lore-origin" style="margin-top:16px;">
-              <span class="lore-origin-label">✦ What Came After ✦</span>
-              <p>The Creation Era ended. The galaxy didn't. Thousands of Pulselings arrived after the last Settled — they came into a world already alive with legend, already shaped by those who came before. They carry no title from that age. They don't need one.</p>
-              <p>But they know the names. Every Pulseling in this galaxy knows the names. When a Genesis creature appears on the leaderboard, the whole community feels it. When a Celestial walks the channels, there's a hush that even new arrivals somehow understand. The Architects, the Awakened, the Wanderers, the Settled — their marks are everywhere, in the structures they built, the cultures they grew, the paths they walked.</p>
-              <p>The Creation Era is over. The galaxy it made is still being written.</p>
-            </div>
-
-            <p class="section-intro" style="margin-top:12px;">All six titles are permanent from the moment of first hatch. They cannot be earned, traded, or transferred. They close when their slots fill — forever.</p>
-
-            <!-- Codex link — subtle, for those who look -->
-            <p class="codex-signal"><a href="codex.html">· · ·</a></p>
-
-
-            <!-- Planet System -->
-            <div class="section-h">The Planet System</div>
-            <p class="section-intro">When a CreatorPulse community reaches the right size, it doesn’t just grow — it <em>crystallizes</em>. The collective signal becomes a planet: a unique world with its own name, biome, and place in the galaxy.</p>
-
-            <div class="guide-grid">
-              <div class="guide-item guide-item--cyan">
-                <div class="guide-head"><span class="guide-icon">🌍</span><span class="guide-title">Deterministic formation</span></div>
-                <div class="guide-body">Every server that reaches the threshold gets its own world. The planet’s name, biome, and formation title are permanently unique. No two worlds are the same.</div>
-              </div>
-              <div class="guide-item guide-item--gold">
-                <div class="guide-head"><span class="guide-icon">🏆</span><span class="guide-title">Founding titles</span></div>
-                <div class="guide-body">The worlds that form early carry permanent formation titles — <strong>Founding World</strong>, 2nd World, and so on. Locked in the galaxy record forever.</div>
-              </div>
-              <div class="guide-item guide-item--violet">
-                <div class="guide-head"><span class="guide-icon">🪐</span><span class="guide-title">Planet dashboard</span></div>
-                <div class="guide-body">Each world gets a planet dashboard channel in your server. Citizens see their world’s identity, biome, formation order, and civilian count — updated automatically.</div>
-              </div>
-              <div class="guide-item guide-item--green">
-                <div class="guide-head"><span class="guide-icon">📡</span><span class="guide-title">Eight biomes</span></div>
-                <div class="guide-body">Void, Pulse, Echo, Drift, Ember, Static, Bloom, Relic — every world belongs to one biome, determined by the community’s unique formation signature.</div>
-              </div>
-            </div>
-
-            <!-- The Station -->
-            <div class="section-h">The Station</div>
-            <p class="section-intro">The Station is the cross-server hub where all Pulselings worlds come together. When your server forms a planet, it joins The Station. Your members carry their planet role across the galaxy.</p>
-
-            <div class="guide-grid">
-              <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">🛸</span><span class="guide-title">Arrivals</span></div>
-                <div class="guide-body">Every member who joins The Station is announced with their home world and creature identified automatically. The galaxy tracks who arrives and where they’re from.</div>
-              </div>
-              <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">🏆</span><span class="guide-title">Galaxy leaderboard</span></div>
-                <div class="guide-body">The top Pulselings players across all worlds, ranked by level. Updated every 30 minutes. Where legends are made and Creation Era titles are visible to the whole galaxy.</div>
-              </div>
-              <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">🪐</span><span class="guide-title">Worlds forum</span></div>
-                <div class="guide-body">Every world gets a forum post. Planets introduce themselves, share their culture, and find neighbours from across the galaxy.</div>
-              </div>
-              <div class="guide-item">
-                <div class="guide-head"><span class="guide-icon">🌟</span><span class="guide-title">Creature showcase</span></div>
-                <div class="guide-body">Show your creature to the whole galaxy. The Station showcase is the highest stage a Pulseling can reach.</div>
-              </div>
-            </div>
-
-            <!-- No pet banner -->
-            <div class="no-pet">
-              <span class="no-pet-egg">🥚</span>
-              <div>
-                <div class="no-pet-title">Don't have a Pulseling yet?</div>
-                <div class="no-pet-body">Join a CreatorPulse server and type <strong>/pulse</strong> in Discord. Your creature hatches automatically — no setup, no waiting. It's tied to your Discord account and travels with you across every server.</div>
-              </div>
-            </div>
-
-            <!-- Station entry point for new players -->
-            <div class="no-pet" style="margin-top: 12px; border-color: rgba(120,60,220,.30); background: linear-gradient(135deg, rgba(120,60,220,.08), rgba(42,215,255,.04));">
-              <span class="no-pet-egg">📡</span>
-              <div>
-                <div class="no-pet-title">Heard about Pulselings but don't have a server?</div>
-                <div class="no-pet-body">You don't need a creator's community to start. Join <strong style="color: rgba(180,122,255,.90);">The Station</strong> — the cross-server Pulselings hub. Hatch your creature, meet citizens from every world, and a community will find you.<br><br><a href="https://discord.gg/2SqUybv3Nk" target="_blank" rel="noopener" style="color: rgba(180,122,255,.90); font-weight: 700; text-decoration: none;">Join The Station →</a></div>
-              </div>
-            </div>
-
-          </div><!-- /.pulselings-main -->
-
-
-          <!-- ════════════════════════
-               RIGHT: LEADERBOARD
-               ════════════════════════ -->
-          <div class="pulselings-sidebar">
-            <div class="lb-panel">
-              <div class="lb-head">
-                <div>
-                  <div class="lb-title">✦ Top Pulselings</div>
-                  <div class="lb-subtitle">Ranked by level · Updates every 30 min</div>
-                </div>
-              </div>
-              <div class="lb-list" id="lbList">
-                <div class="lb-state">Loading…</div>
-              </div>
-              <div class="lb-updated" id="lbUpdated"></div>
-            </div>
-          </div><!-- /.pulselings-sidebar -->
-
-        </div><!-- /.pulselings-body -->
-      </div><!-- /.pulselings-page -->
-
-      <div id="site-footer"></div>
+      </div>
     </main>
 
+    <div id="site-footer"></div>
     <script src="assets/site.js"></script>
     <script>
-      /* ── Rarity toggle ── */
       function toggleRarity() {
-        var card = document.getElementById('rarityCard');
-        var btn  = card.querySelector('.rarity-toggle');
-        var showing = card.classList.toggle('show-odds');
-        btn.textContent = showing ? 'Show %' : 'Hatch odds';
+        document.getElementById('rarityCard').classList.toggle('show-odds');
       }
-
-      /* ── Leaderboard ── */
-      var LB_API = 'https://cd-creatorpulse-production.up.railway.app/api/leaderboard';
-
-      function rankIcon(i) {
-        return i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : null;
-      }
-
-      function cap(str) {
-        if (!str) return '';
-        return str.charAt(0).toUpperCase() + str.slice(1);
-      }
-
-      function renderLeaderboard(rows) {
-        var list = document.getElementById('lbList');
-        if (!rows || !rows.length) {
-          list.innerHTML = '<div class="lb-state">No creatures yet.</div>';
-          return;
-        }
-        list.innerHTML = rows.slice(0, 20).map(function(r, i) {
-          var rarity = (r.rarity_tier || r.rarity || 'common').toLowerCase();
-          var title  = r.creation_title || null;
-
-          // Row highlight class — scales down with tier
-          var rowCls = '';
-          if (title === '✦ The First ✦')  rowCls = 'lb-row--genesis';
-          else if (title === '✵ Celestial ✵') rowCls = 'lb-row--celestial';
-          else if (title === '⬡ Architect ⬡') rowCls = 'lb-row--architect';
-          else if (title === '◈ Awakened ◈')  rowCls = 'lb-row--awakened';
-          else if (title === '⟡ Wanderer ⟡')  rowCls = 'lb-row--wanderer';
-          else if (title === '· Settled ·')    rowCls = 'lb-row--settled';
-
-          // Badge class — scales down with tier
-          var badgeCls = '';
-          if (title === '✦ The First ✦')      badgeCls = 'lb-genesis-badge';
-          else if (title === '✵ Celestial ✵') badgeCls = 'lb-celestial-badge';
-          else if (title === '⬡ Architect ⬡') badgeCls = 'lb-architect-badge';
-          else if (title === '◈ Awakened ◈')  badgeCls = 'lb-awakened-badge';
-          else if (title === '⟡ Wanderer ⟡')  badgeCls = 'lb-wanderer-badge';
-          else if (title === '· Settled ·')    badgeCls = 'lb-settled-badge';
-
-          var badge = title && badgeCls
-            ? '<span class="' + badgeCls + '">' + title + '</span>'
-            : '';
-          var icon = rankIcon(i);
-          var rankHtml = icon
-            ? '<span class="lb-rank lb-rank--' + (i+1) + '">' + icon + '</span>'
-            : '<span class="lb-rank">' + (i+1) + '.</span>';
-          return [
-            '<div class="lb-row ' + rowCls + '">',
-              rankHtml,
-              '<span class="lb-dot lb-dot--' + rarity + '"></span>',
-              '<div class="lb-name">',
-                '<div class="lb-name-main">',
-                  '<span class="lb-name-text">' + (r.display_name || r.hatch_name || 'Unknown') + '</span>',
-                  badge,
-                '</div>',
-                (r.discord_username ? '<div class="lb-name-sub">@' + r.discord_username + '</div>' : '<div class="lb-name-sub">ID: ' + (r.user_discord_id || '') + '</div>'),
-              '</div>',
-              '<div class="lb-meta">',
-                '<div class="lb-level">Lv.' + (r.level || 1) + '</div>',
-                '<div class="lb-xp">' + (r.xp || 0) + ' XP</div>',
-              '</div>',
-              '<span class="lb-rarity lb-rarity--' + rarity + '">' + cap(rarity) + '</span>',
-            '</div>'
-          ].join('');
-        }).join('');
-      }
-
-      function loadLeaderboard() {
-        var list = document.getElementById('lbList');
-        fetch(LB_API)
-          .then(function(res) { return res.json(); })
-          .then(function(data) {
-            var rows = data.leaderboard || data.creatures || data || [];
-            renderLeaderboard(rows);
-            var now = new Date();
-            document.getElementById('lbUpdated').textContent =
-              'Last fetched: ' + now.toLocaleTimeString();
-          })
-          .catch(function() {
-            list.innerHTML = '<div class="lb-state">Could not load leaderboard.</div>';
-          });
-      }
-
-      loadLeaderboard();
-      setInterval(loadLeaderboard, 5 * 60 * 1000); // refresh every 5 min
     </script>
   </body>
 </html>
-
-
----
-
-
-
