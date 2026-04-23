@@ -2,267 +2,303 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Apply for Access &mdash; CreatorPulse</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Apply for early access to CreatorPulse. Applications reviewed personally. Always free." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Get Started &mdash; CreatorPulse</title>
+    <meta name="description" content="Add CreatorPulse to your Discord in seconds. Free to install. Creatures hatch automatically. Subscriptions ready in minutes." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles.css">
     <style>
-      .form-field {
-        display: block;
-        margin-bottom: 14px;
+      /* ── Steps ── */
+      .steps { display: flex; flex-direction: column; gap: 0; position: relative; }
+      .steps::before {
+        content: ''; position: absolute; left: 23px; top: 48px; bottom: 48px;
+        width: 1px; background: linear-gradient(180deg, rgba(42,215,255,.3), rgba(42,215,255,.05));
       }
-      .form-field-title {
-        font-weight: 700;
-        font-size: 13px;
-        margin-bottom: 3px;
+      .step { display: grid; grid-template-columns: 48px 1fr; gap: 20px; padding: 28px 0; position: relative; }
+      .step-num {
+        width: 48px; height: 48px;
+        background: linear-gradient(135deg, rgba(42,215,255,.15), rgba(42,215,255,.05));
+        border: 1px solid rgba(42,215,255,.25); border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 800; font-size: 0.9rem; color: var(--accent);
+        flex-shrink: 0; position: relative; z-index: 1;
       }
-      .form-field-sub {
-        font-size: 12px;
-        color: rgba(255,255,255,.55);
-        margin-bottom: 5px;
+      .step-body h3 { font-size: 1.05rem; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; }
+      .step-body p  { font-size: 0.9rem; color: var(--muted); line-height: 1.65; margin: 0; }
+      .step-tag {
+        display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.10em;
+        text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+        background: rgba(42,215,255,.08); border: 1px solid rgba(42,215,255,.18);
+        border-radius: 4px; padding: 2px 8px;
       }
-      .form-field input,
-      .form-field select,
-      .form-field textarea {
-        width: 100%;
-        background: rgba(255,255,255,.06);
-        border: 1px solid rgba(255,255,255,.12);
-        border-radius: 10px;
-        color: rgba(255,255,255,.90);
-        font-size: 13px;
-        padding: 9px 12px;
-        outline: none;
-        font-family: inherit;
-        transition: border-color 0.15s;
+      .step-tag--green { color: #34d399; background: rgba(52,211,153,.08); border-color: rgba(52,211,153,.20); }
+
+      /* ── Invite card ── */
+      .invite-card {
+        background: linear-gradient(135deg, rgba(42,215,255,.10), rgba(100,80,255,.06));
+        border: 1px solid rgba(42,215,255,.22);
+        border-radius: 20px;
+        padding: 48px;
+        margin-bottom: 64px;
+        text-align: center;
       }
-      .form-field input:focus,
-      .form-field select:focus,
-      .form-field textarea:focus {
-        border-color: rgba(42,215,255,.40);
+      @media (max-width: 600px) { .invite-card { padding: 32px 20px; } }
+      .invite-card h1 {
+        font-size: clamp(1.9rem, 4.5vw, 3rem);
+        font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+        margin: 0 0 14px;
       }
-      .form-field select option {
-        background: #070b12;
+      .invite-card h1 em { font-style: normal; color: var(--accent); }
+      .invite-card .sub {
+        font-size: 1rem; color: var(--muted); line-height: 1.65;
+        max-width: 480px; margin: 0 auto 32px;
       }
-      .form-submit-row {
-        display: flex;
-        gap: 10px;
-        margin-top: 16px;
-        flex-wrap: wrap;
-        align-items: center;
+      .invite-badges {
+        display: flex; flex-wrap: wrap; gap: 8px;
+        justify-content: center; margin-bottom: 28px;
       }
-      .form-status {
-        font-size: 13px;
-        margin-top: 10px;
-        padding: 10px 14px;
-        border-radius: 10px;
-        display: none;
+      .badge {
+        display: inline-flex; align-items: center; gap: 6px;
+        background: rgba(42,215,255,.07); border: 1px solid rgba(42,215,255,.18);
+        border-radius: 100px; padding: 5px 13px;
+        font-size: 0.78rem; font-weight: 700; color: var(--accent);
       }
-      .form-status--success {
-        background: rgba(42,215,120,.10);
-        border: 1px solid rgba(42,215,120,.28);
-        color: rgba(42,215,120,.90);
-        display: block;
+      .badge-green {
+        background: rgba(52,211,153,.07); border-color: rgba(52,211,153,.22); color: #34d399;
       }
-      .form-status--error {
-        background: rgba(255,80,80,.10);
-        border: 1px solid rgba(255,80,80,.25);
-        color: rgba(255,120,120,.90);
-        display: block;
+
+      /* ── What to expect panel ── */
+      .expect-grid {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+        margin: 32px 0 56px;
       }
-      .btn:disabled {
-        opacity: 0.55;
-        cursor: not-allowed;
+      @media (max-width: 580px) { .expect-grid { grid-template-columns: 1fr; } }
+      .expect-item {
+        background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+        border-radius: 14px; padding: 20px;
+      }
+      .expect-item-head { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+      .expect-item-icon { font-size: 1.1rem; }
+      .expect-item h4   { font-size: 0.88rem; font-weight: 700; margin: 0; }
+      .expect-item p    { font-size: 0.82rem; color: var(--muted); line-height: 1.55; margin: 0; }
+
+      /* ── FAQ section ── */
+      .qs-section {
+        margin-bottom: 64px;
+      }
+      .qs-section h2 {
+        font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 24px;
+      }
+      .q-item {
+        border-bottom: 1px solid rgba(255,255,255,.07); padding: 18px 0;
+      }
+      .q-item:first-of-type { border-top: 1px solid rgba(255,255,255,.07); }
+      .q-item h4 { font-size: 0.93rem; font-weight: 700; margin: 0 0 7px; }
+      .q-item p  { font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin: 0; }
+
+      /* ── Bottom CTA ── */
+      .bottom-cta {
+        background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08);
+        border-radius: 16px; padding: 40px 36px;
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 24px; margin-bottom: 80px;
+      }
+      @media (max-width: 600px) { .bottom-cta { flex-direction: column; text-align: center; padding: 28px 20px; } }
+      .bottom-cta h3 { font-size: 1.1rem; font-weight: 800; margin: 0 0 6px; }
+      .bottom-cta p  { font-size: 0.88rem; color: var(--muted); margin: 0; }
+      .bottom-cta-right { flex-shrink: 0; }
+
+      .section-kicker {
+        font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em;
+        text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
       }
     </style>
   </head>
 
-  <body data-page="request-access">
+  <body data-page="get-started">
     <div class="bg"><div class="bg-glow"></div></div>
 
     <div id="site-header"></div>
 
     <main class="page">
-      <section class="hero">
-        <div class="container hero-grid">
+      <div class="container" style="max-width: 820px;">
 
-          <div class="hero-left">
-            <div class="eyebrow">Apply for access</div>
-            <h1>Early access,<br>by application.</h1>
+        <!-- ── INVITE CARD ── -->
+        <div class="invite-card">
+          <div class="section-kicker">Open Beta</div>
+          <h1>Add CreatorPulse to<br>your <em>Discord</em>.</h1>
+          <p class="sub">
+            Free to install. No monthly fees. Creatures hatch the moment your community arrives. Subscriptions are ready in minutes.
+          </p>
+          <div class="invite-badges">
+            <span class="badge">✦ Pulselings — included free</span>
+            <span class="badge-green badge">💰 Earn from your Discord</span>
+            <span class="badge">✓ No monthly fees</span>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+            <a class="btn primary" href="https://discord.com/oauth2/authorize?client_id=1472442641353281628&permissions=2953178198&scope=bot%20applications.commands" target="_blank" rel="noopener">Add to Discord →</a>
+            <a class="btn" href="how-it-works.html">How It Works</a>
+          </div>
+        </div>
 
-            <p class="lead">
-              CreatorPulse is free &mdash; but early access is intentionally small. We review every application personally and onboard the creators who are the best fit for this stage. If you&rsquo;re accepted, we&rsquo;ll reach out on Discord with your invite.
-            </p>
+        <!-- ── WHAT HAPPENS DURING ONBOARDING ── -->
+        <section style="margin-bottom: 56px;">
+          <div class="section-kicker">What to expect</div>
+          <h2 style="font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;margin:0 0 32px;">
+            What happens when you add the bot.
+          </h2>
 
-            <div class="card">
-              <h2 style="margin-top:0;">What to expect</h2>
-              <ul class="list">
-                <li>You&rsquo;re joining a small, intentional first cohort of creators</li>
-                <li>The bot is fully functional &mdash; this is a controlled rollout, not a beta</li>
-                <li>We want communities where CreatorPulse can genuinely run and make a difference</li>
-                <li>If something ever feels off, tell us &mdash; we&rsquo;re reachable and responsive</li>
-              </ul>
-              <p class="muted" style="margin-bottom:0;">
-                <strong style="color:var(--accent);">&#x2713; Always free</strong> &mdash; no subscription required.
-              </p>
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <span class="step-tag">Instant</span>
+                <h3>Bot joins — a private setup channel appears</h3>
+                <p>A private <code>#creatorpulse-setup</code> channel is created, visible only to you and the bot. It contains a single button: Start Setup. Nothing else in your server is touched.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <span class="step-tag">~3 minutes</span>
+                <h3>Click to start — four quick steps in a web wizard</h3>
+                <p>
+                  The wizard walks you through four steps:
+                </p>
+                <ol style="font-size:0.9rem;color:var(--muted);line-height:1.7;margin:10px 0 0 18px;padding:0;">
+                  <li><strong>Your creator name</strong> — what the bot calls you across your server</li>
+                  <li><strong>Subscription tiers</strong> — name and price for up to 3 tiers (you can skip this)</li>
+                  <li><strong>Add-ons</strong> — toggle Live Alerts, Community Server, Staff Tools, and more</li>
+                  <li><strong>Stripe Connect</strong> — optional, links your payout account (can be done later)</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <span class="step-tag">~30 seconds</span>
+                <h3>Provision runs — your server is configured automatically</h3>
+                <p>CreatorPulse builds the channels and structures you selected, creates subscriber roles, sets up your Creator Dashboard, and starts the Pulselings economy. A progress bar tracks it in real time. The setup channel deletes itself when it's done.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">4</div>
+              <div class="step-body">
+                <span class="step-tag--green step-tag">Done</span>
+                <h3>Members run /pulse — creatures hatch, economy begins</h3>
+                <p>That's it. From this point the economy runs itself. Resources drop, the planet grows, the Signal Market fills with orders, and your Creator Dashboard stays live with your stats. No daily input required.</p>
+              </div>
             </div>
           </div>
+        </section>
 
-          <aside class="hero-panel card">
-            <div class="panel-head">
-              <div class="panel-title">Application</div>
-              <span class="panel-pill">Apply</span>
-            </div>
-
-            <p class="muted" style="margin-bottom:14px;">
-              Fill this out and we&rsquo;ll review your application directly.
-            </p>
-
-            <div id="accessForm">
-
-              <label class="form-field">
-                <div class="form-field-title">Discord username</div>
-                <div class="form-field-sub">So we know who to reach out to</div>
-                <input id="f-discord" type="text" placeholder="e.g. username#0000 or username" required>
-              </label>
-
-              <label class="form-field">
-                <div class="form-field-title">Email address</div>
-                <div class="form-field-sub">We&rsquo;ll confirm acceptance here</div>
-                <input id="f-email" type="email" placeholder="e.g. you@email.com" required>
-              </label>
-
-              <label class="form-field">
-                <div class="form-field-title">Creator platform</div>
-                <div class="form-field-sub">TikTok / YouTube / Twitch / Kick / other</div>
-                <input id="f-platform" type="text" placeholder="e.g. TikTok" required>
-              </label>
-
-              <label class="form-field">
-                <div class="form-field-title">Community size</div>
-                <div class="form-field-sub">Approximate member count</div>
-                <input id="f-size" type="text" placeholder="e.g. ~350 members" required>
-              </label>
-
-              <label class="form-field">
-                <div class="form-field-title">Server status</div>
-                <select id="f-server-status" required>
-                  <option value="" disabled selected>Select one</option>
-                  <option value="Existing server">Existing server</option>
-                  <option value="New server">New server</option>
-                </select>
-              </label>
-
-              <label class="form-field">
-                <div class="form-field-title">What do you want CreatorPulse to handle?</div>
-                <div class="form-field-sub">Tell us what&rsquo;s taking up your time, or what you wish your server did automatically</div>
-                <textarea id="f-why" rows="3" placeholder="e.g. I want live alerts, subscriber tiers, and to stop manually managing channels..." required style="resize: vertical;"></textarea>
-              </label>
-
-              <label class="form-field">
-                <div class="form-field-title">Interested in subscriber tiers?</div>
-                <div class="form-field-sub">Completely optional &mdash; the core bot is free either way</div>
-                <select id="f-subs">
-                  <option value="" disabled selected>Select one (optional)</option>
-                  <option value="Yes, soon">Yes, soon</option>
-                  <option value="Yes, eventually">Yes, eventually</option>
-                  <option value="No, just the bot features">No, just the bot features</option>
-                  <option value="Not sure yet">Not sure yet</option>
-                </select>
-              </label>
-
-              <div class="form-submit-row">
-                <button class="btn primary" id="submitBtn" type="button">Submit Application &rarr;</button>
+        <!-- ── WHAT YOU GET GRID ── -->
+        <section style="margin-bottom: 56px;">
+          <div class="section-kicker">What's included</div>
+          <h2 style="font-size:1.3rem;font-weight:800;letter-spacing:-0.02em;margin:0 0 20px;">
+            Everything below is available from day one, free.
+          </h2>
+          <div class="expect-grid">
+            <div class="expect-item">
+              <div class="expect-item-head">
+                <span class="expect-item-icon">🥚</span>
+                <h4>Pulselings creature game</h4>
               </div>
-
-              <div class="form-status" id="formStatus"></div>
-
-              <p class="muted" style="margin-top:12px; margin-bottom:0; font-size:12px;">
-                We review requests in order and prioritize communities that match the current rollout goals.
-              </p>
+              <p>Every member hatches a unique creature seeded from their Discord ID. It levels up from activity, decays when they go quiet. Your server forms a shared planet with a real economy.</p>
             </div>
-          </aside>
+            <div class="expect-item">
+              <div class="expect-item-head">
+                <span class="expect-item-icon">💳</span>
+                <h4>Subscription tiers</h4>
+              </div>
+              <p>Up to 3 tiers, your names and prices. Stripe-powered, paid directly to your bank. Roles assign and revoke automatically. Tier-gated channels enforce themselves.</p>
+            </div>
+            <div class="expect-item">
+              <div class="expect-item-head">
+                <span class="expect-item-icon">📊</span>
+                <h4>Creator Dashboard</h4>
+              </div>
+              <p>A live control panel inside your Discord and on the web. Stats, buttons, announcements, tier management, and financials all in one place.</p>
+            </div>
+            <div class="expect-item">
+              <div class="expect-item-head">
+                <span class="expect-item-icon">📡</span>
+                <h4>Live Alerts</h4>
+              </div>
+              <p>Bot posts when you go live on TikTok, YouTube, Twitch, or Kick. Set it up once during onboarding and never think about it again.</p>
+            </div>
+            <div class="expect-item">
+              <div class="expect-item-head">
+                <span class="expect-item-icon">🛡</span>
+                <h4>Staff Tools</h4>
+              </div>
+              <p>Manager and Mod dashboards with role-based access. Your team can view and manage what they need without touching what they shouldn't.</p>
+            </div>
+            <div class="expect-item">
+              <div class="expect-item-head">
+                <span class="expect-item-icon">🔒</span>
+                <h4>Anti-Raid & more</h4>
+              </div>
+              <p>Verification gate, welcome/goodbye messages, Community Guide, and full channel templates — all optional, all toggled during setup.</p>
+            </div>
+          </div>
+        </section>
 
+        <!-- ── QUICK FAQ ── -->
+        <section class="qs-section">
+          <h2>Common questions before you add it.</h2>
+
+          <div class="q-item">
+            <h4>Does it modify or delete my existing channels?</h4>
+            <p>No. CreatorPulse only creates new channels in its own categories. It doesn't touch anything that already exists in your server.</p>
+          </div>
+
+          <div class="q-item">
+            <h4>What do I need to have ready?</h4>
+            <p>Just your Discord server and admin permissions. Stripe is completely optional — you can connect it later from your Creator Dashboard at any time.</p>
+          </div>
+
+          <div class="q-item">
+            <h4>How long does setup take?</h4>
+            <p>The web wizard takes about 3 minutes. Provisioning completes in roughly 30 seconds after you confirm. Your server is live the moment it finishes.</p>
+          </div>
+
+          <div class="q-item">
+            <h4>Will it send spam or ping my members?</h4>
+            <p>No. CreatorPulse doesn't send announcements or notifications unless you use the Announcement button in your Creator Dashboard or enable Member Events during setup.</p>
+          </div>
+
+          <div class="q-item">
+            <h4>What if I only want the creature game — not subscriptions?</h4>
+            <p>Totally fine. Pulselings and all the core features work without subscriptions. You can skip the Stripe step entirely and enable it later if you change your mind.</p>
+          </div>
+
+          <div class="q-item">
+            <h4>Something went wrong during setup — what do I do?</h4>
+            <p>Any errors during onboarding are automatically flagged to the team. You can also reach us directly at <a href="mailto:support@cdcreatorpulse.com">support@cdcreatorpulse.com</a> and we'll sort it out.</p>
+          </div>
+        </section>
+
+        <!-- ── BOTTOM CTA ── -->
+        <div class="bottom-cta">
+          <div>
+            <h3>Ready to add it?</h3>
+            <p>Free to install. No monthly fees. Your community has creatures by tonight.</p>
+          </div>
+          <div class="bottom-cta-right">
+            <a class="btn primary" href="https://discord.com/oauth2/authorize?client_id=1472442641353281628&permissions=2953178198&scope=bot%20applications.commands" target="_blank" rel="noopener">Add to Discord →</a>
+          </div>
         </div>
-      </section>
 
-      <div id="site-footer"></div>
+      </div>
     </main>
 
+    <div id="site-footer"></div>
     <script src="assets/site.js"></script>
-    <script>
-      (function () {
-        var API = "https://cd-creatorpulse-production.up.railway.app/api/apply";
-
-        var btn = document.getElementById("submitBtn");
-        var status = document.getElementById("formStatus");
-
-        function val(id) {
-          var el = document.getElementById(id);
-          return el ? String(el.value || "").trim() : "";
-        }
-
-        function setStatus(type, msg) {
-          status.className = "form-status form-status--" + type;
-          status.textContent = msg;
-        }
-
-        btn.addEventListener("click", function () {
-          var discord_username  = val("f-discord");
-          var email             = val("f-email");
-          var creator_platform  = val("f-platform");
-          var community_size    = val("f-size");
-          var server_status     = val("f-server-status");
-          var why               = val("f-why");
-          var interested_subs   = val("f-subs");
-
-          if (!discord_username || !email || !creator_platform || !community_size ||
-              !server_status || !why) {
-            setStatus("error", "Please fill in all required fields before submitting.");
-            return;
-          }
-
-          btn.disabled = true;
-          btn.textContent = "Submitting\u2026";
-          status.className = "form-status";
-
-          fetch(API, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              discord_username,
-              email,
-              creator_platform,
-              community_size,
-              server_status,
-              why,
-              interested_subs,
-            }),
-          })
-            .then(function (res) { return res.json(); })
-            .then(function (data) {
-              if (data && data.ok) {
-                setStatus("success", "Application submitted! We\u2019ll be in touch on Discord.");
-                btn.textContent = "Submitted \u2713";
-              } else {
-                throw new Error("unexpected response");
-              }
-            })
-            .catch(function () {
-              setStatus("error", "Something went wrong. Please email support@cdcreatorpulse.com directly.");
-              btn.disabled = false;
-              btn.textContent = "Submit Application \u2192";
-            });
-        });
-      })();
-    </script>
   </body>
 </html>
-
-
----
-
-
-
